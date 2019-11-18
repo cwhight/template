@@ -13,16 +13,17 @@
 }
 
 .btn-flat {
-  color: white;
+  color: #949494;
   padding: 8px 24px;
-  border-radius: 4px;
-  background: #1EDD88;
+  border-radius: 42px;
+  background: #dadada;
   transition: background 0.3s ease;
+  font-family: Roboto Mono;
 }
 
 .btn-flat:hover {
-  background: #1BCB7F;
-  color: white;
+  background: #d0d0d0;
+  color: #949494;
 }
 
 .btn-gradient {
