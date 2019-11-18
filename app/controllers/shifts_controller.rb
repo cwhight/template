@@ -9,6 +9,8 @@ class ShiftsController < ApplicationController
   end
 
   def create
+    @job = Job.find(params[:job_id])
+    @shift.job = @job
     @shift = Shift.new(shift_params)
     if @shift.save
       redirect_to root_path
@@ -22,18 +24,23 @@ class ShiftsController < ApplicationController
 
   def update
     @shift.update(shift_params)
-    redirect_to root_path
+    if @shift.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def destroy
     @shift.destroy
+
     redirect_to root_path
   end
 
   private
 
   def shift_params
-    params.require(:shift).permit(:pay, :start_time, :end_time)
+    params.require(:shift).permit(:pay, :start_time, :end_time, :job_id)
   end
 
   def set_shift
