@@ -11,7 +11,7 @@ class ApplicationsController < ApplicationController
   def create
     @application = Application.new(application_params)
     @application.user = current_user
-    @application.shift = Job.find(params[:shift_id])
+    @application.shift = Shift.find(params[:shift_id])
     if @application.save
       redirect_to root_path
     else
