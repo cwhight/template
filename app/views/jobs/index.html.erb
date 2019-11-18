@@ -1,5 +1,12 @@
-<h1>Jobs</h1>
+<div class="container">
+  <h1>Jobs</h1>
 
-<% @jobs.each do |j|%>
-  <%= link_to "#{j.title}", job_path(j)  %>
-<% end %>
+  <% @jobs.each do |j|%>
+    <div class="card p-3">
+
+        <%= link_to "#{j.title}", job_path(j)  %>
+        <%= j.description %>
+    </div>
+  <% end %>
+
+</div>
