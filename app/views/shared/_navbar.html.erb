@@ -12,8 +12,11 @@
 
       <li class="nav-item active">
         <a class="nav-link nav-text" id="nav-text" href="/">Home</a>
+        <% if current_user %>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link nav-text" %>
+        <% end %>
         <% unless current_user %>
-          <a class="nav-link nav-text" id="nav-text" href="/users/sign_in">Sign in</a>
+          <%= link_to 'Sign in', new_user_session_path, class: "nav-link nav-text" %>
         <% end %>
       </li>
       <li class="nav-item dropdown">
