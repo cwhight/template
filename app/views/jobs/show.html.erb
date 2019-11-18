@@ -2,10 +2,14 @@
   <h1>Show Jobs Page</h1>
 
   <% @job.shifts.each do |shift| %>
-    <div class="card p-3">
-      <%= shift.start_time %>
-      <%= shift.end_time %>
-      <%= shift.pay %>
+    <div class="d-flex justify-content-between card p-3">
+      <div>
+        <%= shift.start_time %>
+        <%= shift.end_time %>
+        <%= shift.pay %>
+      </div>
+
+      <%= render 'shared/application', shift: shift %>
 
     </div>
   <% end %>
