@@ -10,12 +10,13 @@ class ShiftsController < ApplicationController
 
   def create
     @job = Job.find(params[:job_id])
-    @shift.job = @job
     @shift = Shift.new(shift_params)
+    @shift.title = @job.title
+    @shift.job = @job
     if @shift.save
       redirect_to root_path
     else
-      render :new
+      redirect_to job_path(@job), alert: "Did not save"
     end
   end
 
