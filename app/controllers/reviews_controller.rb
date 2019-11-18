@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
-      redirect_to reviews_path
+      redirect_to root_path
     else
       render :new
     end
@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    redirect_to reviews_path
+    redirect_to root_path
   end
 
   private
