@@ -1,3 +1,11 @@
 <h1>Show Jobs Page</h1>
 
 <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
+
+
+            <%= simple_form_for [@job, @shift], url: job_shifts_path(@job) do |f| %>
+              <%= f.input :start_time, as: :date %>
+              <%= f.input :end_time, as: :date %>
+              <%= f.input :pay%>
+              <%= f.button :submit, "Create", class: "btn btn-flat" %>
+            <% end %>
