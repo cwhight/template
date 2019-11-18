@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show]
 
   def index
-    @jobs = Jobs.all
+    @jobs = Job.all
   end
 
   def show
