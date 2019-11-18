@@ -1,0 +1,8 @@
+<h1>New Job</h1>
+
+<%= simple_form_for @job do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :location%>
+  <%= f.button :submit, "#{button_text}", class: "btn btn-flat" %>
+<% end %>
