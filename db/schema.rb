@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_131739) do
+ActiveRecord::Schema.define(version: 2019_11_18_136014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,31 @@ ActiveRecord::Schema.define(version: 2019_11_18_131739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "score"
+    t.bigint "user_id"
+    t.bigint "shift_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_reviews_on_shift_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.string "title"
+    t.integer "pay"
+    t.date "start_time"
+    t.date "end_time"
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_shifts_on_job_id"
+    t.index ["user_id"], name: "index_shifts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +63,8 @@ ActiveRecord::Schema.define(version: 2019_11_18_131739) do
   end
 
   add_foreign_key "jobs", "users"
+  add_foreign_key "reviews", "shifts"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "shifts", "jobs"
+  add_foreign_key "shifts", "users"
 end
