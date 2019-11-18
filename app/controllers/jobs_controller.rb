@@ -7,6 +7,7 @@ class JobsController < ApplicationController
 
   def show
     @shift = Shift.new
+    @application = Application.new
   end
 
   def new
