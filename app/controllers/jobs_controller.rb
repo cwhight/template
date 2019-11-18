@@ -15,7 +15,7 @@ class JobsController < ApplicationController
   def create
     @job = Job.new(job_params)
     if @job.save
-      redirect_to new_job_dose_path(@job)
+      redirect_to jobs_path
     else
       render :new
     end
@@ -37,7 +37,7 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:name)
+    params.require(:job).permit(:title, :description, :location)
   end
 
   def set_job
