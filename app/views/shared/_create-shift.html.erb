@@ -1,0 +1,25 @@
+  <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#formModalCenter">
+    <%= "#{open_modal}" %>
+  </button>
+
+  <div class="modal fade" id="formModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><%= "#{modal_title}" %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for [@job, @shift], url: job_shifts_path do |f| %>
+              <%= f.input :start_time, as: :date %>
+              <%= f.input :end_time, as: :date %>
+              <%= f.input :pay_per_hour%>
+              <%= f.button :submit, "#{button_text}", class: "btn btn-flat" %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
