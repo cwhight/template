@@ -1,7 +1,11 @@
-<h1>Request from <%= @request.user.email %></h1>
+<h1>Request from <%= @request.user.first_name.capitalize %></h1>
 
 <p>Message:</p>
 <p><%= @request.content %></p>
+
+<p>User Details:</p>
+<p>Full Name: <%= @request.user.first_name.capitalize %> <%= @request.user.surname.capitalize %></p>
+<p>DOB: <%= @request.user.dob %></p>
 
 <p><%= link_to "Back", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
 <p><%= link_to "Accept request", request_accept_request_path(@request), method: :patch, class: "btn btn-flat" %></p>
