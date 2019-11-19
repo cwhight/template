@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'jobs#index'
   resources :jobs do
     resources :shifts do
-      resources :applications
+      resources :requests
     end
   end
 

@@ -1,4 +1,4 @@
-class Application < ApplicationRecord
+class Request < ApplicationRecord
   belongs_to :user
   belongs_to :shift
 end
