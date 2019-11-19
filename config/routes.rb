@@ -6,9 +6,11 @@ Rails.application.routes.draw do
       resources :requests, except: [:show]
     end
   end
-  resources :dashboards, only: :show
+
+  get '/dashboard', to: 'pages#dashboard'
 
   resources :requests, only: [:show]
+  resources :users, only: [:edit, :update]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
