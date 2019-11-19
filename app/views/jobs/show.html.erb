@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>Show Jobs Page</h1>
+  <h1><%= @job.title %></h1>
+  <p><%= @job.description %></p>
 
   <% @job.shifts.each do |shift| %>
     <div class="card p-3">
@@ -12,7 +13,7 @@
         </div>
         <div class="my-2 col-12 col-sm-4">
           <% if policy(@job).edit? %>
-            <%= render 'shared/view_applications', shift: shift %>
+            <%= render 'shared/view_requests', shift: shift %>
           <% else %>
             <%= render 'shared/request', shift: shift %>
           <% end %>
