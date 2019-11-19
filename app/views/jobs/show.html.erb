@@ -11,10 +11,10 @@
           <p>Pay/h: <%= shift.pay %></p>
         </div>
         <div class="my-2 col-12 col-sm-4">
-          <% if current_user == @job.user %>
+          <% if policy(@job).edit? %>
             <%= render 'shared/view_applications', shift: shift %>
           <% else %>
-            <%= render 'shared/application', shift: shift %>
+            <%= render 'shared/request', shift: shift %>
           <% end %>
         </div>
 
