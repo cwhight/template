@@ -33,6 +33,7 @@
                     :order => [:day, :month, :year],
                     :label => "Day of Birth",
                     :prompt => "Select" %>
+      <%= f.input :summary, :as => :hidden, :input_html => { :value => "" }
     </div>
     <br>
     <%=f.check_box :terms_of_service,

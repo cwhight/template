@@ -7,7 +7,7 @@
       <p>Email: <%= @user.email %></p>
       <p>Name: <%= @user.first_name %> <%= current_user.surname %></p>
       <p>Date of birth: <%= @user.dob%></p>
-      <p>Summary:</p>
+      <p>Summary: <%= @user.summary%></p>
       <br>
       <div class="p-2">
           <%= link_to 'Change password', registration_path(current_user), :method => :patch %>
@@ -18,6 +18,7 @@
     </div>
     <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Upcoming Jobs</h2>
+      <%= @user.job.title%>
     </div>
     <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Payment Details</h2>
