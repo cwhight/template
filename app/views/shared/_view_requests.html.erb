@@ -7,15 +7,17 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle"><%= "New Shift" %></h5>
+            <h5 class="modal-title" id="exampleModalLongTitle"><%= "Open Applications (#{shift.requests.length})" %></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <% shift.applications.each do |app| %>
-              <p><%= app.user.email %></p>
-              <p><%= app.content %></p>
+
+            <% shift.requests.each do |request| %>
+              <p><%= request.user.email %></p>
+              <p><%= request.content %></p>
+              <p><%= link_to "request details", request_path %></p>
             <% end %>
           </div>
 

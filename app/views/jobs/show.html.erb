@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>Show Jobs Page</h1>
+  <h1><%= @job.title %></h1>
+  <p><%= @job.description %></p>
 
   <% @job.shifts.each do |shift| %>
     <div class="card p-3">
@@ -11,18 +12,19 @@
           <p>Pay/h: <%= shift.pay %></p>
         </div>
         <div class="my-2 col-12 col-sm-4">
-          <% if current_user == @job.user %>
-            <%= render 'shared/view_applications', shift: shift %>
+          <% if policy(@job).edit? %>
+            <%= render 'shared/view_requests', shift: shift %>
           <% else %>
-            <%= render 'shared/application', shift: shift %>
+            <%= render 'shared/request', shift: shift %>
           <% end %>
         </div>
 
       </div>
     </div>
   <% end %>
-
+<% if policy(@job).edit? %>
   <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
   <%= render 'shared/create-shift' %>
+<% end %>
 
 </div>

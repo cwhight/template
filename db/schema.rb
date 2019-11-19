@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_11_19_113609) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +40,17 @@ ActiveRecord::Schema.define(version: 2019_11_19_113609) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "shift_id"
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_requests_on_shift_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -85,6 +97,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_113609) do
   add_foreign_key "applications", "shifts"
   add_foreign_key "applications", "users"
   add_foreign_key "jobs", "users"
+  add_foreign_key "requests", "shifts"
+  add_foreign_key "requests", "users"
   add_foreign_key "reviews", "shifts"
   add_foreign_key "reviews", "users"
   add_foreign_key "shifts", "jobs"
