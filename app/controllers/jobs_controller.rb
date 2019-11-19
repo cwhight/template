@@ -28,7 +28,6 @@ class JobsController < ApplicationController
   end
 
   def edit
-    raise
   end
 
   def update
