@@ -14,9 +14,8 @@
         <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <% if current_user %>
+          <%= link_to 'Dashboard', dashboard_path(current_user), class: "dropdown-item" %>
           <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          <%= link_to 'Employee Dashboard', pending_path, class: "dropdown-item" %>
-          <%= link_to 'Employer Dashboard', pending_path, class: "dropdown-item" %>
         <% end %>
         <% unless current_user %>
           <%= link_to 'Sign in', new_user_session_path, class: "dropdown-item" %>

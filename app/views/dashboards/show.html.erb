@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Dashboard</h1>
+  <div class="row d-flex justify-content-between">
+    <div id="profile" class="col-5 border border-dark shadow p-4 m-2">
+      <h2>Profile</h2>
+      <br>
+      <p>Name: <%= current_user.first_name %> <%= current_user.surname %></p>
+      <p>Date of birth: <%= current_user.dob %></p>
+      <p>Summary:</p>
+      <br>
+      <div class="p-2">
+          <%= link_to 'Update', edit_user_registration_path(current_user), :confirm => 'Are you sure you want to destroy your account?', :method => :edit %>
+      </div>
+        <div class="p-2">
+          <%= link_to 'Delete Account', registration_path(current_user), :method => :delete %>
+      </div>
+    </div>
+    <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
+      <h2>Upcoming Jobs</h2>
+    </div>
+    <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
+      <h2>Payment Details</h2>
+      <div class="p-2">
+          <%= link_to 'Update', user_registration_path, :confirm => 'Are you sure you want to destroy your account?', :method => :delete %>
+      </div>
+    </div>
+    <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
+      <h2>Job History</h2>
+    </div>
+</div>
