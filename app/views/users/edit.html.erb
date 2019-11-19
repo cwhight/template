@@ -1,0 +1,10 @@
+<div class="container">
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :surname %>
+    <%= f.input :dob %>
+    <%= f.button :submit, class: "btn btn-flat" %>
+  <% end %>
+</div>
+
+
