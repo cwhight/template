@@ -18,11 +18,14 @@
     </div>
     <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Upcoming Jobs</h2>
+      <br>
       <% @user.shifts.each do |shift|  %>
+
           <p> Job: <%= shift.job.title %> </p>
           <p> Description: <%= shift.job.description %> </p>
           <p> Location: <%= shift.job.location %> </p>
-        <% end %>
+
+      <% end %>
     </div>
     <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Payment Details</h2>
@@ -36,6 +39,14 @@
     </div>
     <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Job History</h2>
+      <br>
+      <% @user.shifts.each do |shift|  %>
+
+          <p> Job: <%= shift.job.title %> </p>
+          <p> Description: <%= shift.job.description %> </p>
+          <p> Location: <%= shift.job.location %> </p>
+
+      <% end %>
     </div>
 </div>
 <br>
