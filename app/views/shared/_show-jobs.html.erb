@@ -1,0 +1,52 @@
+<button type="button" class="btn btn-flat" data-toggle="modal" data-target="#showJob<%=job.id%>">
+  View Details
+</button>
+
+<div class="modal fade" id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"><%= "#{job.title}" %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <h1><%= job.title %></h1>
+            <p><%= job.description %></p>
+
+            <% job.shifts.each do |shift| %>
+              <div class="card p-3">
+                <div class="row justify-content-between">
+
+                  <div class="col-12 col-sm-8 col-md-6">
+                    <p>Start time: <%= shift.start_time %></p>
+                    <p>End time: <%= shift.end_time %></p>
+                    <p>Pay/h: <%= shift.pay %></p>
+                  </div>
+                  <div class="my-2 col-12 col-sm-4">
+                    <% if policy(job).edit? %>
+                      <%= render 'shared/view_requests', shift: shift, job: job %>
+                    <% else %>
+                      <%= render 'shared/request', shift: shift %>
+                    <% end %>
+                  </div>
+
+                </div>
+              </div>
+            <% end %>
+          <% if policy(job).edit? %>
+            <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes", job: job%>
+            <%= render 'shared/create-shift', job: job, shift: Shift.new %>
+          <% end %>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+

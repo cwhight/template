@@ -1,9 +1,9 @@
 
-  <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#viewApplications">
+  <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#show<%=shift.id%>">
     <%= "View Applications" %>
   </button>
 
-  <div class="modal fade" id="viewApplications" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="show<%=shift.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -17,7 +17,7 @@
             <% shift.requests.each do |request| %>
               <p><%= request.user.email %></p>
               <p><%= request.content %></p>
-              <p><%= link_to "more details", request_path, class: "btn btn-flat" %></p>
+              <p><%= link_to "more details", request_path(request), class: "btn btn-flat" %></p>
             <% end %>
           </div>
 
