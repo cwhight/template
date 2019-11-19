@@ -1,7 +1,8 @@
 class RequestsController < ApplicationController
-  before_action :set_application, only: [:show]
+  before_action :set_request, only: [:show]
 
   def show
+    authorize @request
   end
 
   def new
