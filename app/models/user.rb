@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :jobs
   has_many :reviews
   has_many :shifts
+  validates :terms_of_service, acceptance: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

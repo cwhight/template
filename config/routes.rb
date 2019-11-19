@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :requests, except: [:show]
     end
   end
+  resources :dashboards, only: :show
 
   resources :requests, only: [:show]
 
