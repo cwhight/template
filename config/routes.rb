@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   root to: 'jobs#index'
   resources :jobs do
     resources :shifts do
-      resources :requests
+      resources :requests, except: [:show]
     end
   end
+
+  resources :requests, only: [:show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
