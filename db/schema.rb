@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2019_11_19_160942) do
 
   # These are extensions that must be enabled in order to support this database
@@ -112,8 +111,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_160942) do
     t.string "first_name"
     t.string "surname"
     t.date "dob"
-    t.text "summary"
     t.boolean "employer"
+    t.text "summary"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

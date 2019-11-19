@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'shifts/:shift_id/reviews', to: 'reviews#create', as: :shift_reviews
+
   get '/dashboard', to: 'pages#dashboard'
 
   resources :users, only: [:edit, :update]
