@@ -1,12 +1,12 @@
-  <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#createApplication">
+  <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#createRequest<%=shift.id%>">
     <%= "Apply" %>
   </button>
 
-  <div class="modal fade" id="createApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="createRequest<%=shift.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle"><%= "New Shift" %></h5>
+            <h5 class="modal-title" id="exampleModalLongTitle"><%= "Apply for Shift" %></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
