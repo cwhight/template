@@ -3,4 +3,5 @@
 <p>Message:</p>
 <p><%= @request.content %></p>
 
+<p><%= link_to "Back", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
 <p><%= link_to "Accept request", request_accept_request_path(@request), method: :patch, class: "btn btn-flat" %></p>
