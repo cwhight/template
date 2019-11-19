@@ -3,12 +3,6 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-
-
-  # def edit?
-  #   true
-  # end
-
   class Scope < Scope
     def resolve
       scope.all
