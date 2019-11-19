@@ -21,8 +21,9 @@
       </div>
     </div>
   <% end %>
-
+<% if policy(@job).edit? %>
   <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
+<% end %>
   <%= render 'shared/create-shift' %>
 
 </div>
