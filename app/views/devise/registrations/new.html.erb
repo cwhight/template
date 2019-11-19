@@ -16,10 +16,34 @@
       <%= f.input :password_confirmation,
                   required: true,
                   input_html: { autocomplete: "new-password" } %>
-    </div>
+      <br>
+      <h3> About you </h3>
 
+      <%= f.input :first_name,
+                  required: true,
+                  input_html: { autocomplete: "Chris" } %>
+      <%= f.input :surname,
+                  required: true,
+                  input_html: { autocomplete: "Williams" } %>
+      <%= f.input :dob, :as => :date,
+                    required: true,
+                    :start_year => Date.today.year - 18,
+                    :end_year => Date.today.year - 99,
+                    :month => Date.today.month,
+                    :order => [:day, :month, :year],
+                    :label => "Day of Birth",
+                    :prompt => "Select" %>
+    </div>
+    <br>
+    <%=f.check_box :terms_of_service,
+                      required: true%>
+    <label for="id1">   Yes, I understand and agree to the Template Terms of Service, including the User Agreement and Privacy Policy.</label>
+    <br>
     <div class="form-actions btn btn-primary">
       <%= f.button :submit, "Sign up" %>
     </div>
+    <br>
+    <br>
+    <br>
   <% end %>
 </div>
