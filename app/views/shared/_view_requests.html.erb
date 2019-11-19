@@ -13,6 +13,7 @@
             </button>
           </div>
           <div class="modal-body">
+
             <% shift.requests.each do |request| %>
               <p><%= request.user.email %></p>
               <p><%= request.content %></p>
