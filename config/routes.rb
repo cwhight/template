@@ -9,8 +9,12 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'pages#dashboard'
 
-  resources :requests, only: [:show]
   resources :users, only: [:edit, :update]
+
+  resources :requests, only: [:show] do
+    patch 'requests/:id/accept_request', to: 'shifts#accept_request', as: 'accept_request'
+  end
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

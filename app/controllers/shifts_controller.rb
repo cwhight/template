@@ -13,6 +13,8 @@ class ShiftsController < ApplicationController
     @shift = Shift.new(shift_params)
     @shift.title = @job.title
     @shift.job = @job
+    authorize @job
+    authorize @shift
     if @shift.save
       redirect_to root_path
     else
@@ -36,6 +38,18 @@ class ShiftsController < ApplicationController
     @shift.destroy
 
     redirect_to root_path
+  end
+
+  def accept_request
+    @request = Request.find(params[:id])
+    @shift = @request.shift
+    @user = @request.user
+    @shift.user = @user
+    authorize @shift
+    # authorize @request
+    if @shift.save
+      redirect_to job_path(@shift.job)
+    end
   end
 
   private

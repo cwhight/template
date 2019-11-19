@@ -10,6 +10,11 @@
           <p>Start time: <%= shift.start_time %></p>
           <p>End time: <%= shift.end_time %></p>
           <p>Pay/h: <%= shift.pay %></p>
+          <% if shift.user.nil? %>
+            <p>No worker assigned yet</p>
+          <% else %>
+            <p>Worker: <%= shift.user.email %></p>
+          <% end %>
         </div>
         <div class="my-2 col-12 col-sm-4">
           <% if policy(@job).edit? %>
@@ -23,6 +28,7 @@
     </div>
   <% end %>
 <% if policy(@job).edit? %>
+  <%= link_to 'Back', root_path, class: 'btn btn-flat' %>
   <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
   <%= render 'shared/create-shift' %>
 <% end %>

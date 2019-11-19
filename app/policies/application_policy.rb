@@ -34,6 +34,10 @@ class ApplicationPolicy
     false
   end
 
+  def accept_request?
+    false
+  end
+
   class Scope
     attr_reader :user, :scope
 
