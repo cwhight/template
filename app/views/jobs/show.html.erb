@@ -11,7 +11,7 @@
           <p>End time: <%= shift.end_time %></p>
           <p>Pay/h: <%= shift.pay %></p>
           <% if shift.user.nil? %>
-            <p>Worker: <%= shift.user %></p>
+            <p>No worker assigned yet</p>
           <% else %>
             <p>Worker: <%= shift.user.email %></p>
           <% end %>
