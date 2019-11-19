@@ -10,6 +10,7 @@
           <p>Start time: <%= shift.start_time %></p>
           <p>End time: <%= shift.end_time %></p>
           <p>Pay/h: <%= shift.pay %></p>
+          <p>Worker: <%= shift.user %></p>
         </div>
         <div class="my-2 col-12 col-sm-4">
           <% if policy(@job).edit? %>

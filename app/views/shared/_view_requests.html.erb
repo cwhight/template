@@ -17,7 +17,7 @@
             <% shift.requests.each do |request| %>
               <p><%= request.user.email %></p>
               <p><%= request.content %></p>
-              <p><%= link_to "request details", request_path %></p>
+              <p><%= link_to "more details", request_path, class: "btn btn-flat" %></p>
             <% end %>
           </div>
 
