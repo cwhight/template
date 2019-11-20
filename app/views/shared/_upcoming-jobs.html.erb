@@ -1,0 +1,11 @@
+    <div id="upcoming_jobs" class="col-6 card p-3">
+      <h2>Upcoming Jobs</h2>
+      <br>
+      <% user.shifts.each do |shift|  %>
+
+        <p> Job: <%= shift.job.title %> </p>
+        <p> Description: <%= shift.job.description %> </p>
+        <p> Location: <%= shift.job.location %> </p>
+
+      <% end %>
+    </div>

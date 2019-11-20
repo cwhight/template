@@ -1,0 +1,31 @@
+<div class="card col-6 p-3">
+
+  <div class="profile-header">
+    <h2 class="d-inline">Profile</h2>
+    <%= cl_image_tag user.photo.key, class: "avatar-square d-inline float-right ", crop: :fill if user.photo.attached? %>
+  </div>
+  <br>
+  <p>Name: <%= user.first_name %> <%= user.surname %></p>
+  <p>Email: <%= user.email %></p>
+  <p>Date of birth: <%= user.dob%></p>
+  <p>Summary: <%= user.summary%></p>
+
+  <% score_array = user.reviews.map { |review| review.score } %>
+  <% unless score_array.empty? %>
+
+    <% average_score = score_array.reduce(:+) / score_array.length %>
+    <p>Average Review Score: <%= average_score %></p>
+  <% else %>
+    <p>Review Score: No Reviews Yet </p>
+  <% end %>
+
+  <% if current_user == user %>
+    <div class="p-2">
+        <%= link_to 'Change password', registration_path(current_user), :method => :patch, class: "btn btn-flat" %>
+    </div>
+    <div class="p-2">
+      <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-flat" %>
+    </div>
+  <% end %>
+
+</div>
