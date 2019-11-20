@@ -27,8 +27,11 @@
       <br>
       <% current_user.jobs.each do |job|  %>
           <div class="card p-3">
-
-            <p> Job: <%= link_to job.title, job_path(job)   %></p>
+            <div class="job_card_header">
+              <h3 class="d-inline"> Job: <%= job.title  %> </h3>
+              <%= link_to "View Shifts", job_path(job), class: "d-inline float-right btn btn-flat"   %>
+            </div>
+            <br>
             <p> Description: <%= job.description %> </p>
             <p> Location: <%= job.location %> </p>
           </div>
@@ -50,6 +53,7 @@
       <br>
       <% current_user.jobs.each do |job|  %>
 
+        <% raise %>
           <p> Job: <%= job.title %> </p>
           <p> Description: <%= job.description %> </p>
           <p> Location: <%= job.location %> </p>
