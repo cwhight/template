@@ -11,9 +11,10 @@
   <p>Summary: <%= user.summary%></p>
 
   <% score_array = user.reviews.map { |review| review.score } %>
-  <% if score_array.is_a? Integer %>
+  <% unless score_array.empty? %>
+
     <% average_score = score_array.reduce(:+) / score_array.length %>
-    <p>Review Score: <%= average_score %></p>
+    <p>Average Review Score: <%= average_score %></p>
   <% else %>
     <p>Review Score: No Reviews Yet </p>
   <% end %>
