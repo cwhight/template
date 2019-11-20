@@ -1,6 +1,9 @@
+
 <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#showJob<%=job.id%>">
   View Details
 </button>
+
+
 
 <div class="modal fade" id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -16,31 +19,37 @@
             <h1><%= job.title %></h1>
             <p><%= job.description %></p>
 
+
             <% job.shifts.each do |shift| %>
               <div class="card p-3">
                 <div class="row justify-content-between">
 
-                  <div class="col-12 col-sm-8 col-md-6">
-                    <p>Start time: <%= shift.start_time %></p>
-                    <p>End time: <%= shift.end_time %></p>
+                  <div class="col-12">
+                    <p>Date: <%= shift.date %></p>
+                    <p>Start time: <%= shift.start_time.strftime("%k:%M") %></p>
+                    <p>End time: <%= shift.end_time.strftime("%k:%M") %></p>
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
-                  <div class="my-2 col-12 col-sm-4">
-                    <% if policy(job).edit? %>
-                      <%= render 'shared/view_requests', shift: shift, job: job %>
-                    <% else %>
-                      <%= render 'shared/request', shift: shift %>
-                    <% end %>
-                  </div>
+                  <div>
+                    <div class="m-3 applyButton btn btn-flat">
+                      Send Application
+                    </div>
+
+                    <div id="applyForm" class="hidden modal-body">
+                      <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
+                        <%= f.input :content %>
+                        <%= f.button :submit, "Apply", class: "btn btn-flat" %>
+                      <% end %>
+                      <div class="mt-3 applyBackButton btn btn-flat">
+                        Back
+                      </div>
+                    </div>
+                   </div>
+
 
                 </div>
               </div>
             <% end %>
-          <% if policy(job).edit? %>
-            <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes", job: job%>
-            <%= render 'shared/create-shift', job: job, shift: Shift.new %>
-          <% end %>
-
           </div>
         </div>
 

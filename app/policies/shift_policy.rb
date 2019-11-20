@@ -1,7 +1,7 @@
 class ShiftPolicy < ApplicationPolicy
 
   def create?
-    record.user == user
+    record.job.user == user
   end
 
   def accept_request?
