@@ -34,6 +34,8 @@
                     :label => "Day of Birth",
                     :prompt => "Select" %>
       <%= f.input :summary, :as => :hidden, :input_html => { :value => "" } %>
+      <%= f.input :photo, :input_html => { :value => :photo } %>
+
     </div>
     <br>
     <%=f.check_box :terms_of_service,
