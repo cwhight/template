@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'pages#dashboard'
 
+  get '/dashboard_employer', to: 'pages#dashboard_employer'
+
   resources :users, only: [:edit, :update]
 
   resources :requests, only: [:show] do

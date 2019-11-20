@@ -10,30 +10,20 @@
     <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,400,500,700&display=swap" rel="stylesheet">
 </head>
+
   <body>
     <%= render 'shared/navbar' %>
-      <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_pack_tag 'application' %>
-
-    <!--Footer-->
-
-    <div id="container">
-      <div id="main">
-
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <div class="content">
+      <div class="content-inside">
+        <%= yield %>
       </div>
     </div>
 
-    <footer id="footer">
-      <p id="footer-tagline">
-        TEMPlate © 2019–2020.
-        <br>
-        Made with ♥ at Le Wagon London by Team TEMPlate Batch #319.
-        </br>
-      </p>
-    </footer>
-    <!--//Footer End-->
+    <%= render 'shared/footer' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
+
   </body>
 </html>
