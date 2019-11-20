@@ -16,6 +16,7 @@
             <h1><%= job.title %></h1>
             <p><%= job.description %></p>
 
+
             <% job.shifts.each do |shift| %>
               <div class="card p-3">
                 <div class="row justify-content-between">
@@ -32,11 +33,6 @@
                 </div>
               </div>
             <% end %>
-          <% if policy(job).edit? %>
-            <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes", job: job%>
-            <%= render 'shared/create-shift', job: job, shift: Shift.new %>
-          <% end %>
-
           </div>
         </div>
 
