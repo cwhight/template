@@ -11,6 +11,15 @@
       <p>Name: <%= @user.first_name %> <%= current_user.surname %></p>
       <p>Date of birth: <%= @user.dob%></p>
       <p>Summary: <%= @user.summary%></p>
+
+      <% score_array = @user.reviews.map { |review| review.score } %>
+      <% if score_array.is_a? Integer %>
+        <% average_score = score_array.reduce(:+) / score_array.length %>
+        <p>Review Score: <%= average_score %></p>
+      <% else %>
+        <p>Review Score: No Reviews Yet </p>
+      <% end %>
+
       <br>
       <div class="p-2">
           <%= link_to 'Change password', registration_path(current_user), :method => :patch %>
@@ -49,6 +58,14 @@
         <p> Description: <%= shift.job.description %> </p>
         <p> Location: <%= shift.job.location %> </p>
 
+      <% end %>
+    </div>
+    <div id="reviews" class="col-5 border border-dark shadow p-4 m-2">
+      <h2>Reviews</h2>
+      <% @user.reviews.each do |review| %>
+      <h4><%= review.title %>, by <%= review.shift.job.user.first_name %></h4>
+      <h5>Score: <%= review.score %></h5>
+      <p><%= review.content %></p>
       <% end %>
     </div>
   </div>
