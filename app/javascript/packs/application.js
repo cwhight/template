@@ -1,8 +1,10 @@
 import "bootstrap";
+import { openApply, closeApply } from './components/apply';
+import { initUpdateNavbarOnScroll } from './components/navbar';
 
-import { initUpdateNavbarOnScroll } from '../components/navbar';
 initUpdateNavbarOnScroll();
+openApply();
+closeApply();
 
-import { applyForm } from '../components/apply';
 
 
