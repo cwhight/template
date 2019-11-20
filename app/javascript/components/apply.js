@@ -1,17 +1,21 @@
-const apply = document.querySelector(".applyButton")
-const applyForm = document.querySelector("#applyForm")
-const applyBackButton = document.querySelector(".applyBackButton")
+const apply = document.querySelectorAll(".applyButton")
+const applyForm = document.querySelectorAll("#applyForm")
+const applyBackButton = document.querySelectorAll(".applyBackButton")
 
-apply.addEventListener("click", (e) => {
-  applyForm.classList.toggle("hidden")
-  apply.classList.toggle("hidden")
-})
+apply.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.currentTarget.nextElementSibling.classList.toggle("hidden")
+    e.currentTarget.classList.toggle("hidden")
+    console.log(e)
+  });
+});
 
-applyBackButton.addEventListener("click", (e) => {
-  applyForm.classList.toggle("hidden")
-  apply.classList.toggle("hidden")
-})
-
+applyBackButton.forEach((btn) => {
+   btn.addEventListener("click", (e) => {
+    e.currentTarget.parentElement.classList.toggle("hidden")
+    e.currentTarget.parentElement.previousElementSibling.classList.toggle("hidden")
+  });
+ });
 
 
 export { apply };

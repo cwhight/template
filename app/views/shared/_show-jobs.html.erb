@@ -30,19 +30,22 @@
                     <p>End time: <%= shift.end_time.strftime("%k:%M") %></p>
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
-                  <div class="applyButton btn btn-flat">
-                    Send Application
-                  </div>
-
-                  <div id="applyForm" class="hidden modal-body">
-                    <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
-                      <%= f.input :content %>
-                      <%= f.button :submit, "Apply", class: "btn btn-flat" %>
-                    <% end %>
-                    <div class="mt-3 applyBackButton btn btn-flat">
-                      Back
+                  <div>
+                    <div class="m-3 applyButton btn btn-flat">
+                      Send Application
                     </div>
-                  </div>
+
+                    <div id="applyForm" class="hidden modal-body">
+                      <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
+                        <%= f.input :content %>
+                        <%= f.button :submit, "Apply", class: "btn btn-flat" %>
+                      <% end %>
+                      <div class="mt-3 applyBackButton btn btn-flat">
+                        Back
+                      </div>
+                    </div>
+                   </div>
+
 
                 </div>
               </div>
