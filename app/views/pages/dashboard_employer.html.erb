@@ -22,12 +22,15 @@
       <h2>Upcoming Jobs</h2>
       <br>
       <% current_user.jobs.each do |job|  %>
+          <div class="card p-3">
 
-          <p> Job: <%= job.title %> </p>
-          <p> Description: <%= job.description %> </p>
-          <p> Location: <%= job.location %> </p>
+            <p> Job: <%= link_to job.title, job_path(job)   %></p>
+            <p> Description: <%= job.description %> </p>
+            <p> Location: <%= job.location %> </p>
+          </div>
 
       <% end %>
+      <%= link_to 'Create Job', new_job_path, class: "btn btn-flat" %>
     </div>
     <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Payment Details</h2>

@@ -19,6 +19,10 @@
       <br>
       <h3> About you </h3>
 
+      <%= f.input :employer,
+                  as: :boolean,
+                  required: true
+                  %>
       <%= f.input :first_name,
                   required: true,
                   input_html: { autocomplete: "Chris" } %>
