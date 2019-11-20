@@ -24,14 +24,24 @@
               <div class="card p-3">
                 <div class="row justify-content-between">
 
-                  <div class="col-12 col-sm-8 col-md-6">
+                  <div class="col-12">
                     <p>Date: <%= shift.date %></p>
                     <p>Start time: <%= shift.start_time.strftime("%k:%M") %></p>
                     <p>End time: <%= shift.end_time.strftime("%k:%M") %></p>
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
-                  <div class="my-2 col-12 col-sm-4">
-                      <%= render 'shared/request', job: job, shift: shift %>
+                  <div class="applyButton btn btn-flat">
+                    Send Application
+                  </div>
+
+                  <div id="applyForm" class="hidden modal-body">
+                    <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
+                      <%= f.input :content %>
+                      <%= f.button :submit, "Apply", class: "btn btn-flat" %>
+                    <% end %>
+                    <div class="mt-3 applyBackButton btn btn-flat">
+                      Back
+                    </div>
                   </div>
 
                 </div>
