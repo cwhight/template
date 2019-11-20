@@ -3,7 +3,8 @@
   <div class="row d-flex justify-content-between">
     <div id="profile" class="col-5 border border-dark shadow p-4 m-2">
       <div class="profile-header">
-        <h2>Profile</h2>
+        <h2 class="d-inline">Profile</h2>
+        <%= cl_image_tag current_user.photo.key, class: "avatar-square d-inline float-right ", crop: :fill if current_user.photo.attached? %>
       </div>
       <br>
       <p>Email: <%= current_user.email %></p>
@@ -19,7 +20,10 @@
       </div>
     </div>
     <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
-      <h2>Upcoming Jobs</h2>
+      <div>
+        <h2 class="d-inline">Listed Jobs</h2>
+        <%= link_to 'Create Job', new_job_path, class: "d-inline float-right btn btn-flat" %>
+      </div>
       <br>
       <% current_user.jobs.each do |job|  %>
           <div class="card p-3">
@@ -30,7 +34,6 @@
           </div>
 
       <% end %>
-      <%= link_to 'Create Job', new_job_path, class: "btn btn-flat" %>
     </div>
     <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Payment Details</h2>
@@ -43,7 +46,7 @@
       </div>
     </div>
     <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
-      <h2>Job History</h2>
+      <h2>Past Jobs</h2>
       <br>
       <% current_user.jobs.each do |job|  %>
 
