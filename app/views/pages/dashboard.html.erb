@@ -3,8 +3,8 @@
   <div class="row d-flex justify-content-between">
     <div id="profile" class="col-5 border border-dark shadow p-4 m-2">
       <div class="profile-header">
-        <h2>Profile</h2>
-        <%= cl_image_tag current_user.photo.key, class: "avatar-square", crop: :fill if current_user.photo.attached? %>
+        <h2 class="d-inline">Profile</h2>
+        <%= cl_image_tag current_user.photo.key, class: "avatar-square d-inline float-right ", crop: :fill if current_user.photo.attached? %>
       </div>
       <br>
       <p>Email: <%= @user.email %></p>
