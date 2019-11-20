@@ -13,9 +13,9 @@
           </div>
           <div class="modal-body">
             <%= simple_form_for [shift, @review], url: shift_reviews_path(shift, @review) do |f| %>
-              <%= f.input :score %>
-              <%= f.input :title %>
-              <%= f.input :content %>
+              <%= f.input :score, as: :integer %>
+              <%= f.input :title, as: :string %>
+              <%= f.input :content, as: :text %>
               <%= f.button :submit, "Submit review", class: "btn btn-flat" %>
             <% end %>
           </div>

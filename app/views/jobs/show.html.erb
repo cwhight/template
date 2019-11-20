@@ -9,7 +9,7 @@
         <div class="col-12 col-sm-8 col-md-6">
           <p>Start time: <%= shift.start_time %></p>
           <p>End time: <%= shift.end_time %></p>
-          <p>Pay/h: <%= shift.pay %></p>
+          <p>Pay/h: £<%= shift.pay %></p>
           <% if shift.user.nil? %>
             <p>No worker assigned yet</p>
           <% else %>
