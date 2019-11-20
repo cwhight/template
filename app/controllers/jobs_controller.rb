@@ -2,9 +2,11 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   def index
-    # @jobs = Job.all
-    @jobs = policy_scope(Job).order(created_at: :desc)
-    @request = Request.new
+      @jobs = policy_scope(Job).order(created_at: :desc)
+      @request = Request.new
+    if current_user.employer
+      redirect_to dashboard_employer_path(current_user)
+    end
   end
 
   def show
