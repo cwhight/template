@@ -26,8 +26,8 @@
 
                   <div class="col-12">
                     <p>Date: <%= shift.date %></p>
-                    <p>Start time: <%= shift.start_time.strftime("%k:%M") %></p>
-                    <p>End time: <%= shift.end_time.strftime("%k:%M") %></p>
+                    <p>Start time: <%= shift&.start_time&.strftime("%k:%M") %></p>
+                    <p>End time: <%= shift&.end_time&.strftime("%k:%M") %></p>
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
                   <div>
