@@ -25,6 +25,7 @@
         <%= link_to 'Create Job', new_job_path, class: "d-inline float-right btn btn-flat" %>
       </div>
       <br>
+      <% current_user.shifts.select{|s|s.date + 1 > Date.today} %>
       <% current_user.jobs.each do |job|  %>
           <div class="card p-3">
             <div class="job_card_header">
@@ -48,16 +49,28 @@
           <%= link_to 'Update', user_registration_path, :confirm => 'Are you sure you want to destroy your account?', :method => :delete %>
       </div>
     </div>
-    <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
-      <h2>Past Jobs</h2>
+    <div id="past_jobs" class="col-5 border border-dark shadow p-4 m-2">
+      <div>
+        <h2 class="d-inline">Past Jobs</h2>
+      </div>
       <br>
-      <% current_user.jobs.each do |job|  %>
+      <% if current_user.shifts.nil? %>
 
-        <% raise %>
-          <p> Job: <%= job.title %> </p>
-          <p> Description: <%= job.description %> </p>
-          <p> Location: <%= job.location %> </p>
+      <% else %>
+      <% current_user.shifts.select{|s|s.date + 1 < Date.today} %>
+        <% current_user.jobs.each do |job|  %>
+          <div class="card p-3">
+            <div class="job_card_header">
 
+              <h3> Job: <%= job.title %> </h3>
+              <br>
+              <p> Description: <%= job.description %> </p>
+              <p class="d-inline"> Location: <%= job.location %> </p>
+              <%= link_to "Review", job_path(job), class: "d-inline float-right btn btn-flat"   %>
+
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
