@@ -13,6 +13,7 @@
 
         <%= link_to "#{j.title}", job_path(j)  %>
         <%= j.description %>
+        <%= render 'shared/show-jobs', job: j %>
     </div>
   <% end %>
 

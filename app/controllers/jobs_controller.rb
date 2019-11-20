@@ -4,6 +4,7 @@ class JobsController < ApplicationController
   def index
     # @jobs = Job.all
     @jobs = policy_scope(Job).order(created_at: :desc)
+    @request = Request.new
   end
 
   def show

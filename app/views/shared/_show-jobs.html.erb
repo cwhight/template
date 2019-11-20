@@ -26,11 +26,7 @@
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
                   <div class="my-2 col-12 col-sm-4">
-                    <% if policy(job).edit? %>
-                      <%= render 'shared/view_requests', shift: shift, job: job %>
-                    <% else %>
-                      <%= render 'shared/request', shift: shift %>
-                    <% end %>
+                      <%= render 'shared/request', job: job, shift: shift %>
                   </div>
 
                 </div>
