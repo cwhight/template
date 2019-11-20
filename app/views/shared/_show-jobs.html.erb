@@ -1,6 +1,9 @@
+
 <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#showJob<%=job.id%>">
   View Details
 </button>
+
+
 
 <div class="modal fade" id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -22,8 +25,9 @@
                 <div class="row justify-content-between">
 
                   <div class="col-12 col-sm-8 col-md-6">
-                    <p>Start time: <%= shift.start_time %></p>
-                    <p>End time: <%= shift.end_time %></p>
+                    <p>Date: <%= shift.date %></p>
+                    <p>Start time: <%= shift.start_time.strftime("%k:%M") %></p>
+                    <p>End time: <%= shift.end_time.strftime("%k:%M") %></p>
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
                   <div class="my-2 col-12 col-sm-4">
