@@ -12,13 +12,13 @@
   <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
     <div class="search-form-control form-group">
       <input class="form-control string required" type="text" placeholder="Please enter the type of job you are looking for..." name="search[query]" id="search_query" />
-      <button name="button" type="submit" class="btn btn-flat">
+      <button name="button" type="submit" class="btn btn-ghost">
         <i class="fas fa-search"></i> Search
       </button>
     </div>
   <% end %>
 
-  <div class="row justify-content-around p-3">
+  <div class="row justify-content-between p-3">
 
     <% @jobs.each do |j|%>
     <div class="card p-3 col-5">
@@ -35,5 +35,5 @@
 
     <% end %>
   </div>
-    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat' %>
+    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat', id: 'display_all_jobs' %>
 </div>
