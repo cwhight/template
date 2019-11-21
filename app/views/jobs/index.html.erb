@@ -21,17 +21,7 @@
   <div class="row justify-content-around p-3">
 
     <% @jobs.each do |j|%>
-    <div class="card p-3 col-5">
-      <div class="job_card_header">
-        <h2 class="d-inline"><%= j.title %></h2>
-        <%= cl_image_tag j.user.photo.key, class: "avatar-square d-inline float-right", crop: :fill if j.user.photo.attached? %>
-      </div>
-      <div class = my-2>
-        <%= j.description %>
-      </div>
-      <br>
-      <%= render 'shared/show-jobs', job: j %>
-    </div>
+      <%= render 'shared/job-card', j: j %>
 
     <% end %>
   </div>
