@@ -19,27 +19,8 @@
         <%= link_to 'Update', edit_user_path(current_user) %>
       </div>
     </div>
-    <div id="upcoming_jobs" class="col-5 border border-dark shadow p-4 m-2">
-      <div>
-        <h2 class="d-inline">Listed Jobs</h2>
-        <%= link_to 'Create Job', new_job_path, class: "d-inline float-right btn btn-flat" %>
-      </div>
-      <br>
-        <!-- Needs updating to only show future jobs -->
-      <% current_user.shifts.select{|s|s.date >= Date.today} %>
-      <% current_user.jobs.each do |job|  %>
-          <div class="card p-3">
-            <div class="job_card_header">
-              <h3 class="d-inline"> Job: <%= job.title  %> </h3>
-              <%= link_to "View Shifts", job_path(job), class: "d-inline float-right btn btn-flat"   %>
-            </div>
-            <br>
-            <p> Description: <%= job.description %> </p>
-            <p> Location: <%= job.location %> </p>
-          </div>
+    <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
 
-      <% end %>
-    </div>
     <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
       <h2>Payment Details</h2>
       <br>

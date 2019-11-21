@@ -1,14 +1,14 @@
-    <div id="upcoming_jobs" class="col-12 col-md-6">
-      <div class="card p-3 m-2">
+<div id="upcoming_jobs" class="col-12 col-md-6">
+  <div class="card p-3 m-2">
 
-        <h2>Upcoming Jobs</h2>
-        <br>
+    <h2>Upcoming Jobs</h2>
+    <br>
 
-        <% user.shifts.order(:start_time).each do |shift|  %>
-            <% if shift.date > DateTime.now && shift.start_time > Time.now.hour %>
-              <p class="border-bottom"> <%= link_to shift.job.title, shift_path(shift) %> </p>
-            <% end %>
-
+    <% shifts.order(:start_time).each do |shift|  %>
+        <% if shift.date > DateTime.now && shift.start_time > Time.now.hour %>
+          <p class="border-bottom"> <%= link_to shift.job.title, shift_path(shift) %> </p>
         <% end %>
-      </div>
-    </div>
+
+    <% end %>
+  </div>
+</div>
