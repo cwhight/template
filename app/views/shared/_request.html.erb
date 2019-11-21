@@ -14,7 +14,7 @@
           <div class="modal-body">
             <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
               <%= f.input :content %>
-              <%= f.button :submit, "Apply", class: "btn btn-flat" %>
+              <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
             <% end %>
           </div>
 

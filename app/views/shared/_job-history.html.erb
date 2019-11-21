@@ -6,7 +6,10 @@
     <br>
       <% shifts.order(:date).each do |shift|  %>
           <% if shift.date < DateTime.now  %>
-             <p class="border-bottom"> <%= link_to shift.job.title, shift_path(shift) %> </p>
+            <div class="row justify-content-between m-2">
+              <p> <%= shift.job.title %> </p>
+              <%= render "shared/each_job_history", shift: shift %>
+            </div>
           <% end %>
       <% end %>
   </div>

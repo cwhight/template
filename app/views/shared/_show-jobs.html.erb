@@ -28,14 +28,14 @@
                     <p>Pay/h: <%= shift.pay %></p>
                   </div>
                   <div>
-                    <div class="m-3 applyButton btn btn-flat">
+                    <div class="m-3 applyButton btn btn-ghost">
                       Send Application
                     </div>
 
                     <div id="applyForm" class="hidden modal-body">
                       <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
                         <%= f.input :content %>
-                        <%= f.button :submit, "Apply", class: "btn btn-flat" %>
+                        <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
                       <% end %>
                       <div class="mt-3 applyBackButton btn btn-flat">
                         Back
