@@ -10,17 +10,26 @@ class JobsController < ApplicationController
       @jobs = policy_scope(Job).order(created_at: :desc)
     end
 
-    if current_user && current_user.employer
-        redirect_to dashboard_employer_path(current_user)
+    @markers = @jobs.map do |job|
+      {
+        lat: job.latitude,
+        lng: job.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { job: job })
+      }
     end
-
-    redirect_to dashboard_employer_path(current_user) if current_user.employer
   end
 
   def show
     @shift = Shift.new
     @request = Request.new
     @review = Review.new
+
+    @markers = @jobs.map do |job|
+      {
+        lat: job.latitude,
+        lng: job.longitude
+      }
+    end
   end
 
   def new

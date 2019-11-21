@@ -1,5 +1,13 @@
-<div class="container">
+<div
+  id="map"
+  style="width: 100%;
+  height: 400px;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+<div class="container content-index">
   <h1>Jobs</h1>
+
   <br>
   <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
     <div class="search-form-control form-group">
@@ -9,6 +17,7 @@
       </button>
     </div>
   <% end %>
+
   <div class="row justify-content-around p-3">
 
     <% @jobs.each do |j|%>

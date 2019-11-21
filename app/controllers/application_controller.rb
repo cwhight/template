@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     redirect_to(jobs_path)
   end
 
+  def after_sign_in_path_for(resource)
+    if resource.employer
+      dashboard_employer_path(resource)
+    else
+      jobs_path
+    end
+  end
+
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :surname, :dob, :summary, :photo, :employer])
