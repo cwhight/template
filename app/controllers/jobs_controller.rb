@@ -24,12 +24,11 @@ class JobsController < ApplicationController
     @request = Request.new
     @review = Review.new
 
-    @markers = @jobs.map do |job|
-      {
-        lat: job.latitude,
-        lng: job.longitude
+    @markers = {
+        lat: @job.latitude,
+        lng: @job.longitude
       }
-    end
+
   end
 
   def new
