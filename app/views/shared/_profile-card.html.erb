@@ -1,19 +1,23 @@
 <div class="card col-6 p-3">
 
   <div class="profile-header">
-    <h2 class="d-inline">Profile</h2>
-    <%= cl_image_tag user.photo.key, class: "avatar-square d-inline float-right ", crop: :fill if user.photo.attached? %>
+    <h2 class="d-inline"><%= user.first_name %> <%= user.surname %></h2>
+    <%= cl_image_tag user.photo.key, class: "avatar d-inline float-right ", crop: :fill if user.photo.attached? %>
+    <% now = Time.now.to_date %>
+    <% dob = user.dob %>
+    <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
+
+    <p><%= age %></p>
   </div>
-  <br>
-  <p>Name: <%= user.first_name %> <%= user.surname %></p>
-  <p>Email: <%= user.email %></p>
-  <p>Date of birth: <%= user.dob%></p>
-  <p>Summary: <%= user.summary%></p>
+  <p><%= user.summary%></p>
 
   <% score_array = user.reviews.map { |review| review.score } %>
   <% unless score_array.empty? %>
-    <% average_score = score_array.reduce(:+) / score_array.length %>
-    <p>Average Review Score: <%= average_score %></p>
+    <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+    <div class="border-bottom">
+      <p>Average Review Score: <%= average_score %></p>
+      <h3><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></h3>
+    </div>
   <% else %>
     <p>Review Score: No Reviews Yet </p>
   <% end %>
