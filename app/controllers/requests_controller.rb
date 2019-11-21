@@ -17,7 +17,7 @@ class RequestsController < ApplicationController
     @request.shift = Shift.find(params[:shift_id])
     if @request.save
 
-      redirect_to root_path
+      redirect_to jobs_path
     else
       render :new
     end
