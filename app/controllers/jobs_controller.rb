@@ -4,12 +4,12 @@ class JobsController < ApplicationController
 
   def index
     @request = Request.new
-    if params[:search][:query].present?
+    if params[:search].present?
       @jobs = policy_scope(Job).order(created_at: :desc).kinda_matching(params[:search][:query])
     else
       @jobs = policy_scope(Job).order(created_at: :desc)
     end
-    
+
     if current_user && current_user.employer
         redirect_to dashboard_employer_path(current_user)
     end
