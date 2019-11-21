@@ -3,6 +3,10 @@ class Job < ApplicationRecord
   has_many :shifts
   has_many :reviews, through: :shifts
 
+  validates :title, presence: true, length: { in: 2..30 }
+  validates :description, presence: true, length: { maximum: 200 }
+  validates :location, presence: true
+
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 

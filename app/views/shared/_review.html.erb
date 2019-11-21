@@ -13,9 +13,9 @@
           </div>
           <div class="modal-body">
             <%= simple_form_for [shift, @review], url: shift_reviews_path(shift, @review) do |f| %>
-              <%= f.input :score, as: :integer %>
-              <%= f.input :title, as: :string %>
-              <%= f.input :content, as: :text %>
+              <%= f.input :score, as: :integer, error: 'Please enter a number between 1 and 5' %>
+              <%= f.input :title, as: :string, error: 'Title must be between 3 and 20 characters' %>
+              <%= f.input :content, as: :text, error: 'Max. 500 characters' %>
               <%= f.button :submit, "Submit review", class: "btn btn-flat" %>
             <% end %>
           </div>
