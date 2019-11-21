@@ -2,11 +2,14 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   def index
+    @request = Request.new
+    if params[:search][:query].present?
+      @jobs = policy_scope(Job).order(created_at: :desc).kinda_matching(params[:search][:query])
+    else
       @jobs = policy_scope(Job).order(created_at: :desc)
-      @request = Request.new
-    if current_user.employer
-      redirect_to dashboard_employer_path(current_user)
     end
+
+    redirect_to dashboard_employer_path(current_user) if current_user.employer
   end
 
   def show
