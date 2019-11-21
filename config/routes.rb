@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'jobs#index'
+  root to: 'pages#home'
   resources :jobs do
-    resources :shifts do
+    resources :shifts, except: :show do
       resources :requests, except: [:show]
     end
   end
+
+  resources :shifts, only: :show
 
   post 'shifts/:shift_id/reviews', to: 'reviews#create', as: :shift_reviews
 

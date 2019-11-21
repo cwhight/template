@@ -32,7 +32,7 @@
     </div>
   <% end %>
 <% if policy(@job).edit? %>
-  <%= link_to 'Back', root_path, class: 'btn btn-flat' %>
+  <%= link_to 'Back', jobs_path, class: 'btn btn-flat' %>
   <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
   <%= render 'shared/create-shift' %>
 <% end %>
