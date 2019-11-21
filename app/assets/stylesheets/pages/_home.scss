@@ -58,14 +58,10 @@ h1 {
 }
 
 #footer {
-  background-color: #1A1A1A;
+  background-color: #e2e2e2;
   position: relative;
-  height: 100px;
+  height: 60px;
   margin-top: -50px;
-}
-
-#homepage-search {
-  margin-top: 20px;
 }
 
 #footer-tagline {
@@ -75,7 +71,7 @@ h1 {
   font-size: 13px;
   text-align: center;
   position: absolute;
-  bottom: 5px;
+  bottom: -5px;
   left: 500px;
 }
 
