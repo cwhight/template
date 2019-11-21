@@ -2,28 +2,28 @@
   <div id="landing-hero">
     <img id="landing-logo" src="https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"/ height="80px">
     <h1 id="landing-hero-h1">The quickest and easiest way <br>to find short term work that<br>suits your lifestyle.</h1>
-    <% unless current_user %>
-      <div id="signup">
-        <a href="/users/sign_in" class="btn btn-secondary">Sign In </a>
-        <a href="/users/sign_up" class="btn btn-secondary">Sign Up</a>
-      </div>
-    <% end %>
-    <div class="landing-card card">
-      <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
-        <div class="landing-page-search">
-          <p id="search-box-text">Enter the type of job you are looking for:</p>
-          <input class="form-control string required" type="text" placeholder="e.g Mechanic, Waitress..." name="search[query]" id="search_query" />
-          <button name="button" type="submit" class="btn btn-flat" id="landing-search-btn">
+
+   <% unless current_user %>
+    <div id="signup">
+      <a href="/users/sign_in" class="btn btn-ghost">Sign In </a>
+      <a href="/users/sign_up" class="btn btn-ghost">Sign Up</a>
+    </div>
+   <% end %>
+    <div class="landing-card">
+      <div class="search-form-control form-group" id='landing-page-search'>
+      <%= simple_form_for :search, url: jobs_path, method: :get, id: 'homepage-search' do |f| %>
+          <input class="form-control string required" type="text" placeholder="Please enter the type of job you are looking for..." name="search[query]" id="search_query" />
+          <button name="button" type="submit" class="btn btn-flat">
             <i class="fas fa-search"></i> Search
           </button>
-
-        <% unless current_user %>
-            <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Sign up here</a> to apply for jobs.</p>
-        <% else %>
-            <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Visit your dashboard here</a> to see the jobs you've saved.</p>
-        <% end %>
+      <% unless current_user %>
+          <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Sign up here</a> to apply for jobs.</p>
+      <% else %>
+          <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Visit your dashboard here</a> to see the jobs you've saved.</p>
+      <% end %>
 
         </div>
+      </div>
       <% end %>
       <img id="landing-hero-dog" src="https://res.cloudinary.com/dt02hu2ll/image/upload/v1574339347/Template_Dog_u6swis.png" height="668px" width="500px">
     </div>
