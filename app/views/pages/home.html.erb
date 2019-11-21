@@ -4,6 +4,11 @@
     <img id="landing-logo" src="https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"/ height="80px">
     <h1 id="landing-hero-h1">The quickest and easiest way <br>to find short term work that<br>suits your lifestyle.</h1>
 
+    <div id="signup">
+      <a href="/users/sign_in">Sign In |</a>
+      <a href="/users/sign_up">Sign Up</a>
+    </div>
+
     <div class="card">
    <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
     <div class="landing-page-search">
