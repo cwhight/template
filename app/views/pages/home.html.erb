@@ -33,3 +33,11 @@
   </div>
 </div>
 <div class="content-home"></div>
+
+  <div class="row justify-content-between p-3">
+    <% @jobs.each do |j|%>
+      <%= render 'shared/job-card', j: j %>
+    <% end %>
+  </div>
+    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat', id: 'display_all_jobs' %>
+</div>
