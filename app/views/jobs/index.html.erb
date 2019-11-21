@@ -1,14 +1,12 @@
-<div class="container">
+<div
+  id="map"
+  style="width: 100%;
+  height: 400px;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+<div class="container content-index">
   <h1>Jobs</h1>
-  <br>
-  <%= simple_form_for :search, url: root_path, method: :get do |f| %>
-    <div class="search-form-control form-group">
-      <input class="form-control string required" type="text" placeholder="Please enter the type of job you are looking for..." name="search[query]" id="search_query" />
-      <button name="button" type="submit" class="btn btn-flat">
-        <i class="fas fa-search"></i> Search
-      </button>
-    </div>
-  <% end %>
   <div class="row justify-content-around p-3">
     <% @jobs.each do |j|%>
     <div class="card p-3 col-5">

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container content">
   <h1>Dashboard</h1>
   <div class="row d-flex justify-content-between">
     <div id="profile" class="col-5 border border-dark shadow p-4 m-2">
@@ -25,7 +25,8 @@
         <%= link_to 'Create Job', new_job_path, class: "d-inline float-right btn btn-flat" %>
       </div>
       <br>
-      <% current_user.shifts.select{|s|s.date + 1 > Date.today} %>
+        <!-- Needs updating to only show future jobs -->
+      <% current_user.shifts.select{|s|s.date >= Date.today} %>
       <% current_user.jobs.each do |job|  %>
           <div class="card p-3">
             <div class="job_card_header">
@@ -54,10 +55,12 @@
         <h2 class="d-inline">Past Jobs</h2>
       </div>
       <br>
+        <!-- Needs updating to only show past jobs -->
       <% if current_user.shifts.nil? %>
-
+        <!-- Needs updating to only show past jobs -->
       <% else %>
-      <% current_user.shifts.select{|s|s.date + 1 < Date.today} %>
+        <!-- Needs updating to only show past jobs -->
+      <% current_user.shifts.select{|s|s.date < Date.today} %>
         <% current_user.jobs.each do |job|  %>
           <div class="card p-3">
             <div class="job_card_header">
@@ -75,5 +78,7 @@
     </div>
   </div>
 </div>
-
+<br>
+<br>
+<br>
 <br>
