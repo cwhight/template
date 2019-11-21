@@ -2,11 +2,11 @@
   <h1>Dashboard</h1>
   <div class="row d-flex justify-content-between">
     <%= render 'shared/profile-card', user: current_user %>
-    <%= render 'shared/upcoming-jobs', user: current_user %>
+    <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
     <%= render 'shared/payment-details', user: current_user %>
 
 
-    <%= render 'shared/job-history', user: current_user %>
+    <%= render 'shared/job-history', shifts: current_user.shifts %>
     <%= render 'shared/view-reviews', user: current_user %>
 
 
