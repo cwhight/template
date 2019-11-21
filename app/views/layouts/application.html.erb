@@ -16,18 +16,14 @@
     <% unless params[:controller] == 'pages' && params[:action] == 'home' %>
       <%= render 'shared/navbar' %>
     <% end %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="content">
-      <div class="content-inside">
 
         <%= yield %>
 
     <div class="notice"><%= notice %></div>
     <div class="alert"><%= alert %></div>
-    <%= render 'shared/footer' %>
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-
+    <%= render 'shared/footer' %>
   </body>
 </html>
