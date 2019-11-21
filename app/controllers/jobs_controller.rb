@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :close, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: :index
 
   def index
@@ -62,6 +62,13 @@ class JobsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def close
+    @job.done = true
+    authorize @job
+    @job.save
+    redirect_to dashboard_employer_path(@job.user)
   end
 
   def destroy
