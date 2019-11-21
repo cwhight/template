@@ -20,7 +20,7 @@
             <p><%= job.description %></p>
             <% job.shifts.each do |shift| %>
               <div class="card p-3">
-                <div class="row justify-content-between">
+                <div class="row justify-content-around">
                   <div class="col-12">
                     <p>Date: <%= shift.date %></p>
                     <p>Start time: <%= shift&.start_time&.strftime("%k:%M") %></p>
