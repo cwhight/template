@@ -8,6 +8,10 @@ class ShiftPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    record.user == user || record.job.user == user
+  end
+
   class Scope < Scope
     def resolve
       scope.all

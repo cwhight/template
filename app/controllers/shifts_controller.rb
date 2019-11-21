@@ -2,6 +2,7 @@ class ShiftsController < ApplicationController
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
 
   def show
+    authorize @shift
   end
 
   def new
