@@ -10,6 +10,7 @@
     </div>
   <% end %>
   <div class="row justify-content-around p-3">
+
     <% @jobs.each do |j|%>
     <div class="card p-3 col-5">
       <div class="job_card_header">
@@ -22,6 +23,7 @@
       <br>
       <%= render 'shared/show-jobs', job: j %>
     </div>
+
     <% end %>
   </div>
 </div>

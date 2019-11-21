@@ -3,11 +3,18 @@ class JobsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
+    @request = Request.new
+    if params[:search][:query].present?
+      @jobs = policy_scope(Job).order(created_at: :desc).kinda_matching(params[:search][:query])
+    else
       @jobs = policy_scope(Job).order(created_at: :desc)
-      @request = Request.new
+    end
+    
     if current_user && current_user.employer
         redirect_to dashboard_employer_path(current_user)
     end
+
+    redirect_to dashboard_employer_path(current_user) if current_user.employer
   end
 
   def show
