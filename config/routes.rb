@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'jobs#index'
+  root to: 'pages#home'
   resources :jobs do
     resources :shifts do
       resources :requests, except: [:show]
