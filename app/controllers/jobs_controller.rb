@@ -9,12 +9,6 @@ class JobsController < ApplicationController
     else
       @jobs = policy_scope(Job).order(created_at: :desc)
     end
-
-    if current_user && current_user.employer
-        redirect_to dashboard_employer_path(current_user)
-    end
-
-    redirect_to dashboard_employer_path(current_user) if current_user.employer
   end
 
   def show
