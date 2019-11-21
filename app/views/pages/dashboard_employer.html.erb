@@ -1,65 +1,15 @@
 <div class="container content">
   <h1>Dashboard</h1>
-  <div class="row d-flex justify-content-between">
-    <div id="profile" class="col-5 border border-dark shadow p-4 m-2">
-      <div class="profile-header">
-        <h2 class="d-inline">Profile</h2>
-        <%= cl_image_tag current_user.photo.key, class: "avatar-square d-inline float-right ", crop: :fill if current_user.photo.attached? %>
-      </div>
-      <br>
-      <p>Email: <%= current_user.email %></p>
-      <p>Name: <%= current_user.first_name %> <%= current_user.surname %></p>
-      <p>Date of birth: <%= current_user.dob%></p>
-      <p>Summary: <%= current_user.summary%></p>
-      <br>
-      <div class="p-2">
-        <%= link_to 'Change password', registration_path(current_user), :method => :patch %>
-      </div>
-      <div class="p-2">
-        <%= link_to 'Update', edit_user_path(current_user) %>
-      </div>
-    </div>
+  <div class="row justify-content-between">
+
     <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
+    <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
 
-    <div id="payment_details" class="col-5 border border-dark shadow p-4 m-2">
-      <h2>Payment Details</h2>
-      <br>
-      <p>Card Nickname:</p>
-      <p>Card Type:</p>
-      <p>Card Number:</p>
-      <div class="p-2">
-          <%= link_to 'Update', user_registration_path, :confirm => 'Are you sure you want to destroy your account?', :method => :delete %>
-      </div>
-    </div>
-    <div id="past_jobs" class="col-5 border border-dark shadow p-4 m-2">
-      <div>
-        <h2 class="d-inline">Past Jobs</h2>
-      </div>
-      <br>
-        <!-- Needs updating to only show past jobs -->
-      <% if current_user.shifts.nil? %>
-        <!-- Needs updating to only show past jobs -->
-      <% else %>
-        <!-- Needs updating to only show past jobs -->
-      <% current_user.shifts.select{|s|s.date < Date.today} %>
-        <% current_user.jobs.each do |job|  %>
-          <div class="card p-3">
-            <div class="job_card_header">
-
-              <h3> Job: <%= job.title %> </h3>
-              <br>
-              <p> Description: <%= job.description %> </p>
-              <p class="d-inline"> Location: <%= job.location %> </p>
-              <%= link_to "Review", job_path(job), class: "d-inline float-right btn btn-flat"   %>
-
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+  </div>
+  <div class="p-2">
+    <%= link_to 'Change password', registration_path(current_user), :method => :patch %>
+  </div>
+  <div class="p-2">
+    <%= link_to 'Update', edit_user_path(current_user) %>
   </div>
 </div>
-<br>
-<br>
-<br>
-<br>

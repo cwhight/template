@@ -14,7 +14,7 @@
           <% if shift.user.nil? %>
             <p>No worker assigned yet</p>
           <% else %>
-            <p>Worker: <%= shift.user.email %></p>
+            <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
           <% end %>
         </div>
         <div class="my-2 col-12 col-sm-4">
@@ -32,6 +32,7 @@
     </div>
   <% end %>
 <% if policy(@job).edit? %>
+  <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-flat"  %>
   <%= link_to 'Back', jobs_path, class: 'btn btn-flat' %>
   <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
   <%= render 'shared/create-shift' %>

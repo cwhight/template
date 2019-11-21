@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'jobs/:id/close', to: 'jobs#close', as: :job_close
+
   resources :shifts, only: :show
 
   post 'shifts/:shift_id/reviews', to: 'reviews#create', as: :shift_reviews
