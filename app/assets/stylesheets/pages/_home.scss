@@ -44,13 +44,28 @@ h1 {
   border-radius: 50%;
 }
 
+.search-form {
+  display: flex;
+  width: 80%;
+}
+
+.landing-page-search {
+  width: 450px;
+}
+
+.landing-card {
+  opacity: 1;
+}
+
 #footer {
   background-color: #1A1A1A;
   position: relative;
   height: 100px;
   margin-top: -50px;
+}
 
-
+#homepage-search {
+  margin-top: 20px;
 }
 
 #footer-tagline {
@@ -62,5 +77,15 @@ h1 {
   position: absolute;
   bottom: 5px;
   left: 500px;
+}
+
+#landing-hero {
+  position: relative;
+}
+
+#landing-page-search {
+  position: absolute;
+  bottom: -44px;
+  width: 40%;
 }
 
