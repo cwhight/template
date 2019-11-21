@@ -6,7 +6,7 @@
 
 html, body {
   height: 100%;
-  padding-top: 40px;
+  padding-top: 33px;
   margin: 0;
 }
 
@@ -18,12 +18,15 @@ h1 {
 }
 
 .content {
-  min-height: 100%;
-}
-
-.content-inside {
   padding: 20px;
   padding-bottom: 50px;
+  min-height: 100%
+}
+
+.content-index {
+  padding: 20px;
+  padding-bottom: 50px;
+  min-height: 60%
 }
 
 .avatar {
@@ -38,7 +41,7 @@ h1 {
 #footer {
   background-color: #1A1A1A;
   position: relative;
-  height: 200px;
+  height: 100px;
   margin-top: -50px;
 
 }

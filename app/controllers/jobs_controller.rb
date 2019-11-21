@@ -3,10 +3,19 @@ class JobsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
+    @request = Request.new
+    if params[:search].present?
+      @jobs = policy_scope(Job).order(created_at: :desc).kinda_matching(params[:search][:query])
+    else
       @jobs = policy_scope(Job).order(created_at: :desc)
-      @request = Request.new
-    if current_user && current_user.employer
-        redirect_to dashboard_employer_path(current_user)
+    end
+
+    @markers = @jobs.map do |job|
+      {
+        lat: job.latitude,
+        lng: job.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { job: job })
+      }
     end
   end
 
@@ -14,6 +23,13 @@ class JobsController < ApplicationController
     @shift = Shift.new
     @request = Request.new
     @review = Review.new
+
+    @markers = @jobs.map do |job|
+      {
+        lat: job.latitude,
+        lng: job.longitude
+      }
+    end
   end
 
   def new
