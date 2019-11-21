@@ -1,11 +1,21 @@
 <div id="reviews" class="col-12">
   <div class="card p-3 m-2">
 
-    <h2>Reviews</h2>
+    <h2 class="border-bottom">Reviews</h2>
     <% user.reviews.each do |review| %>
-    <h4><%= review.title %>, by <%= review.shift.job.user.first_name %></h4>
-    <h5>Score: <%= review.score %></h5>
-    <p><%= review.content %></p>
+    <div class="shadow-sm p-3">
+      <div class="d-flex justify-content-between border-bottom">
+        <div class="d-flex justify-content-between">
+        <h4><%= review.title %></h4>
+
+        </div>
+        <h5><span ><% review.score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
+
+      </div>
+        <p><%= review.shift.job.title %></p>
+
+      <p><%= review.content %></p>
+    </div>
     <% end %>
   </div>
 </div>
