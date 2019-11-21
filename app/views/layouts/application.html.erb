@@ -12,7 +12,9 @@
 </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <% unless params[:controller] == 'pages' && params[:action] == 'home' %>
+      <%= render 'shared/navbar' %>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div class="content">
