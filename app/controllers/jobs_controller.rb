@@ -10,12 +10,14 @@ class JobsController < ApplicationController
       @jobs = policy_scope(Job).order(created_at: :desc)
     end
 
-    @markers = @jobs.map do |job|
-      {
-        lat: job.latitude,
-        lng: job.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { job: job })
-      }
+    if @jobs
+      @markers = @jobs.map do |job|
+        {
+          lat: job.latitude,
+          lng: job.longitude,
+          infoWindow: render_to_string(partial: "info_window", locals: { job: job })
+        }
+      end
     end
   end
 
@@ -24,11 +26,14 @@ class JobsController < ApplicationController
     @request = Request.new
     @review = Review.new
 
-    @markers = {
-        lat: @job.latitude,
-        lng: @job.longitude
-      }
-
+    if @jobs
+      @markers = @job.map do |job|
+        {
+          lat: job.latitude,
+          lng: job.longitude
+        }
+      end
+    end
   end
 
   def new
