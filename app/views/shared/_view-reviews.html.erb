@@ -1,8 +1,11 @@
-<div id="reviews" class="col-12 card p-3 my-2">
-  <h2>Reviews</h2>
-  <% user.reviews.each do |review| %>
-  <h4><%= review.title %>, by <%= review.shift.job.user.first_name %></h4>
-  <h5>Score: <%= review.score %></h5>
-  <p><%= review.content %></p>
-  <% end %>
+<div id="reviews" class="col-12">
+  <div class="card p-3 m-2">
+
+    <h2>Reviews</h2>
+    <% user.reviews.each do |review| %>
+    <h4><%= review.title %>, by <%= review.shift.job.user.first_name %></h4>
+    <h5>Score: <%= review.score %></h5>
+    <p><%= review.content %></p>
+    <% end %>
+  </div>
 </div>
