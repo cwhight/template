@@ -12,7 +12,6 @@
 
   <% score_array = user.reviews.map { |review| review.score } %>
   <% unless score_array.empty? %>
-
     <% average_score = score_array.reduce(:+) / score_array.length %>
     <p>Average Review Score: <%= average_score %></p>
   <% else %>
