@@ -1,2 +1,10 @@
-<h2><%= job.title %></h2>
-<p><%= job.location %></p>
+<div class="info-window p-2">
+  <h5><%= job.title %></h5>
+  <i class="fas fa-user-clock card-icon"></i>
+  <p><%= job.location.scan(/.*.+?(?=, )/).first %></p>
+  <button type="button" class="btn btn-ghost bg-white" data-toggle="modal" data-target="#showJob<%=job.id%>">
+  View Details
+</button>
+</div>
+
+
