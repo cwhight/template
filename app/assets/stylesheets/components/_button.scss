@@ -39,3 +39,12 @@
   background: linear-gradient(#147EFF, #0F67DA);
   color: white;
 }
+
+#btn-flat {
+  color: #F7F3E3 !important;
+  padding: 8px 24px;
+  border-radius: 42px;
+  background: #2969DA;
+  transition: background 0.3s ease;
+  font-family: Roboto Mono;
+}

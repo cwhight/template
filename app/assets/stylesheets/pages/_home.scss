@@ -4,11 +4,13 @@
   padding: 0;
 }
 
-html, body {
+body {
   height: 100%;
-  padding-top: 33px;
+  padding-top: 66px;
   margin: 0;
+  overflow-x: hidden;
 }
+
 
 h1, h2, h3, h4, h5 {
   font-family: Arial;
@@ -31,7 +33,7 @@ p {
 .content-home {
   padding: 20px;
   padding-bottom: 50px;
-  min-height: 75%;
+  min-height: 100%;
 }
 
 .content-index {
@@ -65,8 +67,8 @@ p {
 .homepage-image {
   position: absolute;
   right: 165px;
-  top: 80px;
-  height: 420px;
+  top: 60px;
+  height: 400px;
   width: auto;
 }
 
@@ -99,3 +101,10 @@ p {
   height: 57px;
 }
 
+.signin-image {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+  height: 300px;
+  width: auto;
+}
