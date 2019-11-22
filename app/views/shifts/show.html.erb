@@ -1,1 +1,7 @@
-<h1></h1>
+<h1><%= @shift.title %></h1>
+
+<p>Time started: <%= @shift.start_time %></p>
+<p>Time finished: <%= @shift.end_time %></p>
+<p>Time finished: <%= @shift.end_time %></p>
+<p>Pay: <%= @shift.pay %></p>
+<p>Employer: <%= @shift.job.user.first_name.capitalize %> <%= @shift.job.user.surname.capitalize %></p>
