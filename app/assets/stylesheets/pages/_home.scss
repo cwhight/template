@@ -59,6 +59,14 @@ h1 {
   opacity: 1;
 }
 
+.homepage-image {
+  position: absolute;
+  right: 150px;
+  top: 100px;
+  height: 300px;
+  width: auto;
+}
+
 #footer {
   background-color: #e2e2e2;
   position: relative;
@@ -78,7 +86,7 @@ h1 {
 }
 
 #landing-hero {
-  position: relative;
+  width: 100%;
 }
 
 #landing-page-search {
