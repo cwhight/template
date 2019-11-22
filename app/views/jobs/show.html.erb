@@ -12,7 +12,7 @@
 
   </div>
 
-  <% @job.shifts.each do |shift| %>
+  <% @job.shifts.order(:date).each do |shift| %>
     <%= render 'shifts/shift-card', shift: shift %>
   <% end %>
 <% if policy(@job).edit? %>
