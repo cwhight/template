@@ -1,15 +1,24 @@
-<div class="container content">
-  <h1><%= @job.title %></h1>
-  <p><%= @job.description %></p>
+<div class="container content hello">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h1><%= @job.title %></h1>
+      <p><%= @job.description %></p>
+    </div>
+
+    <div class="text-right">
+      <%= render 'shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
+      <%= render 'shared/modal-form', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>
+    </div>
+
+  </div>
 
   <% @job.shifts.each do |shift| %>
     <%= render 'shifts/shift-card', shift: shift %>
   <% end %>
 <% if policy(@job).edit? %>
-  <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-flat"  %>
-  <%= link_to 'Back', jobs_path, class: 'btn btn-flat' %>
-  <%= render 'shared/modal-form', open_modal: "Edit this Job", modal_title: "Edit This Job", button_text: "Save Changes"%>
-  <%= render 'shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
+  <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-ghost"  %>
+  <%= link_to 'Back', jobs_path, class: 'btn btn-ghost' %>
 <% end %>
 
 </div>
+<i class="far fa-edit"></i>
