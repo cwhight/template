@@ -6,7 +6,10 @@
     <br>
       <% shifts.order(:date).each do |shift|  %>
           <% if shift.date < DateTime.now  %>
-             <%= render 'shifts/shift-card-modal', shift: shift %>
+            <div class="row justify-content-between m-2">
+              <p> <%= shift.job.title %> </p>
+              <%= render 'shifts/shift-card-modal', shift: shift %>
+            </div>
           <% end %>
       <% end %>
   </div>
