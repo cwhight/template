@@ -28,7 +28,7 @@
           <% end %>
         <% else %>
           <%= render 'shared/view_requests', shift: shift %>
-          <%= render 'shared/create-shift', shift: shift, modal_button: "Edit Shift" %>
+          <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
         <% end %>
       <% else %>
         <%= render 'shared/request', shift: shift %>
