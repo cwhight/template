@@ -6,7 +6,7 @@
       <%= cl_image_tag j.user.photo.key, class: "avatar d-inline float-right", crop: :fill if j.user.photo.attached? %>
     </div>
     <div class = my-2>
-      <%= j.description %>
+      <%= j.location %>
     </div>
     <br>
     <%= render 'shared/show-jobs', job: j %>
