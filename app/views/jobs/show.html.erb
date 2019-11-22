@@ -17,7 +17,7 @@
   <% end %>
 <% if policy(@job).edit? %>
   <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-ghost"  %>
-  <%= link_to 'Back', jobs_path, class: 'btn btn-ghost' %>
+  <%= link_to 'Back', dashboard_employer_path(@job.user), class: 'btn btn-ghost' %>
 <% end %>
 
 </div>
