@@ -8,7 +8,7 @@
           <% if shift.date < DateTime.now  %>
             <div class="row justify-content-between m-2">
               <p> <%= shift.job.title %> </p>
-              <%= render "shared/each_job_history", shift: shift %>
+              <%= render 'shifts/shift-card-modal', shift: shift %>
             </div>
           <% end %>
       <% end %>

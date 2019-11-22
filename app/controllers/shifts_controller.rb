@@ -17,7 +17,7 @@ class ShiftsController < ApplicationController
     authorize @job
     authorize @shift
     if @shift.save
-      redirect_to jobs_path
+      redirect_to job_path(@job)
     else
       redirect_to job_path(@job), alert: "Did not save"
     end
@@ -29,7 +29,7 @@ class ShiftsController < ApplicationController
   def update
     @shift.update(shift_params)
     if @shift.save
-      redirect_to jobs_path
+      redirect_to job_path(@shift.job)
     else
       render :new
     end
@@ -37,8 +37,7 @@ class ShiftsController < ApplicationController
 
   def destroy
     @shift.destroy
-
-    redirect_to jobs_path
+    redirect_to job_path(@shift.job)
   end
 
   def accept_request

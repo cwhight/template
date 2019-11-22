@@ -3,6 +3,7 @@
   <div class="row d-flex justify-content-between">
     <%= render 'shared/profile-card', user: current_user %>
     <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
+    <%= render 'pages/pending-requests', requests: current_user.requests %>
     <%= render 'shared/payment-details', user: current_user %>
 
 

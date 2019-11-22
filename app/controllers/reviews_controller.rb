@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
     @review.shift = @shift
     @review.user = @user
     if @review.save
-      redirect_to jobs_path
+      redirect_to job_path(@shift.job)
     else
       # render :new
     end

@@ -1,0 +1,31 @@
+<div class="card p-3">
+  <div class="row justify-content-between">
+
+    <div class="col-12 col-sm-8 col-md-6">
+      <p><%= shift&.date %></p>
+      <p><%= shift&.start_time&.strftime("%k:%M") %> to <%= shift&.end_time&.strftime("%k:%M") %></p>
+      <p>Hourly Rate: £<%= shift.pay %></p>
+      <% if shift.user.nil? %>
+        <p>No worker assigned yet</p>
+      <% else %>
+        <%= render 'shifts/profile-card-modal', shift: shift, user: shift.user, open_modal: "#{shift.user.first_name} is scheduled to work this shift" %>
+
+      <% end %>
+    </div>
+    <div class="my-2 col-12 col-sm-4">
+      <% if policy(@job).edit? %>
+        <% if shift.user %>
+          <% if !shift.reviews.any? %>
+            <%= render 'shared/review', shift: shift %>
+          <% end %>
+        <% else %>
+          <%= render 'shared/view_requests', shift: shift %>
+          <%= render 'shared/create-shift', shift: shift, modal_button: "Edit Shift" %>
+        <% end %>
+      <% else %>
+        <%= render 'shared/request', shift: shift %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
