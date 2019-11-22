@@ -1,5 +1,8 @@
 <div class="container content">
-  <h1>Dashboard</h1>
+	<div class="row justify-content-between m-1">
+  		<h1>Dashboard</h1>
+  		<img src="assets/undraw_profile_data_mk6k.svg" alt="" style='height: 60px;'>
+  	</div>
   <div class="row d-flex justify-content-between">
     <%= render 'shared/profile-card', user: current_user %>
     <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
