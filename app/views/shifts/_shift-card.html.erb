@@ -1,18 +1,26 @@
-<div class="card p-3">
+<div class="card p-3 my-2">
   <div class="row justify-content-between">
 
-    <div class="col-12 col-sm-8 col-md-6">
+    <div class="col-12 d-flex justify-content-between">
       <p><%= shift&.date %></p>
       <p><%= shift&.start_time&.strftime("%k:%M") %> to <%= shift&.end_time&.strftime("%k:%M") %></p>
       <p>Hourly Rate: £<%= shift.pay %></p>
-      <% if shift.user.nil? %>
-        <p>No worker assigned yet</p>
-      <% else %>
-        <%= render 'shifts/profile-card-modal', shift: shift, user: shift.user, open_modal: "#{shift.user.first_name} is scheduled to work this shift" %>
+    </div>
 
+    <div class="col-12">
+      <% if shift.user.nil? %>
+        <div class="border-bottom py-2">
+          <p>No worker assigned yet</p>
+        </div>
+      <% else %>
+        <div class="py-2 border-bottom d-flex justify-content-between">
+          <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
+          <%= render 'shifts/profile-card-modal', shift: shift, user: shift.user, open_modal: "View Profile" %>
+        </div>
       <% end %>
     </div>
-    <div class="my-2 col-12 col-sm-4">
+
+    <div class="mt-2 col-12 d-flex justify-content-between">
       <% if policy(@job).edit? %>
         <% if shift.user %>
           <% if !shift.reviews.any? %>

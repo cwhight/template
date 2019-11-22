@@ -5,7 +5,7 @@
     <br>
 
 <% requests.each do |request| %>
-  <% if request.shift.user %>
+  <% unless request.shift.user %>
     <div class="d-flex justify-content-between">
       <p><%= request.shift.job.title %></p>
       <p><%= request.shift.date %></p>
