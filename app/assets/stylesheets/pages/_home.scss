@@ -4,11 +4,13 @@
   padding: 0;
 }
 
-html, body {
+body {
   height: 100%;
   padding-top: 33px;
   margin: 0;
+  overflow-x: hidden;
 }
+
 
 h1 {
   font-family: Roboto Mono;
@@ -26,7 +28,7 @@ h1 {
 .content-home {
   padding: 20px;
   padding-bottom: 50px;
-  min-height: 75%;
+  min-height: 100%;
 }
 
 .content-index {
