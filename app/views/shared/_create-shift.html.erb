@@ -1,18 +1,18 @@
-  <button type="button" class="btn btn-flat" data-toggle="modal" data-target="#createShift">
-    <%= "Create Shift" %>
+  <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#createShift<%=shift.id%>">
+    <%= modal_button %>
   </button>
 
-  <div class="modal fade" id="createShift" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="createShift<%=shift.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle"><%= "New Shift" %></h5>
+            <h5 class="modal-title" id="exampleModalLongTitle"><%= modal_button %></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <%= simple_form_for [@job, @shift], url: job_shifts_path(@job) do |f| %>
+            <%= simple_form_for [@job, shift], url: job_shifts_path(@job) do |f| %>
               <%= f.input :date, as: :date %>
               <%= f.input :start_time, as: :time %>
               <%= f.input :end_time, as: :time %>

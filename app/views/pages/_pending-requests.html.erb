@@ -1,0 +1,16 @@
+<div id="pending-requests" class="col-12 col-md-6">
+  <div class="card p-3 m-2">
+
+    <h2>Pending Requests</h2>
+    <br>
+
+<% requests.each do |request| %>
+  <% if request.shift.user %>
+    <div class="d-flex justify-content-between">
+      <%= render 'shifts/shift-card-modal', shift: request.shift %>
+      <p><%= request.shift.date %></p>
+    </div>
+  <% end %>
+<% end %>
+  </div>
+</div>

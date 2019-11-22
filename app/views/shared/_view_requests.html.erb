@@ -15,7 +15,17 @@
           <div class="modal-body">
 
             <% shift.requests.each do |request| %>
-              <p><%= request.user.email %></p>
+
+              <% score_array = request.user.reviews.map { |review| review.score } %>
+              <% unless score_array.empty? %>
+                <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+                <div class="border-bottom">
+                  <p class="mb-0"><%= "#{request.user.first_name} #{request.user.surname} - " %><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></p>
+                </div>
+              <% else %>
+                <p><%= "#{request.user.first_name} #{request.user.surname}" %></p>
+                <p>Review Score: No Reviews Yet </p>
+              <% end %>
               <p><%= request.content %></p>
               <p><%= link_to "more details", request_path(request), class: "btn btn-flat" %></p>
             <% end %>

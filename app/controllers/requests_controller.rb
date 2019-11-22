@@ -16,8 +16,7 @@ class RequestsController < ApplicationController
     @request.user = current_user
     @request.shift = Shift.find(params[:shift_id])
     if @request.save
-
-      redirect_to jobs_path
+      redirect_to dashboard_path(current_user)
     else
       render :new
     end
