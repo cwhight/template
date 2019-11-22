@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to job_path(@shift.job)
     else
-      # render :new
+      render :new
     end
   end
 
