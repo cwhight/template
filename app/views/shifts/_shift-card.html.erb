@@ -14,7 +14,7 @@
         </div>
       <% else %>
         <div class="py-2 border-bottom d-flex justify-content-between">
-          <% if shift.date > DateTime.now %>
+          <% if shift.date < DateTime.now %>
             <p><%= "#{shift.user.first_name} worked this shift" %></p>
           <% else %>
             <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
