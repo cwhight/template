@@ -9,16 +9,18 @@
 
     <div class="col-12">
       <% if shift.user.nil? %>
-        <p>No worker assigned yet</p>
+        <div class="border-bottom py-2">
+          <p>No worker assigned yet</p>
+        </div>
       <% else %>
-        <div class="border-bottom d-flex justify-content-between">
+        <div class="py-2 border-bottom d-flex justify-content-between">
           <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
           <%= render 'shifts/profile-card-modal', shift: shift, user: shift.user, open_modal: "View Profile" %>
         </div>
       <% end %>
     </div>
 
-    <div class="my-2 col-12 d-flex justify-content-between">
+    <div class="mt-2 col-12 d-flex justify-content-between">
       <% if policy(@job).edit? %>
         <% if shift.user %>
           <% if !shift.reviews.any? %>
