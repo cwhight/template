@@ -4,7 +4,9 @@
   		<img src="assets/undraw_profile_data_mk6k.svg" alt="" style='height: 60px;'>
   	</div>
   <div class="row d-flex justify-content-between">
-    <%= render 'shared/profile-card', user: current_user %>
+    <div class="col-12 col-md-6">
+      <%= render 'shared/profile-card', user: current_user %>
+    </div>
     <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
     <%= render 'pages/pending-requests', requests: current_user.requests %>
 

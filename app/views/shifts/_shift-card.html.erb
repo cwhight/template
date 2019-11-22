@@ -14,8 +14,12 @@
         </div>
       <% else %>
         <div class="py-2 border-bottom d-flex justify-content-between">
-          <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
-          <%= render 'shifts/profile-card-modal', shift: shift, user: shift.user, open_modal: "View Profile" %>
+          <% if shift.date < DateTime.now %>
+            <p><%= "#{shift.user.first_name} worked this shift" %></p>
+          <% else %>
+            <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
+          <% end %>
+            <%= render 'shifts/profile-card-modal', shift: shift, user: shift.user, open_modal: "View Profile" %>
         </div>
       <% end %>
     </div>
@@ -23,10 +27,13 @@
     <div class="mt-2 col-12 d-flex justify-content-between">
       <% if policy(@job).edit? %>
         <% if shift.user %>
-          <% if !shift.reviews.any? %>
-            <%= render 'shared/review', shift: shift %>
+          <% if shift.date < DateTime.now %>
+            <% unless shift.reviews.any? %>
+              <%= render 'shared/review', shift: shift %>
+            <% end %>
           <% end %>
         <% else %>
+          <% message = "No Worker assigned Yet" %>
           <%= render 'shared/view_requests', shift: shift %>
           <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
         <% end %>
