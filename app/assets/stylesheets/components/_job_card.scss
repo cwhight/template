@@ -1,0 +1,26 @@
+.job-card-container {
+  margin: 10px;
+  min-height: 245px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-jobtitle {
+  font-family: Arial;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  color: #333333;
+}
+
+.card-location {
+  font-family: Arial;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  color: #909090;
+}
+
+.card-text {
+  font-family: Arial;
+  letter-spacing: -0.04em;
+}
