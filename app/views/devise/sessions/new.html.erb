@@ -14,12 +14,10 @@
     </div>
 
     <div class="form-actions btn btn-flat">
-      <%= f.button :submit, "Log in" %>
+      <%= f.button :submit, "Log in", class: 'btn btn-flat' %>
     </div>
   <% end %>
   <br>
+   <%= image_tag "undraw_mobile_login_ikmv.svg", alt: "alttext", class: 'signin-image' %>
   <%= render "devise/shared/links" %>
-  <div class='col-6 offset-6 d-none d-lg-block d-xl-block' >
-    <img src="assets/undraw_mobile_login_ikmv.svg" alt="">
-  </div>
 </div>
