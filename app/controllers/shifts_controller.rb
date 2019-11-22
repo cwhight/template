@@ -27,6 +27,7 @@ class ShiftsController < ApplicationController
   end
 
   def update
+    authorize @shift
     @shift.update(shift_params)
     if @shift.save
       redirect_to job_path(@shift.job)

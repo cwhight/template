@@ -12,6 +12,10 @@ class ShiftPolicy < ApplicationPolicy
     record.user == user || record.job.user == user
   end
 
+  def update?
+    record.job.user == user
+  end
+
   class Scope < Scope
     def resolve
       scope.all
