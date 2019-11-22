@@ -13,10 +13,11 @@
           </div>
           <div class="modal-body">
             <%= simple_form_for @job do |f| %>
-              <%= f.input :title %>
-              <%= f.input :description, as: :text %>
-              <%= f.input :location%>
-              <%= f.button :submit, "#{button_text}", class: "btn btn-ghost" %>
+              <%= f.input :title, error: 'Title must be between 2 and 30 characters' %>
+              <%= f.input :summary %>
+              <%= f.input :description, as: :text, error: 'Must have a description' %>
+              <%= f.input :location, error: 'Must have a location' %>
+              <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
             <% end %>
           </div>
 
