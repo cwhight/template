@@ -16,7 +16,7 @@
     <% unless score_array.empty? %>
       <% average_score = score_array.reduce(:+).to_f / score_array.length %>
       <div class="border-bottom">
-        <p>Average Review Score: <%= average_score %></p>
+        <p>Average Review Score: <%= average_score.round(1) %></p>
         <h3><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></h3>
       </div>
     <% else %>
