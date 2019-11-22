@@ -1,8 +1,30 @@
 .mapboxgl-popup {
-  max-width: 200px;
+  width: 500px;
+  color: white;
 }
 
 .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  padding: 0 !important;
+  border-radius: 10px !important;
+}
+
+.card-icon {
+  color: #E09174;
+  padding-bottom: 12px;
+  font-size: 25px
+}
+
+.info-window {
+  background-color: #2968DA;
+  border-radius: 10px;
+}
+
+.mpa-button {
+  background-color: white !important;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
 }
