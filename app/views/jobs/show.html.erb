@@ -12,8 +12,22 @@
 
   </div>
 
+  <h2>Upcoming Shifts</h2>
+
   <% @job.shifts.order(:date).each do |shift| %>
-    <%= render 'shifts/shift-card', shift: shift %>
+    <% if  shift.date > DateTime.now %>
+
+      <%= render 'shifts/shift-card', shift: shift %>
+    <% end %>
+  <% end %>
+
+  <h2>Past Shifts</h2>
+
+  <% @job.shifts.order(:date).reverse.each do |shift| %>
+    <% if  shift.date < DateTime.now %>
+
+      <%= render 'shifts/shift-card', shift: shift %>
+    <% end %>
   <% end %>
 <% if policy(@job).edit? %>
   <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-ghost"  %>
