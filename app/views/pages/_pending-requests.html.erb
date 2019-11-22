@@ -7,8 +7,9 @@
 <% requests.each do |request| %>
   <% if request.shift.user %>
     <div class="d-flex justify-content-between">
-      <%= render 'shifts/shift-card-modal', shift: request.shift %>
+      <p><%= request.shift.job.title %></p>
       <p><%= request.shift.date %></p>
+      <%= render 'shifts/shift-card-modal', shift: request.shift %>
     </div>
   <% end %>
 <% end %>
