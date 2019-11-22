@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1030;
+  z-index: 1000;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -27,11 +27,6 @@
 .nav-text {
   color: white !important;
 }
-
-
-// .nav-text-dark {
-//   color: black !important;
-// }
 
 .rounded {
   border-radius: 50%;

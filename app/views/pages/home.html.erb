@@ -1,13 +1,12 @@
 <%= render 'shared/dashboard-navbar' %>
 
- -->
-<div class="landing-body">
+<div class="row landing-body my-3">
   <div id="landing-hero">
     <img id="landing-logo" src="https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"/ height="80px">
     <div>
       <h1 id="landing-hero-h1">The quickest and easiest way <br>to find short term work that<br>suits your lifestyle.</h1>
     </div>
-    <img src="assets/undraw_modern_life_u1ev.svg" alt="" class='homepage-image'>
+    <img src="assets/undraw_modern_life_u1ev.svg" alt="" class='homepage-image d-none d-lg-block d-xl-block'>
 
     <% unless current_user %>
       <div id="signup">
@@ -31,12 +30,9 @@
       </div>
     <% end %>
     </div>
-  </div>
 </div>
-<div class="content-home">
-</div>
-<div>
-  <div class="row justify-content-between p-3">
+<div class="landing-jobs">
+  <div class="row justify-content-between m-3">
     <% @jobs.each do |j|%>
       <%= render 'shared/job-card', j: j %>
     <% end %>
