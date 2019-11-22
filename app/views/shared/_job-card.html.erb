@@ -1,14 +1,20 @@
 <div class="col-sm-12 col-md-6">
-  <div class="card shadow-sm p-3">
+  <div class="card shadow-sm p-3 job-card-container">
 
     <div class="job_card_header">
-      <h2 class="d-inline"><%= j.title %></h2>
+      <h5 class="d-inline card-jobtitle"><%= j.title %></h5>
       <%= cl_image_tag j.user.photo.key, class: "avatar d-inline float-right", crop: :fill if j.user.photo.attached? %>
+      <div class="my-2 card-location">
+        <%= j.location %>
+      </div>
     </div>
-    <div class = my-2>
-      <%= j.location %>
+     <div class="my-2 card-text">
+      <%= j.summary %>
+    </div>
+     <div class="my-2 card-text">
+      <%= j.description %>
     </div>
     <br>
-    <%= render 'shared/show-jobs', job: j %>
+    <%= render 'shared/show-jobs', job: j, class: "fixed-bottom" %>
   </div>
 </div>
