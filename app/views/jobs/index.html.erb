@@ -23,8 +23,11 @@
 
   <div class="row justify-content-between">
 
-    <% @jobs.each do |j|%>
-      <%= render 'shared/job-card', j: j %>
+    <% @jobs.each do |job|%>
+      <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+      <% unless num_shifts <= 0 %>
+        <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
+      <% end %>
 
     <% end %>
   </div>

@@ -8,6 +8,6 @@ cards.forEach((card) => {
       card.classList.remove('text-secondary')
   });
     document.getElementById(card.dataset.selector).classList.toggle('d-none')
-    e.currentTarget.classList.add('text-secondary')
+    document.getElementById(card.dataset.selector).classList.add('text-secondary')
   });
 });

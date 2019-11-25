@@ -1,5 +1,5 @@
-<div id="upcoming_jobs" class="col-12">
-  <div class="card p-3 m-2">
+<div id="closed-jobs" class="col-12 d-none profile-card">
+  <div class="card p-3 mx-2">
   <div class="d-flex justify-content-between">
     <h2>Closed Jobs</h2>
   </div>
@@ -7,7 +7,7 @@
 
     <% jobs.each do |job| %>
       <% if job.done %>
-        <%= link_to job.title, job_path(job), class: "border-bottom" %>
+        <%= link_to job.title, job_path(job) %>
       <% end %>
     <% end %>
   </div>

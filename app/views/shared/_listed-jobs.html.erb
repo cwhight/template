@@ -1,14 +1,14 @@
-<div id="upcoming_jobs" class="col-12">
-  <div class="card p-3 m-2">
+<div id="listed-jobs" class="col-12 profile-card">
+  <div class="card p-3 mx-2">
   <div class="d-flex justify-content-between">
     <h2>Listed Jobs</h2>
-    <%= link_to "Create Job", new_job_path %>
+    <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
   </div>
     <br>
 
     <% jobs.each do |job| %>
       <% unless job.done %>
-        <%= link_to job.title, job_path(job), class: "border-bottom" %>
+        <%= link_to job.title, job_path(job) %>
       <% end %>
     <% end %>
   </div>
