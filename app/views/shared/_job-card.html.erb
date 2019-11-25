@@ -1,17 +1,18 @@
-<div class="col-sm-12 col-md-6">
+<div class="col-sm-12 col-md-6" data-toggle="modal" data-target="#showJob<%=job.id%>">
   <div class="card shadow-sm p-3 job-card-container">
 
     <div class="job_card_header">
-      <h5 class="d-inline card-jobtitle"><%= j.title %></h5>
-      <%= cl_image_tag j.user.photo.key, class: "avatar d-inline float-right", crop: :fill if j.user.photo.attached? %>
+      <h5 class="d-inline card-jobtitle"><%= job.title %></h5>
+      <%= cl_image_tag job.user.photo.key, class: "avatar d-inline float-right", crop: :fill if job.user.photo.attached? %>
       <div class="my-2 card-location">
-        <%= j.location %>
+        <%= job.location %>
       </div>
     </div>
     <div class="my-2 card-text">
-      <%= j.summary %>
+      <%= job.summary %>
     </div>
     <br>
-    <%= render 'shared/show-jobs', job: j %>
+
   </div>
 </div>
+

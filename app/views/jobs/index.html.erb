@@ -23,8 +23,8 @@
 
   <div class="row justify-content-between">
 
-    <% @jobs.each do |j|%>
-      <%= render 'shared/job-card', j: j %>
+    <% @jobs.each do |job|%>
+      <%= render 'shared/show-jobs', job: job %>
 
     <% end %>
   </div>

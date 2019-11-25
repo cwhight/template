@@ -34,7 +34,7 @@
   <div class="row justify-content-between">
 
     <% @jobs.each do |j|%>
-      <%= render 'shared/job-card', j: j %>
+      <%= render 'shared/show-jobs', job: j %>
     <% end %>
   </div>
 </div>
