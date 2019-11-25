@@ -24,19 +24,19 @@
 
        <div class="dashboard-renders col-6">
         <div class="each-render col-md-12">
-          <%= render 'shared/profile-card', user: current_user, profile: true %>
+          <%= render 'shared/profile-card', user: current_user %>
         </div>
         <div class="each-render">
-          <%= render 'shared/upcoming-jobs', shifts: current_user.shifts, profile: true %>
+          <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
         </div>
         <div class="each-render">
-          <%= render 'pages/pending-requests', requests: current_user.requests, profile: true %>
+          <%= render 'pages/pending-requests', requests: current_user.requests %>
         </div>
         <div class="each-render">
-          <%= render 'shared/job-history', shifts: current_user.shifts, profile: true %>
+          <%= render 'shared/job-history', shifts: current_user.shifts %>
         </div>
         <div class="each-render">
-          <%= render 'shared/view-reviews', user: current_user, profile: true %>
+          <%= render 'shared/view-reviews', user: current_user %>
         </div>
       </div>
 
