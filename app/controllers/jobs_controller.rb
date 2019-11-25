@@ -43,6 +43,11 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
+    sector_ids = params[:job][:sector_ids].drop(1)
+    @sectors = sector_ids.map do |element|
+      Sector.find(element)
+    end
+    @job.sector = @sectors
     @job.user = current_user
     authorize @job
     if @job.save
@@ -79,7 +84,7 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:title, :description, :location, :summary)
+    params.require(:job).permit(:title, :description, :location, :summary, :sector_ids)
   end
 
   def set_job

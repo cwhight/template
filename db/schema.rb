@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_120548) do
+ActiveRecord::Schema.define(version: 2019_11_25_160655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_120548) do
     t.float "longitude"
     t.boolean "done"
     t.string "summary"
+    t.string "sector"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
@@ -87,6 +88,21 @@ ActiveRecord::Schema.define(version: 2019_11_25_120548) do
     t.datetime "updated_at", null: false
     t.index ["shift_id"], name: "index_reviews_on_shift_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "sector_joiners", force: :cascade do |t|
+    t.bigint "job_id"
+    t.bigint "sector_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_sector_joiners_on_job_id"
+    t.index ["sector_id"], name: "index_sector_joiners_on_sector_id"
+  end
+
+  create_table "sectors", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shifts", force: :cascade do |t|
@@ -128,6 +144,8 @@ ActiveRecord::Schema.define(version: 2019_11_25_120548) do
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "shifts"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sector_joiners", "jobs"
+  add_foreign_key "sector_joiners", "sectors"
   add_foreign_key "shifts", "jobs"
   add_foreign_key "shifts", "users"
 end

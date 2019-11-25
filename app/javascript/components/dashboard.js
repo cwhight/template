@@ -1,6 +1,4 @@
 const cards = document.querySelectorAll('.dashboard-card');
-console.log(cards);
-console.log('hello');
 
 cards.forEach((card) => {
   card.addEventListener('click', (e) => {
