@@ -5,7 +5,7 @@ class ShiftPolicy < ApplicationPolicy
   end
 
   def accept_request?
-    true
+    record.job.user == user
   end
 
   def show?
