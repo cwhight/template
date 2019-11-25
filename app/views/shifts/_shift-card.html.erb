@@ -30,7 +30,7 @@
       <% if policy(@job).edit? %>
         <% if shift.user %>
           <% if Time.parse(shift.start_time) < DateTime.now %>
-            <% unless shift.reviews.any? %>
+            <% unless shift.reviews.any? {|review| review.user == shift.user} %>
               <%= render 'shared/review', shift: shift, review_target: shift.user %>
             <% end %>
           <% end %>

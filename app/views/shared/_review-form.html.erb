@@ -1,0 +1,7 @@
+<%= simple_form_for [shift, review], url: shift_reviews_path(shift, review), remote: true do |f| %>
+  <% f.hidden_field :current_user, value: current_user %>
+  <%= f.input :score, as: :integer, error: 'Please enter a number between 1 and 5' %>
+  <%= f.input :title, as: :string, error: 'Title must be between 3 and 20 characters' %>
+  <%= f.input :content, as: :text, error: 'Max. 500 characters' %>
+  <%= f.button :submit, "Submit review", class: "btn btn-ghost" %>
+<% end %>
