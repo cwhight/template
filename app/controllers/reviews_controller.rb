@@ -12,11 +12,21 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     authorize @review
     @shift = Shift.find(params[:shift_id])
-    @user = @shift.user
     @review.shift = @shift
+    if current_user.employer
+      @user = @shift.user
+    else
+      @user = @shift.job.user
+    end
+
     @review.user = @user
+
     if @review.save
-      redirect_to job_path(@shift.job)
+      if current_user.employer
+        redirect_to job_path(@shift.job)
+      else
+        redirect_to dashboard_path(current_user)
+      end
     else
       render :new
     end

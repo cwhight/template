@@ -47,16 +47,17 @@ class ShiftsController < ApplicationController
     @user = @request.user
     @shift.user = @user
     authorize @shift
-    # authorize @request
     if @shift.save
       redirect_to job_path(@shift.job)
+    else
+      redirect_to request_path(@request), notice: "did not save"
     end
   end
 
   private
 
   def shift_params
-    params.require(:shift).permit(:pay, :start_time, :end_time, :job_id, :date)
+    params.require(:shift).permit(:start_time, :end_time, :job_id, :price)
   end
 
   def set_shift

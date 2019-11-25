@@ -8,7 +8,8 @@
   <% unless request.shift.user %>
     <div class="d-flex justify-content-between">
       <p><%= request.shift.job.title %></p>
-      <p><%= request.shift.date %></p>
+      <p><%= request.shift.start_time %></p>
+      <p><%= request.shift.end_time %></p>
       <%= render 'shifts/shift-card-modal', shift: request.shift %>
     </div>
   <% end %>

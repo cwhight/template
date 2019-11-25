@@ -10,7 +10,11 @@ class UsersController < ApplicationController
     @user.update(user_params)
     authorize @user
     if @user.save
-      redirect_to dashboard_path
+      if @user.employer
+        redirect_to dashboard_employer_path(@user)
+      else
+        redirect_to dashboard_path(@user)
+      end
     else
       render :edit
     end

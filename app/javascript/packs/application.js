@@ -7,6 +7,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { hideMap } from '../components/hideMap';
 import { dashboard } from '../components/dashboard';
+import "../plugins/flatpickr"
 
 openApply();
 closeApply();

@@ -1,11 +1,11 @@
 class JobPolicy < ApplicationPolicy
 
   def show?
-    true
+    record.user == user
   end
 
   def create?
-    true
+    user.employer
   end
 
   def update?
