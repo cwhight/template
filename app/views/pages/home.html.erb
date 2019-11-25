@@ -3,8 +3,8 @@
 <div class="row landing-body my-3">
   <div id="landing-hero">
     <%= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 80 %>
-    <div>
-      <h1 id="landing-hero-h1">The quickest and easiest way <br>to find short term work that<br>suits your lifestyle.</h1>
+    <div class="col-12 col-lg-6">
+      <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
     </div>
     <%= image_tag "undraw_modern_life_u1ev.svg", alt: "alttext", class: 'homepage-image d-none d-xl-block' %>
     <% unless current_user %>
@@ -30,8 +30,8 @@
     <% end %>
     </div>
 </div>
-<div class="landing-jobs">
-  <div class="row justify-content-between m-5">
+<div class="landing-jobs container">
+  <div class="row justify-content-between">
 
     <% @jobs.each do |j|%>
       <%= render 'shared/job-card', j: j %>
