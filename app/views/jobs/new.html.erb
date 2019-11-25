@@ -6,6 +6,8 @@
       <%= f.input :summary %>
       <%= f.input :description, as: :text, error: 'Must have a description' %>
       <%= f.input :location, error: 'Must have a location' %>
+      <%= f.association :sectors, as: :check_boxes %>
+
       <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
   <% end %>
 </div>

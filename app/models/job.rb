@@ -1,5 +1,7 @@
 class Job < ApplicationRecord
   belongs_to :user
+  has_many :sector_joiners
+  has_many :sectors, through: :sector_joiners
   has_many :shifts, dependent: :destroy
   has_many :reviews, through: :shifts
 
