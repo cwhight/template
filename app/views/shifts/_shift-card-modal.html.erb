@@ -6,7 +6,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle"><%= "#{shift.job.title} on #{shift.date}" %></h5>
+          <h5 class="modal-title" id="exampleModalLongTitle"><%= "#{shift.job.title} on #{Time.parse(shift.start_time)}" %></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -16,7 +16,7 @@
 
             <div class="row p-2 justify-content-between">
                 <div>
-                  <p><%= shift&.start_time&.strftime("%k:%M") %> to <%= shift&.end_time&.strftime("%k:%M") %></p>
+                  <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
                 </div>
                 <div>
                   <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
