@@ -13,9 +13,8 @@
           </div>
           <div class="modal-body">
             <%= simple_form_for [@job, shift], url: job_shifts_path(@job) do |f| %>
-              <%= f.input :date, as: :date %>
-              <%= f.input :start_time, as: :time %>
-              <%= f.input :end_time, as: :time %>
+              <%= f.input :start_time, as: :string, required: false, input_html: {class: "datepicker"} %>
+              <%= f.input :end_time, as: :string, required: false, input_html: {class: "datepicker"} %>
               <%= f.input :price, error: 'Price must be a number' %>
               <%= f.button :submit, "Create Shift", class: "btn btn-ghost" %>
             <% end %>
