@@ -11,7 +11,10 @@
     <div class="my-2 card-text">
       <%= job.summary %>
     </div>
-    <br>
+    <div>
+      <%= "#{job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length} shifts available" %>
+    </div>
+
 
   </div>
 </div>
