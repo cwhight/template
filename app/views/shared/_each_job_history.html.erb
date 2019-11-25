@@ -15,7 +15,7 @@
           <h1><%= shift.title %></h1>
           <p>Time started: <%= shift.start_time %></p>
           <p>Time finished: <%= shift.end_time %></p>
-          <p>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></p>
+          <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
           <p>Employer: <%= shift.job.user.first_name.capitalize %> <%= shift.job.user.surname.capitalize %></p>
         </div>
 

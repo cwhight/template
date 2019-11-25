@@ -2,8 +2,10 @@
   <div class="row justify-content-between">
 
     <div class="col-12 d-flex justify-content-between">
+
       <p><%= shift&.start_time %> to <%= shift&.end_time %></p>
       <p>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></p>
+
     </div>
 
     <div class="col-12">
@@ -28,7 +30,7 @@
         <% if shift.user %>
           <% if shift.start_time < DateTime.now %>
             <% unless shift.reviews.any? %>
-              <%= render 'shared/review', shift: shift %>
+              <%= render 'shared/review', shift: shift, review_target: shift.user %>
             <% end %>
           <% end %>
         <% else %>

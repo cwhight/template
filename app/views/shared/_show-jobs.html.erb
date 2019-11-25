@@ -26,7 +26,7 @@
                     <p>Date: <%= shift.start_time %></p>
                     <p>Start time: <%= shift&.start_time&.strftime("%k:%M") %></p>
                     <p>End time: <%= shift&.end_time&.strftime("%k:%M") %></p>
-                    <p>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></p>
+                    <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
                     <p>Location: <%= shift.job.location %></p>
                   </div>
                   <div>
