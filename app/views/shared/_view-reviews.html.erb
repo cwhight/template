@@ -1,10 +1,10 @@
 <div id="reviews" class="<%= profile ? 'col-12' : 'col-6' %> d-none profile-card ">
-  <div class="card p-3 m-2">
+  <div class="card p-3 mx-2">
 
-    <h2 class="border-bottom">Reviews</h2>
+    <h2>Reviews</h2>
     <% user.reviews.each do |review| %>
     <div class="shadow-sm p-3">
-      <div class="d-flex justify-content-between border-bottom">
+      <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-between">
         <h4><%= review.title %></h4>
 
