@@ -2,9 +2,10 @@
   <div class="row justify-content-between">
 
     <div class="col-12 d-flex justify-content-between">
-      <p><%= shift&.date %></p>
-      <p><%= shift&.start_time&.strftime("%k:%M") %> to <%= shift&.end_time&.strftime("%k:%M") %></p>
-      <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+
+      <p><%= shift&.start_time %> to <%= shift&.end_time %></p>
+      <p>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></p>
+
     </div>
 
     <div class="col-12">
@@ -14,7 +15,7 @@
         </div>
       <% else %>
         <div class="py-2 border-bottom d-flex justify-content-between">
-          <% if shift.date < DateTime.now %>
+          <% if shift.start_time < DateTime.now %>
             <p><%= "#{shift.user.first_name} worked this shift" %></p>
           <% else %>
             <p><%= "#{shift.user.first_name} is scheduled to work this shift" %></p>
@@ -27,7 +28,7 @@
     <div class="mt-2 col-12 d-flex justify-content-between">
       <% if policy(@job).edit? %>
         <% if shift.user %>
-          <% if shift.date < DateTime.now %>
+          <% if shift.start_time < DateTime.now %>
             <% unless shift.reviews.any? %>
               <%= render 'shared/review', shift: shift, review_target: shift.user %>
             <% end %>

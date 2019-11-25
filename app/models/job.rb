@@ -1,9 +1,9 @@
 class Job < ApplicationRecord
   belongs_to :user
-  has_many :shifts
+  has_many :shifts, dependent: :destroy
   has_many :reviews, through: :shifts
 
-  validates :title, presence: true, length: { in: 2..30 }
+  validates :title, presence: true, length: { in: 2..100 }
   validates :description, presence: true, length: { maximum: 200 }
   validates :location, presence: true
 
@@ -16,5 +16,4 @@ class Job < ApplicationRecord
                   using: {
                     tsearch: { dictionary: "english" }
                   }
-
 end

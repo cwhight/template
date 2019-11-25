@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_111412) do
+ActiveRecord::Schema.define(version: 2019_11_25_120548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,11 +95,10 @@ ActiveRecord::Schema.define(version: 2019_11_25_111412) do
     t.bigint "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date"
-    t.time "start_time"
-    t.time "end_time"
     t.boolean "completed"
     t.integer "price_cents", default: 0, null: false
+    t.string "start_time"
+    t.string "end_time"
     t.index ["job_id"], name: "index_shifts_on_job_id"
     t.index ["user_id"], name: "index_shifts_on_user_id"
   end
