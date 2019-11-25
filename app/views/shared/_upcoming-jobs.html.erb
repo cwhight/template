@@ -1,12 +1,15 @@
-<div id="upcoming_jobs" class="<%= profile ? 'col-12' : 'col-6' %> d-none profile-card">
-  <div class="card p-3 m-2">
+
+<div id="upcoming_jobs" class="d-none profile-card">
+
+  <div class="card p-3 mx-2">
 
     <h2>Upcoming Jobs</h2>
     <br>
-
     <% shifts.order(:start_time).each do |shift|  %>
         <% if shift.start_time >= DateTime.now  %>
+
           <div class="row justify-content-between m-2">
+
             <p> <%= shift.job.title %> </p>
             <%= render 'shifts/shift-card-modal', shift: shift %>
           </div>

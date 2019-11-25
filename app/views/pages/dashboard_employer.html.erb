@@ -1,15 +1,38 @@
-<div class="container content">
-  <h1>Dashboard</h1>
-  <div class="row justify-content-between">
+<div class="container dashboard-container position-relative">
+  <h1 class="py-3">Employer Dashboard</h1>
+  <div class="selector py-3 row">
+    <div class="col-3">
+      <div class="dashboard-card profile card rounded p-3 bg-white" style="height: 70px;" data-selector="profile-card">
+        <h4>Profile</h4>
+      </div>
 
-    <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
-    <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
+      <div class="dashboard-card listed-jobs card rounded p-3 bg-white"style="height: 70px;" data-selector="listed-jobs">
+        <h4>Listed Jobs</h4>
+      </div>
 
-  </div>
-  <div class="p-2">
-    <%= link_to 'Change password', registration_path(current_user), :method => :patch %>
-  </div>
-  <div class="p-2">
-    <%= link_to 'Update', edit_user_path(current_user) %>
+      <div class="dashboard-card closed-jobs card rounded p-3 bg-white" style="height: 70px;" data-selector="closed-jobs">
+        <h4>Closed Jobs</h4>
+      </div>
+
+      <div class="dashboard-card reviews card rounded p-3 bg-white" style="height: 70px;" data-selector="reviews">
+        <h4>Reviews</h4>
+      </div>
+    </div>
+
+    <div class="dashboard-renders col-9">
+      <div class="each-render col-md-12">
+        <%= render 'shared/profile-card', user: current_user, profile: true %>
+      </div>
+      <div class="each-render">
+        <%= render 'shared/listed-jobs', jobs: current_user.jobs, profile: true %>
+      </div>
+      <div class="each-render">
+        <%= render 'shared/closed-jobs', jobs: current_user.jobs, profile: true %>
+      </div>
+      <div class="each-render">
+        <%= render 'shared/view-reviews', user: current_user, profile: true %>
+      </div>
+    </div>
+
   </div>
 </div>
