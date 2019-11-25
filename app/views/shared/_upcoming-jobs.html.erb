@@ -3,10 +3,11 @@
 
     <h2>Upcoming Jobs</h2>
     <br>
-
     <% shifts.order(:start_time).each do |shift|  %>
         <% if shift.start_time >= DateTime.now  %>
+
           <div class="row justify-content-between m-2">
+
             <p> <%= shift.job.title %> </p>
             <%= render 'shifts/shift-card-modal', shift: shift %>
           </div>
