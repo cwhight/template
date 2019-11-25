@@ -1,19 +1,47 @@
-<div class="container content">
-	<div class="row justify-content-between m-1">
-  		<h1>Dashboard</h1>
-      <%= image_tag "undraw_profile_data_mk6k.svg", alt: "alttext", height: 60 %>
-  	</div>
-  <div class="row d-flex justify-content-between">
-    <div class="col-12 col-md-6">
-      <%= render 'shared/profile-card', user: current_user %>
-    </div>
-    <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
-    <%= render 'pages/pending-requests', requests: current_user.requests %>
+<div class="container dashboard-container position-relative">
+  <div class="selector py-3 row">
+      <div class="col-6">
+        <div class="dashboard-card profile card rounded p-3 bg-white" style="height: 70px;" data-selector="profile-card">
+          <h3>Profile</h3>
+        </div>
 
+        <div class="dashboard-card upcoming-jobs card rounded p-3 bg-white"style="height: 70px;" data-selector="upcoming_jobs">
+          <h3>Upcoming Jobs</h3>
+        </div>
 
-    <%= render 'shared/job-history', shifts: current_user.shifts %>
-    <%= render 'shared/view-reviews', user: current_user %>
+        <div class="dashboard-card pending-requests card rounded p-3 bg-white" style="height: 70px;" data-selector="pending-requests">
+          <h3>Pending Requests</h3>
+        </div>
 
+        <div class="dashboard-card job-history card rounded p-3 bg-white" style="height: 70px;" data-selector="job-history">
+          <h3>Job History</h3>
+        </div>
+
+        <div class="dashboard-card reviews card rounded p-3 bg-white" style="height: 70px;" data-selector="reviews">
+          <h3>Reviews</h3>
+        </div>
+      </div>
+
+       <div class="dashboard-renders col-6">
+        <div class="each-render col-md-12">
+          <%= render 'shared/profile-card', user: current_user, profile: true %>
+        </div>
+        <div class="each-render">
+          <%= render 'shared/upcoming-jobs', shifts: current_user.shifts, profile: true %>
+        </div>
+        <div class="each-render">
+          <%= render 'pages/pending-requests', requests: current_user.requests, profile: true %>
+        </div>
+        <div class="each-render">
+          <%= render 'shared/job-history', shifts: current_user.shifts, profile: true %>
+        </div>
+        <div class="each-render">
+          <%= render 'shared/view-reviews', user: current_user, profile: true %>
+        </div>
+      </div>
 
   </div>
 </div>
+
+
+
