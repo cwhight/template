@@ -7,8 +7,9 @@
       <% now = Time.now.to_date %>
       <% dob = user.dob %>
       <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
-
-      <p><%= age %></p>
+      <br>
+      <br>
+      <p>Age: <%= age %> Years</p>
     </div>
     <p><%= user.summary%></p>
 
