@@ -5,7 +5,7 @@ class Shift < ApplicationRecord
   has_many :reviews
   has_many :requests
   validates_associated :job
-  validates :pay, presence: true, numericality: true
+  validates :price, presence: true, numericality: true
   validates :start_time, presence: true
   validates :end_time, presence: true
   validate :start_time_before_end_time
