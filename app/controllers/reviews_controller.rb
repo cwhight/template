@@ -23,12 +23,24 @@ class ReviewsController < ApplicationController
 
     if @review.save
       if current_user.employer
-        redirect_to job_path(@shift.job)
+        @path = "jobs/#{@shift.job.id}"
+        respond_to do |format|
+          format.html { redirect_to job_path(@shift.job) }
+          format.js
+        end
       else
-        redirect_to dashboard_path(current_user)
+        @path = "dashboard"
+        respond_to do |format|
+          format.html { redirect_to dashboard_path(current_user) }
+          format.js
+        end
+
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 

@@ -1,0 +1,12 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('review-form');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+<% if @review.valid? %>
+  window.location.href = "/<%= @path %>"
+<% else %>
+  var form = document.querySelector("#review-form")
+  console.log("hello")
+  refreshForm("<%= j render 'shared/review-form', shift: @shift, review: @review %>")
+<% end %>
