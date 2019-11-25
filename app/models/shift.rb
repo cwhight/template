@@ -3,5 +3,6 @@ class Shift < ApplicationRecord
   belongs_to :job
   has_many :reviews
   has_many :requests
-  validates :pay, presence: true, numericality: true
+  validates :price_cents, presence: true, numericality: true
+  monetize :price_cents
 end
