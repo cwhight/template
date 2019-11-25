@@ -10,6 +10,8 @@ class Shift < ApplicationRecord
   validates :end_time, presence: true
   validate :start_time_before_end_time
   validate :start_time_in_future
+  validates :price_cents, presence: true, numericality: true
+  monetize :price_cents
 
   def start_time_before_end_time
     if end_time < start_time
