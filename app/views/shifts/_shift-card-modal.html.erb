@@ -17,7 +17,7 @@
               <div class="col-12 col-sm-8 col-md-6">
                 <p><%= shift&.date %></p>
                 <p><%= shift&.start_time&.strftime("%k:%M") %> to <%= shift&.end_time&.strftime("%k:%M") %></p>
-                <p>Hourly Rate: £<%= shift.pay %></p>
+                <p>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></p>
               </div>
           </div>
         </div>
