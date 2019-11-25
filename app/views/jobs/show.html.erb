@@ -14,8 +14,8 @@
 
   <h2>Upcoming Shifts</h2>
 
-  <% @job.shifts.order(:date).each do |shift| %>
-    <% if  shift.date > DateTime.now %>
+  <% @job.shifts.order(:start_time).each do |shift| %>
+    <% if  shift.start_time > DateTime.now %>
 
       <%= render 'shifts/shift-card', shift: shift %>
     <% end %>
@@ -23,8 +23,8 @@
 
   <h2>Past Shifts</h2>
 
-  <% @job.shifts.order(:date).reverse.each do |shift| %>
-    <% if  shift.date < DateTime.now %>
+  <% @job.shifts.order(:start_time).reverse.each do |shift| %>
+    <% if  shift.start_time < DateTime.now %>
 
       <%= render 'shifts/shift-card', shift: shift %>
     <% end %>
