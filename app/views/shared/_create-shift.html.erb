@@ -11,7 +11,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body justify-content-center">
             <%= simple_form_for [@job, shift], url: job_shifts_path(@job) do |f| %>
               <%= f.input :start_time, as: :string, required: false, input_html: {class: "datepicker"} %>
               <%= f.input :end_time, as: :string, required: false, input_html: {class: "datepicker"} %>
