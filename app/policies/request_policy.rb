@@ -1,11 +1,11 @@
 class RequestPolicy < ApplicationPolicy
 
   def create?
-    true
+    !user.employer
   end
 
   def show?
-    true
+    record.shift.job.user == user
   end
 
   class Scope < Scope
