@@ -6,7 +6,7 @@ class JobsController < ApplicationController
     @request = Request.new
     if params[:search].present?
       @jobs = policy_scope(Job).order(created_at: :desc)
-      @jobs = @jobs.search_by_sector(params[:search][:sectors].reject(&:blank?)) unless params.dig(:search, :sectors).blank?
+      @jobs = @jobs.search_by_sector(params[:search][:sectors].reject(&:blank?)) unless params.dig(:search, :sectors).any?
       @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
     else
       @jobs = policy_scope(Job).order(created_at: :desc)
