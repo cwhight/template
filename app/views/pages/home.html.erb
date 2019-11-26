@@ -9,8 +9,8 @@
     <%= image_tag "undraw_modern_life_u1ev.svg", alt: "alttext", class: 'homepage-image d-none d-md-block d-lg-block d-xl-block' %>
     <% unless current_user %>
       <div id="signup">
-        <a href="/users/sign_in" class="btn btn-ghost">Sign In </a>
-        <a href="/users/sign_up" class="btn btn-ghost">Sign Up</a>
+        <a href="/users/sign_in" class="btn btn-secondary">Sign In </a>
+        <a href="/users/sign_up" class="btn btn-secondary">Sign Up</a>
       </div>
     <% end %>
     <div class="landing-card">
@@ -39,7 +39,6 @@
   </div>
 </div>
 
-
 <div class="py-3 landing-jobs justify-content-center">
   <div class="col-11 content-index">
     <div class="row justify-content-between">
@@ -54,6 +53,6 @@
         <% end %>
       <% end %>
     </div>
-    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
   </div>
+  <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
 </div>
