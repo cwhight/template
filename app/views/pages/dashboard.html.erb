@@ -1,46 +1,94 @@
-<div class="container dashboard-container position-relative">
-  <h1 class="py-3">Dashboard</h1>
-  <div class="selector py-3 row">
-      <div class="col-3">
-        <div class="dashboard-card profile card rounded p-3 bg-white" style="height: 70px;" data-selector="profile-card">
-          <h4>Profile</h4>
+<div class="wrapper">
+  <nav id="sidebar">
+   <ul class="list-unstyled components">
+
+    <li class="active dashboard-selector"  data-selector="profile-card">
+      <a href="#">Profile</a>
+    </li>
+
+    <li class="dashboard-selector" data-selector="upcoming-jobs">
+      <a href="#">Upcoming Jobs</a>
+    </li>
+
+    <li class="dashboard-selector"  data-selector="pending-requests">
+      <a href="#">Pending Requests</a>
+    </li>
+
+    <li class="dashboard-selector"  data-selector="job-history">
+      <a href="#">Job History</a>
+    </li>
+
+    <li class="dashboard-selector"  data-selector="reviews">
+      <a href="#">Reviews</a>
+    </li>
+   </ul>
+
+
+  </nav>
+  <div class="container" id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="btn btn-ghost">
+              <i class="fas fa-align-left"></i>
+              <span></span>
+          </button>
+
+      </div>
+    </nav>
+    <h1 class="py-3">Dashboard</h1>
+    <div class="selector py-3">
+
+         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
+          <div class="each-render col-12 col-md-6">
+            <%= render 'shared/profile-card', user: current_user %>
+          </div>
+          <div class="each-render col-12 col-md-6">
+            <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
+          </div>
+          <div class="each-render col-12 col-md-6">
+            <%= render 'pages/pending-requests', requests: current_user.requests %>
+          </div>
+          <div class="each-render col-12 col-md-6">
+            <%= render 'shared/job-history', shifts: current_user.shifts %>
+          </div>
+          <div class="each-render col-12">
+            <%= render 'shared/view-reviews', user: current_user %>
+          </div>
         </div>
 
-        <div class="dashboard-card upcoming-jobs card rounded p-3 bg-white"style="height: 70px;" data-selector="upcoming_jobs">
+        <div id="upcoming-jobs" data-target="upcoming-jobs" class="d-none dashboard-card">
           <h4>Upcoming Jobs</h4>
+          <% current_user.shifts.order(:start_time).each do |shift|  %>
+            <% if shift.start_time >= DateTime.now  %>
+              <%= render 'shifts/shift-card-employee', shift: shift %>
+            <% end %>
+
+          <% end %>
         </div>
 
-        <div class="dashboard-card pending-requests card rounded p-3 bg-white" style="height: 70px;" data-selector="pending-requests">
+        <div id="pending-requests" data-target="pending-requests" class="d-none dashboard-card">
           <h4>Pending Requests</h4>
+          <% current_user.requests.each do |request|  %>
+            <% unless request.shift.user  %>
+              <%= render 'shifts/shift-card-employee', shift: request.shift %>
+            <% end %>
+          <% end %>
         </div>
 
-        <div class="dashboard-card job-history card rounded p-3 bg-white" style="height: 70px;" data-selector="job-history">
+        <div id="job-history" data-target="job-history" class="d-none dashboard-card">
           <h4>Job History</h4>
+          <% current_user.shifts.order(:start_time).each do |shift|  %>
+            <% if shift.start_time < DateTime.now  %>
+              <%= render 'shifts/shift-card-employee', shift: shift %>
+            <% end %>
+
+          <% end %>
         </div>
 
-        <div class="dashboard-card reviews card rounded p-3 bg-white" style="height: 70px;" data-selector="reviews">
-          <h4>Reviews</h4>
-        </div>
-      </div>
 
-       <div class="dashboard-renders col-9">
-        <div class="each-render col-md-12">
-          <%= render 'shared/profile-card', user: current_user %>
-        </div>
-        <div class="each-render">
-          <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
-        </div>
-        <div class="each-render">
-          <%= render 'pages/pending-requests', requests: current_user.requests %>
-        </div>
-        <div class="each-render">
-          <%= render 'shared/job-history', shifts: current_user.shifts %>
-        </div>
-        <div class="each-render">
-          <%= render 'shared/view-reviews', user: current_user %>
-        </div>
-      </div>
-
+    </div>
   </div>
 </div>
 

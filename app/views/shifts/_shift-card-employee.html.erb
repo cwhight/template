@@ -1,0 +1,16 @@
+<div class="card p-3">
+
+  <div class="d-flex p-2 justify-content-between">
+    <div>
+      <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+    </div>
+    <div>
+      <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+      <% if shift.end_time < DateTime.now && shift.user == current_user %>
+        <%= render 'shared/review', shift: shift, review_target: shift.job.user %>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
