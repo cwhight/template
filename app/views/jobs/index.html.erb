@@ -1,3 +1,4 @@
+
 <div
   id="map"
   style="width: 100%;
@@ -26,16 +27,29 @@
     <option value="WY">Wyoming</option>
   </select>
 
+      <div>
+        <% @jobs.each do |job|%>
+          <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+          <% unless num_shifts <= 0 %>
+            <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
+          <% end %>
+        <% end %>
+      </div>
 
-  <div class="row justify-content-between">
-
-    <% @jobs.each do |job|%>
-      <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-      <% unless num_shifts <= 0 %>
-        <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
-      <% end %>
-
-    <% end %>
+    </div>
   </div>
-    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat', id: 'display_all_jobs' %>
+
+  <div class="col-5">
+    <div
+      id="map"
+      style=" position: absolute;
+      top: 0;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      height: 91vh;"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  </div>
 </div>

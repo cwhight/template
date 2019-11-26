@@ -1,85 +1,76 @@
 
 <%= render 'shared/job-card', job: job, num_shifts: num_shifts %>
 
-
-
 <div class="modal fade" id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header job-summary-header">
-          <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title}" %></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header job-summary-header">
+        <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title}" %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container">
+          <h1><%= job.title %></h1>
+          <p><%= job.summary %></p>
+          <% job.shifts.each do |shift| %>
+          <% unless shift.user || shift.start_time < DateTime.now %>
+          <hr>
         </div>
 
-        <div class="modal-body">
+
+          <!--Profile Card-->
+
+        <% if current_user.present? %>
           <div class="container">
-            <h1><%= job.title %></h1>
-            <p><%= job.summary %></p>
-            <% job.shifts.each do |shift| %>
-            <% unless shift.user || shift.start_time < DateTime.now%>
-            <hr>
-          </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div>
+                  <%= render '/shared/profile-card', user: current_user, profile: true %>
+                </div>
+              </div>
 
-            <!--Profile Card-->
-            <% if current_user %>
-            <div class="container">
-              <div class="row">
+              <!--Job Summary-->
                 <div class="col-sm-6">
-                  <div>
-                    <%= render '/shared/profile-card', user: current_user, profile: true %>
-                    <hr>
-                    <p>This is your opportunity to send a message to the hiring manager. Be sure to include
-                    your experience and if you are available for more shifts.</b>
-                    <p style="color: #ff7d7d">*Do not discuss payment outside of Template.</p>
-                  </div>
-                  <% end %>
-
-
-            <!--Job Summary-->
-              <div class="card p-3 col-sm-6">
-                <div class="row justify-content-between">
-                  <div class="col-12">
-                    <h3>Job Summary</h3>
-                       <p><%= job.description %></p>
-                    <p><b>Date:</b> <%= Time.parse(shift.start_time) %></p>
-                    <p><b>Start time:</b> <%= Time.parse(shift&.start_time)&.strftime("%k:%M") %></p>
-                    <p><b>End time:</b> <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                    <p><b>Hourly Rate:</b> <%= humanized_money_with_symbol(shift.price) %></p>
-                    <p><b>Location:</b> <%= shift.job.location %></p>
-                  </div>
-                </div>
-              </div>
-
-            <!--Submit Code-->
-                <div class="col-sm-12 message-submission">
-                  <div id="applyForm" class="modal-body">
-                    <h5>Submit your message to: [employer_name/hiring manager]</h5>
-                    <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
-                      <%= f.input :content %>
-                      <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
-                    <% end %>
-                  </div>
-                </div>
-
-                    <!--Send Application Button-->
-                    <div class="hidden m-3 applyButton btn btn-ghost">
-                      Send Application
-                    </div>
-
+                  <div class="row justify-content-between">
+                    <div class="col-12">
+                      <h3>Job Summary</h3>
+                         <p><b>Employer: <%= job.user.first_name %> <%= job.user.surname %></b></p>
+                         <p><%= job.description %></p>
+                      <p><b>Date:</b> <%= Time.parse(shift.start_time) %></p>
+                      <p><b>Start time:</b> <%= Time.parse(shift&.start_time)&.strftime("%k:%M") %></p>
+                      <p><b>End time:</b> <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                      <p><b>Hourly Rate:</b> <%= humanized_money_with_symbol(shift.price) %></p>
+                      <p><b>Location:</b> <%= shift.job.location %></p>
                     </div>
                   </div>
                 </div>
-                </div>
-              </div>
-            <% end %>
-            <% end %>
+            </div>
+          <% end %>
+
+
+
+          <!--Submit Code-->
+          <div class="col-sm-12 message-submission">
+            <div id="applyForm" class="modal-body">
+              <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
+              <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
+                <%= f.input :content, label_html: { class: "content-label" } %>
+                <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
+              <% end %>
+            </div>
           </div>
+
+                  <!--Send Application Button-->
+          <div class="hidden m-3 applyButton btn btn-ghost">
+            Send Application
+          </div>
+           <% end %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-
-
-
+</div>
