@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="container content-index col-12 col-lg-7">
+  <div class="content-index col-12 col-lg-7">
     <div class="container">
       <div class="row justify-content-between border-bottom">
         <h1 class="px-4">Available Jobs</h1>
@@ -11,7 +11,6 @@
             <div class="col-8 col-lg-10">
               <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" />
             </div>
-
             <div>
               <button name="button" type="submit" class="btn btn-ghost btn-search " style="height: 42px; width: 128px;">
                 <i class="fas fa-search"></i> Search
@@ -20,7 +19,6 @@
           </div>
           <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%' } %>
         <% end %>
-
       </div>
       <div>
         <% @jobs.each do |job|%>
@@ -29,21 +27,22 @@
             <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
           <% end %>
         <% end %>
+        <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
       </div>
     </div>
-    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
-  </div>
-  <div class="col-5 d-none d-lg-block d-xl-block">
-    <div
-      id="map"
-      style=" position: absolute;
-      top: 0;
-      bottom: 0;
-      display: block;
-      width: 100%;
-      height: 91vh;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    <div class="col-5 col-lg-5 d-none d-lg-block d-xl-block">
+      <div
+        id="map"
+        style=" position: absolute;
+        top: 0;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 91vh;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
     </div>
+
   </div>
 </div>
