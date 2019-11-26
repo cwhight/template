@@ -1,24 +1,31 @@
-<div class="row">
-  <div class="container content-index col-7">
-    <div class="container">
-      <div class="row justify-content-between px-4 border-bottom">
-        <h1>Available Jobs</h1>
-        <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat', id: 'display_all_jobs' %>
-      </div>
-      <div>
-        <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
-          <div class="form-group form-inline py-3">
-            <div class="pr-2">
-              <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" id="search_query" />
-            </div>
-            <div>
-              <button name="button" type="submit" class="btn btn-ghost btn-search">
-                <i class="fas fa-search"></i> Search
-              </button>
-            </div>
-          </div>
-        <% end %>
-      </div>
+
+<div
+  id="map"
+  style="width: 100%;
+  height: 400px;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+<div class="container content-index">
+  <div class="row justify-content-between">
+    <h1>Jobs</h1>
+    <%= image_tag "undraw_personal_site_xyd1.svg", alt: "alttext", height: 60 %>
+  </div>
+
+  <br>
+  <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
+    <div class="search-form-control form-group">
+      <input class="form-control string required" type="text" placeholder="Please enter the type of job you are looking for..." name="search[query]" id="search_query" />
+      <button name="button" type="submit" class="btn btn-ghost">
+        <i class="fas fa-search"></i> Search
+      </button>
+    </div>
+  <% end %>
+  <select class="sector-picker" name="states[]" multiple="multiple">
+    <option value="AL">Alabama</option>
+      ...
+    <option value="WY">Wyoming</option>
+  </select>
 
       <div>
         <% @jobs.each do |job|%>

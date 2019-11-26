@@ -3,6 +3,10 @@
     <div>
       <h1><%= @job.title %></h1>
       <p><%= @job.description %></p>
+      <p>Categories:</p>
+      <% @job.sectors.each do |sector| %>
+        <p><%= sector.title %></p>
+      <% end %>
     </div>
 
     <div>
