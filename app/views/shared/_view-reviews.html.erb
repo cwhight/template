@@ -1,18 +1,18 @@
-<div id="reviews" class="d-none profile-card ">
-  <div class="card p-3 mx-2">
+<div class="">
+  <div class="card p-3 m-2">
 
     <h2>Reviews</h2>
     <% user.reviews.each do |review| %>
     <div class="shadow-sm p-3">
       <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-between">
-        <h4><%= review.title %></h4>
+          <h4><%= review.title %></h4>
 
         </div>
         <h5><span ><% review.score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
 
       </div>
-        <p><%= review.shift.job.title %></p>
+      <p><%= review.shift.job.title %></p>
 
       <p><%= review.content %></p>
     </div>
