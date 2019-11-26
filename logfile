@@ -1,0 +1,10 @@
+2019-11-26 13:45:53.495 GMT [8287] LOG:  listening on IPv6 address "::1", port 5432
+2019-11-26 13:45:53.495 GMT [8287] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-11-26 13:45:53.496 GMT [8287] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-11-26 13:45:53.505 GMT [8288] LOG:  database system was shut down at 2019-11-26 13:45:32 GMT
+2019-11-26 13:45:53.509 GMT [8287] LOG:  database system is ready to accept connections
+2019-11-26 13:46:05.978 GMT [8338] FATAL:  database "template_development" does not exist
+2019-11-26 13:46:07.815 GMT [8339] FATAL:  database "template_development" does not exist
+2019-11-26 13:46:27.680 GMT [8371] FATAL:  database "template_development" does not exist
+2019-11-26 13:46:28.520 GMT [8387] ERROR:  column "sector" of relation "jobs" does not exist
+2019-11-26 13:46:28.520 GMT [8387] STATEMENT:  ALTER TABLE "jobs" DROP COLUMN "sector"
