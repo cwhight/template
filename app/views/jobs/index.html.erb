@@ -21,10 +21,10 @@
       </button>
     </div>
   <% end %>
-  <select class="sector-picker" name="states[]" multiple="multiple">
-    <option value="AL">Alabama</option>
-      ...
-    <option value="WY">Wyoming</option>
+  <select class="sector-picker" style="width: 400px;" name="states[]" multiple="multiple">
+    <% Sector.all.each do |sector| %>
+      <option value="Sector"><%= sector.title.capitalize %></option>
+    <% end %>
   </select>
 
       <div>
