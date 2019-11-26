@@ -19,9 +19,11 @@ selectors.forEach((selector) => {
 const sidebar = document.querySelector("#sidebar")
 const sidebarCollapse = document.getElementById("sidebarCollapse")
 
-sidebarCollapse.addEventListener('click', (e) => {
-  sidebar.classList.toggle('active')
+if (sidebarCollapse) {
+  sidebarCollapse.addEventListener('click', (e) => {
+    sidebar.classList.toggle('active')
 
-});
+  });
+}
 
 
