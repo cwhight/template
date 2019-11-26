@@ -8,7 +8,10 @@ import { initAutocomplete } from '../plugins/init_autocomplete';
 import { hideMap } from '../components/hideMap';
 import { dashboard } from '../components/dashboard';
 import "../plugins/flatpickr"
+import 'select2/dist/css/select2.css';
+import { initSelect2 } from '../components/init_select2';
 
+initSelect2();
 openApply();
 closeApply();
 initMapbox();

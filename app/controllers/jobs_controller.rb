@@ -47,7 +47,7 @@ class JobsController < ApplicationController
     @sectors = sector_ids.map do |element|
       Sector.find(element)
     end
-    @job.sector = @sectors
+    @job.sectors = @sectors
     @job.user = current_user
     authorize @job
     if @job.save
