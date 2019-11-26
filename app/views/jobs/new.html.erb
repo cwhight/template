@@ -6,12 +6,8 @@
       <%= f.input :summary %>
       <%= f.input :description, as: :text, error: 'Must have a description' %>
       <%= f.input :location, error: 'Must have a location' %>
-      <%= f.association :sectors, as: :check_boxes %>
-      <select class="sector-picker" style="width: 400px;" name="states[]" multiple="multiple">
-        <% Sector.all.each do |sector| %>
-          <option value="Sector"><%= sector.title.capitalize %></option>
-        <% end %>
-      </select>
+      <%= f.association :sectors, label_method: :title, value_method: :id, input_html: { class: 'sector-picker' } %>
+
 
       <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
   <% end %>

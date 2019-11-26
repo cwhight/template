@@ -21,22 +21,14 @@
       </button>
     </div>
   <% end %>
-  <select class="sector-picker" style="width: 400px;" name="states[]" multiple="multiple">
-    <% Sector.all.each do |sector| %>
-      <option value="Sector"><%= sector.title.capitalize %></option>
+
+  <div>
+    <% @jobs.each do |job|%>
+      <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+      <% unless num_shifts <= 0 %>
+        <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
+      <% end %>
     <% end %>
-  </select>
-
-      <div>
-        <% @jobs.each do |job|%>
-          <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-          <% unless num_shifts <= 0 %>
-            <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
-          <% end %>
-        <% end %>
-      </div>
-
-    </div>
   </div>
 
   <div class="col-5">
