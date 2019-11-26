@@ -23,7 +23,8 @@
           </div>
 
             <!--Profile Card-->
-            <% if current_user %>
+
+            <% if current_user.present? %>
             <div class="container">
               <div class="row">
                 <div class="col-sm-6">
@@ -31,14 +32,16 @@
                     <%= render '/shared/profile-card', user: current_user, profile: true %>
                     <hr>
                     <p>This is your opportunity to send a message to the hiring manager. Be sure to include
-                    your experience and if you are available for more shifts.</b>
-                    <p style="color: #ff7d7d">*Do not discuss payment outside of Template.</p>
+                    your experience and if you are available for more shifts.</p>
+
                   </div>
-                  <% end %>
+                </div>
+              </div>
+            <% end %>
 
 
             <!--Job Summary-->
-              <div class="card p-3 col-sm-6">
+              <div class="col-sm-6">
                 <div class="row justify-content-between">
                   <div class="col-12">
                     <h3>Job Summary</h3>
