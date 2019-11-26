@@ -10,4 +10,8 @@ class PagesController < ApplicationController
     @user = current_user
     @review = Review.new
   end
+
+  def dashboard_employer
+    @employer = current_user
+  end
 end
