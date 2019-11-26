@@ -3,10 +3,10 @@
 <div class="row landing-body my-3">
   <div id="landing-hero">
     <%= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 80 %>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-md-6">
       <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
     </div>
-    <%= image_tag "undraw_modern_life_u1ev.svg", alt: "alttext", class: 'homepage-image d-none d-xl-block' %>
+    <%= image_tag "undraw_modern_life_u1ev.svg", alt: "alttext", class: 'homepage-image d-none d-md-block d-lg-block d-xl-block' %>
     <% unless current_user %>
       <div id="signup">
         <a href="/users/sign_in" class="btn btn-ghost">Sign In </a>
@@ -14,33 +14,46 @@
       </div>
     <% end %>
     <div class="landing-card">
-      <div class="search-form-control form-group" id='landing-page-search'>
-      <%= simple_form_for :search, url: jobs_path, method: :get, id: 'homepage-search' do |f| %>
-        <input class="form-control string required" type="text" placeholder="Please enter the type of job you are looking for..." name="search[query]" id="search_query" />
-        <button name="button" type="submit" class="btn btn-flat">
-        <i class="fas fa-search"></i> Search
-        </button>
-        <% unless current_user %>
-          <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Sign up here</a> to apply for jobs.</p>
-        <% else %>
-
-          <p id="search-box-text-bottom"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p>
-
-        <% end %>
+      <div class="search-form-control form-group col-11" id='landing-page-search'>
+        <%= simple_form_for :search, url: jobs_path, method: :get, id: 'homepage-search' do |f| %>
+        <div>
+          <input class="form-control string required" type="text" placeholder="Please enter the type of job you are looking for..." name="search[query]" id="search_query" />
         </div>
+        <div class="p-3 row align-items-center">
+          <div class="d-inline">
+            <button name="button" type="submit" class="btn btn-flat">
+              <i class="fas fa-search"></i> Search
+            </button>
+          </div>
+          <div class="d-inline mx-3">
+            <% unless current_user %>
+              <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Sign up here</a> to apply for jobs.</p>
+            <% else %>
+              <p id="search-box-text-bottom"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
       </div>
-    <% end %>
     </div>
+  </div>
 </div>
-<div class="landing-jobs container">
-  <div class="row justify-content-between">
 
-    <% @jobs.each do |job|%>
-      <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-      <% unless num_shifts <= 0 %>
-        <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
+
+<div class="py-3 landing-jobs justify-content-center">
+  <div class="col-11 content-index">
+    <div class="row justify-content-between">
+      <h1 class="px-4">Available Jobs</h1>
+      <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
+    </div>
+    <div>
+      <% @jobs.each do |job|%>
+        <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+        <% unless num_shifts <= 0 %>
+          <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
+        <% end %>
       <% end %>
-
-    <% end %>
+    </div>
+    <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
   </div>
 </div>
