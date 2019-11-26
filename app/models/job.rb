@@ -11,7 +11,7 @@ class Job < ApplicationRecord
 
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
-
+  scope :search_by_sector, ->(ids) { joins(:sector_joiners).merge(SectorJoiner.where(sector_id: ids.map(&:to_i))) }
   include PgSearch::Model
   pg_search_scope :kinda_matching,
                   against: :title,

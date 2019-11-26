@@ -6,6 +6,11 @@ const initSelect2 = () => {
     placeholder: "Select job sectors...",
     allowClear: true
   });
+  $('.search_category').select2({
+    placeholder: "Select job sectors...",
+    allowClear: true,
+    width: 'resolve'
+  });
 };
 
 export { initSelect2 };
