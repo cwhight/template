@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_11_25_160655) do
     t.float "longitude"
     t.boolean "done"
     t.string "summary"
-    t.string "sector"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
