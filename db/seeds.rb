@@ -1,7 +1,7 @@
 puts "starting seed"
-sectors = ["other", "finance", "business", "charity", "design", "manufacturing",
-              "agriculture", "healthcare", "hospitality", "IT", "security", "leisure", "marketing",
-              "media", "construction", "administration", "retail", "sales", "care", "teaching", "transport"]
+sectors = ["Other", "Finance", "Business", "Charity", "Design", "Manufacturing",
+              "Agriculture", "Healthcare", "Hospitality", "IT", "Security", "Leisure", "Marketing",
+              "Media", "Construction", "Administration", "Retail", "Sales", "Care", "Teaching", "Transport"]
 
 sectors.each do |e|
   puts "seeding with #{e}"
