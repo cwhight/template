@@ -1,38 +1,87 @@
-<div class="container dashboard-container position-relative">
-  <h1 class="py-3">Employer Dashboard</h1>
-  <div class="selector py-3 row">
-    <div class="col-3">
-      <div class="dashboard-card profile card rounded p-3 bg-white" style="height: 70px;" data-selector="profile-card">
-        <h4>Profile</h4>
-      </div>
+<div class="wrapper">
+  <nav id="sidebar">
+   <ul class="list-unstyled components">
 
-      <div class="dashboard-card listed-jobs card rounded p-3 bg-white"style="height: 70px;" data-selector="listed-jobs">
-        <h4>Listed Jobs</h4>
-      </div>
+    <li class="active dashboard-selector"  data-selector="profile-card">
+      <a href="#">Profile</a>
+    </li>
 
-      <div class="dashboard-card closed-jobs card rounded p-3 bg-white" style="height: 70px;" data-selector="closed-jobs">
-        <h4>Closed Jobs</h4>
-      </div>
+    <li class="dashboard-selector" data-selector="listed-jobs">
+      <a href="#">Listed Jobs</a>
+    </li>
 
-      <div class="dashboard-card reviews card rounded p-3 bg-white" style="height: 70px;" data-selector="reviews">
-        <h4>Reviews</h4>
+    <li class="dashboard-selector"  data-selector="pending-requests">
+      <a href="#">Active Applications</a>
+    </li>
+
+    <li class="dashboard-selector"  data-selector="closed-jobs">
+      <a href="#">Closed Jobs</a>
+    </li>
+
+    <li class="dashboard-selector"  data-selector="reviews">
+      <a href="#">Reviews</a>
+    </li>
+   </ul>
+
+
+  </nav>
+  <div class="container" id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="btn btn-ghost">
+              <i class="fas fa-align-left"></i>
+              <span></span>
+          </button>
+
       </div>
+    </nav>
+    <h1 class="py-3">Dashboard</h1>
+    <div class="selector py-3">
+
+         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
+          <div class="each-render col-12 col-md-6">
+            <%= render 'shared/profile-card', user: current_user %>
+          </div>
+          <div class="each-render col-12 col-md-6">
+            <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
+          </div>
+
+          <div class="each-render col-12 col-md-6">
+            <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
+          </div>
+          <div class="each-render col-12">
+            <%= render 'shared/view-reviews', user: current_user %>
+          </div>
+        </div>
+
+        <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card">
+          <h4>Listed Jobs</h4>
+          <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
+        </div>
+
+        <div id="pending-requests" data-target="pending-requests" class="d-none dashboard-card">
+          <h4>Pending Requests</h4>
+
+        </div>
+
+        <div id="closed-jobs" data-target="closed-jobs" class="d-none dashboard-card">
+          <h4>Job History</h4>
+          <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
+        </div>
+
+        <div id="reviews" data-target="reviews" class="d-none dashboard-card">
+          <%= render 'shared/view-reviews', user: current_user %>
+        </div>
+
+
+
     </div>
-
-    <div class="dashboard-renders col-9">
-      <div class="each-render col-md-12">
-        <%= render 'shared/profile-card', user: current_user, profile: true %>
-      </div>
-      <div class="each-render">
-        <%= render 'shared/listed-jobs', jobs: current_user.jobs, profile: true %>
-      </div>
-      <div class="each-render">
-        <%= render 'shared/closed-jobs', jobs: current_user.jobs, profile: true %>
-      </div>
-      <div class="each-render">
-        <%= render 'shared/view-reviews', user: current_user, profile: true %>
-      </div>
-    </div>
-
   </div>
 </div>
+
+
+
+
+
