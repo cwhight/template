@@ -1,0 +1,11 @@
+function refreshForm(innerHTML) {
+  const newApplication = document.getElementbyId('applyForm');
+  newApplication.innerHTML = innerHTML;
+}
+
+<% if @request.valid? %>
+  window.location.href = "/dashboard"
+<% else %>
+  var form = document.querySelector("#review-form")
+  refreshForm("<%= j render 'shared/review-form', shift: @shift, review: @review %>")
+<% end %>
