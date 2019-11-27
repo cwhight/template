@@ -24,6 +24,12 @@
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script>
+      var pusher = new Pusher('PUSHER_APP_KEY', {
+      cluster: 'eu',
+      encrypted: true
+    });
+    </script>
   </body>
 </html>

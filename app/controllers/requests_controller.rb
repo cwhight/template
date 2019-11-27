@@ -3,6 +3,7 @@ class RequestsController < ApplicationController
 
   def show
     authorize @request
+    @chat = Chat.new
   end
 
   def new
