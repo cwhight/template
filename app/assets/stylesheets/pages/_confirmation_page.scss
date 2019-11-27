@@ -17,5 +17,33 @@
 @media (min-width: 1200px) {
   .confirmation-page{
     max-width: 1350px;
+    margin-top: 30px;
   }
+}
+
+.content-label {
+  display: none;
+}
+
+.job-summary {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 20px;
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+.confirm-page-box {
+  height: 150px !important;
+}
+
+.message-submission {
+  padding: 0;
+}
+
+.summary-text {
+  line-height: normal;
+}
+
+.fa-arrow-right {
+  color: #2969DA;
 }

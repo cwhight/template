@@ -15,7 +15,6 @@ class RequestsController < ApplicationController
     @job = Job.find(params[:job_id])
     @request = Request.new(content: params[:request][:content])
     authorize @request
-
   end
 
   def create

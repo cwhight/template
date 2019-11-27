@@ -1,5 +1,5 @@
-
 <div class="container confirmation-page">
+  <h2><i class="fas fa-arrow-right"></i> Your application for <%= @job.title %> at <%= @job.summary %></h2><br>
   <div class="row">
     <div class="col-sm-6">
       <div>
@@ -7,26 +7,27 @@
       </div>
     </div>
 
-      <div class="col-sm-6">
+      <div class="col-sm-6 job-summary">
         <div class="row justify-content-between">
-          <div class="col-12">
-            <h3>Job Summary for <%= @job.title %></h3>
-
-            <p><b>Employer: <%= @job.user.first_name %> <%= @job.user.surname %></b></p>
+          <div class="col-12 summary-text">
+            <h3>Job Summary</h3>
+            <p><b>Hiring Manager:</b> <%= @job.user.first_name %> <%= @job.user.surname %></p>
             <p><%= @job.description %></p>
-            <%= render 'shifts/shift-card-employee', shift: @shift %>
+            <p><b>Job Title: </b><%= @job.title %></p>
+            <p><b>Location: </b><%= @shift.job.location %></p>
+            <p><b>Shift Available: </b><%= @shift.job.user %></p>
+            <p><b>Hourly Rate: </b><%= humanized_money_with_symbol(@shift.price)%></p>
+
+
+            <div id="applyForm" class="col-12 modal-body message-submission">
+              <h5>Submit your message to <%= @job.user.first_name %> <%= @job.user.surname %></h5>
+              <%= simple_form_for  [@job, @request], url: job_shift_requests_path(@job, @shift) do |f| %>
+                <%= f.input :content, label_html: { class: "content-label" }, input_html: { class: "confirm-page-box" } %>
+                <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>
-
-  <div class="col-sm-12 message-submission">
-    <div id="applyForm" class="modal-body">
-      <h5>Submit your message to <%= @job.user.first_name %> <%= @job.user.surname %></h5>
-      <%= simple_form_for  [@job, @request], url: job_shift_requests_path(@job, @shift) do |f| %>
-        <%= f.input :content, label_html: { class: "content-label" } %>
-        <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
