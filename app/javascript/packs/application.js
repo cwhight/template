@@ -10,6 +10,19 @@ import { dashboard } from '../components/dashboard';
 import "../plugins/flatpickr";
 import 'select2/dist/css/select2.css';
 import { initSelect2 } from '../plugins/init_select2';
+import { initSweetalert } from '../plugins/init_sweetalert';
+
+initSweetalert('#confirm-job', {
+  title: "Done",
+  text: "Your job was successfully posted. You'll recieve applications soon!",
+  icon: "success",
+});
+
+initSweetalert('#employee-apply-sweetalert', {
+  title: "Done",
+  text: "Application sent. You'll hear back shortly!",
+  icon: "success",
+});
 
 initSelect2();
 openApply();
