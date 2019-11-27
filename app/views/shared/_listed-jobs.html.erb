@@ -5,10 +5,12 @@
     <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
   </div>
     <br>
-
     <% jobs.each do |job| %>
       <% unless job.done %>
-        <%= link_to job.title, job_path(job) %>
+        <div class="d-flex justify-content-between border-bottom py-2">
+          <h6><%= job.title %></h6>
+          <p><%= link_to 'Details', job_path(job), class: "btn btn-ghost"%></p>
+        </div>
       <% end %>
     <% end %>
   </div>
