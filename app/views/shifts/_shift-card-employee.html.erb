@@ -6,6 +6,7 @@
     </div>
     <div>
       <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+      <p><b>Location:</b> <%= shift.job.location %></p>
       <% if shift.end_time < DateTime.now && shift.user == current_user %>
         <%= render 'shared/review', shift: shift, review_target: shift.job.user %>
       <% end %>

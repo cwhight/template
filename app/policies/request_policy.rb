@@ -4,6 +4,10 @@ class RequestPolicy < ApplicationPolicy
     !user.employer
   end
 
+  def confirmation?
+    create?
+  end
+
   def show?
     record.shift.job.user == user
   end
