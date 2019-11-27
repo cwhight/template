@@ -34,32 +34,32 @@
   </nav>
   <div class="container" id="content">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
 
-        <button type="button" id="sidebarCollapse" class="btn btn-ghost">
+        <button type="button" id="sidebarCollapse" class="btn btn-flat">
             <i class="fas fa-align-left"></i>
         </button>
 
       </div>
     </nav>
-    <h1 class="py-3">Dashboard</h1>
+    <h1 class="py-3 d-flex justify-content-center">Dashboard</h1>
     <div class="selector py-3">
 
          <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-md-6 offset-3">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-md-6 offset-3">
             <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
           </div>
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-md-6 offset-3">
             <%= render 'pages/pending-requests', requests: current_user.requests %>
           </div>
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-md-6 offset-3">
             <%= render 'shared/job-history', shifts: current_user.shifts %>
           </div>
-          <div class="each-render col-12">
+          <div class="each-render col-12 col-md-6 offset-3">
             <%= render 'shared/view-reviews', user: current_user %>
           </div>
         </div>

@@ -17,7 +17,7 @@
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: #f3f3f3;
+    background: #F7F9FD;
     color: #292929;
     transition: all 0.3s;
 }
@@ -59,7 +59,7 @@
 }
 
 #sidebarCollapse {
-  color: #D36135;
+  color: #2969DA;
   font-size: 20px;
 }
 
@@ -74,4 +74,9 @@
     #sidebar.active {
         margin-left: 0;
     }
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0 2px 2px #E3E3E3;
 }
