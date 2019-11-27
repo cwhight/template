@@ -5,8 +5,11 @@
   <br>
 
   <% jobs.each do |job| %>
-    <% if job.done %>
-      <%= link_to job.title, job_path(job) %>
+      <% if job.done %>
+        <div class="d-flex justify-content-between border-bottom py-2">
+          <h6><%= job.title %></h6>
+          <p><%= link_to 'Details', job_path(job), class: "btn btn-show"%></p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
 </div>
