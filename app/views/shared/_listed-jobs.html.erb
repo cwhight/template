@@ -7,9 +7,22 @@
     <br>
     <% jobs.each do |job| %>
       <% unless job.done %>
-        <div class="d-flex justify-content-between border-bottom py-2">
+        <div class="d-flex justify-content-between py-2">
           <h6><%= job.title %></h6>
-          <p><%= link_to 'Details', job_path(job), class: "btn btn-ghost"%></p>
+          <p><%= link_to 'Details', job_path(job), class: "btn btn-show"%></p>
+        </div>
+        <div class="border-bottom">
+          <% request_number = 0 %>
+          <% job.shifts.each do |shift| %>
+            <% request_number += shift.requests.count.to_i %>
+          <% end %>
+          <% if request_number == 0 %>
+            <p>No applications</p>
+          <% elsif request_number == 1 %>
+            <p><%= request_number %> application</p>
+          <% else %>
+            <p><%= request_number %> applications</p>
+          <% end %>
         </div>
       <% end %>
     <% end %>

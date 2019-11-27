@@ -7,7 +7,8 @@
     </li>
 
     <li class="dashboard-selector" data-selector="listed-jobs">
-      <a href="#">Listed Jobs</a>
+      <% listed_jobs = current_user.jobs.where({done: nil}) %>
+      <a href="#">Listed Jobs ( <%= listed_jobs.count %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="pending-requests">
@@ -15,11 +16,18 @@
     </li>
 
     <li class="dashboard-selector"  data-selector="closed-jobs">
-      <a href="#">Closed Jobs</a>
+      <% closed_jobs = current_user.jobs.where({done: true}) %>
+      <a href="#">Closed Jobs ( <%= closed_jobs.count %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="reviews">
-      <a href="#">Reviews</a>
+      <% reviews_number = 0 %>
+      <% current_user.jobs.each do |job| %>
+        <% job.shifts.each do |shift| %>
+          <% reviews_number += shift.reviews.count.to_i %>
+        <% end %>
+      <% end %>
+      <a href="#">Reviews ( <%= reviews_number %> )</a>
     </li>
    </ul>
 
@@ -27,7 +35,7 @@
   </nav>
   <div class="container" id="content">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
 
           <button type="button" id="sidebarCollapse" class="btn btn-ghost">
