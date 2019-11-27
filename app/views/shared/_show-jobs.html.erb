@@ -17,23 +17,26 @@
           <p><%= job.summary %></p>
           <% job.shifts.each do |shift| %>
             <% unless shift.user || shift.start_time < DateTime.now %>
-              <hr>
+            <%= render 'shifts/shift-card-employee', shift: shift %>
             <!--Submit Code-->
-              <div class="hidden col-sm-12 message-submission">
-                <div id="applyForm" class="modal-body">
+              <div class="col-sm-12 message-submission">
+                <div class="my-2 applyButton btn btn-ghost">
+                  Apply for this Shift
+                </div>
+                <div id="applyForm" class="my-3 hidden">
                   <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
                   <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
 
                     <%= f.input :content, label_html: { class: "content-label" } %>
                     <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
                   <% end %>
+                  <div class="mt-3 applyBackButton btn btn-ghost">
+                    Back
+                  </div>
                 </div>
               </div>
 
-                  <!--Send Application Button-->
-              <div class=" m-3 applyButton btn btn-ghost">
-                Send Application
-              </div>
+
             <% end %>
           <% end %>
         </div>
