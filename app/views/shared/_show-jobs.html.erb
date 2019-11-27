@@ -16,29 +16,28 @@
           <h1><%= job.title %></h1>
           <p><%= job.summary %></p>
           <% job.shifts.each do |shift| %>
-          <% unless shift.user || shift.start_time < DateTime.now %>
-          <hr>
-        </div>
-        
-          <!--Submit Code-->
-          <div class="hidden col-sm-12 message-submission">
-            <div id="applyForm" class="modal-body">
-              <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
-              <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
+            <% unless shift.user || shift.start_time < DateTime.now %>
+              <hr>
+            <!--Submit Code-->
+              <div class="hidden col-sm-12 message-submission">
+                <div id="applyForm" class="modal-body">
+                  <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
+                  <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
 
-                <%= f.input :content, label_html: { class: "content-label" } %>
-                <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
-              <% end %>
-            </div>
-          </div>
+                    <%= f.input :content, label_html: { class: "content-label" } %>
+                    <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
+                  <% end %>
+                </div>
+              </div>
 
                   <!--Send Application Button-->
-          <div class=" m-3 applyButton btn btn-ghost">
-            Send Application
-          </div>
-           <% end %>
+              <div class=" m-3 applyButton btn btn-ghost">
+                Send Application
+              </div>
+            <% end %>
           <% end %>
         </div>
+
       </div>
     </div>
   </div>
