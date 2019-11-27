@@ -5,7 +5,7 @@
   border-radius: 4px;
   font-weight: bold;
   background: linear-gradient(#167FFB, #0F60C4);
-  transition: background 0.3s ease;
+  transition: background 0.1s ease;
   border: 1px solid #0F60C4;
 }
 
@@ -14,18 +14,17 @@
   color: white;
 }
 
-#btn-flat {
-  color: #F7F3E3 !important;
+.btn-flat {
+  color: #2969DA;
+  border: 1px solid #2969DA;
   padding: 8px 24px;
-  border-radius: 42px;
-  background: #2969DA;
-  transition: background 0.3s ease;
-  font-family: Roboto Mono;
+  border-radius: 50px;
+  transition: background 0.1s ease;
 }
 
 .btn-flat:hover {
-  background: #222A68;
-  color: #F7F3E3;
+  background: #2969DA;
+  color: white;
 }
 
 .btn-ghost {
@@ -34,11 +33,12 @@
   padding: 8px 24px;
   border-radius: 50px;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.1s ease;
 }
 
 .btn-ghost:hover {
-  opacity: 0.7;
+  background-color: #D36135;
+  color: white;
 }
 
 .btn-show {
@@ -47,24 +47,5 @@
   padding: 3px 9px;
   border-radius: 50px;
   opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.btn-show:hover {
-  background-color: #D36135;
-  color: white;
-}
-
-#btn-flat {
-  color: #F7F3E3 !important;
-  padding: 8px 24px;
-  border-radius: 42px;
-  background: #2969DA;
-  transition: background 0.3s ease;
-  font-family: Roboto Mono;
-}
-
-.btn-flat:hover {
-  background: #222A68;
-  color: #F7F3E3;
+  transition: opacity 0.1s ease;
 }

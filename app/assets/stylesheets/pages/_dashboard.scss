@@ -59,7 +59,12 @@
 }
 
 #sidebarCollapse {
-  background-color: #F7F3E3;
+  color: #D36135;
+  font-size: 20px;
+}
+
+#sidebarCollapse:hover {
+  color: white;
 }
 
 @media (max-width: 768px) {

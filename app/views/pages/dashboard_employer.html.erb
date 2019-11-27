@@ -32,29 +32,26 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
 
-          <button type="button" id="sidebarCollapse" class="btn btn-ghost">
-              <i class="fas fa-align-left"></i>
-              <span></span>
-          </button>
+      <button type="button" id="sidebarCollapse" class="btn btn-ghost">
+          <i class="fas fa-align-left"></i>
+      </button>
       <%= link_to 'refresh shifts', close_shifts_path, class: "btn btn-flat", method: :patch %>
       </div>
     </nav>
-    <h1 class="py-3">Welcome to your dashboard, <%= @employer.first_name %>.</h1>
+    <h1 class="py-3 px-2">Welcome to your dashboard, <%= @employer.first_name %>.</h1>
     <div class="selector py-3">
 
-         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
+        <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
           <div class="each-render col-12 col-md-6">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
           <div class="each-render col-12 col-md-6">
-            <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
+            <%= render 'jobs/profile-listed-jobs', jobs: current_user.jobs %>
           </div>
 
           <div class="each-render col-12 col-md-6">
             <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
           </div>
-          <div class="each-render col-12">
-            <%= render 'shared/view-reviews', user: current_user %>
           </div>
         </div>
 
