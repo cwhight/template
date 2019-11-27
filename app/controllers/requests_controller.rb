@@ -10,6 +10,14 @@ class RequestsController < ApplicationController
     authorize @request
   end
 
+  def confirmation
+    @shift = Shift.find(params[:shift_id])
+    @job = Job.find(params[:job_id])
+    @request = Request.new(content: params[:request][:content])
+    authorize @request
+
+  end
+
   def create
     @request = Request.new(request_params)
     authorize @request

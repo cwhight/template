@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :jobs do
     resources :shifts, except: :show do
       resources :requests, except: [:show]
+      get 'requests/confirmation', to: 'requests#confirmation'
     end
   end
 
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'pages#dashboard'
 
   get '/dashboard_employer', to: 'pages#dashboard_employer'
+
+
 
   resources :users, only: [:edit, :update]
 

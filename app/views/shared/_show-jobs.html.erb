@@ -19,44 +19,13 @@
           <% unless shift.user || shift.start_time < DateTime.now %>
           <hr>
         </div>
-
-
-          <!--Profile Card-->
-
-        <% if current_user.present? %>
-          <div class="container">
-            <div class="row">
-              <div class="hidden col-sm-6">
-                <div>
-                  <%= render '/shared/profile-card', user: current_user, profile: true %>
-                </div>
-              </div>
-
-              <!--Job Summary-->
-                <div class="col-sm-6">
-                  <div class="row justify-content-between">
-                    <div class="col-12">
-                      <h3>Job Summary</h3>
-                         <p><b>Employer: <%= job.user.first_name %> <%= job.user.surname %></b></p>
-                         <p><%= job.description %></p>
-                      <p><b>Date:</b> <%= Time.parse(shift.start_time) %></p>
-                      <p><b>Start time:</b> <%= Time.parse(shift&.start_time)&.strftime("%k:%M") %></p>
-                      <p><b>End time:</b> <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                      <p><b>Hourly Rate:</b> <%= humanized_money_with_symbol(shift.price) %></p>
-                      <p><b>Location:</b> <%= shift.job.location %></p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          <% end %>
-
-
-
+        
           <!--Submit Code-->
           <div class="hidden col-sm-12 message-submission">
             <div id="applyForm" class="modal-body">
               <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
-              <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
+              <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
+
                 <%= f.input :content, label_html: { class: "content-label" } %>
                 <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
               <% end %>
