@@ -1,0 +1,9 @@
+<% listed_jobs_number = current_user.jobs.where({done: nil}).count %>
+
+<div class="card m-2 p-3">
+  <div class="d-flex justify-content-between">
+    <h4><%= listed_jobs_number %> Listed Jobs</h4>
+    <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
+  </div>
+  <h4>TODO applications</h4>
+</div>
