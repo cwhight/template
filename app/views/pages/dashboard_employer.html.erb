@@ -21,13 +21,7 @@
     </li>
 
     <li class="dashboard-selector"  data-selector="reviews">
-      <% reviews_number = 0 %>
-      <% current_user.jobs.each do |job| %>
-        <% job.shifts.each do |shift| %>
-          <% reviews_number += shift.reviews.count.to_i %>
-        <% end %>
-      <% end %>
-      <a href="#">Reviews ( <%= reviews_number %> )</a>
+      <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
     </li>
    </ul>
 
