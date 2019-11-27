@@ -19,7 +19,7 @@
             <% unless shift.user || shift.start_time < DateTime.now %>
               <hr>
             <!--Submit Code-->
-              <div class="hidden col-sm-12 message-submission">
+              <div class="col-sm-12 message-submission">
                 <div id="applyForm" class="modal-body">
                   <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
                   <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
