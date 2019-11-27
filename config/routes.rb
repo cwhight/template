@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
+  patch '/shifts/close', to: 'shifts#close_shifts', as: :close_shifts
+
   get 'jobs/:id/close', to: 'jobs#close', as: :job_close
 
   resources :shifts, only: :show
