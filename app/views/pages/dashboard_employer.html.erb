@@ -7,7 +7,8 @@
     </li>
 
     <li class="dashboard-selector" data-selector="listed-jobs">
-      <a href="#">Listed Jobs</a>
+      <% listed_jobs = current_user.jobs.where({done: nil}) %>
+      <a href="#">Listed Jobs ( <%= listed_jobs.count %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="pending-requests">
@@ -15,11 +16,12 @@
     </li>
 
     <li class="dashboard-selector"  data-selector="closed-jobs">
-      <a href="#">Closed Jobs</a>
+      <% closed_jobs = current_user.jobs.where({done: true}) %>
+      <a href="#">Closed Jobs ( <%= closed_jobs.count %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="reviews">
-      <a href="#">Reviews</a>
+      <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
     </li>
    </ul>
 
@@ -27,14 +29,14 @@
   </nav>
   <div class="container" id="content">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
 
           <button type="button" id="sidebarCollapse" class="btn btn-ghost">
               <i class="fas fa-align-left"></i>
               <span></span>
           </button>
-
+      <%= link_to 'refresh shifts', close_shifts_path, class: "btn btn-flat", method: :patch %>
       </div>
     </nav>
     <h1 class="py-3">Welcome to your dashboard, <%= @employer.first_name %>.</h1>

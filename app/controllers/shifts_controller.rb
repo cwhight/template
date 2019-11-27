@@ -36,6 +36,12 @@ class ShiftsController < ApplicationController
     end
   end
 
+  def close_shifts
+    CloseShiftsJob.perform_later
+    authorize Shift
+    redirect_to dashboard_employer_path(current_user)
+  end
+
   def destroy
     @shift.destroy
     redirect_to job_path(@shift.job)

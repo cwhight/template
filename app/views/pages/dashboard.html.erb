@@ -7,11 +7,18 @@
     </li>
 
     <li class="dashboard-selector" data-selector="upcoming-jobs">
-      <a href="#">Upcoming Jobs</a>
+      <% upcoming_jobs = current_user.shifts.where({completed: nil}) %>
+      <a href="#">Upcoming Jobs ( <%= upcoming_jobs.count %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="pending-requests">
-      <a href="#">Pending Requests</a>
+      <% pending_requests = 0 %>
+      <% current_user.requests.each do |request| %>
+        <% unless request.shift.user %>
+          <% pending_requests += 1 %>
+        <% end %>
+      <% end %>
+      <a href="#">Pending Requests ( <%= pending_requests %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="job-history">
@@ -19,7 +26,7 @@
     </li>
 
     <li class="dashboard-selector"  data-selector="reviews">
-      <a href="#">Reviews</a>
+      <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
     </li>
    </ul>
 

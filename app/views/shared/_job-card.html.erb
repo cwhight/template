@@ -4,15 +4,21 @@
     <div class="job_card_header">
       <h5 class="d-inline card-jobtitle"><%= job.title %></h5>
       <%= cl_image_tag job.user.photo.key, class: "avatar d-inline float-right", crop: :fill if job.user.photo.attached? %>
+      <div class="my-2 card-text">
+        <%= job.summary %>
+      </div>
       <div class="my-2 card-location">
         <%= job.location %>
       </div>
     </div>
-    <div class="my-2 card-text">
-      <%= job.summary %>
+    <div class="sectors">
+      <% job.sectors.each do |sector| %>
+        <p class="btn btn-show"><%= sector.title %></p>
+      <% end %>
     </div>
-    <div>
+    <div class="d-flex justify-content-between">
       <p><%= "#{num_shifts} shift#{num_shifts == 1 ? "" : "s"} available" %></p>
+      <button class="btn btn-ghost" data-toggle="modal" data-target="#showJob<%=job.id%>">Details</button>
     </div>
 
 
