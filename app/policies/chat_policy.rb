@@ -10,8 +10,6 @@ class ChatPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    record.request.user == user || record.request.shift.job.user == user
   end
-
-
 end

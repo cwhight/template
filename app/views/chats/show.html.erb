@@ -16,9 +16,9 @@
       <% end %>
     </div>
     <script>
-      var channel = pusher.subscribe('chat-channel');
+      var channel = pusher.subscribe('message-channel');
       channel.bind('new-message', function(data) {
-          let message = data.message;
+          let message = data.content;
           var div = document.getElementById('chat_section');
           div.innerHTML += `<p> ${message} </p>`;
       });

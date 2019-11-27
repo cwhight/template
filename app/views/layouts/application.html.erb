@@ -9,6 +9,14 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,400,500,700&display=swap" rel="stylesheet">
+
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script>
+      var pusher = new Pusher('PUSHER_APP_KEY', {
+      cluster: 'eu',
+      encrypted: true
+    });
+    </script>
   </head>
 
   <body>
@@ -24,12 +32,6 @@
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-    <script>
-      var pusher = new Pusher('PUSHER_APP_KEY', {
-      cluster: 'eu',
-      encrypted: true
-    });
-    </script>
+
   </body>
 </html>
