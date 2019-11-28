@@ -10,7 +10,7 @@
     <% unless current_user %>
       <div id="signup">
         <a href="/users/sign_in" class="btn btn-secondary">Sign In </a>
-        <a href="/users/sign_up" class="btn btn-secondary">Sign Up</a>
+        <a href="/users/sign_up" class="btn btn-secondary"  data-toggle="modal" data-target="#modalContactForm">Sign Up</a>
       </div>
     <% end %>
     <div class="landing-card">
@@ -56,3 +56,13 @@
     <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
   </div>
 </div>
+
+<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog signup-modal-master" role="document">
+    <div class="modal-content signup-modal">
+      <%= render 'devise/registrations/new' %>
+    </div>
+  </div>
+</div>
+
