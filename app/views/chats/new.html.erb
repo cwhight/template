@@ -1,0 +1,10 @@
+<h1>hello</h1>
+<div class="container">
+  <div class="top">
+    <%= simple_form_for [@chat, @message], chat_messages_path(@chat.id), local: true  do |f| %>
+      <%= f.label :message %>
+      <%= f.text_field :message %>
+      <%= f.button :submit, "Send", class: "btn btn-flat" %>
+    <% end %>
+  </div>
+</div>

@@ -24,9 +24,8 @@
       <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
       <%= simple_form_for [job, @request], url: job_shift_requests_path(job, shift) do |f| %>
         <%= f.input :content, label_html: { class: "content-label" } %>
-        <%= f.button :submit, "Apply", class: "btn btn-ghost", id: "employee-apply-sweetalert" %>
+        <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
       <% end %>
     </div>
   </div>
 </div>
-

@@ -21,16 +21,22 @@ Rails.application.routes.draw do
 
   resources :shifts, only: :show
 
+
   post 'shifts/:shift_id/reviews', to: 'reviews#create', as: :shift_reviews
 
   get '/dashboard', to: 'pages#dashboard'
 
   get '/dashboard_employer', to: 'pages#dashboard_employer'
 
+  resources :chats, except: :create do
+    resources :messages
+  end
+
   resources :users, only: [:edit, :update]
 
   resources :requests, only: [:show] do
     patch 'requests/:id/accept_request', to: 'shifts#accept_request', as: 'accept_request'
+    resources :chats, only: :create
   end
 
   authenticate :user, lambda { |u| u.admin } do
