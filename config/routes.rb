@@ -5,10 +5,15 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :jobs do
     resources :shifts, except: :show do
+      resources :orders, only: [:create]
       resources :requests, except: [:show]
       get 'requests/confirmation', to: 'requests#confirmation'
     end
   end
+  resources :orders, only: [:show] do
+    resources :payments, only: :new
+  end
+
 
   patch '/shifts/close', to: 'shifts#close_shifts', as: :close_shifts
 
@@ -37,9 +42,6 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
-
-
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
