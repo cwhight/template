@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
   def create
     shift = Shift.find(params[:shift_id])
-    order = Order.create!(shift: shift, shift_sku: shift.title, amount: shift.price, state: 'pending', user: current_user)
+    order = Order.create!(shift: shift, shift_sku: shift.title, amount: (shift.total_pay * 100).to_i, state: 'pending', user: current_user)
     authorize order
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
         name: shift.title,
-        amount: shift.price_cents,
+        amount: (shift.total_pay * 100).to_i,
         currency: 'gbp',
         quantity: 1
       }],

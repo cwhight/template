@@ -7,6 +7,8 @@ MoneyRails.configure do |config|
   # To set the default currency
   #
   config.default_currency = :gbp
+  config.no_cents_if_whole = false
+  config.default_format = { no_cents_if_whole: false }
 
   # Set default bank object
   #
@@ -80,7 +82,7 @@ MoneyRails.configure do |config|
   # Example:
   #
   # config.default_format = {
-  #   no_cents_if_whole: nil,
+  #   no_cents_if_whole: false,
   #   symbol: nil,
   #   sign_before_symbol: nil
   # }

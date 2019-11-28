@@ -9,7 +9,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-ActiveRecord::Schema.define(version: 2019_11_28_105206) do
+
+ActiveRecord::Schema.define(version: 2019_11_28_145600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +73,16 @@ ActiveRecord::Schema.define(version: 2019_11_28_105206) do
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "state"
     t.string "shift_sku"
@@ -83,16 +94,6 @@ ActiveRecord::Schema.define(version: 2019_11_28_105206) do
     t.datetime "updated_at", null: false
     t.index ["shift_id"], name: "index_orders_on_shift_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-  
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.bigint "chat_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["chat_id"], name: "index_messages_on_chat_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|
@@ -143,6 +144,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_105206) do
     t.integer "price_cents", default: 0, null: false
     t.string "start_time"
     t.string "end_time"
+    t.float "total_pay"
     t.index ["job_id"], name: "index_shifts_on_job_id"
     t.index ["user_id"], name: "index_shifts_on_user_id"
   end
@@ -171,12 +173,10 @@ ActiveRecord::Schema.define(version: 2019_11_28_105206) do
   add_foreign_key "applications", "users"
   add_foreign_key "chats", "requests"
   add_foreign_key "jobs", "users"
-
-  add_foreign_key "orders", "shifts"
-  add_foreign_key "orders", "users"
-
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "shifts"
+  add_foreign_key "orders", "users"
   add_foreign_key "requests", "shifts"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "shifts"
