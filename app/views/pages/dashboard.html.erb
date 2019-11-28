@@ -43,7 +43,7 @@
 
       </div>
     </nav>
-    <h1 class="py-3 d-flex justify-content-center">Dashboard</h1>
+    <h1 class="py-3 d-flex justify-content-center">Welcome to your dashboard, <%= current_user.first_name %>!</h1>
     <div class="selector py-3">
 
          <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
@@ -64,7 +64,7 @@
           </div>
         </div>
 
-        <div id="upcoming-jobs" data-target="upcoming-jobs" class="d-none dashboard-card">
+        <div id="upcoming-jobs" data-target="upcoming-jobs" class="dashboard-card col-12 col-md-6 offset-md-3">
           <h4>Upcoming Jobs</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time >= DateTime.now  %>
@@ -74,7 +74,7 @@
           <% end %>
         </div>
 
-        <div id="pending-requests" data-target="pending-requests" class="d-none dashboard-card">
+        <div id="pending-requests" data-target="pending-requests" class="col-12 col-md-6 offset-md-3 dashboard-card">
           <h4>Pending Requests</h4>
           <% current_user.requests.each do |request|  %>
           <% if request.chat %>
@@ -86,7 +86,7 @@
           <% end %>
         </div>
 
-        <div id="job-history" data-target="job-history" class="d-none dashboard-card">
+        <div id="job-history" data-target="job-history" class="col-12 col-md-6 offset-md-3 dashboard-card">
           <h4>Job History</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time < DateTime.now  %>
@@ -96,7 +96,7 @@
           <% end %>
         </div>
 
-        <div id="reviews" data-target="reviews" class="d-none dashboard-card">
+        <div id="reviews" data-target="reviews" class="col-12 col-md-6 offset-md-3 dashboard-card">
           <%= render 'shared/view-reviews', user: current_user %>
         </div>
 
