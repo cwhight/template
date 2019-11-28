@@ -1,0 +1,31 @@
+.animation-container {
+  position: relative;
+  height: 500px;
+}
+
+.animation-parent-1  {
+  /* overall animation container */
+  height: 500px;
+  overflow: hidden;
+  transition-property: height;
+  transition-duration: 1s;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.animation-parent-3  {
+  /* animated, "folded" block */
+  height: 56px;
+  transition-property: all;
+  transition-duration: 1s;
+  transform: rotateX(-90deg);
+  transform-origin: top;
+}
+
+.animation-container:hover .animation-parent-1 {
+  height: 2000px;
+}
+
+.animation-container:hover .animation-parent-3 {
+  height: 2000px;
+}
