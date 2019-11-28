@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  has_many :chats
 
   def edit
     @user = User.find(params[:id])
