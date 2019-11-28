@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     @message = Message.new
     authorize @chat
+    mark_as_read(@chat)
   end
 
   def new
@@ -23,10 +24,10 @@ class ChatsController < ApplicationController
     if @chat.save
       redirect_to chat_path(@chat)
     end
-    # Pusher.trigger('chat-channel','new-chat', {
-    #   comment: @chat.message
-    # })
-    # redirect_to chats_path
+  end
+
+  def mark_as_read(chat)
+    chat.messages.select {|message| message.user == current_user }.each {|message| message.update(read: true)}
   end
 
   private

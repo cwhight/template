@@ -23,6 +23,15 @@
     <li class="dashboard-selector"  data-selector="reviews">
       <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
     </li>
+    <% unread_messages = 0 %>
+    <% chats = current_user.chats %>
+    <% chats.each do |chat| %>
+      <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
+    <% end %>
+
+    <li class="dashboard-selector"  data-selector="messages">
+      <a href="#">Messages ( <%= unread_messages %> )</a>
+    </li>
    </ul>
 
 
@@ -72,6 +81,11 @@
           <%= render 'shared/view-reviews', user: current_user %>
         </div>
 
+        <div id="messages" data-target="messages" class="d-none dashboard-card">
+          <% chats.each do |chat|%>
+          <%= link_to "Open", chat_path(chat) %>
+          <% end %>
+        </div>
 
 
     </div>
