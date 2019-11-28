@@ -27,7 +27,7 @@
           </div>
           <div class="d-inline mx-3">
             <% unless current_user %>
-              <p id="search-box-text-bottom"><a href="/users/sign_in" id="sign-in" target="/users/sign_up">Sign up here</a> to apply for jobs.</p>
+              <p id="search-box-text-bottom"><a href="#" data-toggle="modal" data-target="#modalContactForm">Sign up here</a> to apply for jobs.</p>
             <% else %>
               <p id="search-box-text-bottom"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p>
             <% end %>

@@ -27,11 +27,20 @@
         <% end %>
         <% unless current_user %>
           <%= link_to 'Sign in', new_user_session_path, class: "dropdown-item" %>
-          <%= link_to 'Sign up', new_user_registration_path, class: "dropdown-item" %>
+          <%= link_to 'Sign Up', "#", class: "dropdown-item", data: {toggle: "modal", target: "#modalContactForm"} %>
         <% end %>
         </div>
       </li>
     </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog signup-modal-master" role="document">
+    <div class="modal-content signup-modal">
+      <%= render 'devise/registrations/new' %>
+    </div>
   </div>
 </div>
 
