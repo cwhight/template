@@ -3,7 +3,7 @@
 
 <div class="modal fade" id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content col-12 col-md-8 offset-md-2 card shadow-none">
       <div class="modal-header job-summary-header">
         <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title}" %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -20,9 +20,9 @@
               <p>Location: <%= job.location %></p>
               <p>Company: <%= job.summary %></p>
               <p>Brief: <%= job.description %></p>
-              <div class="btn-group">
+              <div class="btn-group dropright">
                 <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
-                <div class="border-bottom dropdown-toggle btn btn-secondary btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="border-bottom dropdown-toggle btn btn-flat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   View <%= num_shifts %> Available Shifts
                 </div>
                 <div class="dropdown-menu">

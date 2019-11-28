@@ -47,7 +47,8 @@
     </div>
     <div>
       <% @jobs.each do |job|%>
-        <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+        <% num_shifts = 0 %>
+        <% num_shifts = job.shifts.where({completed: nil}).length  %>
         <% unless num_shifts <= 0 %>
           <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
         <% end %>
