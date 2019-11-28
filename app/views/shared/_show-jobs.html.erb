@@ -13,43 +13,46 @@
 
       <div class="modal-body">
         <div class="container">
-          <h1><%= job.title %></h1>
-          <p>Location: <%= job.location %></p>
-          <p>Company: <%= job.summary %></p>
-          <p>Brief: <%= job.description %></p>
-          <div class="btn-group">
-            <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
-            <div style="width: 100%" class="border-bottom dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              View <%= num_shifts %> Available Shifts
-            </div>
-            <div class="dropdown-menu">
+          <div class="row">
+            <div class="col-12">
 
-              <% job.shifts.each do |shift| %>
-                <% unless shift.user || shift.completed %>
+              <h1><%= job.title %></h1>
+              <p>Location: <%= job.location %></p>
+              <p>Company: <%= job.summary %></p>
+              <p>Brief: <%= job.description %></p>
+              <div class="btn-group">
+                <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
+                <div class="border-bottom dropdown-toggle btn btn-secondary btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  View <%= num_shifts %> Available Shifts
+                </div>
+                <div class="dropdown-menu">
 
-                <!--Submit Code-->
-                  <div class="dropdown-item col-sm-12 message-submission">
-                      <div class="px-2 pt-1 applyButton border-bottom" >
-                        <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %> </p>
-                        <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                        <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+                  <% job.shifts.each do |shift| %>
+                    <% unless shift.user || shift.completed %>
+
+                    <!--Submit Code-->
+                      <div class="dropdown-item message-submission">
+                          <div class="shift-dropdown p-2 border-bottom d-flex justify-content-between" >
+                            <div class="p-3">
+                              <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %> </p>
+                              <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+                            </div>
+                            <div class="p-3">
+                              <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                            </div>
+                            <div class="p-3">
+                              <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
+                                <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
+                              <% end %>
+                            </div>
+                          </div>
                       </div>
-                    <div id="applyForm" class="m-3 hidden">
-
-                      <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
-                      <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
-
-                        <%= f.input :content, label_html: { class: "content-label" } %>
-                        <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
-                      <% end %>
-                      <div class="mt-3 applyBackButton btn btn-ghost">Back</div>
-                    </div>
-
-                  </div>
 
 
-                <% end %>
-              <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
 

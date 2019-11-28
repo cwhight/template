@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
   def confirmation
     @shift = Shift.find(params[:shift_id])
     @job = Job.find(params[:job_id])
-    @request = Request.new(content: params[:request][:content])
+    @request = Request.new
     authorize @request
   end
 
