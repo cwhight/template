@@ -14,7 +14,9 @@
       <div class="modal-body">
         <div class="container">
           <h1><%= job.title %></h1>
-          <p><%= job.summary %></p>
+          <p>Location: <%= job.location %></p>
+          <p>Company: <%= job.summary %></p>
+          <p>Brief: <%= job.description %></p>
           <div class="btn-group">
             <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
             <div style="width: 100%" class="border-bottom dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,11 +29,12 @@
 
                 <!--Submit Code-->
                   <div class="dropdown-item col-sm-12 message-submission">
-                    <div class="p-3 d-flex applyButton justify-content-between" >
-                      <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                      <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
-                    </div>
-                    <div id="applyForm" class="my-3 hidden">
+                      <div class="px-2 pt-1 applyButton border-bottom" >
+                        <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %> </p>
+                        <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                        <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+                      </div>
+                    <div id="applyForm" class="m-3 hidden">
 
                       <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
                       <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
@@ -39,9 +42,7 @@
                         <%= f.input :content, label_html: { class: "content-label" } %>
                         <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
                       <% end %>
-                      <div class="mt-3 applyBackButton btn btn-ghost">
-                        Back
-                      </div>
+                      <div class="mt-3 applyBackButton btn btn-ghost">Back</div>
                     </div>
 
                   </div>
@@ -51,8 +52,6 @@
               <% end %>
             </div>
           </div>
-        </div>
-
 
         </div>
       </div>
