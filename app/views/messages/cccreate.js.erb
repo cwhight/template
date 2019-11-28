@@ -1,0 +1,3 @@
+var div = document.getElementById('chat_section');
+          div.innerHTML += `<p> <%=@user%>: <%=@message%></p>
+          <p class="ml-3 p-3 card"><%=@message.content%></p>`;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_164202) do
+ActiveRecord::Schema.define(version: 2019_11_28_124713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,10 @@ ActiveRecord::Schema.define(version: 2019_11_27_164202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "request_id"
+    t.bigint "employer_id"
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_chats_on_employee_id"
+    t.index ["employer_id"], name: "index_chats_on_employer_id"
     t.index ["request_id"], name: "index_chats_on_request_id"
   end
 
@@ -79,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_164202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.boolean "read", default: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -157,6 +162,8 @@ ActiveRecord::Schema.define(version: 2019_11_27_164202) do
   add_foreign_key "applications", "shifts"
   add_foreign_key "applications", "users"
   add_foreign_key "chats", "requests"
+  add_foreign_key "chats", "users", column: "employee_id"
+  add_foreign_key "chats", "users", column: "employer_id"
   add_foreign_key "jobs", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
