@@ -15,32 +15,45 @@
         <div class="container">
           <h1><%= job.title %></h1>
           <p><%= job.summary %></p>
-          <% job.shifts.each do |shift| %>
-            <% unless shift.user || shift.start_time < DateTime.now %>
-            <%= render 'shifts/shift-card-employee', shift: shift %>
-            <!--Submit Code-->
-              <div class="col-sm-12 message-submission">
+          <div class="btn-group">
+            <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
+            <div style="width: 100%" class="border-bottom dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              View <%= num_shifts %> Available Shifts
+            </div>
+            <div class="dropdown-menu">
 
-                <div class="my-2 applyButton btn btn-ghost">
-                  Apply for this Shift
-                </div>
-                <div id="applyForm" class="my-3 hidden">
+              <% job.shifts.each do |shift| %>
+                <% unless shift.user || shift.completed %>
 
-                  <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
-                  <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
+                <!--Submit Code-->
+                  <div class="dropdown-item col-sm-12 message-submission">
+                    <div class="p-3 d-flex applyButton justify-content-between" >
+                      <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                      <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
+<!--                       <div class="my-2 applyButton btn btn-ghost">
+                        Apply for this Shift
+                      </div> -->
+                    </div>
+                    <div id="applyForm" class="my-3 hidden">
 
-                    <%= f.input :content, label_html: { class: "content-label" } %>
-                    <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
-                  <% end %>
-                  <div class="mt-3 applyBackButton btn btn-ghost">
-                    Back
+                      <h5>Submit your message to <%= job.user.first_name %> <%= job.user.surname %></h5>
+                      <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
+
+                        <%= f.input :content, label_html: { class: "content-label" } %>
+                        <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
+                      <% end %>
+                      <div class="mt-3 applyBackButton btn btn-ghost">
+                        Back
+                      </div>
+                    </div>
+
                   </div>
-                </div>
-              </div>
 
 
-            <% end %>
-          <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         </div>
 
       </div>
