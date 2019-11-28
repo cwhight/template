@@ -15,6 +15,10 @@ class RequestsController < ApplicationController
     @shift = Shift.find(params[:shift_id])
     @job = Job.find(params[:job_id])
     @request = Request.new(content: params[:request][:content])
+    @markers = [{
+      lat: @job.latitude,
+      lng: @job.longitude
+    }]
     authorize @request
   end
 
