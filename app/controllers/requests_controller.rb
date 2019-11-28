@@ -23,6 +23,7 @@ class RequestsController < ApplicationController
     @request.user = current_user
     @request.shift = Shift.find(params[:shift_id])
     if @request.save
+      sleep 3
       redirect_to dashboard_path(current_user)
     else
       render :new
