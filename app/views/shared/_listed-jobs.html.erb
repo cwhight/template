@@ -19,9 +19,11 @@
         <% if request_number == 0 %>
           <p>No applications</p>
         <% elsif request_number == 1 %>
-          <p><%= request_number %> application</p>
+          <%= link_to "#{request_number} application", job_path(job), class: "green-text" %>
+        <% elsif request_number < 4 %>
+          <%= link_to "#{request_number} applications", job_path(job), class: "orange-text" %>
         <% else %>
-          <p><%= request_number %> applications</p>
+          <%= link_to "#{request_number} applications", job_path(job), class: "red-text" %>
         <% end %>
       </div>
     <% end %>
