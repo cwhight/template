@@ -14,26 +14,28 @@ class ShiftsController < ApplicationController
     @shift = Shift.new(shift_params)
     @shift.title = @job.title
     @shift.job = @job
-    authorize @job
-    authorize @shift
+    @shift.total_pay = ((@shift.price.fractional.to_f / 100) * ((Time.parse(@shift.end_time) - Time.parse(@shift.start_time)) / 3600))
     if @shift.save
       redirect_to job_path(@job)
     else
       redirect_to job_path(@job), alert: "Did not save"
     end
+    authorize @job
+    authorize @shift
   end
 
   def edit
   end
 
   def update
-    authorize @shift
     @shift.update(shift_params)
+    @shift.total_pay = ((@shift.price.fractional.to_f / 100) * ((Time.parse(@shift.end_time) - Time.parse(@shift.start_time)) / 3600))
     if @shift.save
       redirect_to job_path(@shift.job)
     else
       render :new
     end
+    authorize @shift
   end
 
   def close_shifts
@@ -63,7 +65,7 @@ class ShiftsController < ApplicationController
   private
 
   def shift_params
-    params.require(:shift).permit(:start_time, :end_time, :job_id, :price)
+    params.require(:shift).permit(:start_time, :end_time, :job_id, :price, :total_pay)
   end
 
   def set_shift
