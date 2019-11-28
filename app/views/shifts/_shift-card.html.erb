@@ -37,10 +37,15 @@
               <% end %>
             </div>
             <div>
-              <%= form_tag job_shift_orders_path(@job, shift) do %>
-                <%= hidden_field_tag 'shift_id', @shift.id %>
-                <%= hidden_field_tag 'job_id', @job.id %>
-                <%= submit_tag 'Pay', class: 'btn btn-flat' %>
+              <% if current_user.orders.where(shift: shift, state: "paid").any? %>
+                <p>You paid 🎉</p>
+              <% else %>
+                <%= form_tag job_shift_orders_path(@job, shift) do %>
+                  <%= hidden_field_tag 'shift_id', @shift.id %>
+                  <%= hidden_field_tag 'job_id', @job.id %>
+                  <%= submit_tag 'Pay', class: 'btn btn-flat' %>
+                <% end %>
+
               <% end %>
             </div>
           <% end %>
