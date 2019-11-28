@@ -1,1 +1,43 @@
-<h1>New Application</h1>
+<div class="container confirmation-page">
+  <h2><i class="fas fa-arrow-right"></i> Your application for <%= @job.title %> at <%= @job.summary %></h2><br>
+  <div class="row">
+    <div class="col-sm-6">
+      <div>
+        <%= render '/shared/profile-card', user: current_user, profile: true %>
+      </div>
+      <div
+        id="map"
+        style="
+        display: block;
+        height: 40vh;
+        width: 100%;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        class="card"
+        >
+      </div>
+    </div>
+
+      <div class="card col-sm-6 job-summary">
+        <div class="row justify-content-between">
+          <div class="col-12 summary-text">
+            <h3>Job Summary</h3>
+            <p><b>Hiring Manager:</b> <%= @job.user.first_name %> <%= @job.user.surname %></p>
+            <p><%= @job.description %></p>
+            <p><b>Job Title: </b><%= @job.title %></p>
+            <p><b>Location: </b><%= @shift.job.location %></p>
+            <p><b>Shift Available: </b><%= @shift.start_time %> - <%= @shift.end_time %></p>
+            <p><b>Hourly Rate: </b><%= humanized_money_with_symbol(@shift.price)%></p>
+            <div id="applyForm" class="col-12 modal-body message-submission">
+              <h5>Submit your message to <%= @job.user.first_name %></h5>
+              <%= simple_form_for  [@job, @request], url: job_shift_requests_path(@job, @shift) do |f| %>
+                <%= f.input :content, label_html: { class: "content-label" }, input_html: { class: "confirm-page-box" } %>
+                <%= f.button :submit, "Send Application", class: "btn btn-ghost", id: "employee-apply-sweetalert" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

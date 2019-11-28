@@ -41,9 +41,7 @@
                               <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
                             </div>
                             <div class="p-3">
-                              <%= simple_form_for [job, @request], url: job_shift_requests_confirmation_path(job, shift), method: :get do |f| %>
-                                <%= f.button :submit, "Apply", class: "btn btn-ghost" %>
-                              <% end %>
+                              <%= link_to "Apply", new_job_shift_request_path(job, shift), class: "btn btn-ghost" %>
                             </div>
                           </div>
                       </div>
