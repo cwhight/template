@@ -1,15 +1,16 @@
 <div class="card p-3">
 
-  <div class="d-flex p-2 justify-content-between">
+  <div class="p-2 justify-content-between">
+
     <div>
-      <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-    </div>
-    <div>
-      <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
-      <p><b>Location:</b> <%= shift.job.location %></p>
+      <h4><%= shift.job.title %> at <%= shift.job.summary %></h4>
+      <p><%= shift.job.location %></p>
+      <h6><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></h6>
+      <h6>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></h6>
       <% if shift.end_time < DateTime.now && shift.user == current_user %>
         <%= render 'shared/review', shift: shift, review_target: shift.job.user %>
       <% end %>
+
 
     </div>
   </div>

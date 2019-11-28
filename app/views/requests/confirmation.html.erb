@@ -21,9 +21,17 @@
               <h5>Submit your message to <%= @job.user.first_name %> <%= @job.user.surname %></h5>
               <%= simple_form_for  [@job, @request], url: job_shift_requests_path(@job, @shift) do |f| %>
                 <%= f.input :content, label_html: { class: "content-label" }, input_html: { class: "confirm-page-box" } %>
-                <%= f.button :submit, "Send Application", class: "btn btn-ghost" %>
+                <%= f.button :submit, "Send Application", class: "btn btn-ghost", id: "employee-apply-sweetalert" %>
               <% end %>
             </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div
+          id="map"
+          style="
+          display: block;"
+          >
           </div>
         </div>
       </div>

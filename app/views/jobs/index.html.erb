@@ -18,19 +18,19 @@
           </div>
         </div>
         <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%' } %>
-      <% end %>
-      </div>
-    <div>
-      <% @jobs.each do |job|%>
-        <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-        <% unless num_shifts <= 0 %>
-          <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
         <% end %>
-      <% end %>
-      <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+      </div>
+      <div>
+        <% @jobs.each do |job|%>
+          <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+          <% unless num_shifts <= 0 %>
+            <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
+          <% end %>
+        <% end %>
+        <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+      </div>
     </div>
   </div>
-</div>
   <div class="col-5 col-lg-5 d-none d-lg-block d-xl-block">
     <div
       id="map"

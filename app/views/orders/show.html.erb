@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row py-4">
+    <div class="col">
+      <h1>Payment Review #<%= @order.id %> <small><span class="badge badge-primary"><%= @order.state %></span></small></h1>
+      <ul class="list-unstyled">
+        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
+        <li><strong>Employee</strong> <%= @order.shift.first_name %> </li>
+        <li><strong>TOTAL Pay</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

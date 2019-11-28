@@ -7,7 +7,6 @@ const openApply = () => {
   btn.addEventListener("click", (e) => {
     e.currentTarget.nextElementSibling.classList.toggle("hidden")
     e.currentTarget.classList.toggle("hidden")
-    console.log(e)
   });
 });
 };

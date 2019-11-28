@@ -1,25 +1,24 @@
-<div class="">
-  <div class="card p-3 m-2">
+<div class="profile-card card p-3 m-2">
 
-    <h2>Reviews</h2>
-    <% if user.reviews.any? %>
-      <% user.reviews.each do |review| %>
-      <div class="shadow-sm p-3">
+  <h2>Reviews</h2>
+  <% if user.reviews.any? %>
+    <% user.reviews.each do |review| %>
+    <div class="shadow-sm p-3">
+      <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-between">
-          <div class="d-flex justify-content-between">
-            <h4><%= review.title %></h4>
-
-          </div>
-          <h5><span ><% review.score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
+          <h4><%= review.title %></h4>
 
         </div>
-        <p><%= review.shift.job.title %></p>
+        <h5><span ><% review.score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
 
-        <p><%= review.content %></p>
       </div>
-      <% end %>
-    <% else %>
-      <p>No reviews yet</p>
+      <p><%= review.shift.job.title %></p>
+
+      <p><%= review.content %></p>
+    </div>
     <% end %>
-  </div>
+  <% else %>
+    <p>No reviews yet</p>
+  <% end %>
 </div>
+

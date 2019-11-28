@@ -30,9 +30,18 @@
       <% if policy(@job).edit? %>
         <% if shift.user %>
           <% if Time.parse(shift.start_time) < DateTime.now %>
-            <% unless shift.reviews.any? {|review| review.user == shift.user} %>
-              <%= render 'shared/review', shift: shift, review_target: shift.user %>
-            <% end %>
+            <div>
+              <% unless shift.reviews.any? {|review| review.user == shift.user} %>
+                <%= render 'shared/review', shift: shift, review_target: shift.user %>
+              <% end %>
+            </div>
+            <div>
+              <%= form_tag job_shift_orders_path(@job, shift) do %>
+                <%= hidden_field_tag 'shift_id', @shift.id %>
+                <%= hidden_field_tag 'job_id', @job.id %>
+                <%= submit_tag 'Pay', class: 'btn btn-flat' %>
+              <% end %>
+            </div>
           <% end %>
         <% else %>
           <% message = "No Worker assigned Yet" %>

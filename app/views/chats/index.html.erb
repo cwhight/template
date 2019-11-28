@@ -1,0 +1,32 @@
+
+<h1 style="text-align:center">Real-time Comments!</h1>
+<div class="container">
+    <div class="top">
+        <%= form_with scope: :chat, url: chats_path, local: true do |form| %>
+        <div class="form-group">
+            <%= form.label :message %>
+            <%= form.text_field :message %>
+            <%= form.submit %>
+        </div>
+
+        <% end %>
+    </div>
+    <div class="bottom" id="chat_section">
+        <h2>chats</h2>
+        <% @chats.each do |chat| %>
+          <% if chat.user %>
+            <p><%= chat.user.first_name %></p>
+          <% end %>
+            <p><%= chat.message %></p>
+
+        <% end %>
+    </div>
+    <script>
+      var channel = pusher.subscribe('chat-channel');
+      channel.bind('new-chat', function(data) {
+          let message = data.message;
+          var div = document.getElementById('chat_section');
+          div.innerHTML += `<p> ${message} </p>`;
+      });
+    </script>
+</div>

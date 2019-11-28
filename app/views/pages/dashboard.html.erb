@@ -28,6 +28,16 @@
     <li class="dashboard-selector"  data-selector="reviews">
       <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
     </li>
+
+    <% unread_messages = 0 %>
+    <% chats = current_user.employee_chats %>
+    <% chats.each do |chat| %>
+      <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
+    <% end %>
+
+    <li class="dashboard-selector"  data-selector="messages">
+      <a href="#">Messages ( <%= unread_messages %> )</a>
+    </li>
    </ul>
 
 
@@ -43,28 +53,28 @@
 
       </div>
     </nav>
-    <h1 class="py-3 d-flex justify-content-center">Dashboard</h1>
+    <h1 class="py-3 d-flex justify-content-center">Welcome to your dashboard, <%= current_user.first_name %>!</h1>
     <div class="selector py-3">
 
          <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
-          <div class="each-render col-12 col-md-6 offset-md-3">
+          <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
-          <div class="each-render col-12 col-md-6 offset-md-3">
+          <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
           </div>
-          <div class="each-render col-12 col-md-6 offset-md-3">
+          <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'pages/pending-requests', requests: current_user.requests %>
           </div>
-          <div class="each-render col-12 col-md-6 offset-md-3">
+          <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/job-history', shifts: current_user.shifts %>
           </div>
-          <div class="each-render col-12 col-md-6 offset-md-3">
+          <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/view-reviews', user: current_user %>
           </div>
         </div>
 
-        <div id="upcoming-jobs" data-target="upcoming-jobs" class="d-none dashboard-card">
+        <div id="upcoming-jobs" data-target="upcoming-jobs" class="dashboard-card d-none col-12">
           <h4>Upcoming Jobs</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time >= DateTime.now  %>
@@ -74,16 +84,19 @@
           <% end %>
         </div>
 
-        <div id="pending-requests" data-target="pending-requests" class="d-none dashboard-card">
+        <div id="pending-requests" data-target="pending-requests" class="col-12 d-none dashboard-card">
           <h4>Pending Requests</h4>
           <% current_user.requests.each do |request|  %>
+          <% if request.chat %>
+            <%= link_to 'View Messages', chat_path(request.chat), class: "btn btn-flat" %>
+          <% end %>
             <% unless request.shift.user  %>
               <%= render 'shifts/shift-card-employee', shift: request.shift %>
             <% end %>
           <% end %>
         </div>
 
-        <div id="job-history" data-target="job-history" class="d-none dashboard-card">
+        <div id="job-history" data-target="job-history" class="col-12 d-none dashboard-card">
           <h4>Job History</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time < DateTime.now  %>
@@ -93,10 +106,13 @@
           <% end %>
         </div>
 
-        <div id="reviews" data-target="reviews" class="d-none dashboard-card">
+        <div id="reviews" data-target="reviews" class="col-12 d-none dashboard-card">
           <%= render 'shared/view-reviews', user: current_user %>
         </div>
 
+        <div id="messages" data-target="messages" class="d-none dashboard-card">
+          <%= render 'pages/inbox', chats: chats %>
+        </div>
 
     </div>
   </div>
