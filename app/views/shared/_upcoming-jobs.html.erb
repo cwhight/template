@@ -1,20 +1,16 @@
+<div class="card p-3 m-2 profile-card">
 
-<div class="m-2">
+  <h2>Upcoming Jobs</h2>
+  <br>
+  <% shifts.order(:start_time).each do |shift|  %>
+      <% unless shift.completed  %>
 
-  <div class="card p-3">
+        <div class="row justify-content-between m-2">
 
-    <h2>Upcoming Jobs</h2>
-    <br>
-    <% shifts.order(:start_time).each do |shift|  %>
-        <% unless shift.completed  %>
+          <p> <%= shift.job.title %> </p>
+          <%= render 'shifts/shift-card-modal', shift: shift %>
+        </div>
+      <% end %>
 
-          <div class="row justify-content-between m-2">
-
-            <p> <%= shift.job.title %> </p>
-            <%= render 'shifts/shift-card-modal', shift: shift %>
-          </div>
-        <% end %>
-
-    <% end %>
-  </div>
+  <% end %>
 </div>
