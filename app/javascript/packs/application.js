@@ -14,7 +14,7 @@ import { initSweetalert } from '../plugins/init_sweetalert';
 
 initSweetalert('#confirm-job', {
   title: "Done",
-  text: "Your job was successfully posted. You'll recieve applications soon!",
+  text: "Your shift was successfully posted. You'll recieve applications soon!",
   icon: "success",
   buttons: false
 });
