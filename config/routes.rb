@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get '/dashboard_employer', to: 'pages#dashboard_employer'
 
+
   resources :chats, except: :create do
     resources :messages
   end

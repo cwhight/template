@@ -1,0 +1,62 @@
+ <div class="modal-header text-center signup-title">
+    <h4 class="modal-title font-weight-bold "><i class="fas fa-angle-double-right signup-arrow"></i></i> Sign Up</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs sign-up-modal-form">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    placeholder: "Email address",
+                    input_html: { autocomplete: "email" }%>
+        <%= f.input :first_name,
+                    required: true,
+                    placeholder: "First name",
+                    input_html: { autocomplete: "Chris" } %>
+        <%= f.input :surname,
+                    required: true,
+                    placeholder: "Last name",
+                    input_html: { autocomplete: "Williams" } %>
+        <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    placeholder: "Create a Password",
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    required: true,
+                    placeholder: "Re-enter Password",
+                    input_html: { autocomplete: "new-password" } %>
+
+        <%= f.input :dob, :as => :date,
+                      required: true,
+                      :start_year => Date.today.year - 18,
+                      :end_year => Date.today.year - 99,
+                      :month => Date.today.month,
+                      :order => [:day, :month, :year],
+                      :label => "Date of Birth",
+                      :prompt => [] %>
+        <%= f.input :summary, :as => :hidden, :input_html => { :value => "" } %>
+        <%= f.input :photo, :input_html => { :value => :photo } %>
+        <%= f.input :employer,
+                    as: :boolean,
+                    required: true
+                    %>
+
+  </div>
+  <%=f.check_box :terms_of_service,
+                    required: true%>
+  <label for="id1" class="termsandcond"><b>Yes, I understand and agree to the Template Terms of Service, including the User Agreement and Privacy Policy.</b></label>
+  <br>
+  <div class="form-actions btn btn-primary modal-button">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+  <br>
+  <br>
+  <br>
+<% end %>
+
