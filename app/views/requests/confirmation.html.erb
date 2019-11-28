@@ -28,7 +28,7 @@
             <p><b>Shift Available: </b><%= @shift.start_time %> - <%= @shift.end_time %></p>
             <p><b>Hourly Rate: </b><%= humanized_money_with_symbol(@shift.price)%></p>
             <div id="applyForm" class="col-12 modal-body message-submission">
-              <h5>Submit your message to <%= @job.user.first_name %> <%= @job.user.surname %></h5>
+              <h5>Submit your message to <%= @job.user.first_name %></h5>
               <%= simple_form_for  [@job, @request], url: job_shift_requests_path(@job, @shift) do |f| %>
                 <%= f.input :content, label_html: { class: "content-label" }, input_html: { class: "confirm-page-box" } %>
                 <%= f.button :submit, "Send Application", class: "btn btn-ghost", id: "employee-apply-sweetalert" %>
