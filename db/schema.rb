@@ -9,7 +9,10 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+
 ActiveRecord::Schema.define(version: 2019_11_28_124713) do
+
+
 
 
   # These are extensions that must be enabled in order to support this database
@@ -77,6 +80,16 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "state"
     t.string "shift_sku"
@@ -89,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
     t.index ["shift_id"], name: "index_orders_on_shift_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
+
   
   create_table "messages", force: :cascade do |t|
     t.text "content"
@@ -100,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
+
 
   create_table "requests", force: :cascade do |t|
     t.bigint "user_id"
@@ -166,7 +181,6 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
     t.date "dob"
     t.boolean "employer"
     t.text "summary"
-    t.string "stripe_uid"
     t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -179,12 +193,10 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
   add_foreign_key "chats", "users", column: "employee_id"
   add_foreign_key "chats", "users", column: "employer_id"
   add_foreign_key "jobs", "users"
-
-  add_foreign_key "orders", "shifts"
-  add_foreign_key "orders", "users"
-
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "shifts"
+  add_foreign_key "orders", "users"
   add_foreign_key "requests", "shifts"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "shifts"
