@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_11_28_124713) do
 
-
-
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.boolean "read", default: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -102,19 +100,6 @@ ActiveRecord::Schema.define(version: 2019_11_28_124713) do
     t.index ["shift_id"], name: "index_orders_on_shift_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
-
-  
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.bigint "chat_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.boolean "read", default: false
-    t.index ["chat_id"], name: "index_messages_on_chat_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
 
   create_table "requests", force: :cascade do |t|
     t.bigint "user_id"
