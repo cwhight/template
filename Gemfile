@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
 
+gem 'faker'
 gem 'pusher'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'

@@ -1,6 +1,6 @@
 <div class="p-3">
   <h4>Inbox</h4>
-  <% chats.each do |chat|%>
+  <% chats.order(created_at: :desc).each do |chat|%>
     <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
     <div class="card p-3 profile-card d-flex justify-content-between">
       <%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %>
