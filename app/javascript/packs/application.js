@@ -16,12 +16,14 @@ initSweetalert('#confirm-job', {
   title: "Done",
   text: "Your job was successfully posted. You'll recieve applications soon!",
   icon: "success",
+  buttons: false
 });
 
 initSweetalert('#employee-apply-sweetalert', {
   title: "Done",
   text: "Application sent. You'll hear back shortly!",
   icon: "success",
+  buttons: false
 });
 
 initSelect2();

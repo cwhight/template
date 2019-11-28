@@ -53,7 +53,7 @@ class JobsController < ApplicationController
     @job.user = current_user
     authorize @job
     if @job.save
-      sleep 5
+      sleep 3
       redirect_to job_path(@job)
     else
       render :new
