@@ -74,7 +74,7 @@
           </div>
         </div>
 
-        <div id="upcoming-jobs" data-target="upcoming-jobs" class="dashboard-card d-none col-12">
+        <div id="upcoming-jobs" data-target="upcoming-jobs" class="dashboard-card d-none col-12 col-md-8 offset-md-2">
           <h4>Upcoming Jobs</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time >= DateTime.now  %>
@@ -84,7 +84,7 @@
           <% end %>
         </div>
 
-        <div id="pending-requests" data-target="pending-requests" class="col-12 d-none dashboard-card">
+        <div id="pending-requests" data-target="pending-requests" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <h4>Pending Requests</h4>
           <% current_user.requests.each do |request|  %>
           <% if request.chat %>
@@ -96,7 +96,7 @@
           <% end %>
         </div>
 
-        <div id="job-history" data-target="job-history" class="col-12 d-none dashboard-card">
+        <div id="job-history" data-target="job-history" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <h4>Job History</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time < DateTime.now  %>
@@ -106,11 +106,11 @@
           <% end %>
         </div>
 
-        <div id="reviews" data-target="reviews" class="col-12 d-none dashboard-card">
+        <div id="reviews" data-target="reviews" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <%= render 'shared/view-reviews', user: current_user %>
         </div>
 
-        <div id="messages" data-target="messages" class="d-none dashboard-card">
+        <div id="messages" data-target="messages" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <%= render 'pages/inbox', chats: chats %>
         </div>
 
