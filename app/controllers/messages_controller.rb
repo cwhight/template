@@ -8,9 +8,12 @@ class MessagesController < ApplicationController
     @message.user = @user
     authorize @message
     if @message.save
-      Pusher.trigger('message-channel','new-message', {
-        message: @message.content
+      Pusher.trigger('message-channel', 'new-message', {
+        content: @message.content,
+        user: @message.user.first_name,
+        sent: @message.created_at.strftime("%H:%M")
       })
+
       redirect_to chat_path(@chat)
     end
   end
