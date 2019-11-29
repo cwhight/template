@@ -21,6 +21,10 @@
   border-radius: 10px;
 }
 
+.info-window h5 {
+  color: white
+}
+
 .mpa-button {
   background-color: white !important;
 }
@@ -28,3 +32,9 @@
 .mapboxgl-popup-close-button {
   display: none;
 }
+
+.mapboxgl-popup-tip {
+  border-top-color: #2968DA;
+  border-color: #2968DA
+}
+
