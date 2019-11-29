@@ -12,6 +12,10 @@ class RequestPolicy < ApplicationPolicy
     record.shift.job.user == user
   end
 
+  def accept?
+    record.shift.job.user == user
+  end
+
   class Scope < Scope
     def resolve
       scope.all
