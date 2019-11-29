@@ -1,7 +1,7 @@
 <div class="container">
   <h1 style="text-align:center"><%= chat.request.shift.job.summary %> on <%= Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y") %></h1>
   <h3 style="text-align:center"><%= chat.request.shift.job.title %></h1>
-    <div class="card p-3" id="chat_section">
+    <div class="p-3" id="chat_section">
       <% chat.messages.each do |message| %>
       <div class="d-flex justify-content-between flex-column">
         <p class="border-bottom"><%= message.user.first_name %>: <%= message.created_at.strftime("%H:%M") %></p>
