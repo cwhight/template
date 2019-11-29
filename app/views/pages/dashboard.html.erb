@@ -75,7 +75,7 @@
         </div>
 
         <div id="upcoming-jobs" data-target="upcoming-jobs" class="dashboard-card d-none col-12 col-md-8 offset-md-2">
-          <h4>Upcoming Jobs</h4>
+          <h4 class="mx-3">Upcoming Jobs</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time >= DateTime.now  %>
               <%= render 'shifts/shift-card-employee', shift: shift %>
@@ -85,7 +85,7 @@
         </div>
 
         <div id="pending-requests" data-target="pending-requests" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
-          <h4>Pending Requests</h4>
+          <h4 class="mx-3">Pending Requests</h4>
           <% current_user.requests.each do |request|  %>
             <% unless request.shift.user  %>
               <%= render 'shifts/shift-card-employee', shift: request.shift %>
@@ -94,7 +94,7 @@
         </div>
 
         <div id="job-history" data-target="job-history" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
-          <h4>Job History</h4>
+          <h4 class="mx-3">Job History</h4>
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time < DateTime.now  %>
               <%= render 'shifts/shift-card-employee', shift: shift %>
