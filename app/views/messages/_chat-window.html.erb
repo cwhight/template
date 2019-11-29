@@ -1,11 +1,10 @@
 <div class="container">
-  <h1 style="text-align:center"><%= chat.request.shift.job.summary %> on <%= Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y") %></h1>
-  <h3 style="text-align:center"><%= chat.request.shift.job.title %></h1>
+  <h1 style="text-align:center"><%= chat.request.shift.job.title %> on <%= chat.request.shift.start_time %></h1>
     <div class="card p-3" id="chat_section">
       <% chat.messages.each do |message| %>
-      <div class="d-flex justify-content-between flex-column">
-        <p class="border-bottom"><%= message.user.first_name %>: <%= message.created_at.strftime("%H:%M") %></p>
-        <p class="ml-3 p-3 chat-card card"><%= message.content %></p>
+      <div class="d-flex">
+        <p><%= message.user.first_name %>: <%= message.created_at.strftime("%H:%M") %></p>
+        <p class="ml-3 p-3 card"><%= message.content %></p>
       </div>
 
       <% end %>
@@ -22,9 +21,8 @@
       channel.bind('new-message', function(data) {
           let { content, user, sent } = data;
           var div = document.getElementById('chat_section');
-          div.innerHTML += `<div class="d-flex justify-content-between flex-column">
-          <p class="border-bottom"> ${user}: ${sent}</p>
-          <p class="ml-3 p-3 card chat-card">${content}</p></div>`;
+          div.innerHTML += `<p> ${user}: ${sent}</p>
+          <p class="ml-3 p-3 card">${content}</p>`;
       });
     </script>
 </div>
