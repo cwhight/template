@@ -59,7 +59,7 @@ employees = []
 puts "creating random employers"
 
 10.times do
-  user = User.create!(email: Faker::Internet.email, password: "123456", employer: true, first_name: Faker::Name.first_name, surname: Faker::Name.last_name )
+  user = User.create!(dob: "01/01/1982", email: Faker::Internet.email, password: "123456", employer: true, first_name: Faker::Name.first_name, surname: Faker::Name.last_name )
   employers << user
 end
 
@@ -71,7 +71,7 @@ freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", passwo
 puts "Creating employees"
 
 5.times do
- user = User.create!(email: Faker::Internet.email, password: "123456", employer: false, first_name: Faker::Name.first_name, surname: Faker::Name.last_name )
+ user = User.create!(dob: "01/01/1997", email: Faker::Internet.email, password: "123456", employer: false, first_name: Faker::Name.first_name, surname: Faker::Name.last_name )
  employees << user
 end
 
