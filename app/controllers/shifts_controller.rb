@@ -14,7 +14,6 @@ class ShiftsController < ApplicationController
     @shift = Shift.new(shift_params)
     @shift.title = @job.title
     @shift.job = @job
-    @shift.total_pay = ((@shift.price.fractional.to_f / 100) * ((Time.parse(@shift.end_time) - Time.parse(@shift.start_time)) / 3600))
     if @shift.save
       redirect_to job_path(@job)
     else
@@ -29,7 +28,6 @@ class ShiftsController < ApplicationController
 
   def update
     @shift.update(shift_params)
-    @shift.total_pay = ((@shift.price.fractional.to_f / 100) * ((Time.parse(@shift.end_time) - Time.parse(@shift.start_time)) / 3600))
     if @shift.save
       redirect_to job_path(@shift.job)
     else
