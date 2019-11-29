@@ -55,7 +55,7 @@ class ShiftsController < ApplicationController
     @user = @request.user
     @shift.user = @user
     authorize @shift
-    if @shift.save
+    if @shift.save!
       redirect_to job_path(@shift.job)
     else
       redirect_to request_path(@request), notice: "did not save"

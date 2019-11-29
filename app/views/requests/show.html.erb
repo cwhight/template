@@ -12,7 +12,7 @@
 
   <div class="mt-3 d-flex justify-content-between">
 
-    <p><%= link_to "Accept request", request_accept_request_path(@request), method: :patch, class: "btn btn-flat" %></p>
+    <p><%= link_to "Accept request", accept_request_path(@request), method: :patch, class: "btn btn-flat" %></p>
     <p><%= link_to "Back", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
     <%= simple_form_for [@request, @chat], url: request_chats_path(@request), method: :post  do |f| %>
 
