@@ -17,10 +17,10 @@
       <div class="search-form-control form-group col-11" id='landing-page-search'>
         <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
         <div class="form-group form-inline py-3 justify-content-between nowrap">
-          <div class="col-4 col-md-4">
+          <div class="col-5 col-md-5">
             <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
           </div>
-          <div class="col-6 col-md-6">
+          <div class="col-5 col-md-5">
             <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%' } %>
           </div>
           <div>
@@ -29,16 +29,15 @@
             </button>
           </div>
         </div>
-          <div class="d-inline">
-            <% unless current_user %>
-              <p id="search-box-text-bottom"><a href="#" data-toggle="modal" data-target="#modalContactForm">Sign up here</a> to apply for jobs.</p>
-            <% else %>
-              <p id="search-box-text-bottom"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p>
-            <% end %>
-          </div>
+        <div class="d-inline">
+          <% unless current_user %>
+            <p id="search-box-text-bottom" class="m-3"><a href="#" data-toggle="modal" data-target="#modalContactForm">Sign up here</a> to apply for jobs.</p>
+          <% else %>
+            <p id="search-box-text-bottom" class="m-3"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p>
+          <% end %>
         </div>
-        <% end %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
