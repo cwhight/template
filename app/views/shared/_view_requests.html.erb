@@ -1,7 +1,7 @@
 
   <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#show<%=shift.id%>">
     <% request_number = 0 %>
-    <% request_number += shift.requests.count.to_i %>
+    <% request_number += shift.requests.where({completed: nil}).count.to_i %>
     <% if request_number == 0 %>
       <p class="m-0">No applications</p>
     <% elsif request_number == 1 %>
