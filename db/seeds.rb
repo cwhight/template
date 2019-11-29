@@ -128,7 +128,7 @@ puts "Employers created"
 
 puts "Creating Charlie"
 
-User.create!(email: "charlie.whight@gmail.com", password: "123456", employer: false, first_name: "Charlie", surname: "Whight", dob: "01/11/1993" )
+User.create!(email: "raj.panasar@gmail.com", password: "123456", employer: false, first_name: "Raj", surname: "Panasar", dob: "01/11/1953" )
 
 charlie = User.last
 
