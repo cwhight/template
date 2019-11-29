@@ -2,65 +2,64 @@ puts "starting seed"
 
 require 'faker'
 
-addresses = ["28 Manor Road
-London
+addresses = ["28, Manor Road,
+London,
 WC65 1RP",
-"19 Queen Street
-London
+"19, Queen Street,
+London,
 NW04 5GN",
-"64 Mill Road
-London
+"64, Mill Road,
+London,
 EC38 2DV",
-"37 Stanley Road
-London
+"37, Stanley Road,
+London,
 WC93 0EH",
-"9 Grove Road
-London
+"9, Grove Road,
+London,
 SE80 7EU",
-"728 Broadway
-London
+"728, Broadway,
+London,
 N03 9SF",
-"59 Manchester Road
-London
+"59, Manchester Road,
+London,
 SW09 6QY",
-"18 Albert Road
-London
+"18, Albert Road,
+London,
 EC79 6IJ",
-"66 Manor Road
-London
+"66, Manor Road,
+London,
 W58 7HT",
-"1 The Crescent
-London
+"1, The Crescent,
+London,
 E82 9HA",
-"87 The Drive
-London
+"87, The Drive,
+London,
 WC06 4EC",
-"615 Alexander Road
-London
+"615, Alexander Road,
+London,
 SE39 2HT",
-"12 Broadway
-London
+"12, Broadway,
+London,
 WC74 8FG",
-"45 Mill Road
-London
+"45, Mill Road,
+London,
 WC73 6NM",
-"62 St. John’s Road
-London
+"62, St. John’s Road, London,
 SW64 1DC",
-"24 Park Lane
-London
+"24, Park Lane,
+London,
 NW40 6FU",
-"42 Stanley Road
-London
+"42, Stanley Road,
+London,
 WC52 0TZ",
-"66 The Crescent
-London
+"66, The Crescent,
+London,
 N14 9ZX",
-"94 Mill Road
-London
+"94, Mill Road,
+London,
 N02 8WQ",
-"17 Queens Road
-London
+"17, Queens Road,
+London,
 E31 9LO"]
 p addresses.size
 
