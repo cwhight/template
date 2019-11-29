@@ -38,6 +38,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     authorize @request
     @request.user = current_user
+    @request.completed = false
     @request.shift = Shift.find(params[:shift_id])
     if @request.save
       @chat = Chat.new
@@ -62,7 +63,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:title, :content, :shift_id)
+    params.require(:request).permit(:title, :content, :completed, :shift_id)
   end
 
   def set_request

@@ -50,8 +50,10 @@
           <% end %>
         <% else %>
         <% message = "No Worker assigned Yet" %>
-        <%= render 'shared/view_requests', shift: shift %>
-        <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
+        <% if !shift.completed %>
+          <%= render 'shared/view_requests', shift: shift %>
+          <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
+        <% end %>
         <% end %>
       <% else %>
         <%= render 'shared/request', shift: shift %>

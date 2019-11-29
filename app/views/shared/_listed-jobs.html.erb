@@ -13,8 +13,8 @@
       </div>
       <div class="border-bottom">
         <% request_number = 0 %>
-        <% job.shifts.each do |shift| %>
-          <% request_number += shift.requests.count.to_i %>
+        <% job.shifts.where({completed: nil} && {user: nil}).each do |shift| %>
+          <% request_number += shift.requests.where({completed: nil}).count.to_i %>
         <% end %>
         <% if request_number == 0 %>
           <p class="m-0">No applications</p>

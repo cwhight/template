@@ -4,8 +4,9 @@ class CloseShiftsJob < ApplicationJob
   def perform
     # Do something later
     Shift.all.each do |shift|
-      if Time.parse(shift.end_time) < DateTime.now
+      if Time.parse(shift.start_time) < DateTime.now
         shift.update_attribute(:completed, true)
+        shift.requests.each { |request| request.update_attribute(:completed, true) }
       end
     end
   end
