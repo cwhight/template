@@ -54,3 +54,16 @@
   background-color: #D36135;
   color: white;
 }
+
+.btn-paid {
+  background: #FE2908;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 50px;
+  transition: background 0.1s ease;
+}
+
+.btn-paid:hover {
+  background: #FE2908;
+  color: white;
+}
