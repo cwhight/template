@@ -22,26 +22,24 @@
               <p>Brief: <%= job.description %></p>
               <div class="btn-group dropright">
                 <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
-                <div class="border-bottom dropdown-toggle btn btn-flat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-toggle btn btn-flat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   View <%= num_shifts %> Available Shifts
                 </div>
-                <div class="dropdown-menu">
-
+                <div class="dropdown-menu scrollable-menu" role="menu">
+                  <div style="max-height: 337px; overflow: scroll;">
                   <% job.shifts.each do |shift| %>
                     <% unless shift.user || shift.completed %>
 
                     <!--Submit Code-->
                       <div class="dropdown-item message-submission">
-                          <div class="shift-dropdown p-2 border-bottom d-flex justify-content-between" >
-                            <div class="p-3">
-                              <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %> </p>
-                              <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
-                            </div>
-                            <div class="p-3">
+                          <div class="shift-dropdown p-2 border-bottom" >
+                            <div class="p-1 d-flex justify-content-between">
+                              <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %></p>
                               <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
                             </div>
-                            <div class="p-3">
-                              <%= link_to "Apply", new_job_shift_request_path(job, shift), class: "btn btn-ghost" %>
+                            <div class="p-1 d-flex justify-content-between">
+                              <p><%= humanized_money_with_symbol(shift.price) %>/h</p>
+                              <%= link_to "Apply", new_job_shift_request_path(job, shift), class: "btn btn-show" %>
                             </div>
                           </div>
                       </div>
@@ -49,6 +47,7 @@
 
                     <% end %>
                   <% end %>
+                  </div>
                 </div>
               </div>
             </div>
