@@ -67,3 +67,18 @@
   background: #FE2908;
   color: white;
 }
+
+.btn-map {
+  background-color: white;
+  color: #D36135;
+  border: 1px solid #D36135;
+  padding: 8px 24px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.btn-map:hover {
+  background-color: #D36135;
+  color: white;
+}
