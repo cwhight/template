@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
         sent: @message.created_at.strftime("%H:%M")
       })
 
-
+      redirect_to chat_path(@chat)
     end
   end
 
