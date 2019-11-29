@@ -26,8 +26,8 @@
                   View <%= num_shifts %> Available Shifts
                 </div>
                 <div class="dropdown-menu scrollable-menu" role="menu">
-                  <div style="max-height: 337px; overflow: scroll;">
-                  <% job.shifts.each do |shift| %>
+                  <div style="max-height: 300px; overflow: scroll;">
+                  <% job.shifts.sort_by { |shift| shift.start_time }.each do |shift| %>
                     <% unless shift.user || shift.completed %>
 
                     <!--Submit Code-->

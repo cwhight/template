@@ -26,7 +26,7 @@
             <p><%= @job.description %></p>
             <p><b>Job Title: </b><%= @job.title %></p>
             <p><b>Location: </b><%= @shift.job.location %></p>
-            <p><b>Shift Available: </b><%= @shift.start_time %> - <%= @shift.end_time %></p>
+            <p><b>Shift Available: </b><%= Time.parse(@shift&.start_time)&.strftime("%e %B") %>, <%= Time.parse(@shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(@shift&.end_time)&.strftime("%k:%M") %></p>
             <p><b>Hourly Rate: </b><%= humanized_money_with_symbol(@shift.price)%></p>
             <div id="applyForm" class="col-12 modal-body message-submission">
               <h5>Submit your message to <%= @job.user.first_name %></h5>
