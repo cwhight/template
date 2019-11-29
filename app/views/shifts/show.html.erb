@@ -1,7 +1,6 @@
 <h1><%= @shift.title %></h1>
 
-<p>Time started: <%= @shift.start_time %></p>
-<p>Time finished: <%= @shift.end_time %></p>
-<p>Time finished: <%= @shift.end_time %></p>
+<p>Time started: <%= Time.parse(@shift.start_time).strftime("%d/%m/%Y") %></p>
+<p>Time finished: <%= Time.parse(@shift.end_time).strftime("%d/%m/%Y") %></p>
 <p>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></p>
 <p>Employer: <%= @shift.job.user.first_name.capitalize %> <%= @shift.job.user.surname.capitalize %></p>

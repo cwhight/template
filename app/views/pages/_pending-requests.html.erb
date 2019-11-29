@@ -7,8 +7,8 @@
     <% unless request.shift.user %>
       <div class="row justify-content-between m-2">
         <p><%= request.shift.job.title %></p>
-        <p><%= request.shift.start_time %></p>
-        <p><%= request.shift.end_time %></p>
+        <p><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %></p>
+        <p><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %></p>
         <%= render 'shifts/shift-card-modal', shift: request.shift %>
       </div>
     <% end %>
