@@ -85,11 +85,21 @@ puts "creating Freddie's jobs"
   i += 1
   # p employees[rand(0..(employees.size - 1))]
   rand(5..10).times do
+    user = employees[rand(0..(employees.size - 1))]
     puts "future shifts"
     start_index = rand(0..2)
     Shift.create!(title: job.title, job: job, price_cents: rand(1000..2500), start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
     shift = Shift.last
-    Request.new(shift: shift, user: employees[rand(0..(employees.size - 1))], content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
+    Request.new(shift: shift, user: user, content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
+         request = Request.last
+      chat = Chat.new(request: request, employee: user, employer: request.shift.job.user)
+
+      chat.save(validate: false)
+      p chat
+      message = Message.new(chat: chat, content: request.content, read: true, user: user )
+      request.update(chat: chat)
+      message.save(validate: false)
+
   end
   puts "creating old shifts"
   rand(4..6).times do
@@ -98,6 +108,15 @@ puts "creating Freddie's jobs"
     Shift.new(user: user, title: job.title, job: job, price_cents: rand(1000..2500), start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*3600, completed: true).save(validate: false)
     shift = Shift.last
     Request.new(shift: shift, user: user , content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
+      request = Request.last
+      chat = Chat.new(request: request, employee: user, employer: request.shift.job.user)
+
+      chat.save(validate: false)
+      p chat
+      message = Message.new(chat: chat, content: request.content, read: true, user: user )
+      request.update(chat: chat)
+      message.save(validate: false)
+
     review_index = rand(0..3)
     Review.create!(title: employee_review_titles[review_index], score: employee_review_scores[review_index], content: employee_review_content[review_index], shift: shift, user: user)
     Review.create!(title: employer_review_titles[review_index], score: employer_review_scores[review_index], content: employer_review_content[review_index], shift: shift, user: job.user)

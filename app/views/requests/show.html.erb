@@ -5,8 +5,7 @@
   <%= render 'shared/profile-card', user: @request.user %>
   <div class="card p-3">
 
-    <p>Message:</p>
-    <p><%= @request.content %></p>
+    <%= render "chats/chat-window", chat: @request.chat %>
   </div>
 
 
