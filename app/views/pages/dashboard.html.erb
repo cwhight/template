@@ -6,11 +6,6 @@
       <a href="#">Profile</a>
     </li>
 
-    <li class="dashboard-selector" data-selector="upcoming-jobs">
-      <% upcoming_jobs = current_user.shifts.where({completed: nil}) %>
-      <a href="#">Upcoming Jobs ( <%= upcoming_jobs.count %> )</a>
-    </li>
-
     <li class="dashboard-selector"  data-selector="pending-requests">
       <% pending_requests = 0 %>
       <% current_user.requests.each do |request| %>
@@ -19,6 +14,11 @@
         <% end %>
       <% end %>
       <a href="#">Pending Requests ( <%= pending_requests %> )</a>
+    </li>
+
+    <li class="dashboard-selector" data-selector="upcoming-jobs">
+      <% upcoming_jobs = current_user.shifts.where({completed: nil}) %>
+      <a href="#">Upcoming Jobs ( <%= upcoming_jobs.count %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="job-history">

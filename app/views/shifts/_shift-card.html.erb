@@ -49,9 +49,9 @@
             </div>
           <% end %>
         <% else %>
-          <% message = "No Worker assigned Yet" %>
-          <%= render 'shared/view_requests', shift: shift %>
-          <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
+        <% message = "No Worker assigned Yet" %>
+        <%= render 'shared/view_requests', shift: shift %>
+        <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
         <% end %>
       <% else %>
         <%= render 'shared/request', shift: shift %>

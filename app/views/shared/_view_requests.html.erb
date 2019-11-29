@@ -1,6 +1,16 @@
 
   <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#show<%=shift.id%>">
-    <%= "View Applications" %>
+    <% request_number = 0 %>
+    <% request_number += shift.requests.count.to_i %>
+    <% if request_number == 0 %>
+      <p class="m-0">No applications</p>
+    <% elsif request_number == 1 %>
+      <p class="green-text m-0"><%= request_number %> application</p>
+    <% elsif request_number < 4 %>
+      <p class="orange-text m-0"><%= request_number %> applications</p>
+    <% else %>
+      <p class="red-text m-0"><%= request_number %> applications</p>
+    <% end %>
   </button>
 
   <div class="modal fade" id="show<%=shift.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
