@@ -14,16 +14,17 @@
       <%= render 'chats/message-box', message: Message.new, chat: chat %>
     </div>
     <script>
+      var div = document.getElementById('chat_section');
+      div.scrollTop = div.scrollHeight
       var channel = pusher.subscribe('<%=chat.id%>-channel');
       channel.bind('new-message', function(data) {
           let { content, user, sent } = data;
-          var div = document.getElementById('chat_section');
           div.innerHTML += `<div class="d-flex justify-content-between flex-column">
           <p class="border-bottom"> ${user}: ${sent}</p>
           <p class="ml-3 p-3 card chat-card">${content}</p></div>`;
           var messageBox = document.getElementById('message-box');
           messageBox.innerHTML = '<%= j render "chats/message-box", chat: chat, message: Message.new %>';
+          div.scrollTop = div.scrollHeight
       });
     </script>
-
 </div>
