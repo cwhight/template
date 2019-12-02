@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
         sender: @message.user.id
       })
     end
+    @chat.update(updated_at: Time.now)
   end
 
   private
