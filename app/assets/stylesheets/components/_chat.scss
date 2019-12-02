@@ -29,11 +29,34 @@ input.form-control.sidebar-form {
   font-size: 0.85rem;
 }
 
-.chat-card {
+.recipient-chat-card {
   background-color: rgba(41,105,218,0.3);
+}
+
+.sender-chat-card {
+  background-color: rgba(41,105,218,0.7);
 }
 
 #chat_section {
   max-height: 60vh;
   overflow: auto;
+}
+
+#message-text {
+  min-width: 100%;
+  max-width: 200px;
+  min-height: 3.5rem;
+  overflow-y: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E7E7E7;
+}
+
+.sender {
+  float: right;
+
+}
+
+.recipient {
+  float: left;
+
 }

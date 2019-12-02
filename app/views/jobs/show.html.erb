@@ -1,62 +1,82 @@
-<div class="container content hello">
-  <div class="d-flex justify-content-between">
-    <div>
-      <div class="py-1 px-2 col-12 col-md-11">
-        <h1><%= @job.title %></h1>
-        <h6>Description:</h6>
-        <p><%= @job.description %></p>
-      </div>
-      <h6>Categories:</h6>
-      <% @job.sectors.each do |sector| %>
-        <div class="row px-3">
-          <p class="btn btn-show"><%= sector.title %></p>
-        </div>
+<div class="wrapper">
+  <nav id="sidebar">
+    <ul class="list-unstyled components">
+      <li>
+        <%= link_to 'Dashboard',current_user.employer ? dashboard_employer_path(@current_user) : dashboard_path %>
+      </li>
+
+      <% current_user.jobs.each do |job| %>
+        <% unless job.done %>
+          <li <%= job.id == @job.id ? 'class=active' : "" %>>
+
+            <%= link_to job.title, job_path(job)  %>
+
+          </li>
+        <% end %>
       <% end %>
+    </ul>
+  </nav>
+
+  <div class="container content hello">
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="py-1 px-2 col-12 col-md-11">
+          <h1><%= @job.title %></h1>
+          <h6>Description:</h6>
+          <p><%= @job.description %></p>
+        </div>
+        <h6>Categories:</h6>
+        <% @job.sectors.each do |sector| %>
+          <div class="row px-3">
+            <p class="btn btn-show"><%= sector.title %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <div>
+        <%= render 'shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
+        <%= render 'shared/modal-form', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>
+      </div>
+
     </div>
 
-    <div>
-      <%= render 'shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
-      <%= render 'shared/modal-form', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>
-    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h2>Upcoming Shifts</h2>
+          <% @job.shifts.order(:start_time).each do |shift| %>
+            <% if  shift.start_time > DateTime.now %>
+              <%= render 'shifts/shift-card', shift: shift %>
+            <% end %>
+          <% end %>
+          <% upcoming_shifts = @job.shifts.where("start_time > '#{DateTime.now}'") %>
+          <% if upcoming_shifts.blank? %>
+            <div class="card col-12 p-3">
+              <p>No shifts created yet</p>
+            </div>
+          <% end %>
+      </div>
 
-  </div>
+      <div class="col-12 col-md-6">
+        <h2>Past Shifts</h2>
 
-  <div class="row">
-    <div class="col-12 col-md-6">
-      <h2>Upcoming Shifts</h2>
-        <% @job.shifts.order(:start_time).each do |shift| %>
-          <% if  shift.start_time > DateTime.now %>
+        <% @job.shifts.order(start_time: :desc).each do |shift| %>
+          <% if  shift.start_time < DateTime.now %>
+
             <%= render 'shifts/shift-card', shift: shift %>
           <% end %>
         <% end %>
-        <% upcoming_shifts = @job.shifts.where("start_time > '#{DateTime.now}'") %>
-        <% if upcoming_shifts.blank? %>
-          <div class="card col-12 p-3">
-            <p>No shifts created yet</p>
-          </div>
-        <% end %>
+        <% past_shifts = @job.shifts.where("start_time < '#{DateTime.now}'") %>
+          <% if past_shifts.blank? %>
+            <div class="card col-12 p-3">
+              <p>No shifts completed yet</p>
+            </div>
+          <% end %>
+      </div>
     </div>
+    <% if policy(@job).edit? %>
+      <%= link_to 'Back', dashboard_employer_path(@job.user), class: 'btn btn-ghost' %>
+      <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-ghost"  %>
+    <% end %>
 
-    <div class="col-12 col-md-6">
-      <h2>Past Shifts</h2>
-
-      <% @job.shifts.order(start_time: :desc).each do |shift| %>
-        <% if  shift.start_time < DateTime.now %>
-
-          <%= render 'shifts/shift-card', shift: shift %>
-        <% end %>
-      <% end %>
-      <% past_shifts = @job.shifts.where("start_time < '#{DateTime.now}'") %>
-        <% if past_shifts.blank? %>
-          <div class="card col-12 p-3">
-            <p>No shifts completed yet</p>
-          </div>
-        <% end %>
-    </div>
   </div>
-  <% if policy(@job).edit? %>
-    <%= link_to 'Back', dashboard_employer_path(@job.user), class: 'btn btn-ghost' %>
-    <%= link_to "Close Job Listing", job_close_path(@job), class: "btn btn-ghost"  %>
-  <% end %>
-
 </div>
