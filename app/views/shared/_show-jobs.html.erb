@@ -20,14 +20,25 @@
               <p>Location: <%= job.location %></p>
               <p>Company: <%= job.summary %></p>
               <p>Brief: <%= job.description %></p>
+              
+              <!-- Dropdown Starts -->
 
               <div class="dropdown">
-                <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
-
-              <div class="dropdown-toggle btn btn-flat collapsible">View <%= num_shifts %> Available Shifts</div>
+                <div class="dropdown-toggle btn btn-flat collapsible">View <%= num_shifts %> Available Shifts</div>
+                  <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}.length  %>
+                  View <%= num_shifts %> Available Shifts
+                </div>
                 <div class="content-collapse">
-                  <% job.shifts.sort_by { |shift| shift.start_time }.each do |shift| %>
-                    <% unless shift.user || shift.completed %>
+                  <% lower_pay = params[:my_range].split(";").first.to_i * 100 %>
+                  <% higher_pay = params[:my_range].split(";").last.to_i * 100 %>
+                  <% job_prices = job.shifts.pluck(:price_cents) %>
+                  <% if job_prices.any? { |p| (p > lower_pay) && (p < higher_pay) } %>
+                    <% good_shifts = job.shifts.select{ |shift| (shift.price_cents > lower_pay) && (shift.price_cents < higher_pay) } %>
+                    <% good_shifts.sort_by { |shift| shift.start_time }.each do |shift| %>
+                      <% unless shift.user || shift.completed %>
+
+
+
                       <% if Time.parse(shift.start_time) > Time.now  %>
                         <div class="dropdown-item message-submission">
                           <div class="p-2 border-bottom">
@@ -41,7 +52,8 @@
                             </div>
                           </div>
                         </div>
-                       <% end %>
+                      <% end %>
+
                     <% end %>
                   <% end %>
 
