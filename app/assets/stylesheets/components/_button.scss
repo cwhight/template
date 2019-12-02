@@ -1,4 +1,8 @@
 
+.btn {
+  font-weight: bold;
+}
+
 .btn-gradient {
   color: white;
   padding: 8px 24px;
@@ -28,8 +32,9 @@
 }
 
 .btn-ghost {
-  color: #D36135;
+  color: #D36135 !important;
   border: 1px solid #D36135;
+  background-color: white;
   padding: 8px 24px;
   border-radius: 50px;
   opacity: 1;
@@ -38,7 +43,7 @@
 
 .btn-ghost:hover {
   background-color: #D36135;
-  color: white;
+  color: white !important;
 }
 
 .btn-show {
@@ -81,4 +86,73 @@
 .btn-map:hover {
   background-color: #D36135;
   color: white;
+}
+
+.btn-sign-up {
+  background-color: #3DCC96;
+  color: #FCF7F8 !important;
+  padding: 8px 24px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+  text-align: center;
+  input {
+    color: #FCF7F8;
+  }
+  &:hover {
+  background-color: white;
+  border: 1px solid #3DCC96;
+  color: #3DCC96 !important;
+  input {
+    color: #3DCC96 !important;
+    }
+  }
+}
+
+.btn-login {
+  color: #A5B3C0 !important;
+  border: 1px solid #A5B3C0;
+  background-color: white;
+  padding: 8px 24px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.btn-login:hover {
+  background-color: #A5B3C0;
+  color: white !important;
+}
+
+.btn-sector {
+  color: #A5B3C0 !important;
+  border: 1px solid #A5B3C0;
+  background-color: white;
+  border-radius: 50px;
+  height: 24px;
+  font-size: 8px;
+}
+
+.btn-search {
+  color: white !important;
+  border: 1px solid #A5B3C0;
+  background-color: #A5B3C0 !important;
+  padding: 8px 24px;
+  border-radius: 50px;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.btn-search:hover {
+  background-color: white !important;
+  color: #A5B3C0 !important;
+}
+
+.btn-modal {
+  margin-top: 15px;
+  margin-bottom: -40px;
+  font-family: Arial;
+  letter-spacing: -0.05em;
+  border-radius: 5px;
+  width: 100%;
 }

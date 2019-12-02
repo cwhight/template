@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row justify-content-between border-bottom">
         <h1 class="px-4">Available Jobs</h1>
-        <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
+        <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
       </div>
       <div>
         <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
@@ -12,7 +12,7 @@
             <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
           </div>
           <div>
-            <button name="button" type="submit" class="btn btn-ghost btn-search " style="height: 42px; width: 128px;">
+            <button name="button" type="submit" class="btn btn-search " style="height: 42px; width: 128px;">
               <i class="fas fa-search"></i> Search
             </button>
           </div>
@@ -29,7 +29,7 @@
             <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
           <% end %>
         <% end %>
-        <%= link_to 'Display all jobs', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+        <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
       </div>
     </div>
   </div>
