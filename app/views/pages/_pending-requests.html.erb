@@ -3,7 +3,7 @@
   <h2>Pending Requests</h2>
   <br>
 
-  <% requests.each do |request| %>
+  <% requests.order(created_at: :asc).each do |request| %>
     <% unless request.shift.user %>
       <div class="row justify-content-between m-2">
         <p><%= request.shift.job.title %></p>
