@@ -27,7 +27,7 @@ class ChatsController < ApplicationController
   end
 
   def mark_as_read(chat)
-    chat.messages.select {|message| message.user == current_user }.each {|message| message.update(read: true)}
+    chat.messages.select {|message| message.user != current_user }.each {|message| message.update(read: true)}
   end
 
   private

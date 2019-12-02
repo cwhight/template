@@ -1,13 +1,34 @@
-<div class="container">
-  <h1 style="text-align:center"><%= chat.request.shift.job.summary %> on <%= Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y") %></h1>
-  <h3 style="text-align:center"><%= chat.request.shift.job.title %></h1>
-    <div class="p-3" id="chat_section">
+<div class="p-3 m-2 card container">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h4 style="text-align:center"><%= chat.request.shift.job.summary %> on <%= Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y") %></h4>
+      <p style="text-align:center"><%= chat.request.shift.job.title %></p>
+    </div>
+    <div>
+      <% if policy(chat.request.shift).accept_request? %>
+        <p><%= link_to "Accept", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3" %></p>
+      <% end %>
+    </div>
+  </div>
+    <div class="row p-3" id="chat_section">
       <% chat.messages.each do |message| %>
-      <div class="d-flex justify-content-between flex-column">
-        <p class="border-bottom"><%= message.user.first_name %>: <%= message.created_at.strftime("%H:%M") %></p>
-        <p class="ml-3 p-3 chat-card card"><%= message.content %></p>
-      </div>
-
+        <div class="col-12">
+          <% if message.user == current_user %>
+            <% sender = "sender"%>
+            <% show_read = message.read ? 'Read' : 'Unread' %>
+          <% else %>
+            <% show_read = "" %>
+            <% sender = "recipient"  %>
+          <% end %>
+          <div class="<%= sender %> d-flex justify-content-between flex-column w-75">
+            <div class="d-flex justify-content-between">
+              <% message.user == current_user ? user = "You" : user = message.user.first_name %>
+              <%= show_read %>
+              <p class="border-bottom"><%= user %>: <%= message.created_at.strftime("%H:%M") %></p>
+            </div>
+            <p class="ml-3 p-3 <%= sender %>-chat-card card"><%= message.content %></p>
+          </div>
+        </div>
       <% end %>
     </div>
     <div class="mt-2" id="message-box">
@@ -18,10 +39,22 @@
       div.scrollTop = div.scrollHeight
       var channel = pusher.subscribe('<%=chat.id%>-channel');
       channel.bind('new-message', function(data) {
-          let { content, user, sent } = data;
-          div.innerHTML += `<div class="d-flex justify-content-between flex-column">
-          <p class="border-bottom"> ${user}: ${sent}</p>
-          <p class="ml-3 p-3 card chat-card">${content}</p></div>`;
+          let { content, user, sent, read, sender } = data;
+          if (sender == <%= current_user.id %>) {
+            var isSender = "sender"
+            var show_read = `<p> ${read}</p>`
+            var user2 = "You"
+          } else {
+            var show_read = ""
+            var isSender = "recipient"
+            var user2 = user
+          }
+          div.innerHTML += `<div class="col-12"><div class="${isSender} w-75 d-flex justify-content-between flex-column">
+          <div class="d-flex justify-content-between">
+          ${show_read}
+          <p class="border-bottom"> ${user2}: ${sent}</p>
+          </div>
+          <p class="ml-3 p-3 card ${isSender}-chat-card">${content}</p></div></div>`;
           var messageBox = document.getElementById('message-box');
           messageBox.innerHTML = '<%= j render "chats/message-box", chat: chat, message: Message.new %>';
           div.scrollTop = div.scrollHeight

@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
     authorize @request
     @chat = @request.chat
     @message = Message.new
+    # mark_as_read(@chat)
   end
 
   def new
