@@ -1,10 +1,13 @@
-<div class="container content">
+<div class="container content sign_up_modal sign_up">
   <h2>Sign up</h2>
-
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
-
     <div class="form-inputs sign-up-modal-form">
+      <%= f.input :employer,
+                  as: :radio_buttons,
+                  collection: ['Yes - I want to hire', "No - I'm looking for a job"],
+                  label: "Are you looking to hire?",
+                  required: true %>
       <%= f.input :email,
                   required: true,
                   autofocus: true,
@@ -38,22 +41,14 @@
                     :prompt => [] %>
       <%= f.input :summary, :as => :hidden, :input_html => { :value => "" } %>
       <%= f.input :photo, :input_html => { :value => :photo } %>
-      <%= f.input :employer,
-                  as: :boolean,
-                  required: true
-                  %>
-
-    </div>
+    <br>
     <%=f.check_box :terms_of_service,
                       required: true%>
     <label for="id1" class="termsandcond"><b>Yes, I understand and agree to the Template Terms of Service, including the User Agreement and Privacy Policy.</b></label>
     <br>
-    <div class="form-actions btn-sign-up">
-      <%= f.button :submit, "Sign up" %>
+    <br>
+    <%= f.button :submit, "Sign up" %>
     </div>
-    <br>
-    <br>
-    <br>
   <% end %>
 </div>
 
