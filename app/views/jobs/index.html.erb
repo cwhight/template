@@ -17,7 +17,9 @@
             </button>
           </div>
         </div>
-        <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
+        <div class="pl-3">
+          <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
+        </div>
         <% end %>
       </div>
       <div>
