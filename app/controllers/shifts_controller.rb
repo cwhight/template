@@ -37,8 +37,14 @@ class ShiftsController < ApplicationController
   end
 
   def close_shifts
-    CloseShiftsJob.perform_later
+    @shifts = Shift.all
     authorize Shift
+    @shifts.each do |shift|
+      if Time.parse(shift.start_time) < DateTime.now
+        shift.update_attribute(:completed, true)
+        shift.requests.each { |request| request.update_attribute(:completed, true) }
+      end
+    end
     redirect_to dashboard_employer_path(current_user)
   end
 

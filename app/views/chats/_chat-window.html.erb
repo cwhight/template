@@ -1,12 +1,12 @@
 <div class="p-3 m-2 card container">
-  <div class="d-flex justify-content-between align-items-center">
+  <div class="border-bottom mb-2 d-flex justify-content-between align-items-center">
     <div>
       <h4 style="text-align:center"><%= chat.request.shift.job.summary %> on <%= Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y") %></h4>
       <p style="text-align:center"><%= chat.request.shift.job.title %></p>
     </div>
     <div>
       <% if policy(chat.request.shift).accept_request? %>
-        <p><%= link_to "Accept", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3" %></p>
+        <p><%= link_to "Accept", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3", data: "Are you sure" %></p>
       <% end %>
     </div>
   </div>
