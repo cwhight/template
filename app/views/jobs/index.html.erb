@@ -18,6 +18,20 @@
           </div>
         </div>
         <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
+        <%= f.input :price_cents, label: "Filter by pay/h", required: false,
+          input_html: { class: 'js-range-slider',
+          type: 'text',
+          name: 'my_range',
+          value: "",
+          'data-type': "double",
+          'data-min': "6",
+          'data-max': "50",
+          'data-from': "5",
+          'data-to': "100",
+          'data-grid': "true",
+          'data-keyboard': "true",
+          'data-skin': "flat"
+        } %>
         <% end %>
       </div>
       <div>
@@ -45,3 +59,4 @@
     </div>
   </div>
 </div>
+
