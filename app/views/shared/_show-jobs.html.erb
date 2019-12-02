@@ -21,8 +21,8 @@
               <p>Company: <%= job.summary %></p>
               <p>Brief: <%= job.description %></p>
               <div class="btn-group dropright">
-                <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user}.length  %>
                 <div class="dropdown-toggle btn btn-flat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}.length  %>
                   View <%= num_shifts %> Available Shifts
                 </div>
                 <div class="dropdown-menu scrollable-menu" role="menu">
@@ -37,9 +37,11 @@
                       <% unless shift.user || shift.completed %>
 
                       <!--Submit Code-->
+                      <% if Time.parse(shift.start_time) > Time.now  %>
                         <div class="dropdown-item message-submission">
                             <div class="shift-dropdown p-2 border-bottom" >
                               <div class="p-1 d-flex justify-content-between">
+
                                 <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %></p>
                                 <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
                               </div>
@@ -49,7 +51,6 @@
                               </div>
                             </div>
                         </div>
-
 
                       <% end %>
                     <% end %>
