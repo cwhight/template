@@ -18,4 +18,11 @@ class Job < ApplicationRecord
                   using: {
                     tsearch: { dictionary: "english" }
                   }
+
+
+  def relevant_shifts(min_price, max_price)
+    return shifts if min_price.nil? || max_price.nil?
+
+    shifts.reject { |shift| (shift.price_cents < min_price) || (shift.price_cents > max_price) }
+  end
 end
