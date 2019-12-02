@@ -26,3 +26,14 @@
 .shift-dropdown {
   min-width: 100%;
 }
+
+.collapsible {
+  cursor: pointer;
+}
+
+.content-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  border-radius: 2px;
+}
