@@ -1,3 +1,9 @@
-var div = document.getElementById('chat_section');
-          div.innerHTML += `<p> <%=@user%>: <%=@message%></p>
-          <p class="ml-3 p-3 card"><%=@message.content%></p>`;
+var messageBox = document.getElementById('message-box');
+
+function refreshBox(innerHTML) {
+  messageBox.innerHTML = innerHTML;
+}
+
+
+  refreshBox('<%= j render "chats/message-box", message: Message.new, chat: chat %>'
+

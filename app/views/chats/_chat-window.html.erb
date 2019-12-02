@@ -10,23 +10,20 @@
 
       <% end %>
     </div>
-    <div class="mt-2">
-      <%= simple_form_for [chat, @message], url: chat_messages_path(chat), local: true  do |f| %>
-        <%= f.input :content, label: Message %>
-        <%= f.button :submit, "Send", class: "btn btn-flat" %>
-      <% end %>
-      <% if policy(chat.request.shift).accept_request? %>
-        <p><%= link_to "Accept request", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3" %></p>
-      <% end %>
+    <div class="mt-2" id="message-box">
+      <%= render 'chats/message-box', message: Message.new, chat: chat %>
     </div>
     <script>
-      var channel = pusher.subscribe('message-channel');
+      var channel = pusher.subscribe('<%=chat.id%>-channel');
       channel.bind('new-message', function(data) {
           let { content, user, sent } = data;
           var div = document.getElementById('chat_section');
           div.innerHTML += `<div class="d-flex justify-content-between flex-column">
           <p class="border-bottom"> ${user}: ${sent}</p>
           <p class="ml-3 p-3 card chat-card">${content}</p></div>`;
+          var messageBox = document.getElementById('message-box');
+          messageBox.innerHTML = '<%= j render "chats/message-box", chat: chat, message: Message.new %>';
       });
     </script>
+
 </div>
