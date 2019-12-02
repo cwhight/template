@@ -4,8 +4,9 @@
       <li>
         <%= link_to 'Dashboard',current_user.employer ? dashboard_employer_path(@current_user) : dashboard_path %>
       </li>
+      <% current_user.employer ? chats = current_user.chats : chats = current_user.employee_chats %>
 
-      <% current_user.chats.order(updated_at: :desc).first(10).each do |chat| %>
+      <% chats.order(updated_at: :desc).first(10).each do |chat| %>
         <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
         <li <%= chat.id == @chat.id ? 'class=active' : "" %>>
 
