@@ -24,8 +24,8 @@ addresses = ["28 Balaclava Road, London Borough of Southwark, England, United Ki
 "Shoreditch, London Borough of Hackney, England, United Kingdom"]
 p addresses.size
 
-jobs = [["Bar Staff","Experienced bar staf required to cover shifts at lively bar/restaurant in Hoxton","Hospitality"],
-["Bar Man","Bar man wanted who has experience mixing cocktails and wokring very busy bars","Hospitality"],
+jobs = [["Bar Staff","Experienced bar staff required to cover shifts at lively bar/restaurant in Hoxton","Hospitality"],
+["Bar Man","Bar man wanted who has experience mixing cocktails and working very busy bars","Hospitality"],
  ["Waitress","Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
   ["Waiter/Waitress","Waiter/Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
    ["Waiter","Waiter/Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
@@ -47,7 +47,7 @@ end
 
 employee_review_scores = [4,5,4,2]
 employee_review_titles = ["Did a good job", "Was a great worker", "Would hire again", "Bad experience"]
-employee_review_content = ["Very experienced, picked up tasks easily and got on well with everyone", "Nothign more to add, they were great", "Happy to hire them again, turned up on time, carried out the shift professionally", "Would not reccomend, turned up late, sloppy and inexperienced"]
+employee_review_content = ["Very experienced, picked up tasks easily and got on well with everyone", "Nothing more to add, they were great", "Happy to hire them again, turned up on time, carried out the shift professionally", "Would not reccomend, turned up late, sloppy and inexperienced"]
 employer_review_scores = [4,5,5,1]
 employer_review_titles = ["Great to work for", "Busy shift, but fair employer", "Happily work for them again", "Bad experience"]
 employer_review_content = ["No problems, paid on time, comfortable environment and friendly boss", "Very busy bar, but good staff and friendly boss", "Nothing to add, would happily work for them again", "Not a safe place to work, overcrowded, dirty and boss was unreasonable"]
@@ -65,7 +65,7 @@ end
 
 puts "creating Freddie"
 
-freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", password: "123456", employer: true, first_name: "Freddie", surname: "James")
+freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", password: "123456", employer: true, first_name: "Freddie", surname: "Warren")
 
 
 puts "Creating employees"
@@ -128,7 +128,7 @@ puts "Employers created"
 
 puts "Creating Charlie"
 
-User.create!(email: "charlie.whight@gmail.com", password: "123456", employer: false, first_name: "Charlie", surname: "Whight", dob: "01/11/1993" )
+User.create!(email: "raj.panasar@gmail.com", password: "123456", employer: false, first_name: "Raj", surname: "Panasar", dob: "01/11/1953" )
 
 charlie = User.last
 
