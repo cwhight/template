@@ -32,8 +32,8 @@
 }
 
 .content-collapse {
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease-out;
+  transition: height 0.5s ease-out;
   border-radius: 2px;
 }
