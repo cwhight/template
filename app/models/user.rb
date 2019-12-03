@@ -53,24 +53,4 @@ class User < ApplicationRecord
     end
     return past_shifts_json
   end
-
-  def self.pending_shifts_to_json(user_id)
-    user = User.find(user_id)
-    pending_shifts_json = []
-    return unless user.employer == false
-
-    applied_shifts = []
-    user.requests.each { |request| applied_shifts << request.shift unless request.shift.user }
-
-    applied_shifts.each do |shift|
-      pending_shift_json = {
-        title: shift.title,
-        start: shift.start_time.delete_suffix(' +0000'),
-        end: shift.end_time.delete_suffix(' +0000')
-      }
-
-      pending_shifts_json << pending_shift_json
-    end
-    return pending_shifts_json
-  end
 end
