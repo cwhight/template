@@ -12,10 +12,6 @@
   z-index: 1000;
 }
 
-#site_header {
-
-}
-
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
@@ -35,4 +31,8 @@
 .rounded {
   border-radius: 50%;
   background-color: transparent;
+}
+
+.empty_space {
+  height: 20vh;
 }
