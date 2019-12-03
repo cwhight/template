@@ -26,6 +26,13 @@ class ChatsController < ApplicationController
     end
   end
 
+  def inbox_show
+    @chat = Chat.find(params[:id])
+    @message = Message.new
+    authorize @chat
+    mark_as_read(@chat)
+  end
+
   def mark_as_read(chat)
     chat.messages.select {|message| message.user != current_user }.each {|message| message.update(read: true)}
   end

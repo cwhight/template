@@ -12,4 +12,8 @@ class ChatPolicy < ApplicationPolicy
   def show?
     record.request.user == user || record.request.shift.job.user == user
   end
+
+  def inbox_show?
+    show?
+  end
 end

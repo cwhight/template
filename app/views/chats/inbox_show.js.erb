@@ -1,0 +1,8 @@
+console.log("hello")
+var chatWindow = document.querySelector("#chat-window-inbox")
+
+function loadMessage(innerHTML) {
+  chatWindow.innerHTML = innerHTML
+}
+
+loadMessage("<%= j render 'chats/chat-window', chat: @chat %>")
