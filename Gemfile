@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
 
+gem "simple_calendar", "~> 2.0"
 gem 'faker'
 gem 'pusher'
 gem 'sidekiq'

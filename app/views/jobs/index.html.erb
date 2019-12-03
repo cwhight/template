@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
+        <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
         <%= f.input :price_cents, label: "Filter by pay/h", required: false,
           input_html: { class: 'js-range-slider',
           type: 'text',
