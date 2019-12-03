@@ -25,7 +25,7 @@ addresses = ["28 Balaclava Road, London Borough of Southwark, England, United Ki
 p addresses.size
 
 jobs = [["Bar Staff","Experienced bar staff required to cover shifts at lively bar/restaurant in Hoxton","Hospitality"],
-["Bar Man","Bar man wanted who has experience mixing cocktails and working very busy bars","Hospitality"],
+["Bar Staff","Bar staff needed who has experience mixing cocktails and working very busy bars","Hospitality"],
  ["Waitress","Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
   ["Waiter/Waitress","Waiter/Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
    ["Waiter","Waiter/Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],

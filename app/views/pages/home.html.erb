@@ -45,12 +45,14 @@
       <h1 class="px-4">Available Jobs</h1>
       <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
     </div>
+
       <div>
         <% @jobs.each do |job|%>
           <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
           <% unless num_shifts <= 0 %>
             <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
           <% end %>
+
         <% end %>
         <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
       </div>

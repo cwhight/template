@@ -55,13 +55,19 @@
             <%= render 'shared/profile-card', user: current_user %>
           </div>
           <div class="each-render col-12 col-md-8 offset-md-2">
-            <%= render 'jobs/profile-listed-jobs', jobs: current_user.jobs %>
+            <div class="card p-3 m-2">
+
+              <h4>Listed Jobs</h4>
+              <a href="#" class="btn btn-flat dashboard-selector" data-selector="listed-jobs">
+                View All ( <%= listed_jobs.count %> )
+              </a>
+            </div>
           </div>
 
           <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
           </div>
-          </div>
+
         </div>
 
         <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card col-12 col-md-8 offset-md-2">
