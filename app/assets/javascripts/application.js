@@ -1,8 +1,8 @@
 //= require rails-ujs
-//= require_tree .
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/locale-all
+//= require_tree .
 
 let upcoming = JSON.parse(document.getElementById("calendar").dataset.upcoming);
 let past = JSON.parse(document.getElementById("calendar").dataset.past);
