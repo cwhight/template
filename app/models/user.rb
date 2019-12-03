@@ -32,8 +32,8 @@ class User < ApplicationRecord
 
       upcoming_shifts_json << upcoming_shift_json
 
-      return upcoming_shifts_json
     end
+    return upcoming_shifts_json
   end
 
   def self.past_shifts_to_json(user_id)
@@ -50,8 +50,8 @@ class User < ApplicationRecord
 
       past_shifts_json << past_shift_json
 
-      return past_shifts_json
     end
+    return past_shifts_json
   end
 
   def self.pending_shifts_to_json(user_id)
@@ -70,8 +70,7 @@ class User < ApplicationRecord
       }
 
       pending_shifts_json << pending_shift_json
-
-      return pending_shifts_json
     end
+    return pending_shifts_json
   end
 end
