@@ -1,4 +1,5 @@
-  <div class="navbar navbar-expand-sm navbar-homepage">
+<div class="fixed-top navbar navbar-expand-sm navbar-light navbar-lewagon" id="site_header">
+   <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"), current_user&.employer ? dashboard_employer_path : root_path, class: "navbar-brand"  %>
     <p></p>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,8 +10,6 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item dropdown">
-
-
           <% if current_user && current_user.photo.attached? %>
             <%= cl_image_tag current_user.photo.key, class: 'avatar dropdown-toggle', id: 'navbarDropdown', data: {toggle: 'dropdown'}, 'aria-haspopup': true, 'aria-expanded': false %>
           <% else %>
