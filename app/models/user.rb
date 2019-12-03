@@ -17,4 +17,60 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def self.upcoming_shifts_to_json(user_id)
+    user = User.find(user_id)
+    upcoming_shifts_json = []
+    return unless user.employer == false
+
+    user.shifts.select { |shift| shift.start_time >= DateTime.now }.each do |shift|
+      upcoming_shift_json = {
+        title: shift.title,
+        start: shift.start_time.delete_suffix(' +0000'),
+        end: shift.end_time.delete_suffix(' +0000')
+      }
+
+      upcoming_shifts_json << upcoming_shift_json
+
+      return upcoming_shifts_json
+    end
+  end
+
+  def self.past_shifts_to_json(user_id)
+    user = User.find(user_id)
+    past_shifts_json = []
+    return unless user.employer == false
+
+    user.shifts.select { |shift| shift.start_time <= DateTime.now }.each do |shift|
+      past_shift_json = {
+        title: shift.title,
+        start: shift.start_time.delete_suffix(' +0000'),
+        end: shift.end_time.delete_suffix(' +0000')
+      }
+
+      past_shifts_json << past_shift_json
+
+      return past_shifts_json
+    end
+  end
+
+  def self.pending_shifts_to_json(user_id)
+    user = User.find(user_id)
+    pending_shifts_json = []
+    return unless user.employer == false
+
+    applied_shifts = user.requests.map { |request| request.shift unless request.shift.user }
+
+    applied_shifts.each do |shift|
+      pending_shift_json = {
+        title: shift.title,
+        start: shift.start_time.delete_suffix(' +0000'),
+        end: shift.end_time.delete_suffix(' +0000')
+      }
+
+      pending_shifts_json << pending_shift_json
+
+      return pending_shifts_json
+    end
+  end
 end
