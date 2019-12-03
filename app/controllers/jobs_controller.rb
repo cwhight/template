@@ -14,7 +14,7 @@ class JobsController < ApplicationController
         job_prices = job.shifts.pluck(:price_cents)
         job_prices.any? { |p| (p > lower_pay) && (p < higher_pay) }
       end
-      @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
+      # @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
 
     elsif params[:search].present?
 

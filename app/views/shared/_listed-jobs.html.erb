@@ -1,32 +1,42 @@
+  <div class="m-2 d-flex justify-content-between">
 
-<div class="card m-2 p-3 profile-card">
-<div class="d-flex justify-content-between">
-  <h2>Listed Jobs</h2>
-  <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
-</div>
-  <br>
-  <% jobs.each do |job| %>
-    <% unless job.done %>
-      <div class="d-flex justify-content-between py-2">
-        <h6><%= job.title %></h6>
-        <p><%= link_to 'Learn more', job_path(job), class: "btn btn-show"%></p>
-      </div>
-      <div class="border-bottom">
-        <% request_number = 0 %>
-        <% job.shifts.where({completed: nil} && {user: nil}).each do |shift| %>
-          <% request_number += shift.requests.where({completed: nil}).count.to_i %>
-        <% end %>
-        <% if request_number == 0 %>
-          <p class="m-0">No applications</p>
-        <% elsif request_number == 1 %>
-          <%= link_to "#{request_number} application", job_path(job), class: "green-text" %>
-        <% elsif request_number < 4 %>
-          <%= link_to "#{request_number} applications", job_path(job), class: "orange-text" %>
-        <% else %>
-          <%= link_to "#{request_number} applications", job_path(job), class: "red-text" %>
-        <% end %>
-      </div>
+    <h2>Listed Jobs</h2>
+    <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
+  </div>
+
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Job</th>
+        <th scope="col">Shifts</th>
+        <th scope="col">Applications</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+  <tbody>
+
+
+    <% jobs.each do |job| %>
+          <% active_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user} %>
+          <% num_shifts = active_shifts.length  %>
+          <% num_requests = 0 %>
+          <% active_shifts.each do  |shift|  %>
+            <% num_requests += shift.requests.count %>
+          <% end %>
+
+
+         <tr>
+            <th scope="row"><%= job.title %></th>
+
+            <td><%= num_shifts %> unstaffed</td>
+
+            <td><%= num_requests %> pending applications </td>
+
+            <td><%= link_to 'View Details', job_path(job), class: "btn btn-flat" %></td>
+
+          </tr>
+
     <% end %>
-  <% end %>
-</div>
-
+  </tbody>
+</table>

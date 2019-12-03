@@ -56,7 +56,7 @@
     <h1 class="py-3 d-flex justify-content-center">Welcome to your dashboard, <%= current_user.first_name %>!</h1>
     <div class="selector py-3">
 
-         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
+        <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
           <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
@@ -64,7 +64,13 @@
             <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
           </div>
           <div class="each-render col-12 col-md-8 offset-md-2">
-            <%= render 'pages/pending-requests', requests: current_user.requests %>
+            <div class="card m-2 p-3 profile-card">
+              <h2>Pending Requests</h2>
+              <% current_user.requests do |request| %>
+                <%= render 'shifts/shift-card-employee', shift: request.shift %>
+              <% end %>
+              <a class="dashboard-selector btn btn-flat"  data-selector="pending-requests" href="#">View All</a>
+            </div>
           </div>
           <div class="each-render col-12 col-md-8 offset-md-2">
             <%= render 'shared/job-history', shifts: current_user.shifts %>
@@ -86,15 +92,13 @@
 
         <div id="pending-requests" data-target="pending-requests" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <h4 class="mx-3">Pending Requests</h4>
-          <% current_user.requests.order(created_at: :desc).each do |request|  %>
-            <% unless request.shift.user  %>
-              <%= render 'shifts/shift-card-employee', shift: request.shift %>
-            <% end %>
-          <% end %>
+              <%= render 'pages/pending-requests', requests: current_user.requests %>
+
         </div>
 
         <div id="job-history" data-target="job-history" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <h4 class="mx-3">Job History</h4>
+
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time < DateTime.now  %>
               <%= render 'shifts/shift-card-employee', shift: shift %>
