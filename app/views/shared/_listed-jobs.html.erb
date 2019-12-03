@@ -24,9 +24,15 @@
           <% active_shifts.each do  |shift|  %>
             <% num_requests += shift.requests.count %>
           <% end %>
+          <% if num_shifts == 0 || num_requests == 0 %>
+            <% c = "table-success" %>
+          <% elsif num_shifts > 2 && num_requests > 2 %>
+            <% c = "table-danger" %>
+          <% elsif num_shifts > 2 || num_requests > 2 %>
+            <% c = "table-warning" %>
+          <% end %>
 
-
-         <tr>
+         <tr class="<%= c %>">
             <th scope="row"><%= job.title %></th>
 
             <td><%= num_shifts %> unstaffed</td>

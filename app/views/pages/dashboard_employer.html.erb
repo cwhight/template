@@ -10,9 +10,10 @@
       <% listed_jobs = current_user.jobs.where({done: nil}) %>
       <a href="#">Listed Jobs ( <%= listed_jobs.count %> )</a>
     </li>
+    <% applications = current_user.chats.reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now }.size %>
 
-    <li class="dashboard-selector"  data-selector="pending-requests">
-      <a href="#">Active Applications</a>
+    <li class="dashboard-selector"  data-selector="active-applications">
+      <a href="#">Active Applications ( <%= applications %> )</a>
     </li>
 
     <li class="dashboard-selector"  data-selector="closed-jobs">
@@ -51,21 +52,37 @@
     <div class="selector py-3">
 
         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
-          <div class="each-render col-12 col-md-8 offset-md-2">
+          <div class="each-render col-12 col-md-6">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
-          <div class="each-render col-12 col-md-8 offset-md-2">
-            <div class="card p-3 m-2">
 
-              <h4>Listed Jobs</h4>
-              <a href="#" class="btn btn-flat dashboard-selector" data-selector="listed-jobs">
-                View All ( <%= listed_jobs.count %> )
-              </a>
+          <div class=" each-render col-12 col-md-6"  >
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
+              <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
+                <p>Inbox ( <%= unread_messages %> )</p>
+            </div>
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="active-applications">
+              <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
+                <p>Applications ( <%= applications %> )</p>
             </div>
           </div>
 
-          <div class="each-render col-12 col-md-8 offset-md-2">
-            <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
+          <div class=" each-render col-12 col-md-6"  >
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="listed-jobs">
+              <a href="#" ><i class="my-3 profile-icon fas fa-bullhorn"></i></a>
+                <p>Listed Jobs ( <%= listed_jobs.count %> )</p>
+            </div>
+          </div>
+
+          <div class="dashboard-selector each-render col-12 col-md-6" data-selector="closed-jobs">
+            <div class="btn card m-2 p-3">
+              <a href="#"><i class="my-3 profile-icon fas fa-history"></i></a>
+              <p>Closed Jobs ( <%= closed_jobs.count %> )</p>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <%= render 'shared/view-reviews', user: current_user %>
           </div>
 
         </div>
@@ -74,8 +91,8 @@
           <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
         </div>
 
-        <div id="pending-requests" data-target="pending-requests" class="d-none dashboard-card col-12 col-md-8 offset-md-2">
-          <h4>Pending Requests</h4>
+        <div id="active-applications" data-target="pending-requests" class="d-none dashboard-card col-12 col-md-8 offset-md-2">
+          <h4>Active Applications</h4>
 
         </div>
 
