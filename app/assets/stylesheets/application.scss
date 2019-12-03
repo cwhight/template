@@ -11,3 +11,61 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+.employer_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10vh;
+  margin-top: 5vh;
+
+  .svg-input {
+    width: 200px;
+    height: 200px;
+    opacity: .7;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.full-opacity {
+  opacity: 1 !important;
+  width: 120px;
+  height: 120px;
+  background: #5DD4A6;
+  border-radius: 50%;
+  color: #FFF;
+  font-size: 20px;
+  text-align: center;
+  line-height: 100px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  animation: animate-pulse 3s linear infinite;
+  cursor: pointer
+}
+
+.svg-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@keyframes animate-pulse{
+    0%{
+        box-shadow: 0 0 0 0 rgba(93,212,166,1),  0 0 0 0 rgba(93,212,166,1);
+    }
+    40%{
+        box-shadow: 0 0 0 50px rgba(93,212,166,0.0),  0 0 0 0 rgba(93,212,166,1);
+    }
+    80%{
+        box-shadow: 0 0 0 50px rgba(93,212,166,0.0),  0 0 0 30px rgba(93,212,166,0.0);
+    }
+    100%{
+        box-shadow: 0 0 0 0 rgba(93,212,166,0.0),  0 0 0 30px rgba(93,212,166,0.0);
+    }
+
+}
