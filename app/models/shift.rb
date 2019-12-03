@@ -2,6 +2,7 @@ class Shift < ApplicationRecord
   include ActiveModel::Validations
   belongs_to :user, optional: true
   belongs_to :job
+  has_one :order
   has_many :reviews
   has_many :requests
   validates_associated :job

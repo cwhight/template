@@ -57,10 +57,10 @@
     <div class="selector py-3">
 
         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-lg-6">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
-          <div class=" each-render col-12 col-md-6"  >
+          <div class=" each-render col-12 col-lg-6"  >
             <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
               <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
                 <p>Inbox ( <%= unread_messages %> )</p>
@@ -70,13 +70,13 @@
                 <p>Applications ( <%= pending_requests %> )</p>
             </div>
           </div>
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-lg-6">
             <div class="btn dashboard-selector card p-3 m-2" data-selector="upcoming-jobs">
               <a href="#" ><i class="my-3 profile-icon fas fa-clock"></i></a>
                 <p>Upcoming Jobs ( <%= upcoming_jobs.count %> )</p>
             </div>
           </div>
-          <div class="each-render col-12 col-md-6">
+          <div class="each-render col-12 col-lg-6">
             <div class="btn dashboard-selector card p-3 m-2" data-selector="job-history">
               <a href="#" ><i class="my-3 profile-icon fas fa-history"></i></a>
                 <p>Job History</p>
