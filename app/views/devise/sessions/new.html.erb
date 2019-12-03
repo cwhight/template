@@ -1,4 +1,5 @@
 <div class="container content login">
+  <%= devise_error_messages! %>
   <br>
   <br>
   <h2>Log in</h2>
@@ -19,5 +20,4 @@
   <% end %>
   <br>
   <%= image_tag "undraw_mobile_login_ikmv.svg", alt: "alttext", class: 'signin-image' %>
-  <%= render "devise/shared/links" %>
 </div>
