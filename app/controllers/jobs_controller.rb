@@ -6,15 +6,15 @@ class JobsController < ApplicationController
     @request = Request.new
     if params[:search].present? && params[:my_range].present?
 
-      lower_pay = params[:my_range].split(";").first.to_i * 100
-      higher_pay = params[:my_range].split(";").last.to_i * 100
+      @lower_pay = params[:my_range].split(";").first.to_i * 100
+      @higher_pay = params[:my_range].split(";").last.to_i * 100
       @jobs = policy_scope(Job).order(created_at: :desc)
       @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
       @jobs = @jobs.select do |job|
-        job_prices = job.shifts.pluck(:price_cents)
-        job_prices.any? { |p| (p > lower_pay) && (p < higher_pay) }
+        job.shifts.pluck(:price_cents).any? { |pay| (pay > @lower_pay) && (pay < @higher_pay) } &&
+        job.shifts.select { |shift| (shift.price_cents > @lower_pay) && (shift.price_cents < @higher_pay) }.any? { |shift| !shift.completed }
+
       end
-      # @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
 
     elsif params[:search].present?
 
