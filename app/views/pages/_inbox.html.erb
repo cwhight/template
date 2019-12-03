@@ -29,10 +29,8 @@
   </div>
 
 
-  <div class="btn btn-lg btn-flat" id="old-conversations-btn">
-    Old Conversations
-  </div>
-  <div class="m-2 d-none" id="old-conversations">
+
+  <div class="m-2" id="old-conversations">
     <h5>Old Conversations</h5>
     <% chats.order(created_at: :desc).each do |chat|%>
       <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
