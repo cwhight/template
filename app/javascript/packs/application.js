@@ -29,9 +29,7 @@ initSweetalert('#employee-apply-sweetalert', {
   buttons: false
 });
 
-if (openOldConv) {
-  openConv();
-}
+
 initSelect2();
 openApply();
 closeApply();
