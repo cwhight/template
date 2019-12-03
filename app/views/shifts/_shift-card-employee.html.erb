@@ -7,7 +7,7 @@
         <h4><%= shift.job.title %> at <%= shift.job.summary %></h4>
 
           <% if shift.requests.where(user: current_user).first.chat %>
-            <%= link_to 'View Messages', chat_path(shift.requests.where(user: current_user).chat), class: "btn btn-flat" %>
+            <%= link_to 'View Messages', chat_path(shift.requests.where(user: current_user).first.chat), class: "btn btn-flat" %>
           <% end %>
 
       </div>

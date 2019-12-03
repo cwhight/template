@@ -93,6 +93,7 @@
 
         <div id="active-applications" data-target="pending-requests" class="d-none dashboard-card col-12 col-md-8 offset-md-2">
           <h4>Active Applications</h4>
+          <%= render 'requests/active-applications', chats: current_user.chats %>
 
         </div>
 
