@@ -59,7 +59,7 @@ class User < ApplicationRecord
     pending_shifts_json = []
     return unless user.employer == false
 
-    applied_shifts = user.requests.map { |request| request.shift unless request.shift.user }
+    applied_shifts = user.requests.select { |request| request.shift unless request.shift.user }
 
     applied_shifts.each do |shift|
       pending_shift_json = {
