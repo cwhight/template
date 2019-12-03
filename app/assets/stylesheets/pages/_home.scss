@@ -74,22 +74,19 @@ p {
   width: auto;
 }
 
-#footer {
-  background-color: #e2e2e2;
-  position: relative;
-  height: 60px;
-  margin-top: -50px;
+.footer {
+  background-color: #A5B3C0;
+  height: 10vh;
 }
 
 #footer-tagline {
   font-family: Roboto Mono;
-  color: gray;
+  color: white;
   letter-spacing: -0.05em;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
-  position: absolute;
-  bottom: -5px;
-  left: 500px;
+  margin: auto;
+  line-height: 4vh;
 }
 
 #landing-hero {
