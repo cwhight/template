@@ -13,7 +13,7 @@ $('#calendar').fullCalendar({
   upcoming,
   past,
   pending
-  ];
+  ]
 });
 
 
