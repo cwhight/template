@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
 
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 gem 'faker'
 gem 'pusher'
 gem 'sidekiq'
