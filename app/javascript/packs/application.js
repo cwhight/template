@@ -40,7 +40,9 @@ const checkBox = document.querySelector(".user_employer");
 const employerSvg = document.querySelector(".employer");
 const employeeSvg = document.querySelector(".employee");
 
-checkBox.addEventListener("click", () => {
-  employerSvg.classList.toggle("full-opacity")
-  employeeSvg.classList.toggle("full-opacity")
-})
+if (checkBox) {
+  checkBox.addEventListener("click", () => {
+    employerSvg.classList.toggle("full-opacity")
+    employeeSvg.classList.toggle("full-opacity")
+  })
+}

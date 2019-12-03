@@ -10,10 +10,14 @@ let pending = JSON.parse(document.getElementById("calendar").dataset.pending);
 
 $('#calendar').fullCalendar({
   eventSources: [
-  upcoming,
-  past,
-  pending
-  ]
+    upcoming,
+    past,
+    pending
+  ],
+  color: '#ff0000',
+  dayRender: function(calEvent, cell, date) {
+      cell.css('background-color', '#f4f4f4');
+  }
 });
 
 
