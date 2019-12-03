@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   get '/dashboard_employer', to: 'pages#dashboard_employer'
 
+  get '/dashboard/chats/:id', to: 'chats#inbox_show', as: :dashboard_chat
+
 
   resources :chats, except: :create do
     resources :messages
