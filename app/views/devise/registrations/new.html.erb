@@ -2,7 +2,6 @@
   <h2>Sign up</h2>
   <%= devise_error_messages! %>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
     <div class="form-inputs sign-up-modal-form">
       <h3>Are you an employer?*</h3>
       <div class="employer_input col-6">
