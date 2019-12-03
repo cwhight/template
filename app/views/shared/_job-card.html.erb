@@ -1,11 +1,19 @@
 <div data-toggle="modal" data-target="#showJob<%=job.id%>">
   <div class="border-bottom border-top p-3 job-card-container">
+    <% score_array = job.user.reviews.map { |review| review.score } %>
 
     <div class="job_card_header">
       <h5 class="d-inline card-jobtitle"><%= job.title %></h5>
+
+
       <%= cl_image_tag job.user.photo.key, class: "avatar d-inline float-right", crop: :fill if job.user.photo.attached? %>
+
       <div class="my-2 card-text">
-        <%= job.summary %>
+        <div class="mb-1"><%= job.summary %></div>
+        <% unless score_array.empty? %>
+          <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+          <span ><%= average_score.round(1) %><i class="star fas fa-star"></i></span>
+        <% end %>
       </div>
       <div class="my-2 card-location">
         <%= job.location %>
