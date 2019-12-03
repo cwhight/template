@@ -1,4 +1,6 @@
 <div class="container content login">
+  <br>
+  <br>
   <h2>Log in</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -15,6 +17,8 @@
 
     <%= f.button :submit, "Log in", class: "btn-sign-up" %>
   <% end %>
+  <br>
+  <br>
   <br>
   <%= image_tag "undraw_mobile_login_ikmv.svg", alt: "alttext", class: 'signin-image' %>
   <%= render "devise/shared/links" %>

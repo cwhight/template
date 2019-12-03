@@ -13,7 +13,6 @@ import { initSelect2 } from '../plugins/init_select2';
 import { initSweetalert } from '../plugins/init_sweetalert';
 import { showJobs} from '../components/showJobs';
 
-
 initSweetalert('#confirm-job', {
   title: "Done",
   text: "Your shift was successfully posted. You'll recieve applications soon!",
@@ -33,3 +32,12 @@ openApply();
 closeApply();
 initMapbox();
 initAutocomplete();
+
+const checkBox = document.querySelector(".user_employer");
+const employerSvg = document.querySelector(".employer");
+const employeeSvg = document.querySelector(".employee");
+
+checkBox.addEventListener("click", () => {
+  employerSvg.classList.toggle("full-opacity")
+  employeeSvg.classList.toggle("full-opacity")
+})
