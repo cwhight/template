@@ -1,0 +1,32 @@
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Job</th>
+        <th scope="col">Shift</th>
+        <th scope="col">Applicant</th>
+        <th scope="col">Messages</th>
+      </tr>
+    </thead>
+  <tbody>
+
+
+    <% chats.each do |chat| %>
+      <% request = chat.request %>
+      <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
+
+         <tr>
+            <th scope="row"><%= request.shift.job.title %></th>
+            <td><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></td>
+            <td><%= request.user.first_name %></td>
+            <% if request.chat %>
+              <td><%= link_to 'View Application', request_path(request) %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+          </tr>
+      <% end %>
+
+    <% end %>
+  </tbody>
+</table>

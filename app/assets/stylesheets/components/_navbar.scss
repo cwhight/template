@@ -5,7 +5,7 @@
 
 .navbar-homepage {
   justify-content: space-between;
-  background-color: rgba(0,0,0,0);
+  background-color: #2a69da;
   position: fixed;
   top: 0;
   right: 0;
@@ -31,4 +31,8 @@
 .rounded {
   border-radius: 50%;
   background-color: transparent;
+}
+
+.empty_space {
+  height: 20vh;
 }

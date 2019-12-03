@@ -6,7 +6,7 @@
     </div>
     <div>
       <% if policy(chat.request.shift).accept_request? %>
-        <p><%= link_to "Accept", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3", data: "Are you sure" %></p>
+        <%= render 'requests/confirm-modal', chat: chat %>
       <% end %>
     </div>
   </div>

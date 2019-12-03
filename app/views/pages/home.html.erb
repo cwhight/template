@@ -1,8 +1,8 @@
-<%= render 'shared/dashboard-navbar' %>
+<%= render 'shared/homepage-navbar' %>
 
 <div class="row landing-body my-3">
   <div id="landing-hero">
-    <%= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 80 %>
+    <%= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 60 %>
     <div class="col-12 col-lg-6">
       <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
     </div>
@@ -45,12 +45,14 @@
       <h1 class="px-4">Available Jobs</h1>
       <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
     </div>
+
       <div>
         <% @jobs.each do |job|%>
           <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
           <% unless num_shifts <= 0 %>
             <%= render 'shared/show-jobs', job: job, num_shifts: num_shifts %>
           <% end %>
+
         <% end %>
         <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
       </div>

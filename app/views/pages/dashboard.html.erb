@@ -13,7 +13,7 @@
           <% pending_requests += 1 %>
         <% end %>
       <% end %>
-      <a href="#">Pending Requests ( <%= pending_requests %> )</a>
+      <a href="#">Pending Applications ( <%= pending_requests %> )</a>
     </li>
 
     <li class="dashboard-selector" data-selector="upcoming-jobs">
@@ -62,19 +62,33 @@
         </div>
 
         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
-          <div class="each-render col-12 col-md-8 offset-md-2">
+
+          <div class="each-render col-12 col-lg-6">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
-          <div class="each-render col-12 col-md-8 offset-md-2">
-            <%= render 'shared/upcoming-jobs', shifts: current_user.shifts %>
+          <div class=" each-render col-12 col-lg-6"  >
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
+              <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
+                <p>Inbox ( <%= unread_messages %> )</p>
+            </div>
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="pending-requests">
+              <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
+                <p>Applications ( <%= pending_requests %> )</p>
+            </div>
           </div>
-          <div class="each-render col-12 col-md-8 offset-md-2">
-            <%= render 'pages/pending-requests', requests: current_user.requests %>
+          <div class="each-render col-12 col-lg-6">
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="upcoming-jobs">
+              <a href="#" ><i class="my-3 profile-icon fas fa-clock"></i></a>
+                <p>Upcoming Jobs ( <%= upcoming_jobs.count %> )</p>
+            </div>
           </div>
-          <div class="each-render col-12 col-md-8 offset-md-2">
-            <%= render 'shared/job-history', shifts: current_user.shifts %>
+          <div class="each-render col-12 col-lg-6">
+            <div class="btn dashboard-selector card p-3 m-2" data-selector="job-history">
+              <a href="#" ><i class="my-3 profile-icon fas fa-history"></i></a>
+                <p>Job History</p>
+            </div>
           </div>
-          <div class="each-render col-12 col-md-8 offset-md-2">
+          <div class="each-render col-12">
             <%= render 'shared/view-reviews', user: current_user %>
           </div>
         </div>
@@ -91,15 +105,13 @@
 
         <div id="pending-requests" data-target="pending-requests" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <h4 class="mx-3">Pending Requests</h4>
-          <% current_user.requests.order(created_at: :desc).each do |request|  %>
-            <% unless request.shift.user  %>
-              <%= render 'shifts/shift-card-employee', shift: request.shift %>
-            <% end %>
-          <% end %>
+              <%= render 'pages/pending-requests', requests: current_user.requests %>
+
         </div>
 
         <div id="job-history" data-target="job-history" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
           <h4 class="mx-3">Job History</h4>
+
           <% current_user.shifts.order(:start_time).each do |shift|  %>
             <% if shift.start_time < DateTime.now  %>
               <%= render 'shifts/shift-card-employee', shift: shift %>
@@ -108,7 +120,7 @@
           <% end %>
         </div>
 
-        <div id="reviews" data-target="reviews" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
+        <div id="reviews" data-target="reviews" class="col-12 d-none dashboard-card">
           <%= render 'shared/view-reviews', user: current_user %>
         </div>
 

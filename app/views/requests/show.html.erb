@@ -12,5 +12,6 @@
       <%= render "chats/chat-window", chat: @request.chat %>
     </div>
   </div>
-  <p><%= link_to "Back", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
+  <p><%= link_to "View Job Listing", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
 </div>
+<div class="empty_space"></div>

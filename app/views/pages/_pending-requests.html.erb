@@ -1,16 +1,30 @@
-<div class="card m-2 p-3 profile-card">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Job</th>
+      <th scope="col">Shift</th>
+      <th scope="col">Employer</th>
+      <th scope="col">Messages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% requests.order(created_at: :desc).each do |request| %>
+      <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now%>
 
-  <h2>Pending Requests</h2>
-  <br>
-
-  <% requests.order(created_at: :asc).each do |request| %>
-    <% unless request.shift.user %>
-      <div class="row justify-content-between m-2">
-        <p><%= request.shift.job.title %></p>
-        <p><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %></p>
-        <p><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %></p>
-        <%= render 'shifts/shift-card-modal', shift: request.shift %>
-      </div>
+         <tr>
+            <th scope="row"><%= request.shift.job.title %></th>
+            <td><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></td>
+            <td><%= request.shift.job.user.first_name %></td>
+            <% if request.chat %>
+              <td><%= link_to 'View Messages', chat_path(request.chat) %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+          </tr>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </tbody>
+</table>
+
+
+

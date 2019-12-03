@@ -5,11 +5,11 @@
     <div>
       <div class="d-flex justify-content-between">
         <h4><%= shift.job.title %> at <%= shift.job.summary %></h4>
-        <% shift.requests.each do |request| %>
-          <% if request.chat %>
-            <%= link_to 'View Messages', chat_path(request.chat), class: "btn btn-flat" %>
+
+          <% if shift.requests.where(user: current_user).first.chat %>
+            <%= link_to 'View Messages', chat_path(shift.requests.where(user: current_user).first.chat), class: "btn btn-flat" %>
           <% end %>
-        <% end %>
+
       </div>
       <p><%= shift.job.location %></p>
       <h6><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></h6>

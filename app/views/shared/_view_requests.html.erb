@@ -29,15 +29,14 @@
               <% score_array = request.user.reviews.map { |review| review.score } %>
               <% unless score_array.empty? %>
                 <% average_score = score_array.reduce(:+).to_f / score_array.length %>
-                <div class="border-bottom">
-                  <p class="mb-0"><%= "#{request.user.first_name} #{request.user.surname} - " %><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></p>
+                <div>
+                  <h5 class="mb-2"><%= "#{request.user.first_name} #{request.user.surname} - " %><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
                 </div>
               <% else %>
                 <p><%= "#{request.user.first_name} #{request.user.surname}" %></p>
                 <p>Review Score: No Reviews Yet </p>
               <% end %>
-              <p><%= request.content %></p>
-              <p><%= link_to "Learn more", request_path(request), class: "btn btn-ghost" %></p>
+              <p><%= link_to request.content , request_path(request), class: "card p-2 btn" %></p>
             <% end %>
           </div>
 

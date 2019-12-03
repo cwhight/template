@@ -12,7 +12,8 @@ import 'select2/dist/css/select2.css';
 import { initSelect2 } from '../plugins/init_select2';
 import { initSweetalert } from '../plugins/init_sweetalert';
 import { showJobs} from '../components/showJobs';
-
+import { stickyNavbar} from '../components/stickyNavbar';
+import {openConv} from '../components/inbox.js';
 
 initSweetalert('#confirm-job', {
   title: "Done",
@@ -28,8 +29,20 @@ initSweetalert('#employee-apply-sweetalert', {
   buttons: false
 });
 
+if (openOldConv) {
+  openConv();
+}
 initSelect2();
 openApply();
 closeApply();
 initMapbox();
 initAutocomplete();
+
+const checkBox = document.querySelector(".user_employer");
+const employerSvg = document.querySelector(".employer");
+const employeeSvg = document.querySelector(".employee");
+
+checkBox.addEventListener("click", () => {
+  employerSvg.classList.toggle("full-opacity")
+  employeeSvg.classList.toggle("full-opacity")
+})
