@@ -17,22 +17,32 @@
         >
       </div>
     </div>
-
+    <% score_array = @job.user.reviews.map { |review| review.score } %>
       <div class="col-12  col-md-6">
         <div class="d-flex justify-content-between">
           <div class="m-2 p-3 card summary-text">
-            <h3>Job Summary</h3>
-            <p><b>Hiring Manager:</b> <%= @job.user.first_name %> <%= @job.user.surname %></p>
+            <div class="d-flex justify-content-between">
+
+              <h3>Job Summary</h3>
+              <%= cl_image_tag @job.user.photo.key, class: "avatar d-inline float-right", crop: :fill if @job.user.photo.attached? %>
+            </div>
+            <p>
+              <b>Hiring Manager:</b> <%= @job.user.first_name %> <%= @job.user.surname %>
+              <% unless score_array.empty? %>
+                <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+                <span > - <%= average_score.round(1) %> <i class="star fas fa-star"></i></span>
+              <% end %>
+            </p>
             <p><%= @job.description %></p>
-            <p><b>Job Title: </b><%= @job.title %></p>
-            <p><b>Location: </b><%= @shift.job.location %></p>
-            <p><b>Shift Available: </b><%= Time.parse(@shift&.start_time)&.strftime("%e %B") %>, <%= Time.parse(@shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(@shift&.end_time)&.strftime("%k:%M") %></p>
-            <p><b>Hourly Rate: </b><%= humanized_money_with_symbol(@shift.price)%></p>
+            <p><b><i class="red-marker fas fa-map-marker-alt"></i> Location: </b><%= @shift.job.location %></p>
+            <p><b><i class="blue-icon fas fa-calendar"></i> Shift Available: </b><%= Time.parse(@shift&.start_time)&.strftime("%e %B") %>, <%= Time.parse(@shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(@shift&.end_time)&.strftime("%k:%M") %></p>
+            <p><b><i class="star fas fa-coins"></i> Hourly Rate: </b> <%= humanized_money_with_symbol(@shift.price)%></p>
+            <p><b><i class="pink-icon fas fa-piggy-bank"></i> Total Pay:</b> <%= number_to_currency(@shift.total_pay, unit: "£") %></p>
             <div id="applyForm" class="col-12 modal-body message-submission">
               <h5>Submit your message to <%= @job.user.first_name %></h5>
               <%= simple_form_for  [@job, @request], url: job_shift_requests_path(@job, @shift) do |f| %>
                 <%= f.input :content, label_html: { class: "content-label" }, input_html: { class: "confirm-page-box" } %>
-                <%= f.button :submit, "Send Application", class: "btn btn-ghost", id: "employee-apply-sweetalert" %>
+                <%= f.button :submit, "Send Application", class: "btn btn-flat", id: "employee-apply-sweetalert" %>
               <% end %>
             </div>
           </div>
