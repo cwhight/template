@@ -15,8 +15,11 @@ $('#calendar').fullCalendar({
     pending
   ],
   dayRender: function(calEvent, cell, date) {
-      cell.css('background-color', '#f4f4f4');
-  }
+
+  },
+  contentHeight: 500,
+  // plugins: [ timeGridPlugin ],
+  // defaultView: 'timeGridWeek'
 });
 
 

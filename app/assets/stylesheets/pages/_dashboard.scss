@@ -108,3 +108,15 @@
   height: 30px;
 }
 
+.fc-body .fc-row {
+  max-height: 120px;
+  overflow: scroll;
+}
+
+.fc-title {
+  font-size: 10px;
+}
+
+.fc-time {
+  font-size: 10px;
+}
