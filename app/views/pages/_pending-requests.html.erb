@@ -1,7 +1,7 @@
-<table class="table table-hover">
+<table class="table table-hover" style="max-width: 100%">
   <thead>
     <tr>
-      <th scope="col">Job</th>
+
       <th scope="col">Shift</th>
       <th scope="col">Employer</th>
       <th scope="col">Messages</th>
@@ -12,8 +12,10 @@
       <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now%>
 
          <tr>
-            <th scope="row"><%= request.shift.job.title %></th>
-            <td><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></td>
+            <th scope="row">
+              <p><%= request.shift.job.title %></p>
+              <p><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></p>
+            </th>
             <td><%= request.shift.job.user.first_name %></td>
             <% if request.chat %>
               <td><%= link_to 'View Messages', chat_path(request.chat) %></td>
