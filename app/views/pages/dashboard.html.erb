@@ -58,6 +58,7 @@
         <div
           data-upcoming="<%= User.upcoming_shifts_to_json(current_user.id).to_json %>"
           data-past="<%= User.past_shifts_to_json(current_user.id).to_json %>"
+          data-pending="<%= User.pending_shifts_to_json(current_user.id).to_json %>"
           id="calendar">
         </div>
 

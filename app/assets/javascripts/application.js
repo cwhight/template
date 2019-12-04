@@ -6,11 +6,13 @@
 
 let upcoming = JSON.parse(document.getElementById("calendar").dataset.upcoming);
 let past = JSON.parse(document.getElementById("calendar").dataset.past);
+let pending = JSON.parse(document.getElementById("calendar").dataset.pending);
 
 $('#calendar').fullCalendar({
   eventSources: [
     upcoming,
-    past
+    past,
+    pending
   ],
   dayRender: function(calEvent, cell, date) {
       cell.css('background-color', '#f4f4f4');
