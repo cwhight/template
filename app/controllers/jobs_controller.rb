@@ -4,16 +4,56 @@ class JobsController < ApplicationController
 
   def index
     @request = Request.new
-    if params[:search].present? && params[:my_range].present?
+    if params[:search].present? && params[:my_range].present? && params[:start_time].present?
+
+      lower_start_time = params[:start_time].split(";").first.to_i / 1000 + 3600
+      higher_start_time = params[:start_time].split(";").last.to_i / 1000 + 3600
+      base_date = Time.parse("1 January 1970")
+      @lower_start_date = base_date + lower_start_time
+      @higher_start_date = base_date + higher_start_time
 
       @lower_pay = params[:my_range].split(";").first.to_i * 100
       @higher_pay = params[:my_range].split(";").last.to_i * 100
+
       @jobs = policy_scope(Job).order(created_at: :desc)
       @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
+
       @jobs = @jobs.select do |job|
         job.shifts.pluck(:price_cents).any? { |pay| (pay > @lower_pay) && (pay < @higher_pay) } &&
-        job.shifts.select { |shift| (shift.price_cents > @lower_pay) && (shift.price_cents < @higher_pay) }.any? { |shift| !shift.completed }
+          job.shifts.select { |shift| (shift.price_cents > @lower_pay) && (shift.price_cents < @higher_pay) }.any? { |shift| !shift.completed }
+      end
 
+      @jobs = @jobs.select do |job|
+        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_date && start < @higher_start_date } &&
+          job.shifts.select { |shift| (shift.start_time > @lower_start_date) && (shift.start_time < @higher_start_date) }
+      end
+
+    elsif params[:search].present? && params[:my_range].present?
+
+      @lower_pay = params[:my_range].split(";").first.to_i * 100
+      @higher_pay = params[:my_range].split(";").last.to_i * 100
+
+      @jobs = policy_scope(Job).order(created_at: :desc)
+      @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
+
+      @jobs = @jobs.select do |job|
+        job.shifts.pluck(:price_cents).any? { |pay| (pay > @lower_pay) && (pay < @higher_pay) } &&
+          job.shifts.select { |shift| (shift.price_cents > @lower_pay) && (shift.price_cents < @higher_pay) }.any? { |shift| !shift.completed }
+      end
+
+    elsif params[:search].present? && params[:start_time].present?
+      lower_start_time = params[:start_time].split(";").first.to_i / 1000 + 3600
+      higher_start_time = params[:start_time].split(";").last.to_i / 1000 + 3600
+      base_date = Time.parse("1 January 1970")
+      @lower_start_date = base_date + lower_start_time
+      @higher_start_date = base_date + higher_start_time
+
+      @jobs = policy_scope(Job).order(created_at: :desc)
+      @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
+
+      @jobs = @jobs.select do |job|
+        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_date && start < @higher_start_date } &&
+          job.shifts.select { |shift| (shift.start_time > @lower_start_date) && (shift.start_time < @higher_start_date) }
       end
 
     elsif params[:search].present?

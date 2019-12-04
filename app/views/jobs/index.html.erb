@@ -25,13 +25,23 @@
           name: 'my_range',
           value: "",
           'data-type': "double",
-          'data-min': "6",
+          'data-min': "5",
           'data-max': "50",
           'data-from': "5",
           'data-to': "100",
           'data-grid': "true",
           'data-keyboard': "true",
-          'data-skin': "flat"
+          'data-skin': "round",
+          'data-prefix': "£"
+        } %>
+
+        <%= f.input :start_time, label: "Filter by date", required: false,
+          input_html: { class: 'js-range-slider2',
+          type: 'text',
+          name: 'start_time',
+          value: "",
+          'data-type': "double",
+          'data-skin': "round"
         } %>
 
         <% end %>
