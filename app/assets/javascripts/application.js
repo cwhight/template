@@ -24,7 +24,8 @@ $(".js-range-slider").ionRangeSlider({});
 
 var lang = "en-US";
 var year = new Date().getFullYear();
-var month = new Date().getMonth();
+var futureMonth = new Date().getMonth() + 1;
+var currentMonth = new Date().getMonth();
 var day = new Date().getDate();
 
 function dateToTS (date) {
@@ -43,9 +44,9 @@ function tsToDate (ts) {
 
 $(".js-range-slider2").ionRangeSlider({
   grid: true,
-  min: dateToTS(new Date(year, month, day)),
-  max: dateToTS(new Date(year, month, day)),
-  from: dateToTS(new Date(year, month, day)),
-  to: dateToTS(new Date(year, month, day)),
+  min: dateToTS(new Date(year, currentMonth, day)),
+  max: dateToTS(new Date(year, futureMonth, day)),
+  from: dateToTS(new Date(year, currentMonth, day)),
+  to: dateToTS(new Date(year, futureMonth, day)),
   prettify: tsToDate
 });

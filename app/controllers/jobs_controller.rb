@@ -6,9 +6,11 @@ class JobsController < ApplicationController
     @request = Request.new
     if params[:search].present? && params[:my_range].present? && params[:start_time].present?
 
-      @lower_start_time = params[:start_time].split(";").first
-      raise
-      @higher_start_time =
+      lower_start_time = params[:start_time].split(";").first.to_i / 1000 + 3600
+      higher_start_time = params[:start_time].split(";").last.to_i / 1000 + 3600
+      base_date = Time.parse("1 January 1970")
+      @lower_start_date = base_date + lower_start_time
+      @higher_start_date = base_date + higher_start_time
 
       @lower_pay = params[:my_range].split(";").first.to_i * 100
       @higher_pay = params[:my_range].split(";").last.to_i * 100
@@ -22,8 +24,8 @@ class JobsController < ApplicationController
       end
 
       @jobs = @jobs.select do |job|
-        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_time && start < @higher_start_time } &&
-          job.shifts.select { |shift| (shift.start_time > @lower_start_time) && (shift.start_time < @higher_start_time) }
+        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_date && start < @higher_start_date } &&
+          job.shifts.select { |shift| (shift.start_time > @lower_start_date) && (shift.start_time < @higher_start_date) }
       end
 
     elsif params[:search].present? && params[:my_range].present?
@@ -40,16 +42,18 @@ class JobsController < ApplicationController
       end
 
     elsif params[:search].present? && params[:start_time].present?
-      @lower_start_time = params[:start_time].split(";").first
-      raise
-      @higher_start_time =
+      lower_start_time = params[:start_time].split(";").first.to_i / 1000 + 3600
+      higher_start_time = params[:start_time].split(";").last.to_i / 1000 + 3600
+      base_date = Time.parse("1 January 1970")
+      @lower_start_date = base_date + lower_start_time
+      @higher_start_date = base_date + higher_start_time
 
       @jobs = policy_scope(Job).order(created_at: :desc)
       @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
 
       @jobs = @jobs.select do |job|
-        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_time && start < @higher_start_time } &&
-          job.shifts.select { |shift| (shift.start_time > @lower_start_time) && (shift.start_time < @higher_start_time) }
+        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_date && start < @higher_start_date } &&
+          job.shifts.select { |shift| (shift.start_time > @lower_start_date) && (shift.start_time < @higher_start_date) }
       end
 
     elsif params[:search].present?
