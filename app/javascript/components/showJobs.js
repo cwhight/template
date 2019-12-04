@@ -1,14 +1,16 @@
-var coll = document.getElementsByClassName("collapsible");
-var i;
+const colls = document.querySelectorAll(".collapsible");
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (this.classList.contains("active")){
+
+
+colls.forEach((coll) => {
+  coll.addEventListener("click", (e) => {
+    e.currentTarget.classList.toggle("active");
+    var content = e.currentTarget.nextElementSibling;
+    if (e.currentTarget.classList.contains("active")){
       content.style.height = 0;
     } else {
       content.style.height = content.scrollHeight + "px";
     }
   });
-};
+})
+
