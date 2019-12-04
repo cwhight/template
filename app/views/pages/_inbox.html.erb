@@ -1,11 +1,10 @@
-<div class="p-3">
+<div class="p-1">
   <h4>Inbox</h4>
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-12 col-md-6">
 
-      <div class="m-2">
-
+      <div class="my-2">
         <h5>Open Applications</h5>
         <% chats.order(created_at: :desc).each do |chat|%>
           <% unless chat.request.shift.user || Time.parse(chat.request.shift.start_time) < Time.now%>
@@ -13,11 +12,12 @@
             <div class="card p-3 profile-card d-flex justify-content-between">
               <%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %>
               <%= link_to "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}", dashboard_chat_path(chat), remote: true %>
+              <%= chat.messages.last.content %>
             </div>
           <% end %>
         <% end %>
       </div>
-      <div class="m-2">
+      <div class="my-2">
         <h5>Upcoming Shifts</h5>
         <% chats.order(created_at: :desc).each do |chat|%>
           <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
@@ -33,7 +33,7 @@
 
 
 
-      <div class="m-2" id="old-conversations">
+      <div class="my-2" id="old-conversations">
         <h5>Old Conversations</h5>
         <% chats.order(created_at: :desc).each do |chat|%>
           <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
@@ -46,7 +46,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-6" id="chat-window-inbox">
+    <div class="col-12 col-md-6" id="chat-window-inbox">
 
     </div>
   </div>
