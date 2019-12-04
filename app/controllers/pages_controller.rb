@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
 
   def home
-    @jobs = Job.all
+    @jobs = policy_scope(Job).order(created_at: :desc)
     @request = Request.new
     @favourite = Favourite.new
   end
