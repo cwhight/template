@@ -13,7 +13,7 @@ import { initSelect2 } from '../plugins/init_select2';
 import { initSweetalert } from '../plugins/init_sweetalert';
 import { showJobs} from '../components/showJobs';
 import { stickyNavbar} from '../components/stickyNavbar';
-import { openMessages } from '../components/inbox.js';
+import { openMessages } from '../components/inbox';
 
 openMessages();
 
