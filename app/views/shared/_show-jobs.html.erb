@@ -1,7 +1,7 @@
 <%= render 'shared/job-card', job: job, num_shifts: num_shifts %>
 <div class="modal fade"  id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-for-mobile modal-content card shadow-none">
+    <div class="modal-content card shadow-none">
       <div class="modal-header job-summary-header">
         <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title} at #{job.summary}" %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
