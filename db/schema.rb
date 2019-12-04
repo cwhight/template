@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_143814) do
+ActiveRecord::Schema.define(version: 2019_12_04_103320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,17 +36,6 @@ ActiveRecord::Schema.define(version: 2019_11_29_143814) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "applications", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "shift_id"
-    t.string "title"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shift_id"], name: "index_applications_on_shift_id"
-    t.index ["user_id"], name: "index_applications_on_user_id"
-  end
-
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,11 +45,6 @@ ActiveRecord::Schema.define(version: 2019_11_29_143814) do
     t.index ["employee_id"], name: "index_chats_on_employee_id"
     t.index ["employer_id"], name: "index_chats_on_employer_id"
     t.index ["request_id"], name: "index_chats_on_request_id"
-  end
-
-  create_table "dashboards", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -174,8 +158,6 @@ ActiveRecord::Schema.define(version: 2019_11_29_143814) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "applications", "shifts"
-  add_foreign_key "applications", "users"
   add_foreign_key "chats", "requests"
   add_foreign_key "chats", "users", column: "employee_id"
   add_foreign_key "chats", "users", column: "employer_id"
