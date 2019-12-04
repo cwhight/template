@@ -1,19 +1,31 @@
 <%= render 'shared/job-card', job: job, num_shifts: num_shifts %>
-<div class="modal fade" id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade"  id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-for-mobile modal-xl modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content card shadow-none">
       <div class="modal-header job-summary-header">
-        <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title}" %></h5>
+        <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title} at #{job.summary}" %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="container">
-          <h1><%= job.title %></h1>
-          <p>Location: <%= job.location %></p>
-          <p>Company: <%= job.summary %></p>
-          <p>Brief: <%= job.description %></p>
+          <% score_array = job.user.reviews.map { |review| review.score } %>
+          <div class="mb-1 d-flex justify-content-between">
+            <p>
+              <strong>Employer: </strong>
+              <%= "#{job.user.first_name} - " %>
+              <% unless score_array.empty? %>
+                <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+                <span ><%= average_score.round(1) %><i class="star fas fa-star"></i></span>
+              <% end %>
+            </p>
+            <div>
+              <%= cl_image_tag job.user.photo.key, class: "avatar d-inline float-right", crop: :fill if job.user.photo.attached? %>
+            </div>
+          </div>
+          <p><i class="red-marker fas fa-map-marker-alt"></i> <%= job.location %></p>
+          <p><i class="green-marker fas fa-angle-double-right"></i> <%= job.description %></p>
           <div class="dropdown">
             <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}.length  %>
             <div class="dropdown-toggle btn btn-flat collapsible active">
