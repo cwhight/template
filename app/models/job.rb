@@ -19,10 +19,17 @@ class Job < ApplicationRecord
                     tsearch: { dictionary: "english" }
                   }
 
+  def relevant_shifts(min_price, max_price, lower_start_date, higher_start_date)
+    if min_price && lower_start_date
+      new_shifts = shifts.reject { |shift| (shift.start_time < lower_start_date) || (shift.start_time > higher_start_date) }.reject { |shift| (shift.price_cents < min_price) || (shift.price_cents > max_price) }
+    elsif min_price
+      new_shifts = shifts.reject { |shift| (shift.price_cents < min_price) || (shift.price_cents > max_price) }
+    elsif lower_start_date
+      new_shifts = shifts.reject { |shift| (shift.start_time < lower_start_date) || (shift.start_time > higher_start_date) }
+    else
+      new_shifts = shifts
+    end
 
-  def relevant_shifts(min_price, max_price)
-    return shifts if min_price.nil? || max_price.nil?
-
-    shifts.reject { |shift| (shift.price_cents < min_price) || (shift.price_cents > max_price) }
+    new_shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now }
   end
 end

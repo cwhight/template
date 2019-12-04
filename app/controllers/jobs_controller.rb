@@ -24,9 +24,10 @@ class JobsController < ApplicationController
       end
 
       @jobs = @jobs.select do |job|
-        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_date && start < @higher_start_date } &&
-          job.shifts.select { |shift| (shift.start_time > @lower_start_date) && (shift.start_time < @higher_start_date) }
+        job.shifts.pluck(:start_time).any? { |start| start > @lower_start_date && start < @higher_start_date }
       end
+
+      @jobs = @jobs.reject { |j| j.relevant_shifts(@lower_pay, @higher_pay, @lower_start_date, @higher_start_date).empty? }
 
     elsif params[:search].present? && params[:my_range].present?
 
