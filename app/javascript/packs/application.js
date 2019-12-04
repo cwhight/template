@@ -15,7 +15,10 @@ import { showJobs} from '../components/showJobs';
 import { stickyNavbar} from '../components/stickyNavbar';
 import { openMessages } from '../components/inbox';
 
-openMessages();
+if (document.getElementById("open-apps")) {
+  openMessages();
+
+}
 
 initSweetalert('#confirm-job', {
   title: "Done",
