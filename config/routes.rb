@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   resources :jobs do
+    resources :favourites, only: [:create, :destroy]
     resources :shifts, except: :show do
       resources :orders, only: [:create]
       resources :requests, except: [:show]
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   resources :orders, only: [:show] do
     resources :payments, only: :new
   end
-
 
   patch '/shifts/close', to: 'shifts#close_shifts', as: :close_shifts
 

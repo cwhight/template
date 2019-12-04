@@ -1,0 +1,10 @@
+var favToggle = document.querySelector("#favourite-toggle<%=@job.id%>")
+
+function replaceFav(innerHTML) {
+  favToggle.innerHTML = innerHTML
+}
+
+replaceFav('<%= link_to '', job_favourites_path(@job), method: :post, class: "far fa-heart", remote: true  %>')
+
+console.log("hello")
+

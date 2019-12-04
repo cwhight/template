@@ -3,8 +3,21 @@
     <% score_array = job.user.reviews.map { |review| review.score } %>
 
     <div class="job_card_header">
-      <h5 class="d-inline card-jobtitle"><%= job.title %></h5>
-
+      <h5 class="d-inline card-jobtitle mr-3"><%= job.title %></h5>
+      <div id="favourite-toggle<%=job.id%>">
+        <% if current_user %>
+          <% if current_user.favourites %>
+            <% if current_user.favourites.any? {|f| f.job == job} %>
+              <% favourite = current_user.favourites.where(job: job) %>
+              <%= link_to '', job_favourite_path(job, current_user.favourites.where(job: job).first), method: :delete, class: "fas fa-heart", remote: true  %>
+            <% else %>
+            <%= link_to '', job_favourites_path(job), method: :post, class: "far fa-heart", remote: true  %>
+            <% end %>
+          <% else %>
+            <%= link_to '', job_favourites_path(job), method: :post, class: "far fa-heart", remote: true  %>
+          <% end %>
+        <% end %>
+      </div>
 
       <%= cl_image_tag job.user.photo.key, class: "avatar d-inline float-right", crop: :fill if job.user.photo.attached? %>
 

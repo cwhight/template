@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :requests
   has_many :shifts
+  has_many :favourites
 
   has_many :messages
   has_many :chats, foreign_key: "employer_id"

@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     @jobs = Job.all
     @request = Request.new
+    @favourite = Favourite.new
   end
 
   def dashboard
