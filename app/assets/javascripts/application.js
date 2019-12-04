@@ -4,9 +4,9 @@
 //= require fullcalendar/locale-all
 //= require_tree .
 
-let upcoming = JSON.parse(document.getElementById("calendar").dataset.upcoming);
-let past = JSON.parse(document.getElementById("calendar").dataset.past);
-let pending = JSON.parse(document.getElementById("calendar").dataset.pending);
+var upcoming = $("#calendar").data('upcoming');
+var past = $("#calendar").data('past');
+var pending = $("#calendar").data('pending');
 
 $('#calendar').fullCalendar({
   eventSources: [
@@ -15,8 +15,11 @@ $('#calendar').fullCalendar({
     pending
   ],
   dayRender: function(calEvent, cell, date) {
-      cell.css('background-color', '#f4f4f4');
-  }
+
+  },
+  contentHeight: 500,
+  // plugins: [ timeGridPlugin ],
+  // defaultView: 'timeGridWeek'
 });
 
 
