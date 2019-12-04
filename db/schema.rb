@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_103320) do
     t.string "first_name"
     t.string "surname"
     t.date "dob"
-    t.boolean "employer", default: false
+    t.boolean "employer"
     t.text "summary"
     t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
