@@ -1,53 +1,108 @@
 <div class="p-1">
   <h4>Inbox</h4>
 
+  <div class="d-flex justify-content-between">
+    <div id="open-apps" class="btn p-3 card">
+      <a href="#">Open Applications</a>
+    </div>
+    <div id="upcoming" class="btn p-3 card">
+      <a href="#">Upcoming Jobs</a>
+    </div>
+    <div id="old-jobs" class="btn p-3 card">
+      <a href="#">Old Conversations</a>
+    </div>
+  </div>
+
   <div class="row">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-">
 
-      <div class="my-2">
-        <h5>Open Applications</h5>
-        <% chats.order(created_at: :desc).each do |chat|%>
-          <% unless chat.request.shift.user || Time.parse(chat.request.shift.start_time) < Time.now%>
-            <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
-            <div class="card p-3 profile-card d-flex justify-content-between">
-              <%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %>
-              <%= link_to "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}", dashboard_chat_path(chat), remote: true %>
-              <%= chat.messages.last.content %>
-            </div>
-          <% end %>
-        <% end %>
+      <div id="open-apps-msg" class="my-2">
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><i class="far fa-envelope"></i></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% chats.order(created_at: :desc).each do |chat|%>
+              <% unless chat.request.shift.user || Time.parse(chat.request.shift.start_time) < Time.now%>
+                <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
+                <tr>
+                  <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
+                  <td><%= render 'pages/chat-modal', chat: chat %></td>
+
+                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}" %></td>
+                  <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-      <div class="my-2">
-        <h5>Upcoming Shifts</h5>
+
+      <div id="upcoming-msg" class="d-none my-2">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><i class="far fa-envelope"></i></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+
         <% chats.order(created_at: :desc).each do |chat|%>
           <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
             <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
-            <div class="card p-3 profile-card d-flex justify-content-between">
-              <%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %>
-              <%= link_to "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}", chat_path(chat) %>
-            </div>
+                <tr>
+                  <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
+                  <td><%= render 'pages/chat-modal', chat: chat %></td>
+
+                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}" %></td>
+                  <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                </tr>
           <% end %>
         <% end %>
-
+          </tbody>
+        </table>
       </div>
 
-
-
-      <div class="my-2" id="old-conversations">
-        <h5>Old Conversations</h5>
+      <div class="d-none my-2" id="old-jobs-msg">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><i class="far fa-envelope"></i></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
         <% chats.order(created_at: :desc).each do |chat|%>
           <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
             <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
-            <div class="card p-3 profile-card d-flex justify-content-between">
-              <%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %>
-              <%= link_to "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}", chat_path(chat) %>
-            </div>
+                <tr>
+                  <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
+                  <td><%= render 'pages/chat-modal', chat: chat %></td>
+
+                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}" %></td>
+                  <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                </tr>
           <% end %>
         <% end %>
+        </tbody>
+        </table>
       </div>
     </div>
-    <div class="col-12 col-md-6" id="chat-window-inbox">
+    <div class="col-12">
+     <div class="my-2" id="chat-window-inbox">
 
+     </div>
     </div>
   </div>
 
