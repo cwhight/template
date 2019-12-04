@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_103320) do
+ActiveRecord::Schema.define(version: 2019_12_04_152605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2019_12_04_103320) do
     t.index ["employee_id"], name: "index_chats_on_employee_id"
     t.index ["employer_id"], name: "index_chats_on_employer_id"
     t.index ["request_id"], name: "index_chats_on_request_id"
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_favourites_on_job_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -161,6 +170,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_103320) do
   add_foreign_key "chats", "requests"
   add_foreign_key "chats", "users", column: "employee_id"
   add_foreign_key "chats", "users", column: "employer_id"
+  add_foreign_key "favourites", "jobs"
+  add_foreign_key "favourites", "users"
   add_foreign_key "jobs", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"

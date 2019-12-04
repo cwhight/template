@@ -4,6 +4,7 @@ class JobsController < ApplicationController
 
   def index
     @request = Request.new
+    @favourite = Favourite.new
     if params[:search].present? && params[:my_range].present? && params[:start_time].present?
 
       lower_start_time = params[:start_time].split(";").first.to_i / 1000 + 3600
