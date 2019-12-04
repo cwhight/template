@@ -26,7 +26,7 @@
               <%= show_read %>
               <p class="border-bottom"><%= user %>: <%= message.created_at.strftime("%H:%M") %></p>
             </div>
-            <p class="ml-3 p-3 <%= sender %>-chat-card card"><%= message.content %></p>
+            <p class="ml-3 p-3 <%= sender %>-chat-card message card"><%= message.content %></p>
           </div>
         </div>
       <% end %>
@@ -36,7 +36,7 @@
     </div>
     <script>
       var div = document.getElementById('chat_section');
-      div.scrollTop = div.scrollHeight
+      div.scrollTop = div.scrollHeight - div.clientHeight
       var channel = pusher.subscribe('<%=chat.id%>-channel');
       channel.bind('new-message', function(data) {
           let { content, user, sent, read, sender } = data;
@@ -58,6 +58,9 @@
           var messageBox = document.getElementById('message-box');
           messageBox.innerHTML = '<%= j render "chats/message-box", chat: chat, message: Message.new %>';
           div.scrollTop = div.scrollHeight
+          var messages = document.querySelectorAll(".message")
+          var lastMessage = messages[messages.length - 1];
+          lastMessage.scrollIntoView();
       });
     </script>
 </div>
