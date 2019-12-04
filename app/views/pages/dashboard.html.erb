@@ -35,6 +35,10 @@
       <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
     <% end %>
 
+    <li class="dashboard-selector"  data-selector="favourites">
+      <a href="#">Favourites ( <%= current_user.favourites.count %> )</a>
+    </li>
+
     <li class="dashboard-selector"  data-selector="messages">
       <a href="#">Messages ( <%= unread_messages %> )</a>
     </li>
