@@ -3,7 +3,8 @@
   <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content card shadow-none">
       <div class="modal-header job-summary-header">
-        <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title} at #{job.summary}" %></h5>
+        <h5 class="modal-title job-summary-title" id="exampleModalLongTitle"><%= "#{job.title}" %></h5>
+        <p><%= job.summary %></p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
