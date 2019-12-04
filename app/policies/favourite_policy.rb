@@ -6,7 +6,8 @@ class FavouritePolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    user.favourites.all? {|f| f.job != record.job}
+
   end
 
   def destroy?
