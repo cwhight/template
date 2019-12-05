@@ -67,33 +67,45 @@
           <div class="each-render col-12 col-lg-6">
             <%= render 'shared/profile-card', user: current_user %>
           </div>
-          <div class=" each-render col-12 col-lg-6"  >
+          <div class="each-render col-12 col-lg-6">
             <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
               <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
                 <p>Inbox ( <%= unread_messages %> )</p>
             </div>
-            <div class="btn dashboard-selector card p-3 m-2" data-selector="pending-requests">
-              <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
-                <p>Applications ( <%= pending_requests %> )</p>
+          </div>
+          <div class=" each-render col-12 col-lg-6"  >
+            <div class="row px-0">
+              <div class="col-6 pr-0">
+                <div class="btn dashboard-selector card p-3 m-2" data-selector="pending-requests">
+                  <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
+                    <p>Applications ( <%= pending_requests %> )</p>
+                </div>
+              </div>
+
+              <div class="col-6 pl-0">
+
+                <div class="btn dashboard-selector card p-3 m-2" data-selector="favourites">
+                  <a href="#" ><i class="my-3 profile-icon far fa-heart"></i></a>
+                    <p>Favourites ( <%= current_user.favourites.count %> )</p>
+                </div>
+              </div>
+              <div class="col-6 pr-0">
+                <div class="btn dashboard-selector card p-3 m-2" data-selector="upcoming-jobs">
+                  <a href="#" ><i class="my-3 profile-icon fas fa-clock"></i></a>
+                    <p>Upcoming ( <%= upcoming_jobs.count %> )</p>
+                </div>
+              </div>
+              <div class="col-6 pl-0">
+                <div class="btn dashboard-selector card p-3 m-2" data-selector="job-history">
+                  <a href="#" ><i class="my-3 profile-icon fas fa-history"></i></a>
+                    <p>Job History</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="each-render col-12 col-lg-6">
-            <div class="btn dashboard-selector card p-3 m-2" data-selector="favourites">
-              <a href="#" ><i class="my-3 profile-icon far fa-heart"></i></a>
-                <p>Favourites ( <%= current_user.favourites.count %> )</p>
-            </div>
           </div>
           <div class="each-render col-12 col-lg-6">
-            <div class="btn dashboard-selector card p-3 m-2" data-selector="upcoming-jobs">
-              <a href="#" ><i class="my-3 profile-icon fas fa-clock"></i></a>
-                <p>Upcoming Jobs ( <%= upcoming_jobs.count %> )</p>
-            </div>
-          </div>
-          <div class="each-render col-12 col-lg-6">
-            <div class="btn dashboard-selector card p-3 m-2" data-selector="job-history">
-              <a href="#" ><i class="my-3 profile-icon fas fa-history"></i></a>
-                <p>Job History</p>
-            </div>
           </div>
           <div class="col-12">
 
