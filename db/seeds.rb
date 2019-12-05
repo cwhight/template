@@ -45,7 +45,7 @@ sectors.each do |e|
   Sector.create!(title: e)
 end
 
-prices = [1000,1500,1400,950,750,1800]
+prices = [1100,1500,1400,1050,1250,1800]
 
 now = DateTime.now
 today = Time.parse(now.strftime("%Y-%m-%dT00:00:00%z"))
@@ -194,7 +194,8 @@ puts "creating Freddie's jobs"
 
   end
   puts "creating old shifts"
-  rand(4..6).times do
+  j = 0
+  rand(4..5).times do
     start_index = rand(0..6)
     user = employees[rand(0..(employees.size - 1))]
     Shift.new(user: user, title: job.title, job: job, price_cents: price, start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*3600, completed: true).save(validate: false)
@@ -210,8 +211,10 @@ puts "creating Freddie's jobs"
       message.save(validate: false)
 
     review_index = rand(0..3)
-    Review.create!(title: employee_review_titles[review_index], score: employee_review_scores[review_index], content: employee_review_content[review_index], shift: shift, user: user)
+
+    Review.create!(title: employee_review_titles[review_index], score: employee_review_scores[review_index], content: employee_review_content[review_index], shift: shift, user: user) unless j == 3
     Review.create!(title: employer_review_titles[review_index], score: employer_review_scores[review_index], content: employer_review_content[review_index], shift: shift, user: job.user)
+    j += 1
   end
 end
 

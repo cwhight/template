@@ -1,15 +1,14 @@
 
   <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#show<%=shift.id%>">
     <% request_number = 0 %>
-    <% request_number += shift.requests.where({completed: nil}).count.to_i %>
+    <% request_number += shift.requests.reject{|request| request.shift.user || Time.parse(request.shift.start_time) < Time.now }.size %>
     <% if request_number == 0 %>
       <p class="m-0">No applications</p>
     <% elsif request_number == 1 %>
-      <p class="green-text m-0"><%= request_number %> application</p>
-    <% elsif request_number < 4 %>
-      <p class="orange-text m-0"><%= request_number %> applications</p>
-    <% else %>
-      <p class="red-text m-0"><%= request_number %> applications</p>
+      <p class="m-0"><%= request_number %> application</p>
+    <% else  %>
+      <p class="m-0"><%= request_number %> applications</p>
+
     <% end %>
   </button>
 

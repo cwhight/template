@@ -58,7 +58,7 @@
             <% else %>
               <tr>
             <% end %>
-              <th scope="row"><%= Time.parse(shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(shift.start_time).strftime("%H/%M") %> to <%= Time.parse(shift.end_time).strftime("%H/%M") %></th>
+              <th scope="row"><%= Time.parse(shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(shift.start_time).strftime("%H:%M") %> to <%= Time.parse(shift.end_time).strftime("%H:%M") %></th>
               <td>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></td>
               <td>Total Pay: <%= number_to_currency(shift.total_pay, unit: "£") %></td>
               <% if shift.user %>
@@ -102,7 +102,7 @@
             <% else %>
               <tr>
             <% end %>
-              <th scope="row"><%= Time.parse(shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(shift.start_time).strftime("%H/%M") %> to <%= Time.parse(shift.end_time).strftime("%H/%M") %></th>
+              <th scope="row"><%= Time.parse(shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(shift.start_time).strftime("%H:%M") %> to <%= Time.parse(shift.end_time).strftime("%H:%M") %></th>
               <td>Hourly Price: <%= humanized_money_with_symbol(shift.price) %></td>
               <td>Total Pay: <%= number_to_currency(shift.total_pay, unit: "£") %></td>
 
