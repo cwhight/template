@@ -93,7 +93,7 @@
 
         <div id="active-applications" data-target="pending-requests" class="d-none dashboard-card">
           <h4>Active Applications</h4>
-          <%= render 'requests/active-applications', chats: current_user.chats %>
+          <%= render 'requests/active-applications', chats: current_user.chats.order(updated_at: :desc).reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now } %>
 
         </div>
 
