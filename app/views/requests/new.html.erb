@@ -1,22 +1,6 @@
 <div class="container confirmation-page">
   <h2 class="mt-2"><i class="fas fa-arrow-right"></i> Your application for <%= @job.title %> at <%= @job.summary %></h2><br>
   <div class="row">
-    <div class="col-12 col-md-6">
-      <div>
-        <%= render '/shared/profile-card', user: current_user, profile: true %>
-      </div>
-      <div
-        id="map"
-        style="
-        display: block;
-        height: 40vh;
-        "
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-        class="card m-2"
-        >
-      </div>
-    </div>
     <% score_array = @job.user.reviews.map { |review| review.score } %>
       <div class="col-12  col-md-6">
         <div class="d-flex justify-content-between">
@@ -48,6 +32,22 @@
           </div>
         </div>
       </div>
+    <div class="col-12 col-md-6">
+      <div id="profile-on-phone">
+        <%= render '/shared/profile-card', user: current_user, profile: true %>
+      </div>
+      <div
+        id="map"
+        style="
+        display: block;
+        height: 40vh;
+        "
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        class="card m-2 mb-4"
+        >
+      </div>
+    </div>
   </div>
 </div>
 
