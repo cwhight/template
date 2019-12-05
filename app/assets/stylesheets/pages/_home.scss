@@ -5,7 +5,7 @@
 }
 
 body {
-  min-height: 92vh;
+  height: 92vh;
   padding-top: 66px;
   margin: 0;
   overflow-x: hidden;
@@ -76,7 +76,7 @@ p {
 
 .footer {
   background-color: #A5B3C0;
-  min-height: 10vh;
+  height: 10vh;
 }
 
 #footer-tagline {
@@ -112,10 +112,6 @@ p {
   display: flex;
   justify-content: space-between;
   margin: 0;
-}
-
-.transparent-brand {
-  display: none !important;
 }
 
 .homepage-img {
