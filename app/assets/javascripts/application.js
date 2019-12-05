@@ -3,6 +3,7 @@
 //= require fullcalendar
 //= require fullcalendar/locale-all
 //= require_tree .
+//= require ./cable.js
 
 var upcoming = $("#calendar").data('upcoming');
 var past = $("#calendar").data('past');
