@@ -35,7 +35,7 @@
             </div>
 
             <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
-            <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-0 pr-2"},
+            <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-1 pr-2"},
               input_html: { class: 'js-range-slider',
               type: 'text',
               name: 'my_range',
