@@ -24,17 +24,17 @@ addresses = ["28 Balaclava Road, London Borough of Southwark, England, United Ki
 "Shoreditch, London Borough of Hackney, England, United Kingdom"]
 p addresses.size
 
-jobs = [["Bar Staff","Experienced bar staff required to cover shifts at lively bar/restaurant in Hoxton","Hospitality"],
+jobs = [["Barman/Barwoman","Experienced bar staff required to cover shifts at lively bar/restaurant in Hoxton","Hospitality"],
 ["Bar Staff","Bar staff needed who has experience mixing cocktails and working very busy bars","Hospitality"],
  ["Waitress","Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
   ["Waiter/Waitress","Waiter/Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
    ["Waiter","Waiter/Waitress needed to wait tables, lunch and dinner shifts available","Hospitality"],
     ["Bar Manager","Desperately need experienced bar manager cover, our usual manager is off sick and we need someone who can run the show","Hospitality"],
-     ["Cleaner","","Hospitality"],
+
+     ["Front of House","","Hospitality"],["Cleaner","","Hospitality"],
      ["Model","","Media"],
      ["Chef","","Hospitality"],
-     ["Kitchen Staff","","Hospitality"],
-     ["Front of House","","Hospitality"]]
+     ["Kitchen Staff","","Hospitality"]]
 
 sectors = ["Other", "Finance", "Business", "Charity", "Design", "Manufacturing",
               "Agriculture", "Healthcare", "Hospitality", "IT", "Security", "Leisure", "Marketing",
@@ -45,14 +45,19 @@ sectors.each do |e|
   Sector.create!(title: e)
 end
 
-employee_review_scores = [4,5,4,2]
+prices = [1000,1500,1400,950,750,1800]
+
+now = DateTime.now
+today = DateTime.parse(now.strftime("%Y-%m-%dT00:00:00%z"))
+
+employee_review_scores = [4,5,4,5]
 employee_review_titles = ["Did a good job", "Was a great worker", "Would hire again", "Bad experience"]
-employee_review_content = ["Very experienced, picked up tasks easily and got on well with everyone", "Nothing more to add, they were great", "Happy to hire them again, turned up on time, carried out the shift professionally", "Would not reccomend, turned up late, sloppy and inexperienced"]
-employer_review_scores = [4,5,5,1]
+employee_review_content = ["Very experienced, picked up tasks easily and got on well with everyone", "Nothing more to add, they were great", "Happy to hire them again, turned up on time, carried out the shift professionally", "Brilliant worker, really easy to work with, great fun too"]
+employer_review_scores = [4,5,5,4]
 employer_review_titles = ["Great to work for", "Busy shift, but fair employer", "Happily work for them again", "Bad experience"]
-employer_review_content = ["No problems, paid on time, comfortable environment and friendly boss", "Very busy bar, but good staff and friendly boss", "Nothing to add, would happily work for them again", "Not a safe place to work, overcrowded, dirty and boss was unreasonable"]
-shift_starts = [Time.now + 360, Time.now + 3600, Time.now + 3600*24 ]
-past_shift_starts = [Time.now - 24*3*3600, Time.now - 8*3600, Time.now - 3600*24 ]
+employer_review_content = ["No problems, paid on time, comfortable environment and friendly boss", "Very busy bar, but good staff and friendly boss", "Nothing to add, would happily work for them again", "No problems at all, really good shift"]
+shift_starts = [today + 1 + 1/2, today + 1 + 37/48, today + 1 + 20/24, today + 1 + 21/24, today + 2 + 18/24, today + 4 + 19/24, today + 6 + 43/48 ]
+past_shift_starts = [today - 1/2, today - 4/24, today - 6/24, today - 3/2, today - 28/24, today - 30/24, today - 150/24  ]
 employers = []
 employees = []
 
@@ -65,7 +70,7 @@ end
 
 puts "creating Freddie"
 
-freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", password: "123456", employer: true, first_name: "Freddie", surname: "Warren")
+freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", password: "123456", employer: true, first_name: "Freddie", surname: "Warren", summary: "Owner of a small chain of restaurants/bars in North London")
 
 
 puts "Creating employees"
@@ -78,17 +83,18 @@ end
 puts "creating Freddie's jobs"
 
   i = 0
-6.times do
+2.times do
+  price = prices[rand(0..prices.size - 1)]
   puts "1"
   job = Job.create!(user: freddie, title: jobs[i][0], description: jobs[i][1], location: "100-102 Hoxton St, Hackney, London N1 6SG", summary: "Hoxton 100", sectors: Sector.where(title: jobs[i][2]) )
   puts "2"
   i += 1
   # p employees[rand(0..(employees.size - 1))]
-  rand(5..10).times do
+  rand(3..6).times do
     user = employees[rand(0..(employees.size - 1))]
     puts "future shifts"
-    start_index = rand(0..2)
-    Shift.create!(title: job.title, job: job, price_cents: rand(1000..2500), start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
+    start_index = rand(0..6)
+    Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*1/24)
     shift = Shift.last
     Request.new(shift: shift, user: user, content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
          request = Request.last
@@ -103,9 +109,9 @@ puts "creating Freddie's jobs"
   end
   puts "creating old shifts"
   rand(4..6).times do
-    start_index = rand(0..2)
+    start_index = rand(0..6)
     user = employees[rand(0..(employees.size - 1))]
-    Shift.new(user: user, title: job.title, job: job, price_cents: rand(1000..2500), start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*3600, completed: true).save(validate: false)
+    Shift.new(user: user, title: job.title, job: job, price_cents: price, start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*1/24, completed: true).save(validate: false)
     shift = Shift.last
     Request.new(shift: shift, user: user , content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
       request = Request.last
@@ -126,39 +132,87 @@ end
 puts "Employers created"
 
 
-puts "Creating Charlie"
+puts "Creating Raj"
 
-User.create!(email: "raj.panasar@gmail.com", password: "123456", employer: false, first_name: "Raj", surname: "Panasar", dob: "01/11/1953" )
+User.create!(email: "raj.panasar@gmail.com", password: "123456", employer: false, first_name: "Raj", surname: "Panasar", dob: "01/11/1993", summary: "I have 8 years experience working in multiple hospitality roles, can wait tables, mix cocktails and manage a bar. Looking to pick up additional shifts over the holidays" )
 
 charlie = User.last
 
-employees << charlie
+
 
 puts "creating random jobs"
 
 i = 0
 20.times do
-  job_index = rand(0..(jobs.size-1))
+  price = prices[rand(0..prices.size - 1)]
+  job_index = rand(0..(jobs.size-5))
   job = Job.create!(user: employers[rand(0..employers.size - 1)], title: jobs[job_index][0], location: addresses[i], description: "Cover needed for multiple shifts", sectors: Sector.where(title: jobs[job_index][2]) )
   puts "jobs created"
   i += 1
   rand(1..5).times do
-    start_index = rand(0..2)
-    shift = Shift.create!(title: job.title, job: job, price_cents: rand(1000..2500), start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
+    start_index = rand(0..6)
+    shift = Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
     puts "Shift created"
     Request.create!(shift: shift, user: employees[rand(0..(employees.size - 1))], content: "Hi, I'd really like to work this shift, please get back to me if you have any questions")
   end
   rand(2..4).times do
-    start_index = rand(0..2)
+    start_index = rand(0..6)
     user = employees[rand(0..(employees.size - 1))]
-    Shift.new(user: user, title: job.title, job: job, price_cents: rand(1000..2500), start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*3600, completed: true).save(validate: false)
+    Shift.new(user: user, title: job.title, job: job, price_cents: price, start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*3600, completed: true).save(validate: false)
     shift = Shift.last
     Request.new(shift: shift, user: user , content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
     review_index = rand(0..3)
     Review.create!(title: employee_review_titles[review_index], score: employee_review_scores[review_index], content: employee_review_content[review_index], shift: shift, user: user)
     Review.create!(title: employer_review_titles[review_index], score: employer_review_scores[review_index], content: employer_review_content[review_index], shift: shift, user: job.user)
   end
+
 end
+
+i = 0
+4.times do
+  price = prices[rand(0..prices.size - 1)]
+  job_index = rand(0..(jobs.size-5))
+  job = Job.create!(user: employers[rand(0..employers.size - 1)], title: jobs[job_index][0], location: addresses[i], description: "Cover needed for multiple shifts", sectors: Sector.where(title: jobs[job_index][2]) )
+  puts "jobs created"
+  i += 1
+  user = charlie
+  rand(0..1).times do
+    start_index = rand(0..6)
+    shift = Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
+    puts "Shift created"
+    Request.create!(shift: shift, user: user, content: "Hi, I'd really like to work this shift, please get back to me if you have any questions")
+    request = Request.last
+    chat = Chat.new(request: request, employee: user, employer: request.shift.job.user)
+
+      chat.save(validate: false)
+      p chat
+      message = Message.new(chat: chat, content: request.content, read: true, user: user )
+      request.update(chat: chat)
+      message.save(validate: false)
+
+  end
+  rand(1..2).times do
+    start_index = rand(0..6)
+
+    Shift.new(user: user, title: job.title, job: job, price_cents: price, start_time: past_shift_starts[start_index], end_time: past_shift_starts[start_index] + rand(4..6)*3600, completed: true).save(validate: false)
+    shift = Shift.last
+    Request.new(shift: shift, user: user , content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
+    review_index = rand(0..3)
+    request = Request.last
+    chat = Chat.new(request: request, employee: user, employer: request.shift.job.user)
+
+      chat.save(validate: false)
+      p chat
+      message = Message.new(chat: chat, content: request.content, read: true, user: user )
+      request.update(chat: chat)
+      message.save(validate: false)
+    Review.create!(title: employee_review_titles[review_index], score: employee_review_scores[review_index], content: employee_review_content[review_index], shift: shift, user: user)
+    Review.create!(title: employer_review_titles[review_index], score: employer_review_scores[review_index], content: employer_review_content[review_index], shift: shift, user: job.user)
+  end
+
+end
+
+
 
 puts "Jobs Created"
 
