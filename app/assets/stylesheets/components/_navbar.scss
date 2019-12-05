@@ -1,3 +1,30 @@
+@media (max-width: 500px) {
+  .navbar-lewagon {
+    display: none !important
+  }
+
+}
+
+@media (min-width: 500px) {
+  .navbar-bottom {
+    display: none !important
+  }
+
+}
+
+.bottom-navlink {
+  color: white;
+  font-size: 30px;
+}
+
+.navbar-bottom {
+  justify-content: space-between;
+  background-color: #2969DA;
+  max-width: 100%;
+  min-height: 66px;
+}
+
+
 .navbar-lewagon {
   justify-content: space-between;
   background-color: #2969DA;
