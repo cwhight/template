@@ -14,19 +14,27 @@ $('#calendar').fullCalendar({
     past,
     pending
   ],
-  dayRender: function(calEvent, cell, date) {
-
-  },
   contentHeight: 500,
 });
 
+// price filter
+
 $(".js-range-slider").ionRangeSlider({});
+
+// date filter
 
 var lang = "en-US";
 var year = new Date().getFullYear();
 var futureMonth = new Date().getMonth() + 1;
 var currentMonth = new Date().getMonth();
 var day = new Date().getDate();
+
+var lowerYear = $(".targeter").data('startyear');
+var lowerMonth = $(".targeter").data('startmonth') - 1;
+var lowerDay = $(".targeter").data('startday');
+var higherYear = $(".targeter").data('endyear');
+var higherMonth = $(".targeter").data('endmonth')  - 1;
+var higherDay = $(".targeter").data('endday');
 
 function dateToTS (date) {
     return date.valueOf();
@@ -38,15 +46,16 @@ function tsToDate (ts) {
     return d.toLocaleDateString(lang, {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
+        hour: 'numeric',
     });
 }
 
 $(".js-range-slider2").ionRangeSlider({
   grid: true,
-  min: dateToTS(new Date(year, currentMonth, day)),
-  max: dateToTS(new Date(year, futureMonth, day)),
-  from: dateToTS(new Date(year, currentMonth, day)),
-  to: dateToTS(new Date(year, futureMonth, day)),
+  min: dateToTS(new Date(year, currentMonth, day, 1)),
+  max: dateToTS(new Date(year, futureMonth, day, 23)),
+  from: dateToTS(new Date(lowerYear, lowerMonth, lowerDay, 1)),
+  to: dateToTS(new Date(higherYear, higherMonth, higherDay, 23)),
   prettify: tsToDate
 });

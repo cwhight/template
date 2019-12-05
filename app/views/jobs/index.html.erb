@@ -2,7 +2,15 @@
   <div class="content-index col-12 col-lg-7">
     <div class="container">
       <div class="row justify-content-between border-bottom">
-        <h1 class="">Available Jobs</h1>
+        <h1 class="targeter"
+        data-sectors="<%= params[:search][:sectors].reject(&:empty?) %>"
+        data-startyear="<%= @lower_start_date.year %>"
+        data-startmonth="<%= @lower_start_date.month %>"
+        data-startday="<%= @lower_start_date.day %>"
+        data-endyear="<%= @higher_start_date.year %>"
+        data-endmonth="<%= @higher_start_date.month %>"
+        data-endday="<%= @higher_start_date.day %>">
+        Available Jobs</h1>
         <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
       </div>
       <div>
@@ -17,8 +25,7 @@
             </button>
           </div>
         </div>
-
-        <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
+        <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
         <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-0"},
           input_html: { class: 'js-range-slider',
           type: 'text',
@@ -27,8 +34,8 @@
           'data-type': "double",
           'data-min': "5",
           'data-max': "50",
-          'data-from': "5",
-          'data-to': "100",
+          'data-from': "#{params[:my_range].split(';').first}",
+          'data-to': "#{params[:my_range].split(';').last}",
           'data-grid': "true",
           'data-keyboard': "true",
           'data-skin': "round",
@@ -41,7 +48,8 @@
           name: 'start_time',
           value: "",
           'data-type': "double",
-          'data-skin': "round"
+          'data-skin': "round",
+          'date-grid': "false"
         } %>
 
         <% end %>
