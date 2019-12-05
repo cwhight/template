@@ -18,7 +18,7 @@
             </th>
             <td><%= request.shift.job.user.first_name %></td>
             <% if request.chat %>
-              <td><%= link_to 'View Messages', chat_path(request.chat) %></td>
+              <td><%= link_to 'View Messages', chat_path(request.chat), class: 'btn btn-flat' %></td>
             <% else %>
               <td></td>
             <% end %>

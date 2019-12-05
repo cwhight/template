@@ -61,5 +61,8 @@
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <% unless params[:controller] == 'pages' && params[:action] == 'home' %>
+      <%= render 'pages/bottom-navbar' %>
+    <% end %>
   </body>
 </html>

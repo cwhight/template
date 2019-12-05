@@ -2,7 +2,7 @@
   <div class="content-index col-12 col-lg-7">
     <div class="container">
       <div class="row justify-content-between border-bottom">
-        <h1 class="targeter m-3">
+        <h1 class="targeter m-3"
           <% if params[:search] %>
             <% if params[:search][:sectors] %>
               data-sectors="<%= params[:search][:sectors].reject(&:empty?) %>"
@@ -16,8 +16,8 @@
           <% if @higher_start_date %>
             data-endyear="<%= @higher_start_date.year %>"
             data-endmonth="<%= @higher_start_date.month %>"
-            data-endday="<%= @higher_start_date.day %>">
-          <% end %>Available Jobs</h1>
+            data-endday="<%= @higher_start_date.day %>"
+          <% end %>>Available Jobs</h1>
       </div>
 
         <div class="dropdown-toggle w-100 my-1 btn btn-large btn-flat collapsible active">

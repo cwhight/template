@@ -12,6 +12,14 @@ body {
   background: white;
 }
 
+@media (max-width: 768px) {
+  body {
+    padding-top: 0px;
+    padding-bottom: 66px;
+  }
+
+}
+
 .scrollable-menu {
   top: -230px !important;
   left: 406px !important;
