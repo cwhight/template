@@ -114,11 +114,24 @@ p {
   margin: 0;
 }
 
-.homepage-avatar {
-  margin-right: 15px;
-  margin-top: 10px;
+.transparent-brand {
+  display: none !important;
 }
 
 .homepage-img {
   margin-top: 10px;
+}
+
+.fixed-top {
+  z-index: 1 !important;
+}
+
+@media only screen and (max-width: 400px) {
+.mobile-avatar {
+  margin: 0px;
+  }
+}
+
+.transparent-nav {
+  background-color: rgba(0,0,0,0);
 }
