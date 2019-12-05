@@ -37,7 +37,7 @@
   <body>
 
     <% unless params[:controller] == 'pages' && params[:action] == 'home' %>
-      <%= render 'shared/navbar'  %>
+      <%= render 'shared/navbar' %>
     <% end %>
     <%= render 'layouts/messages' %>
         <%= yield %>
