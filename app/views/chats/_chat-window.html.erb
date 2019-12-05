@@ -22,7 +22,7 @@
           <% end %>
           <div class="<%= sender %> d-flex justify-content-between flex-column w-75">
             <div class="d-flex justify-content-between">
-              <%# message.user == current_user ? user = "You" : user = message.user.first_name %>
+              <% message.user == current_user ? user = "You" : user = message.user.first_name %>
               <%# if message.read && message.user == current_user %>
                 <!-- <p class="green-text"><i class="fas fa-check px-3"></i>Read</p> -->
               <%# elsif !message.read && message.user == current_user %>
