@@ -52,10 +52,10 @@ today = Time.parse(now.strftime("%Y-%m-%dT00:00:00%z"))
 
 
 employee_review_scores = [4,5,4,5]
-employee_review_titles = ["Did a good job", "Was a great worker", "Would hire again", "Bad experience"]
+employee_review_titles = ["Did a good job", "Was a great worker", "Would hire again", "Brilliant"]
 employee_review_content = ["Very experienced, picked up tasks easily and got on well with everyone", "Nothing more to add, they were great", "Happy to hire them again, turned up on time, carried out the shift professionally", "Brilliant worker, really easy to work with, great fun too"]
 employer_review_scores = [4,5,5,4]
-employer_review_titles = ["Great to work for", "Busy shift, but fair employer", "Happily work for them again", "Bad experience"]
+employer_review_titles = ["Great to work for", "Busy shift, but fair employer", "Happily work for them again", "Very Good"]
 employer_review_content = ["No problems, paid on time, comfortable environment and friendly boss", "Very busy bar, but good staff and friendly boss", "Nothing to add, would happily work for them again", "No problems at all, really good shift"]
 shift_starts = [today + 3600*24 + 3600*12, today + 3600*24 + 3600*24*37/48, today + 3600*24 + 3600*24*20/24, today + 3600*24 + 3600*24*21/24, today + 3600*24*2 + 3600*24*18/24, today + 3600*24*4 + 3600*24*19/24, today + 3600*24*6 + 3600*24*43/48 ]
 past_shift_starts = [today - 3600*24*1/2, today - 3600*24*4/24, today - 3600*24*6/24, today - 3600*24*3/2, today - 3600*24*28/24, today - 3600*24*30/24, today - 3600*24*150/24  ]
