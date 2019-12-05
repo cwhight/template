@@ -48,7 +48,8 @@ end
 prices = [1000,1500,1400,950,750,1800]
 
 now = DateTime.now
-today = DateTime.parse(now.strftime("%Y-%m-%dT00:00:00%z"))
+today = Time.parse(now.strftime("%Y-%m-%dT00:00:00%z"))
+
 
 employee_review_scores = [4,5,4,5]
 employee_review_titles = ["Did a good job", "Was a great worker", "Would hire again", "Bad experience"]
@@ -56,8 +57,8 @@ employee_review_content = ["Very experienced, picked up tasks easily and got on 
 employer_review_scores = [4,5,5,4]
 employer_review_titles = ["Great to work for", "Busy shift, but fair employer", "Happily work for them again", "Bad experience"]
 employer_review_content = ["No problems, paid on time, comfortable environment and friendly boss", "Very busy bar, but good staff and friendly boss", "Nothing to add, would happily work for them again", "No problems at all, really good shift"]
-shift_starts = [today + 1 + 1/2, today + 1 + 37/48, today + 1 + 20/24, today + 1 + 21/24, today + 2 + 18/24, today + 4 + 19/24, today + 6 + 43/48 ]
-past_shift_starts = [today - 1/2, today - 4/24, today - 6/24, today - 3/2, today - 28/24, today - 30/24, today - 150/24  ]
+shift_starts = [today + 3600*24 + 3600*12, today + 3600*24 + 3600*24*37/48, today + 3600*24 + 3600*24*20/24, today + 3600*24 + 3600*24*21/24, today + 3600*24*2 + 3600*24*18/24, today + 3600*24*4 + 3600*24*19/24, today + 3600*24*6 + 3600*24*43/48 ]
+past_shift_starts = [today - 3600*24*1/2, today - 3600*24*4/24, today - 3600*24*6/24, today - 3600*24*3/2, today - 3600*24*28/24, today - 3600*24*30/24, today - 3600*24*150/24  ]
 employers = []
 employees = []
 
@@ -93,7 +94,7 @@ puts "creating Freddie's jobs"
   rand(3..6).times do
     user = employees[rand(0..(employees.size - 1))]
     puts "future shifts"
-    start_index = rand(0..6)
+    start_index = rand(0..4)
     Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*1/24)
     shift = Shift.last
     Request.new(shift: shift, user: user, content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
