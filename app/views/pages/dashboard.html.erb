@@ -9,7 +9,7 @@
     <li class="dashboard-selector"  data-selector="pending-requests">
       <% pending_requests = 0 %>
       <% current_user.requests.each do |request| %>
-        <% unless request.shift.user || Time.parse(shift.start_time) < Time.now %>
+        <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
           <% pending_requests += 1 %>
         <% end %>
       <% end %>
