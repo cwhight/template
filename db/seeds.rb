@@ -87,7 +87,7 @@ puts "Employers created"
 
 puts "Creating Raj"
 
-User.create!(email: "raj.panasar@gmail.com", password: "123456", employer: false, first_name: "Raj", surname: "Panasar", dob: "01/11/1993", summary: "I have 8 years experience working in multiple hospitality roles, can wait tables, mix cocktails and manage a bar. Looking to pick up additional shifts over the holidays" )
+User.create!(email: "chris.williams@gmail.com", password: "123456", employer: false, first_name: "Chris", surname: "Williams", dob: "01/11/1993", summary: "I have 8 years experience working in multiple hospitality roles, can wait tables, mix cocktails and manage a bar. Looking to pick up additional shifts over the holidays" )
 
 charlie = User.last
 
