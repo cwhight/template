@@ -11,6 +11,11 @@ const initSelect2 = () => {
     allowClear: true,
     width: 'resolve'
   });
+
+  var sectors = $('.targeter').data('sectors');
+
+  $('.search_category').val(sectors);
+  $('.search_category').trigger('change');
 };
 
 export { initSelect2 };
