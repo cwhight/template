@@ -22,12 +22,12 @@
           <% end %>
           <div class="<%= sender %> d-flex justify-content-between flex-column w-75">
             <div class="d-flex justify-content-between">
-              <% message.user == current_user ? user = "You" : user = message.user.first_name %>
-              <% if message.read && message.user == current_user %>
-                <p class="green-text"><i class="fas fa-check px-3"></i>Read</p>
-              <% elsif !message.read && message.user == current_user %>
-                <p><i class="fas fa-paper-plane px-3"></i>Unread</p>
-              <% end %>
+              <%# message.user == current_user ? user = "You" : user = message.user.first_name %>
+              <%# if message.read && message.user == current_user %>
+                <!-- <p class="green-text"><i class="fas fa-check px-3"></i>Read</p> -->
+              <%# elsif !message.read && message.user == current_user %>
+                <!-- <p><i class="fas fa-paper-plane px-3"></i>Unread</p> -->
+              <%# end %>
               <p class="border-bottom"><%= user %>: <%= message.created_at.strftime("%H:%M") %></p>
             </div>
             <p class="ml-3 p-3 <%= sender %>-chat-card message card"><%= message.content %></p>
