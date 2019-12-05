@@ -47,15 +47,14 @@ function tsToDate (ts) {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: 'numeric',
     });
 }
 
 $(".js-range-slider2").ionRangeSlider({
-  grid: true,
-  min: dateToTS(new Date(year, currentMonth, day, 1)),
-  max: dateToTS(new Date(year, futureMonth, day, 23)),
-  from: dateToTS(new Date(lowerYear, lowerMonth, lowerDay, 1)),
-  to: dateToTS(new Date(higherYear, higherMonth, higherDay, 23)),
+  grid: false,
+  min: dateToTS(new Date(year, currentMonth, day)),
+  max: dateToTS(new Date(year, futureMonth, day)),
+  from: dateToTS(new Date(lowerYear, lowerMonth, lowerDay)),
+  to: dateToTS(new Date(higherYear, higherMonth, higherDay)),
   prettify: tsToDate
 });
