@@ -83,13 +83,13 @@ end
 
 puts "creating Freddie's jobs"
 
-  i = 0
+  i = 1
 2.times do
   price = prices[rand(0..prices.size - 1)]
   puts "1"
   job = Job.create!(user: freddie, title: jobs[i][0], description: jobs[i][1], location: "100-102 Hoxton St, Hackney, London N1 6SG", summary: "Hoxton 100", sectors: Sector.where(title: jobs[i][2]) )
   puts "2"
-  i += 1
+  i += 2
   # p employees[rand(0..(employees.size - 1))]
   rand(3..6).times do
     user = employees[rand(0..(employees.size - 1))]
