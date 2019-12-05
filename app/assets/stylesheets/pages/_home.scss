@@ -5,7 +5,7 @@
 }
 
 body {
-  height: 92vh;
+  min-height: 92vh;
   padding-top: 66px;
   margin: 0;
   overflow-x: hidden;
@@ -76,7 +76,7 @@ p {
 
 .footer {
   background-color: #A5B3C0;
-  height: 10vh;
+  min-height: 10vh;
 }
 
 #footer-tagline {
