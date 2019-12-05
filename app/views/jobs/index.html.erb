@@ -5,47 +5,54 @@
         <h1 class="">Available Jobs</h1>
         <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
       </div>
-      <div>
-        <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
-        <div class="form-group form-inline py-3 pr-3 justify-content-between nowrap">
-          <div class="pl-0 col-8 col-lg-10">
-            <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
-          </div>
-          <div>
-            <button name="button" type="submit" class="btn btn-search " style="height: 42px; width: 128px;">
-              <i class="fas fa-search"></i> Search
-            </button>
-          </div>
+
+        <div class="dropdown-toggle w-100 my-1 btn btn-large btn-flat collapsible active">
+          Filter
+        </div>
+        <div class="content-collapse">
+
+          <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
+            <div class="form-group form-inline py-3 justify-content-between nowrap">
+              <div class="px-0 col-12">
+                <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
+              </div>
+            </div>
+
+            <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
+            <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-0 pr-2"},
+              input_html: { class: 'js-range-slider',
+              type: 'text',
+              name: 'my_range',
+              value: "",
+              'data-type': "double",
+              'data-min': "5",
+              'data-max': "50",
+              'data-from': "5",
+              'data-to': "100",
+              'data-grid': "true",
+              'data-keyboard': "true",
+              'data-skin': "round",
+              'data-prefix': "£"
+            } %>
+
+            <%= f.input :start_time, label: "Filter by date", required: false,
+              input_html: { class: 'js-range-slider2',
+              type: 'text',
+              name: 'start_time',
+              value: "",
+              'data-type': "double",
+              'data-skin': "round"
+            } %>
+
+            <div>
+              <button name="button" type="submit" class="float-right my-2 btn btn-search " style="height: 42px; width: 128px;">
+                <i class="fas fa-search"></i> Apply
+              </button>
+            </div>
+          <% end %>
         </div>
 
-        <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "params.dig(:search, :query)" } %>
-        <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-0"},
-          input_html: { class: 'js-range-slider',
-          type: 'text',
-          name: 'my_range',
-          value: "",
-          'data-type': "double",
-          'data-min': "5",
-          'data-max': "50",
-          'data-from': "5",
-          'data-to': "100",
-          'data-grid': "true",
-          'data-keyboard': "true",
-          'data-skin': "round",
-          'data-prefix': "£"
-        } %>
 
-        <%= f.input :start_time, label: "Filter by date", required: false,
-          input_html: { class: 'js-range-slider2',
-          type: 'text',
-          name: 'start_time',
-          value: "",
-          'data-type': "double",
-          'data-skin': "round"
-        } %>
-
-        <% end %>
-      </div>
       <div>
         <% @jobs.each do |job|%>
           <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
