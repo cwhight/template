@@ -63,8 +63,7 @@
           messageBox.innerHTML = '<%= j render "chats/message-box", chat: chat, message: Message.new %>';
           div.scrollTop = div.scrollHeight
           var messages = document.querySelectorAll(".message")
-          var lastMessage = messages[messages.length - 1];
-          lastMessage.scrollIntoView();
+
       });
     </script>
 </div>
