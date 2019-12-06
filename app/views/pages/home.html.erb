@@ -11,7 +11,7 @@
     </div>
     <%= image_tag "undraw_modern_life_u1ev.svg", alt: "alttext", class: 'homepage-image d-none d-lg-block d-xl-block' %>
     <% unless current_user %>
-      <div class="" id="signup">
+      <div id="signup">
         <a href="/users/sign_in" class="btn btn-login">Login</a>
         <a href="/users/sign_up" class="btn btn-sign-up"  data-toggle="modal" data-target="#modalContactForm">Sign up</a>
       </div>
@@ -31,7 +31,7 @@
         </div>
         <div class="d-inline">
           <% unless current_user %>
-            <p id="search-box-text-bottom" class="m-3"><a href="#" data-toggle="modal" data-target="#modalContactForm">Sign up here</a> to apply for jobs.</p>
+            <p id="search-box-text-bottom" class="m-3 d-none d-sm-none d-md-block"><a href="#" data-toggle="modal" data-target="#modalContactForm">Sign up here</a> to apply for jobs.</p>
           <% else %>
 <!--             <p id="search-box-text-bottom" class="m-3"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p> -->
           <% end %>
