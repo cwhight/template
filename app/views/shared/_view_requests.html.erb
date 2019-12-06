@@ -1,14 +1,13 @@
 
   <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#show<%=shift.id%>">
     <% request_number = 0 %>
-    <% request_number += shift.requests.reject{|request| request.shift.user || Time.parse(request.shift.start_time) < Time.now }.size %>
+    <% request_number += shift.requests.select{ |request| !request.shift.user && Time.parse(request.shift.start_time) > Time.now }.size %>
     <% if request_number == 0 %>
       <p class="m-0">No applications</p>
     <% elsif request_number == 1 %>
       <p class="m-0"><%= request_number %> application</p>
     <% else  %>
       <p class="m-0"><%= request_number %> applications</p>
-
     <% end %>
   </button>
 
@@ -24,18 +23,18 @@
           <div class="modal-body">
 
             <% shift.requests.each do |request| %>
-
-              <% score_array = request.user.reviews.map { |review| review.score } %>
-              <% unless score_array.empty? %>
-                <% average_score = score_array.reduce(:+).to_f / score_array.length %>
-                <div>
-                  <h5 class="mb-2"><%= "#{request.user.first_name} #{request.user.surname} - " %><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
-                </div>
-              <% else %>
-                <p><%= "#{request.user.first_name} #{request.user.surname}" %></p>
-                <p>Review Score: No Reviews Yet </p>
-              <% end %>
-              <p><%= link_to request.content , request_path(request), class: "card p-2 btn" %></p>
+              <div class="card m-3 p-3">
+                <% score_array = request.user.reviews.map { |review| review.score } %>
+                <% unless score_array.empty? %>
+                  <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+                    <h5 class="mb-2"><%= "#{request.user.first_name} #{request.user.surname} - " %><span ><% average_score.round.times do %><i class="star fas fa-star"></i><% end %></h5>
+                <% else %>
+                  <p><%= "#{request.user.first_name} #{request.user.surname}" %></p>
+                  <p>Review Score: No Reviews Yet </p>
+                <% end %>
+                <p><%= request.content %></p>
+                <%= link_to "More details >", request_path(request), class: "btn btn-flat m-1" %>
+              </div>
             <% end %>
           </div>
 
