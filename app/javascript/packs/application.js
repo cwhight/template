@@ -17,7 +17,6 @@ import { openMessages } from '../components/inbox';
 
 if (document.getElementById("open-apps")) {
   openMessages();
-
 }
 
 initSweetalert('#confirm-job', {
@@ -33,7 +32,6 @@ initSweetalert('#employee-apply-sweetalert', {
   icon: "success",
   buttons: false
 });
-
 
 initSelect2();
 openApply();
