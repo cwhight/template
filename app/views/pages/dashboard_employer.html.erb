@@ -40,46 +40,58 @@
     </nav>
     <div class="container" id="content">
 
-      <nav class="navbar navbar-expand-lg navbar-light" id="dashboard-navbar">
-        <div class="container-fluid">
+        <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between align-items-stretch">
+          <div class="each-render col-12 col-lg-6 pr-lg-0 d-flex align-items-stretch ">
+            <%= render 'shared/profile-card', user: current_user %>
+          </div>
+          <div class="each-render col-12 col-lg-6 pl-lg-0 d-flex align-items-stretch ">
+            <div class="card m-2">
 
-        <button type="button" id="sidebarCollapse" class="btn btn-flat">
-            <i class="fas fa-align-left"></i>
-        </button>
-        </div>
-      </nav>
-      <h1 class="py-3 px-2 d-flex justify-content-center">Welcome to your dashboard, <%= current_user.first_name %>!</h1>
-      <div class="selector py-3">
+              <div class="row px-0">
+                <div class="col-6 quarter-dashboard text-center border-right  pr-0">
+                  <div class="btn dashboard-selector p-3 py-4 mx-2 border-bottom" data-selector="messages">
+                    <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
+                      <p>Inbox ( <%= unread_messages %> )</p>
+                  </div>
 
-          <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
-            <div class="each-render col-12 col-lg-6">
-              <%= render 'shared/profile-card', user: current_user %>
+                </div>
+                <div class="col-6 quarter-dashboard text-center  pl-0">
+                  <div class="btn dashboard-selector p-3 py-4 mx-2 border-bottom" data-selector="active-applications">
+                    <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
+                      <p>Applications ( <%= applications %> )</p>
+                  </div>
+
+                </div>
+                <div class="col-6 quarter-dashboard text-center border-right pr-0">
+
+                  <div class="btn dashboard-selector p-3 m-2" data-selector="listed-jobs">
+                    <a href="#" ><i class="my-3 profile-icon fas fa-bullhorn"></i></a>
+                      <p>Listed Jobs ( <%= listed_jobs.count %> )</p>
+                  </div>
+                </div>
+                <div class="text-center col-6 quarter-dashboard pl-0">
+                  <div class="btn m-2 p-3">
+                    <a href="#"><i class="my-3 profile-icon fas fa-history"></i></a>
+                    <p>Closed Jobs ( <%= closed_jobs.count %> )</p>
+                  </div>
+
+                </div>
+
+
+              </div>
             </div>
 
-            <div class=" each-render col-12 col-lg-6"  >
-              <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
-                <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
-                  <p>Inbox ( <%= unread_messages %> )</p>
-              </div>
-              <div class="btn dashboard-selector card p-3 m-2" data-selector="active-applications">
-                <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
-                  <p>Applications ( <%= applications %> )</p>
-              </div>
-            </div>
 
-            <div class=" each-render col-12 col-lg-6"  >
-              <div class="btn dashboard-selector card p-3 m-2" data-selector="listed-jobs">
-                <a href="#" ><i class="my-3 profile-icon fas fa-bullhorn"></i></a>
-                  <p>Listed Jobs ( <%= listed_jobs.count %> )</p>
-              </div>
-            </div>
+          <div class=" each-render pl-0 col-12 col-lg-6"  >
+          </div>
 
-            <div class="dashboard-selector each-render col-12 col-md-6" data-selector="closed-jobs">
-              <div class="btn card m-2 p-3">
-                <a href="#"><i class="my-3 profile-icon fas fa-history"></i></a>
-                <p>Closed Jobs ( <%= closed_jobs.count %> )</p>
-              </div>
-            </div>
+
+          <div class=" each-render col-12 col-lg-6"  >
+          </div>
+
+          <div class="dashboard-selector pl-0 each-render col-12 col-md-6" data-selector="closed-jobs">
+          </div>
+
 
             <div class="col-12">
               <%= render 'shared/view-reviews', user: current_user %>
@@ -87,9 +99,11 @@
 
           </div>
 
-          <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card col-12 col-md-8 offset-md-2">
-            <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
-          </div>
+
+        <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card col-12 ">
+          <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
+        </div>
+
 
           <div id="active-applications" data-target="pending-requests" class="d-none dashboard-card">
             <h4>Active Applications</h4>
@@ -97,9 +111,11 @@
 
           </div>
 
-          <div id="closed-jobs" data-target="closed-jobs" class="d-none dashboard-card col-12 col-md-8 offset-md-2">
-            <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
-          </div>
+
+        <div id="closed-jobs" data-target="closed-jobs" class="d-none dashboard-card col-12 ">
+          <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
+        </div>
+
 
           <div id="reviews" data-target="reviews" class="d-none dashboard-card col-12">
             <%= render 'shared/view-reviews', user: current_user %>

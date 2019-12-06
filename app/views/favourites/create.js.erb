@@ -4,6 +4,6 @@ function replaceFav(innerHTML) {
   favToggle.innerHTML = innerHTML
 }
 
-replaceFav('<%= link_to '', job_favourite_path(@job, @favourite), method: :delete, class: "fas fa-heart", remote: true  %>')
+replaceFav('<%= link_to '', job_favourite_path(@job, @favourite), method: :delete, class: "favourite-btn fas fa-heart", remote: true  %>')
 
 console.log("hello")

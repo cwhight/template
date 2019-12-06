@@ -11,12 +11,12 @@
               <% if current_user.favourites %>
                 <% if current_user.favourites.any? {|f| f.job == job} %>
                   <% favourite = current_user.favourites.where(job: job) %>
-                  <%= link_to '', job_favourite_path(job, current_user.favourites.where(job: job).first), method: :delete, class: "fas fa-heart", remote: true  %>
+                  <%= link_to '', job_favourite_path(job, current_user.favourites.where(job: job).first), method: :delete, class: "favourite-btn fas fa-heart", remote: true  %>
                 <% else %>
-                <%= link_to '', job_favourites_path(job), method: :post, class: "far fa-heart", remote: true  %>
+                <%= link_to '', job_favourites_path(job), method: :post, class: "favourite-btn far fa-heart", remote: true  %>
                 <% end %>
               <% else %>
-                <%= link_to '', job_favourites_path(job), method: :post, class: "far fa-heart", remote: true  %>
+                <%= link_to '', job_favourites_path(job), method: :post, class: "favourite-btn far fa-heart", remote: true  %>
               <% end %>
             <% end %>
           </div>

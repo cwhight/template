@@ -1,8 +1,8 @@
 <div class="profile-card card p-3 m-2">
 
    <div class="d-flex justify-content-between border-bottom">
-    <div>
-      <div class="profile-header">
+    <div class="w-100">
+      <div class="w-100 profile-header">
         <h2 class="d-inline"><%= user.first_name %> <%= user.surname %></h2>
         <% now = Time.now.to_date %>
         <% dob = user.dob %>
@@ -11,7 +11,7 @@
         <br>
         <p>Age: <%= age %> Years</p>
       </div>
-      <p><%= user.summary%></p>
+      <p class="w-100 pr-4"><%= user.summary%></p>
 
       <% score_array = user.reviews.map { |review| review.score } %>
       <% unless score_array.empty? %>
@@ -30,7 +30,7 @@
   </div>
 
   <% if current_user == user %>
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between align-items-center">
 
     <div class="py-2">
       <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
