@@ -43,7 +43,7 @@
                     <div class="dropdown-item message-submission">
                       <div class="p-2 border-bottom">
                         <div class="p-1 d-flex justify-content-between">
-                          <p><%= Time.parse(shift&.start_time)&.strftime("%e %B") %></p>
+                          <p><%= Time.parse(shift&.start_time)&.strftime("%e %b") %></p>
                           <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
                         </div>
                         <div class="p-1 d-flex justify-content-between">

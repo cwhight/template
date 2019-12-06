@@ -14,7 +14,7 @@
          <tr>
             <th scope="row">
               <p><%= request.shift.job.title %></p>
-              <p><%= Time.parse(request.shift.start_time).strftime("%d/%m/%Y") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></p>
+              <p><%= Time.parse(request.shift.start_time).strftime("%e %b") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></p>
             </th>
             <td><%= request.shift.job.user.first_name %></td>
             <% if request.chat %>

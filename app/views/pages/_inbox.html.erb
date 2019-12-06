@@ -35,7 +35,7 @@
                   <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
                   <td><%= render 'pages/chat-modal', chat: chat %></td>
 
-                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}" %></td>
+                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
                   <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
                 </tr>
               <% end %>
@@ -63,7 +63,7 @@
                   <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
                   <td><%= render 'pages/chat-modal', chat: chat %></td>
 
-                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}" %></td>
+                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
                   <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
                 </tr>
           <% end %>
@@ -90,7 +90,7 @@
                   <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
                   <td><%= render 'pages/chat-modal', chat: chat %></td>
 
-                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%d/%m/%Y")}" %></td>
+                  <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
                   <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
                 </tr>
           <% end %>
