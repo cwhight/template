@@ -1,55 +1,44 @@
-<div class="wrapper">
-  <nav id="sidebar">
-   <ul class="list-unstyled components">
+<body style="background-image: url(<%= image_path 'dashboard_image.png' %> );">
+  <div class="wrapper">
+    <nav id="sidebar">
+     <ul class="list-unstyled components">
 
-    <li class="active dashboard-selector"  data-selector="profile-card">
-      <a href="#">Profile</a>
-    </li>
+      <li class="active dashboard-selector"  data-selector="profile-card">
+        <a href="#">Profile</a>
+      </li>
 
-    <li class="dashboard-selector" data-selector="listed-jobs">
-      <% listed_jobs = current_user.jobs.where({done: nil}) %>
-      <a href="#">Listed Jobs ( <%= listed_jobs.count %> )</a>
-    </li>
-    <% applications = current_user.chats.reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now }.size %>
+      <li class="dashboard-selector" data-selector="listed-jobs">
+        <% listed_jobs = current_user.jobs.where({done: nil}) %>
+        <a href="#">Listed Jobs ( <%= listed_jobs.count %> )</a>
+      </li>
+      <% applications = current_user.chats.reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now }.size %>
 
-    <li class="dashboard-selector"  data-selector="active-applications">
-      <a href="#">Active Applications ( <%= applications %> )</a>
-    </li>
+      <li class="dashboard-selector"  data-selector="active-applications">
+        <a href="#">Active Applications ( <%= applications %> )</a>
+      </li>
 
-    <li class="dashboard-selector"  data-selector="closed-jobs">
-      <% closed_jobs = current_user.jobs.where({done: true}) %>
-      <a href="#">Closed Jobs ( <%= closed_jobs.count %> )</a>
-    </li>
+      <li class="dashboard-selector"  data-selector="closed-jobs">
+        <% closed_jobs = current_user.jobs.where({done: true}) %>
+        <a href="#">Closed Jobs ( <%= closed_jobs.count %> )</a>
+      </li>
 
-    <li class="dashboard-selector"  data-selector="reviews">
-      <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
-    </li>
-    <% unread_messages = 0 %>
-    <% chats = current_user.chats %>
-    <% chats.each do |chat| %>
-      <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
-    <% end %>
+      <li class="dashboard-selector"  data-selector="reviews">
+        <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
+      </li>
+      <% unread_messages = 0 %>
+      <% chats = current_user.chats %>
+      <% chats.each do |chat| %>
+        <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
+      <% end %>
 
-    <li class="dashboard-selector"  data-selector="messages">
-      <a href="#">Messages ( <%= unread_messages %> )</a>
-    </li>
-   </ul>
+      <li class="dashboard-selector"  data-selector="messages">
+        <a href="#">Messages ( <%= unread_messages %> )</a>
+      </li>
+     </ul>
 
 
-  </nav>
-  <div class="container" id="content">
-
-    <nav class="navbar navbar-expand-lg navbar-light" id="dashboard-navbar">
-      <div class="container-fluid">
-
-      <button type="button" id="sidebarCollapse" class="btn btn-flat">
-          <i class="fas fa-align-left"></i>
-      </button>
-      <%= link_to 'refresh shifts', close_shifts_path, class: "btn btn-flat", method: :patch %>
-      </div>
     </nav>
-    <h1 class="py-3 px-2 d-flex justify-content-center">Welcome to your dashboard, <%= current_user.first_name %>!</h1>
-    <div class="selector py-3">
+    <div class="container" id="content">
 
         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between align-items-stretch">
           <div class="each-render col-12 col-lg-6 pr-lg-0 d-flex align-items-stretch ">
@@ -88,9 +77,10 @@
 
                 </div>
 
+
               </div>
             </div>
-          </div>
+
 
           <div class=" each-render pl-0 col-12 col-lg-6"  >
           </div>
@@ -102,40 +92,44 @@
           <div class="dashboard-selector pl-0 each-render col-12 col-md-6" data-selector="closed-jobs">
           </div>
 
-          <div class="col-12">
-            <%= render 'shared/view-reviews', user: current_user %>
+
+            <div class="col-12">
+              <%= render 'shared/view-reviews', user: current_user %>
+            </div>
+
           </div>
 
-        </div>
 
         <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card col-12 ">
           <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
         </div>
 
-        <div id="active-applications" data-target="pending-requests" class="d-none dashboard-card">
-          <h4>Active Applications</h4>
-          <%= render 'requests/active-applications', chats: current_user.chats.order(updated_at: :desc).reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now } %>
 
-        </div>
+          <div id="active-applications" data-target="pending-requests" class="d-none dashboard-card">
+            <h4>Active Applications</h4>
+            <%= render 'requests/active-applications', chats: current_user.chats.order(updated_at: :desc).reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now } %>
+
+          </div>
+
 
         <div id="closed-jobs" data-target="closed-jobs" class="d-none dashboard-card col-12 ">
           <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
         </div>
 
-        <div id="reviews" data-target="reviews" class="d-none dashboard-card col-12">
-          <%= render 'shared/view-reviews', user: current_user %>
-        </div>
 
-        <div id="messages" data-target="messages" class="d-none dashboard-card">
-          <%= render 'pages/inbox', chats: chats  %>
-        </div>
+          <div id="reviews" data-target="reviews" class="d-none dashboard-card col-12">
+            <%= render 'shared/view-reviews', user: current_user %>
+          </div>
+
+          <div id="messages" data-target="messages" class="d-none dashboard-card">
+            <%= render 'pages/inbox', chats: chats  %>
+          </div>
 
 
+      </div>
     </div>
   </div>
-</div>
-
-
+</body>
 
 
 

@@ -4,6 +4,7 @@
       <h4 style="text-align:center"><%= chat.request.shift.job.summary %> on <%= Time.parse(chat.request.shift.start_time).strftime("%e %b") %></h4>
       <p style="text-align:center"><%= chat.request.shift.job.title %></p>
     </div>
+      <%= link_to "Accept #{chat.employee.first_name}", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3" %>
     <div>
       <% if policy(chat.request.shift).accept_request? %>
         <%= render 'requests/confirm-modal', chat: chat %>

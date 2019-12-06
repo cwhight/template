@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   get '/dashboard/chats/:id', to: 'chats#inbox_show', as: :dashboard_chat
 
+  get '/confirmation_page', to: 'pages#confirmation_page'
 
   resources :chats, except: :create do
     resources :messages
