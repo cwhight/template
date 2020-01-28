@@ -33,7 +33,7 @@
           <% if Time.parse(shift.start_time) < DateTime.now %>
             <div>
               <% unless shift.reviews.any? { |review| review.user == shift.user} %>
-                <%= render reviews/shared/create-review-modal, shift: shift, review_target: shift.user %>
+                <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %>
               <% end %>
             </div>
             <div>

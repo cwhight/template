@@ -71,7 +71,7 @@
  [m
                <% unless shift.reviews.any? { |review| review.user == shift.user} %>[m
 [31m-                <td><%= render 'shared/review', shift: shift, review_target: shift.user %></td>[m
-[32m+[m[32m                <td><%= render reviews/shared/create-review-modal, shift: shift, review_target: shift.user %></td>[m
+[32m+[m[32m                <td><%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %></td>[m
                <% else %>[m
                  <td>[m
                    <div class="mt-2 d-flex justify-content-between flex-column align-items-center">[m

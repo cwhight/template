@@ -107,7 +107,7 @@
               <td>Total Pay: <%= number_to_currency(shift.total_pay, unit: "£") %></td>
 
               <% unless shift.reviews.any? { |review| review.user == shift.user} %>
-                <td><%= render reviews/shared/create-review-modal, shift: shift, review_target: shift.user %></td>
+                <td><%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %></td>
               <% else %>
                 <td>
                   <div class="mt-2 d-flex justify-content-between flex-column align-items-center">
