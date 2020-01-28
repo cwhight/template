@@ -7,5 +7,5 @@ function refreshForm(innerHTML) {
   window.location.href = "/<%= @path %>"
 <% else %>
   var form = document.querySelector("#review-form")
-  refreshForm("<%= j render 'shared/review-form', shift: @shift, review: @review %>")
+  refreshForm("<%= j render 'reviews/shared/review-form', shift: @shift, review: @review %>")
 <% end %>

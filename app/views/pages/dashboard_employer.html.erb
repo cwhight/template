@@ -55,7 +55,7 @@
         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between ">
 
           <div class="each-render col-12 col-lg-6 pr-lg-0 d-flex align-items-stretch ">
-            <%= render 'shared/profile-card', user: current_user %>
+            <%= render 'users/shared/profile-card', user: current_user %>
           </div>
           <div class="each-render col-12 col-lg-6 pl-lg-0 d-flex align-items-stretch ">
             <div class="card m-2">
@@ -99,7 +99,7 @@
           </div>
 
           <div class="col-12">
-            <%= render 'shared/view-reviews', user: current_user %>
+            <%= render 'reviews/shared/view-reviews', user: current_user %>
           </div>
 
 
@@ -107,7 +107,7 @@
 
       </div>
         <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card col-12 ">
-          <%= render 'shared/listed-jobs', jobs: current_user.jobs %>
+          <%= render 'jobs/shared/listed-jobs', jobs: current_user.jobs %>
         </div>
 
 
@@ -119,12 +119,12 @@
 
 
         <div id="closed-jobs" data-target="closed-jobs" class="d-none dashboard-card col-12 ">
-          <%= render 'shared/closed-jobs', jobs: current_user.jobs %>
+          <%= render 'jobs/shared/closed-jobs', jobs: current_user.jobs %>
         </div>
 
 
           <div id="reviews" data-target="reviews" class="d-none dashboard-card col-12">
-            <%= render 'shared/view-reviews', user: current_user %>
+            <%= render 'reviews/shared/view-reviews', user: current_user %>
           </div>
 
           <div id="messages" data-target="messages" class="d-none dashboard-card">

@@ -34,8 +34,8 @@
       </div>
 
       <div>
-        <%= render 'shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
-        <%= render 'shared/modal-form', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>
+        <%= render 'shifts/shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
+        <%= render 'jobs/shared/edit-job', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>
       </div>
 
     </div>
@@ -70,7 +70,7 @@
                 <% chat = shift.requests.where(user: shift.user).first.chat %>
                 <td><%= link_to "Message #{shift.user.first_name}", chat_path(chat), class: "btn btn-flat" %></td>
               <% else %>
-                <td><%= render 'shared/view_requests', shift: shift %></td>
+                <td><%= render 'requests/shared/view-requests-modal', shift: shift %></td>
                 <td><%= render 'shifts/edit-shift', shift: shift, modal_button: "" %></td>
               <% end %>
 
@@ -107,7 +107,7 @@
               <td>Total Pay: <%= number_to_currency(shift.total_pay, unit: "£") %></td>
 
               <% unless shift.reviews.any? { |review| review.user == shift.user} %>
-                <td><%= render 'shared/review', shift: shift, review_target: shift.user %></td>
+                <td><%= render reviews/shared/create-review-modal, shift: shift, review_target: shift.user %></td>
               <% else %>
                 <td>
                   <div class="mt-2 d-flex justify-content-between flex-column align-items-center">

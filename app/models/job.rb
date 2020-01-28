@@ -33,4 +33,5 @@ class Job < ApplicationRecord
 
     new_shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now }
   end
+
 end

@@ -3,7 +3,7 @@
 <div class="row mx-0 landing-body my-3">
   <div id="landing-hero">
     <div class="row navbar-preload">
-      <%= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 60, class: 'homepage-img'%>
+      <%#= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 60, class: 'homepage-img'%>
       <%= render 'shared/transparent_navbar' %>
     </div>
     <div class="col-12 col-lg-6">
@@ -53,7 +53,7 @@
         <% @jobs.each do |job|%>
           <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
           <% unless num_shifts <= 0 %>
-            <%= render 'shared/show-jobs', favourite: @favourite, job: job, num_shifts: num_shifts %>
+            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>
           <% end %>
 
         <% end %>

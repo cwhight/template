@@ -15,7 +15,7 @@
       <h6><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></h6>
       <h6>Hourly Rate: <%= humanized_money_with_symbol(shift.price) %></h6>
       <% if shift.end_time < DateTime.now && shift.user == current_user %>
-        <%= render 'shared/review', shift: shift, review_target: shift.job.user %>
+        <%= render reviews/shared/create-review-modal, shift: shift, review_target: shift.job.user %>
       <% end %>
 
 

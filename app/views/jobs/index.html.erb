@@ -69,13 +69,17 @@
         </div>
 
       <div>
-        <% @jobs.each do |job|%>
-          <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-          <% unless num_shifts <= 0 %>
-            <%= render 'shared/show-jobs', favourite: @favourite, job: job, num_shifts: num_shifts %>
+        <% unless @jobs.empty? %>
+          <% @jobs.each do |job|%>
+            <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+            <% unless num_shifts <= 0 %>
+              <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>
+            <% end %>
           <% end %>
+          <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+        <% else %>
+          <%= link_to 'No jobs matched your search: Display all', jobs_path, class: 'btn btn-flat my-2' %>
         <% end %>
-        <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
       </div>
     </div>
   </div>

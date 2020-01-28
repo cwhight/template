@@ -65,7 +65,7 @@
           <h1 class="text-center w-100 p-2">Welcome to your dashboard, <%= current_user.first_name %>!</h1>
 
           <div class="each-render col-12 col-lg-6">
-            <%= render 'shared/profile-card', user: current_user %>
+            <%= render 'users/shared/profile-card', user: current_user %>
           </div>
           <div class="each-render col-12 col-lg-6">
             <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
@@ -117,7 +117,7 @@
             </div>
           </div>
           <div class="each-render col-12">
-            <%= render 'shared/view-reviews', user: current_user %>
+            <%= render 'reviews/shared/view-reviews', user: current_user %>
           </div>
         </div>
 
@@ -143,7 +143,7 @@
                 <% current_user.favourites.each do |fav| %>
                   <% num_shifts = fav.job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
 
-                  <%= render 'shared/show-jobs', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>
+                  <%= render 'jobs/shared/job-listings', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>
 
                 <% end %>
               <% else %>
@@ -164,7 +164,7 @@
         </div>
 
         <div id="reviews" data-target="reviews" class="col-12 d-none dashboard-card">
-          <%= render 'shared/view-reviews', user: current_user %>
+          <%= render 'reviews/shared/view-reviews', user: current_user %>
         </div>
 
         <div id="messages" data-target="messages" class="d-none dashboard-card">

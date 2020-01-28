@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
+  resources :employees, only: [:index]
+
   patch '/shifts/close', to: 'shifts#close_shifts', as: :close_shifts
 
   get 'jobs/:id/close', to: 'jobs#close', as: :job_close
