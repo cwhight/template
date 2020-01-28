@@ -1,0 +1,322 @@
+[1mdiff --git a/app/views/jobs/_info_window.html.erb b/app/views/jobs/_info_window.html.erb[m
+[1mdeleted file mode 100644[m
+[1mindex c4102bc..0000000[m
+[1m--- a/app/views/jobs/_info_window.html.erb[m
+[1m+++ /dev/null[m
+[36m@@ -1,10 +0,0 @@[m
+[31m-<div class="info-window p-2">[m
+[31m-  <h5><%= job.title %></h5>[m
+[31m-  <i class="fas fa-user-clock card-icon"></i>[m
+[31m-  <p><%= job.location.scan(/.*.+?(?=, )/).first %></p>[m
+[31m-  <button type="button" class="btn btn-map" data-toggle="modal" data-target="#showJob<%=job.id%>">[m
+[31m-  Learn more[m
+[31m-</button>[m
+[31m-</div>[m
+[31m-[m
+[31m-[m
+[1mdiff --git a/app/views/jobs/_profile-listed-jobs.html.erb b/app/views/jobs/_profile-listed-jobs.html.erb[m
+[1mdeleted file mode 100644[m
+[1mindex 0b45c67..0000000[m
+[1m--- a/app/views/jobs/_profile-listed-jobs.html.erb[m
+[1m+++ /dev/null[m
+[36m@@ -1,9 +0,0 @@[m
+[31m-<% listed_jobs_number = current_user.jobs.where({done: nil}).count %>[m
+[31m-[m
+[31m-<div class="profile-card card m-2 p-3">[m
+[31m-  <div class="d-flex justify-content-between">[m
+[31m-    <h4><%= listed_jobs_number %> Listed Jobs</h4>[m
+[31m-    <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>[m
+[31m-  </div>[m
+[31m-  <h4>TODO applications</h4>[m
+[31m-</div>[m
+[1mdiff --git a/app/views/jobs/index.html.erb b/app/views/jobs/index.html.erb[m
+[1mindex 267916e..47c6e5e 100644[m
+[1m--- a/app/views/jobs/index.html.erb[m
+[1m+++ b/app/views/jobs/index.html.erb[m
+[36m@@ -72,7 +72,7 @@[m
+         <% @jobs.each do |job|%>[m
+           <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>[m
+           <% unless num_shifts <= 0 %>[m
+[31m-            <%= render 'shared/show-jobs', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
+[32m+[m[32m            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
+           <% end %>[m
+         <% end %>[m
+         <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>[m
+[1mdiff --git a/app/views/jobs/show.html.erb b/app/views/jobs/show.html.erb[m
+[1mindex ba7624f..2e4b268 100644[m
+[1m--- a/app/views/jobs/show.html.erb[m
+[1m+++ b/app/views/jobs/show.html.erb[m
+[36m@@ -34,8 +34,8 @@[m
+       </div>[m
+ [m
+       <div>[m
+[31m-        <%= render 'shared/create-shift', shift: @shift, modal_button: "Create Shift"%>[m
+[31m-        <%= render 'shared/modal-form', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>[m
+[32m+[m[32m        <%= render 'shifts/shared/create-shift', shift: @shift, modal_button: "Create Shift"%>[m
+[32m+[m[32m        <%= render 'jobs/shared/edit-job', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>[m
+       </div>[m
+ [m
+     </div>[m
+[36m@@ -70,7 +70,7 @@[m
+                 <% chat = shift.requests.where(user: shift.user).first.chat %>[m
+                 <td><%= link_to "Message #{shift.user.first_name}", chat_path(chat), class: "btn btn-flat" %></td>[m
+               <% else %>[m
+[31m-                <td><%= render 'shared/view_requests', shift: shift %></td>[m
+[32m+[m[32m                <td><%= render 'requests/shared/view-requests-modal', shift: shift %></td>[m
+                 <td><%= render 'shifts/edit-shift', shift: shift, modal_button: "" %></td>[m
+               <% end %>[m
+ [m
+[36m@@ -107,7 +107,7 @@[m
+               <td>Total Pay: <%= number_to_currency(shift.total_pay, unit: "£") %></td>[m
+ [m
+               <% unless shift.reviews.any? { |review| review.user == shift.user} %>[m
+[31m-                <td><%= render 'shared/review', shift: shift, review_target: shift.user %></td>[m
+[32m+[m[32m                <td><%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %></td>[m
+               <% else %>[m
+                 <td>[m
+                   <div class="mt-2 d-flex justify-content-between flex-column align-items-center">[m
+[1mdiff --git a/app/views/pages/dashboard.html.erb b/app/views/pages/dashboard.html.erb[m
+[1mindex e6dd4f6..176ebe9 100644[m
+[1m--- a/app/views/pages/dashboard.html.erb[m
+[1m+++ b/app/views/pages/dashboard.html.erb[m
+[36m@@ -65,7 +65,7 @@[m
+           <h1 class="text-center w-100 p-2">Welcome to your dashboard, <%= current_user.first_name %>!</h1>[m
+ [m
+           <div class="each-render col-12 col-lg-6">[m
+[31m-            <%= render 'shared/profile-card', user: current_user %>[m
+[32m+[m[32m            <%= render 'users/shared/profile-card', user: current_user %>[m
+           </div>[m
+           <div class="each-render col-12 col-lg-6">[m
+             <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">[m
+[36m@@ -117,7 +117,7 @@[m
+             </div>[m
+           </div>[m
+           <div class="each-render col-12">[m
+[31m-            <%= render 'shared/view-reviews', user: current_user %>[m
+[32m+[m[32m            <%= render 'reviews/shared/view-reviews', user: current_user %>[m
+           </div>[m
+         </div>[m
+ [m
+[36m@@ -143,7 +143,7 @@[m
+                 <% current_user.favourites.each do |fav| %>[m
+                   <% num_shifts = fav.job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>[m
+ [m
+[31m-                  <%= render 'shared/show-jobs', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>[m
+[32m+[m[32m                  <%= render 'jobs/shared/job-listings', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>[m
+ [m
+                 <% end %>[m
+               <% else %>[m
+[36m@@ -164,7 +164,7 @@[m
+         </div>[m
+ [m
+         <div id="reviews" data-target="reviews" class="col-12 d-none dashboard-card">[m
+[31m-          <%= render 'shared/view-reviews', user: current_user %>[m
+[32m+[m[32m          <%= render 'reviews/shared/view-reviews', user: current_user %>[m
+         </div>[m
+ [m
+         <div id="messages" data-target="messages" class="d-none dashboard-card">[m
+[1mdiff --git a/app/views/pages/dashboard_employer.html.erb b/app/views/pages/dashboard_employer.html.erb[m
+[1mindex 4f4f40f..8696665 100644[m
+[1m--- a/app/views/pages/dashboard_employer.html.erb[m
+[1m+++ b/app/views/pages/dashboard_employer.html.erb[m
+[36m@@ -55,7 +55,7 @@[m
+         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between ">[m
+ [m
+           <div class="each-render col-12 col-lg-6 pr-lg-0 d-flex align-items-stretch ">[m
+[31m-            <%= render 'shared/profile-card', user: current_user %>[m
+[32m+[m[32m            <%= render 'users/shared/profile-card', user: current_user %>[m
+           </div>[m
+           <div class="each-render col-12 col-lg-6 pl-lg-0 d-flex align-items-stretch ">[m
+             <div class="card m-2">[m
+[36m@@ -99,7 +99,7 @@[m
+           </div>[m
+ [m
+           <div class="col-12">[m
+[31m-            <%= render 'shared/view-reviews', user: current_user %>[m
+[32m+[m[32m            <%= render 'reviews/shared/view-reviews', user: current_user %>[m
+           </div>[m
+ [m
+ [m
+[36m@@ -107,7 +107,7 @@[m
+ [m
+       </div>[m
+         <div id="listed-jobs" data-target="listed-jobs" class="d-none dashboard-card col-12 ">[m
+[31m-          <%= render 'shared/listed-jobs', jobs: current_user.jobs %>[m
+[32m+[m[32m          <%= render 'jobs/shared/listed-jobs', jobs: current_user.jobs %>[m
+         </div>[m
+ [m
+ [m
+[36m@@ -119,12 +119,12 @@[m
+ [m
+ [m
+         <div id="closed-jobs" data-target="closed-jobs" class="d-none dashboard-card col-12 ">[m
+[31m-          <%= render 'shared/closed-jobs', jobs: current_user.jobs %>[m
+[32m+[m[32m          <%= render 'jobs/shared/closed-jobs', jobs: current_user.jobs %>[m
+         </div>[m
+ [m
+ [m
+           <div id="reviews" data-target="reviews" class="d-none dashboard-card col-12">[m
+[31m-            <%= render 'shared/view-reviews', user: current_user %>[m
+[32m+[m[32m            <%= render 'reviews/shared/view-reviews', user: current_user %>[m
+           </div>[m
+ [m
+           <div id="messages" data-target="messages" class="d-none dashboard-card">[m
+[1mdiff --git a/app/views/pages/home.html.erb b/app/views/pages/home.html.erb[m
+[1mindex 94ba098..ab9300f 100644[m
+[1m--- a/app/views/pages/home.html.erb[m
+[1m+++ b/app/views/pages/home.html.erb[m
+[36m@@ -3,7 +3,7 @@[m
+ <div class="row mx-0 landing-body my-3">[m
+   <div id="landing-hero">[m
+     <div class="row navbar-preload">[m
+[31m-      <%= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 60, class: 'homepage-img'%>[m
+[32m+[m[32m      <%#= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 60, class: 'homepage-img'%>[m
+       <%= render 'shared/transparent_navbar' %>[m
+     </div>[m
+     <div class="col-12 col-lg-6">[m
+[36m@@ -53,7 +53,7 @@[m
+         <% @jobs.each do |job|%>[m
+           <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>[m
+           <% unless num_shifts <= 0 %>[m
+[31m-            <%= render 'shared/show-jobs', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
+[32m+[m[32m            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
+           <% end %>[m
+ [m
+         <% end %>[m
+[1mdiff --git a/app/views/payments/new.html.erb b/app/views/payments/new.html.erb[m
+[1mindex ee19b16..22a0c6c 100644[m
+[1m--- a/app/views/payments/new.html.erb[m
+[1m+++ b/app/views/payments/new.html.erb[m
+[36m@@ -5,7 +5,7 @@[m
+         <h1>Checkout summary</h1>[m
+       </div>[m
+       <div class="col-6 offset-3">[m
+[31m-        <%= render 'shared/profile-card', user: @shift.user %>[m
+[32m+[m[32m        <%= render 'users/shared/profile-card', user: @shift.user %>[m
+       </div>[m
+       <div class=" col-6 offset-3">[m
+         <div class=" card m-2 my-3 p-3">[m
+[1mdiff --git a/app/views/requests/confirmation.html.erb b/app/views/requests/confirmation.html.erb[m
+[1mindex 1822e85..45c883d 100644[m
+[1m--- a/app/views/requests/confirmation.html.erb[m
+[1m+++ b/app/views/requests/confirmation.html.erb[m
+[36m@@ -3,7 +3,7 @@[m
+   <div class="row">[m
+     <div class="col-sm-6">[m
+       <div>[m
+[31m-        <%= render '/shared/profile-card', user: current_user, profile: true %>[m
+[32m+[m[32m        <%= render '/users/shared/profile-card', user: current_user, profile: true %>[m
+       </div>[m
+       <div[m
+         id="map"[m
+[1mdiff --git a/app/views/requests/new.html.erb b/app/views/requests/new.html.erb[m
+[1mindex 7be47d8..6fabcdf 100644[m
+[1m--- a/app/views/requests/new.html.erb[m
+[1m+++ b/app/views/requests/new.html.erb[m
+[36m@@ -34,7 +34,7 @@[m
+       </div>[m
+     <div class="col-12 col-md-6">[m
+       <div id="profile-on-phone">[m
+[31m-        <%= render '/shared/profile-card', user: current_user, profile: true %>[m
+[32m+[m[32m        <%= render '/users/shared/profile-card', user: current_user, profile: true %>[m
+       </div>[m
+       <div[m
+         id="map"[m
+[1mdiff --git a/app/views/requests/new.js.erb b/app/views/requests/new.js.erb[m
+[1mindex f372b28..cf9e70d 100644[m
+[1m--- a/app/views/requests/new.js.erb[m
+[1m+++ b/app/views/requests/new.js.erb[m
+[36m@@ -7,5 +7,5 @@[m [mfunction refreshForm(innerHTML) {[m
+   window.location.href = "/dashboard"[m
+ <% else %>[m
+   var form = document.querySelector("#review-form")[m
+[31m-  refreshForm("<%= j render 'shared/review-form', shift: @shift, review: @review %>")[m
+[32m+[m[32m  refreshForm("<%= j render 'reviews/shared/review-form', shift: @shift, review: @review %>")[m
+ <% end %>[m
+[1mdiff --git a/app/views/requests/show.html.erb b/app/views/requests/show.html.erb[m
+[1mindex f23134a..f629e23 100644[m
+[1m--- a/app/views/requests/show.html.erb[m
+[1m+++ b/app/views/requests/show.html.erb[m
+[36m@@ -6,8 +6,8 @@[m
+     <div class="row">[m
+ [m
+       <div class="col-12 col-md-6 mb-2">[m
+[31m-        <%= render 'shared/profile-card', user: @request.user %>[m
+[31m-        <%= render "shared/view-reviews", user: @request.user %>[m
+[32m+[m[32m        <%= render 'users/shared/profile-card', user: @request.user %>[m
+[32m+[m[32m        <%= render "reviews/shared/view-reviews", user: @request.user %>[m
+       </div>[m
+ [m
+       <div class="col-12 col-md-6">[m
+[1mdiff --git a/app/views/reviews/create.js.erb b/app/views/reviews/create.js.erb[m
+[1mindex 2878737..767003e 100644[m
+[1m--- a/app/views/reviews/create.js.erb[m
+[1m+++ b/app/views/reviews/create.js.erb[m
+[36m@@ -7,5 +7,5 @@[m [mfunction refreshForm(innerHTML) {[m
+   window.location.href = "/<%= @path %>"[m
+ <% else %>[m
+   var form = document.querySelector("#review-form")[m
+[31m-  refreshForm("<%= j render 'shared/review-form', shift: @shift, review: @review %>")[m
+[32m+[m[32m  refreshForm("<%= j render 'reviews/shared/review-form', shift: @shift, review: @review %>")[m
+ <% end %>[m
+[1mdiff --git a/app/views/shared/_closed-jobs.html.erb b/app/views/shared/_closed-jobs.html.erb[m
+[1mdeleted file mode 100644[m
+[1mindex 1601b05..0000000[m
+[1m--- a/app/views/shared/_closed-jobs.html.erb[m
+[1m+++ /dev/null[m
+[36m@@ -1,15 +0,0 @@[m
+[31m-<div class="profile-card card p-3 m-2">[m
+[31m-  <div class="d-flex justify-content-between">[m
+[31m-    <h2>Closed Jobs</h2>[m
+[31m-  </div>[m
+[31m-  <br>[m
+[31m-[m
+[31m-  <% jobs.each do |job| %>[m
+[31m-      <% if job.done %>[m
+[31m-        <div class="d-flex justify-content-between border-bottom py-2">[m
+[31m-          <h6><%= job.title %></h6>[m
+[31m-          <p><%= link_to 'Learn more', job_path(job), class: "btn btn-show"%></p>[m
+[31m-        </div>[m
+[31m-      <% end %>[m
+[31m-    <% end %>[m
+[31m-</div>[m
+[1mdiff --git a/app/views/shared/_create-shift.html.erb b/app/views/shared/_create-shift.html.erb[m
+[1mdeleted file mode 100644[m
+[1mindex f2b7942..0000000[m
+[1m--- a/app/views/shared/_create-shift.html.erb[m
+[1m+++ /dev/null[m
+[36m@@ -1,25 +0,0 @@[m
+[31m-  <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#createShift<%=shift.id%>">[m
+[31m-    <%= modal_button %>[m
+[31m-  </button>[m
+[31m-[m
+[31m-  <div class="modal fade" id="createShift<%=shift.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">[m
+[31m-      <div class="modal-dialog modal-dialog-centered" role="document">[m
+[31m-        <div class="modal-content">[m
+[31m-          <div class="modal-header">[m
+[31m-            <h5 class="modal-title" id="exampleModalLongTitle"><%= modal_button %></h5>[m
+[31m-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">[m
+[31m-              <span aria-hidden="true">&times;</span>[m
+[31m-            </button>[m
+[31m-          </div>[m
+[31m-          <div class="modal-body justify-content-center">[m
+[31m-            <%= simple_form_for [@job, shift], url: job_shifts_path(@job) do |f| %>[m
+[31m-              <%= f.input :start_time, as: :string, required: false, input_html: {class: "datepicker"} %>[m
+[31m-              <%= f.input :end_time, as: :string, required: false, input_html: {class: "datepicker"} %>[m
+[31m-              <%= f.input :price, error: 'Price must be a number' %>[m
+[31m-              <%= f.button :submit, "Create Shift", class: "btn btn-ghost", id: "confirm-job" %>[m
+[31m-            <% end %>[m
+[31m-          </div>[m
+[31m-[m
+[31m-        </div>[m
+[31m-      </div>[m
+[31m-    </div>[m
+[1mdiff --git a/app/views/shared/_each_job_history.html.erb b/app/views/shared/_each_job_history.html.erb[m
+[1mdeleted file mode 100644[m
+[1mindex a67bc91..0000000[m
+[1m--- a/app/views/shared/_each_job_history.html.erb[m
+[1m+++ /dev/null[m
+[36m@@ -1,24 +0,0 @@[m
+[31m-<button type="button" class="btn btn-ghost" data-toggle="modal" data-target="#look<%=shift.id%>">[m
+[31m-  <%= "Learn More" %>[m
+[31m-<

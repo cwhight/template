@@ -33,7 +33,7 @@
           <% if Time.parse(shift.start_time) < DateTime.now %>
             <div>
               <% unless shift.reviews.any? { |review| review.user == shift.user} %>
-                <%= render 'shared/review', shift: shift, review_target: shift.user %>
+                <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %>
               <% end %>
             </div>
             <div>
@@ -51,12 +51,12 @@
         <% else %>
         <% message = "No Worker assigned Yet" %>
         <% if !shift.completed %>
-          <%= render 'shared/view_requests', shift: shift %>
+          <%= render 'requests/shared/view-requests-modal', shift: shift %>
           <%= render 'shifts/edit-shift', shift: shift, modal_button: "" %>
         <% end %>
         <% end %>
       <% else %>
-        <%= render 'shared/request', shift: shift %>
+        <%= render 'requests/shared/create-request-modal', shift: shift %>
       <% end %>
     </div>
 
