@@ -16,6 +16,14 @@ class RequestPolicy < ApplicationPolicy
     record.shift.job.user == user
   end
 
+  def active_applications?
+    true
+  end
+
+  def pending_requests?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

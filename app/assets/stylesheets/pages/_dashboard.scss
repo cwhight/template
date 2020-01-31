@@ -11,10 +11,15 @@
     height: 92vh;
     position: sticky;
     top: 66px;
+
 }
 
 #sidebar.active {
     margin-left: -250px;
+}
+
+.sideSideBar {
+
 }
 
 #sidebar {
@@ -66,7 +71,8 @@
 }
 
 #sidebarCollapse:hover {
-  color: white;
+  color: grey;
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {

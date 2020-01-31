@@ -49,6 +49,11 @@ class ReviewsController < ApplicationController
     redirect_to jobs_path
   end
 
+  def review_dashboard
+    @reviews = current_user.reviews
+    authorize @reviews
+  end
+
   private
 
   def review_params

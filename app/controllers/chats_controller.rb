@@ -33,6 +33,11 @@ class ChatsController < ApplicationController
     mark_as_read(@chat)
   end
 
+  def inbox
+    @chats = current_user.chats
+    authorize @chats
+  end
+
   def mark_as_read(chat)
     chat.messages.select {|message| message.user != current_user }.each {|message| message.update(read: true)}
   end

@@ -15,4 +15,5 @@ class PagesController < ApplicationController
   def dashboard_employer
     @employer = current_user
   end
+
 end

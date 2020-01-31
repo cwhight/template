@@ -5,14 +5,9 @@
 <% end %>
 
 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-  <% if current_user && current_user.employer %>
-    <%= link_to 'Dashboard (Employer)', dashboard_employer_path, class: "dropdown-item" %>
+  <% if current_user %>
     <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
   <% else %>
-    <%= link_to 'Dashboard', dashboard_path, class: "dropdown-item" %>
-    <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-  <% end %>
-  <% unless current_user %>
     <%= link_to 'Sign in', new_user_session_path, class: "dropdown-item" %>
     <%= link_to 'Sign up', new_user_registration_path, class: "dropdown-item" %>
   <% end %>

@@ -5,6 +5,7 @@
 //= require_tree .
 //= require ./cable.js
 
+
 var upcoming = $("#calendar").data('upcoming');
 var past = $("#calendar").data('past');
 var pending = $("#calendar").data('pending');

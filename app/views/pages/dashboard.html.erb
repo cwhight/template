@@ -1,62 +1,22 @@
+<% page = "" %>
+<% pending_requests = 0 %>
+<% current_user.requests.each do |request| %>
+  <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
+    <% pending_requests += 1 %>
+  <% end %>
+<% end %>
+<% upcoming_jobs = current_user.shifts.where({completed: nil}) %>
+
+<% unread_messages = 0 %>
+<% chats = current_user.employee_chats %>
+<% chats.each do |chat| %>
+  <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
+<% end %>
+
 <div class="wrapper">
-  <nav id="sidebar">
-   <ul class="list-unstyled components">
-
-    <li class="active dashboard-selector"  data-selector="profile-card">
-      <a href="#">Profile</a>
-    </li>
-
-    <li class="dashboard-selector"  data-selector="pending-requests">
-      <% pending_requests = 0 %>
-      <% current_user.requests.each do |request| %>
-        <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
-          <% pending_requests += 1 %>
-        <% end %>
-      <% end %>
-      <a href="#">Pending Applications ( <%= pending_requests %> )</a>
-    </li>
-
-    <li class="dashboard-selector" data-selector="upcoming-jobs">
-      <% upcoming_jobs = current_user.shifts.where({completed: nil}) %>
-      <a href="#">Upcoming Jobs ( <%= upcoming_jobs.count %> )</a>
-    </li>
-
-    <li class="dashboard-selector"  data-selector="job-history">
-      <a href="#">Job History</a>
-    </li>
-
-    <li class="dashboard-selector"  data-selector="reviews">
-      <a href="#">Reviews ( <%= current_user.reviews.count %> )</a>
-    </li>
-
-    <% unread_messages = 0 %>
-    <% chats = current_user.employee_chats %>
-    <% chats.each do |chat| %>
-      <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
-    <% end %>
-
-    <li class="dashboard-selector"  data-selector="favourites">
-      <a href="#">Favourites ( <%= current_user.favourites.count %> )</a>
-    </li>
-
-    <li class="dashboard-selector"  data-selector="messages">
-      <a href="#">Messages ( <%= unread_messages %> )</a>
-    </li>
-   </ul>
-
-
-  </nav>
+ <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
   <div class="container" id="content">
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-
-        <button type="button" id="sidebarCollapse" class="btn btn-flat">
-            <i class="fas fa-align-left"></i>
-        </button>
-
-      </div>
-    </nav>
     <div class="selector py-3">
 
         <div id="profile-card" class="dashboard-renders dashboard-card row justify-content-between">
@@ -69,7 +29,7 @@
           </div>
           <div class="each-render col-12 col-lg-6">
             <div class="btn dashboard-selector card p-3 m-2" data-selector="messages">
-              <a href="#" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
+              <a href="/inbox" ><i class="my-3 profile-icon fas fa-inbox"></i></a>
                 <p>Inbox ( <%= unread_messages %> )</p>
             </div>
           </div>
@@ -77,7 +37,7 @@
             <div class="row px-0">
               <div class="col-6 pr-0">
                 <div class="btn dashboard-selector card p-3 m-2" data-selector="pending-requests">
-                  <a href="#" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
+                  <a href="/dashboard/pending" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
                     <p>Applications ( <%= pending_requests %> )</p>
                 </div>
               </div>
@@ -85,19 +45,19 @@
               <div class="col-6 pl-0">
 
                 <div class="btn dashboard-selector card p-3 m-2" data-selector="favourites">
-                  <a href="#" ><i class="my-3 profile-icon far fa-heart"></i></a>
+                  <a href="/dashboard/favourites" ><i class="my-3 profile-icon far fa-heart"></i></a>
                     <p>Favourites ( <%= current_user.favourites.count %> )</p>
                 </div>
               </div>
               <div class="col-6 pr-0">
                 <div class="btn dashboard-selector card p-3 m-2" data-selector="upcoming-jobs">
-                  <a href="#" ><i class="my-3 profile-icon fas fa-clock"></i></a>
+                  <a href="/dashboard/upcoming" ><i class="my-3 profile-icon fas fa-clock"></i></a>
                     <p>Upcoming ( <%= upcoming_jobs.count %> )</p>
                 </div>
               </div>
               <div class="col-6 pl-0">
                 <div class="btn dashboard-selector card p-3 m-2" data-selector="job-history">
-                  <a href="#" ><i class="my-3 profile-icon fas fa-history"></i></a>
+                  <a href="/dashboard/historic" ><i class="my-3 profile-icon fas fa-history"></i></a>
                     <p>Job History</p>
                 </div>
               </div>
@@ -119,56 +79,6 @@
           <div class="each-render col-12">
             <%= render 'reviews/shared/view-reviews', user: current_user %>
           </div>
-        </div>
-
-        <div id="upcoming-jobs" data-target="upcoming-jobs" class="dashboard-card d-none col-12 col-md-8 offset-md-2">
-          <h4 class="mx-3">Upcoming Jobs</h4>
-          <% current_user.shifts.order(:start_time).each do |shift|  %>
-            <% if shift.start_time >= DateTime.now  %>
-              <%= render 'shifts/shift-card-employee', shift: shift %>
-            <% end %>
-
-          <% end %>
-        </div>
-
-        <div id="pending-requests" data-target="pending-requests" class="col-12 d-none dashboard-card">
-          <h4 class="mx-3">Pending Requests</h4>
-              <%= render 'pages/pending-requests', requests: current_user.requests %>
-
-        </div>
-
-        <div id="favourites" data-target="favourites" class="col-12 d-none dashboard-card">
-          <h4 class="mx-3">Favourites</h4>
-              <% if current_user.favourites.length > 0 %>
-                <% current_user.favourites.each do |fav| %>
-                  <% num_shifts = fav.job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-
-                  <%= render 'jobs/shared/job-listings', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>
-
-                <% end %>
-              <% else %>
-                <p>Check out the <%= link_to 'job listings', jobs_path %> and save your favourites here!</p>
-              <% end %>
-
-        </div>
-
-        <div id="job-history" data-target="job-history" class="col-12 col-md-8 offset-md-2 d-none dashboard-card">
-          <h4 class="mx-3">Job History</h4>
-
-          <% current_user.shifts.order(:start_time).each do |shift|  %>
-            <% if shift.start_time < DateTime.now  %>
-              <%= render 'shifts/shift-card-employee', shift: shift %>
-            <% end %>
-
-          <% end %>
-        </div>
-
-        <div id="reviews" data-target="reviews" class="col-12 d-none dashboard-card">
-          <%= render 'reviews/shared/view-reviews', user: current_user %>
-        </div>
-
-        <div id="messages" data-target="messages" class="d-none dashboard-card">
-          <%= render 'pages/inbox', chats: chats %>
         </div>
 
     </div>

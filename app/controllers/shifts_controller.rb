@@ -65,6 +65,26 @@ class ShiftsController < ApplicationController
       redirect_to request_path(@request), notice: "did not save"
     end
   end
+
+  def upcoming_shifts
+    @shifts = current_user.shifts
+    authorize @shifts
+  end
+
+  def historic_shifts
+    @shifts = current_user.shifts
+    authorize @shifts
+  end
+
+  private
+
+  def shift_params
+    params.require(:shift).permit(:start_time, :end_time, :job_id, :price, :total_pay)
+  end
+
+  def set_shift
+    @shift = Shift.find(params[:id])
+  end
 end
 
 # def upcoming_shifts_to_json
@@ -84,12 +104,3 @@ end
 #   end
 # end
 
-private
-
-def shift_params
-  params.require(:shift).permit(:start_time, :end_time, :job_id, :price, :total_pay)
-end
-
-def set_shift
-  @shift = Shift.find(params[:id])
-end

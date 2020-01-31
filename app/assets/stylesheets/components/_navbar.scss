@@ -72,3 +72,17 @@
 .lots_of_empty_space_new_password {
   height: 55vh;
 }
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.nav-link:hover {
+  background-color: white;
+}

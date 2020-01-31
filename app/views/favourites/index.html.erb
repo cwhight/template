@@ -1,0 +1,20 @@
+<% page = "favourites" %>
+
+<div class="wrapper">
+  <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
+
+  <div id="favourites" data-target="favourites" class="col-12 d-none dashboard-card">
+    <h4 class="mx-3">Favourites</h4>
+        <% if current_user.favourites.length > 0 %>
+          <% current_user.favourites.each do |fav| %>
+            <% num_shifts = fav.job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+
+            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>
+
+          <% end %>
+        <% else %>
+          <p>Check out the <%= link_to 'job listings', jobs_path %> and save your favourites here!</p>
+        <% end %>
+
+  </div>
+</div>

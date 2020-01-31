@@ -1,0 +1,62 @@
+<% listed_jobs = current_user.jobs.where({done: nil}) %>
+<% applications = current_user.chats.reject {|ch| ch.request.shift.user || Time.parse(ch.request.shift.start_time) < Time.now }.size %>
+<% closed_jobs = current_user.jobs.where({done: true}) %>
+<% unread_messages = 0 %>
+<% chats = current_user.chats %>
+<% chats.each do |chat| %>
+  <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
+<% end %>
+
+
+
+<nav id="sidebar">
+ <ul class="list-unstyled components">
+
+  <li <%= page == "profile" ? "class=active" : "" %>  data-selector="profile-card">
+    <%= link_to 'Profile', dashboard_employer_path  %>
+  </li>
+
+  <li <%= page == "listed_jobs" ? "class=active" : "" %>  data-selector="listed-jobs">
+    <%= link_to "Listed Jobs ( #{listed_jobs.count } )", listed_jobs_path  %>
+    <span><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a></span></a>
+
+    <ul class="collapse list-unstyled" id="homeSubmenu">
+
+      <% listed_jobs.each do |job| %>
+
+          <li <%= @job && job.id == @job.id ? 'class=active' : "" %>>
+
+            <%= link_to job.title, job_path(job)  %>
+
+          </li>
+
+      <% end %>
+    </ul>
+  </li>
+
+  <li <%= page == "active" ? "class=active" : "" %>  data-selector="active-applications">
+    <%= link_to "Active Applications ( #{applications} )", active_applications_path %>
+  </li>
+
+  <li <%= page == "closed_jobs" ? "class=active" : "" %> data-selector="closed-jobs">
+    <%= link_to "Closed Jobs ( #{closed_jobs.count} )", closed_jobs_path %>
+  </li>
+
+  <li <%= page == "reviews" ? "class=active" : "" %>  data-selector="reviews">
+    <%= link_to "Reviews ( #{current_user.reviews.count} )", review_dashboard_path %>
+  </li>
+
+
+  <li <%= page == "inbox" ? "class=active" : "" %>  data-selector="messages">
+    <%= link_to "Messages ( #{unread_messages} )", inbox_path  %>
+  </li>
+ </ul>
+
+
+</nav>
+
+
+<div class="px-2 py-3 sideSideBar">
+  <a href="#"><i class="fas fa-align-left" id="sidebarCollapse"></i></a>
+</div>
+

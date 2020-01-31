@@ -20,6 +20,15 @@ class ShiftPolicy < ApplicationPolicy
     record.job.user == user
   end
 
+  def upcoming_shifts?
+    true
+  end
+
+  def historic_shifts?
+    true
+  end
+
+
   class Scope < Scope
     def resolve
       scope.all

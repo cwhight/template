@@ -1,5 +1,6 @@
 <%= simple_form_for [chat, message], url: chat_messages_path(chat), local: true  do |f| %>
-      <%= f.text_field :content, label: Message, contenteditable: "true", class: "form-control"%>
+  <%= f.input :content, label: Message %>
+  <%= f.button :submit, "Send", class: "btn btn-flat" %>
 <% end %>
 
 

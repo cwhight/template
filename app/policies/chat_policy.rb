@@ -16,4 +16,8 @@ class ChatPolicy < ApplicationPolicy
   def inbox_show?
     show?
   end
+
+  def inbox?
+    true
+  end
 end

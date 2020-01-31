@@ -82,6 +82,16 @@ class JobsController < ApplicationController
     redirect_to jobs_path
   end
 
+  def closed_jobs
+    @jobs = current_user.jobs.where({done: true})
+    authorize @jobs
+  end
+
+  def listed_jobs
+    @jobs = current_user.jobs.where({done: nil})
+    authorize @jobs
+  end
+
   private
 
   def job_params

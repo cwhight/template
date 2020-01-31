@@ -1,5 +1,9 @@
 class FavouritesController < ApplicationController
 
+  def index
+    @favourites = policy_scope(Favourite)
+  end
+
   def create
     @favourite = Favourite.new
     @job = Job.find(params[:job_id])

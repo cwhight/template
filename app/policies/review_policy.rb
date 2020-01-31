@@ -3,6 +3,10 @@ class ReviewPolicy < ApplicationPolicy
     true
   end
 
+  def review_dashboard?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

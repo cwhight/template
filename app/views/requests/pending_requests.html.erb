@@ -1,0 +1,50 @@
+<% page = "pending" %>
+<% pending_requests = 0 %>
+<% current_user.requests.each do |request| %>
+  <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
+    <% pending_requests += 1 %>
+  <% end %>
+<% end %>
+<div class="wrapper">
+  <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
+  <div class="container px-2 py-3">
+    <div>
+      <h1>Active Applications</h1>
+      <p>Manage your job applications here - you currently have <%= pending_requests %> applications </p>
+
+    </div>
+    <div>
+      <table class="table table-hover" style="max-width: 100%">
+        <thead>
+          <tr>
+
+            <th scope="col">Shift</th>
+            <th scope="col">Employer</th>
+            <th scope="col">Messages</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @requests.order(created_at: :desc).each do |request| %>
+            <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now%>
+
+               <tr>
+                  <th scope="row">
+                    <p><%= request.shift.job.title %></p>
+                    <p><%= Time.parse(request.shift.start_time).strftime("%e %b") %>: <%= Time.parse(request.shift.start_time).strftime("%H/%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H/%M") %></p>
+                  </th>
+                  <td><%= request.shift.job.user.first_name %></td>
+                  <% if request.chat %>
+                    <td><%= link_to 'View Messages', chat_path(request.chat), class: 'btn btn-flat' %></td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+

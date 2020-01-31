@@ -62,6 +62,15 @@ class RequestsController < ApplicationController
     end
   end
 
+  def active_applications
+    authorize Request
+  end
+
+  def pending_requests
+    @requests = current_user.requests
+    authorize @requests
+  end
+
   private
 
   def request_params

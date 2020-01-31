@@ -1,23 +1,11 @@
+<% page = "" %>
+
 <div class="wrapper">
-  <nav id="sidebar">
-    <ul class="list-unstyled components">
-      <li>
-        <%= link_to 'Dashboard',current_user.employer ? dashboard_employer_path(@current_user) : dashboard_path %>
-      </li>
+  <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
 
-      <% current_user.jobs.each do |job| %>
-        <% unless job.done %>
-          <li <%= job.id == @job.id ? 'class=active' : "" %>>
 
-            <%= link_to job.title, job_path(job)  %>
+  <div class="cont content">
 
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-  </nav>
-
-  <div class="container content">
     <div class="d-flex justify-content-between">
       <div>
         <div class="py-1 px-2 col-12 col-md-11">
@@ -63,9 +51,9 @@
               <td>Total Pay: <%= number_to_currency(shift.total_pay, unit: "£") %></td>
               <% if shift.user %>
                 <td>
-                  <div class="mt-2 d-flex justify-content-between flex-column align-items-center">
-                    <i class="fas fa-check"></i><%= "Booked: #{shift.user.first_name}" %>
-                  </div>
+
+                    <span><i class="fas fa-check"></i>   <%= "Booked: #{shift.user.first_name}" %></span>
+
                 </td>
                 <% chat = shift.requests.where(user: shift.user).first.chat %>
                 <td><%= link_to "Message #{shift.user.first_name}", chat_path(chat), class: "btn btn-flat" %></td>
@@ -110,9 +98,9 @@
                 <td><%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %></td>
               <% else %>
                 <td>
-                  <div class="mt-2 d-flex justify-content-between flex-column align-items-center">
-                    <i class="fas fa-check"></i><%= "Reviewed: #{shift.user.first_name}" %>
-                  </div>
+
+                    <i class="fas fa-check"></i>   <%= "Reviewed: #{shift.user.first_name}" %>
+
                 </td>
               <% end %>
               <% if shift.order %>

@@ -1,0 +1,17 @@
+<% page = "upcoming" %>
+
+<div class="wrapper">
+  <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
+  <div class="container px-2 py-3">
+
+    <div class="dashboard-card col-12 col-md-8 offset-md-2">
+      <h4 class="mx-3">Upcoming Jobs</h4>
+      <% @shifts.order(:start_time).each do |shift|  %>
+        <% if shift.start_time >= DateTime.now  %>
+          <%= render 'shifts/shift-card-employee', shift: shift %>
+        <% end %>
+
+      <% end %>
+    </div>
+  </div>
+</div>

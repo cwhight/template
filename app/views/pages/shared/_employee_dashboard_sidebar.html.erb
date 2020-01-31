@@ -1,0 +1,54 @@
+<% pending_requests = 0 %>
+<% current_user.requests.each do |request| %>
+  <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
+    <% pending_requests += 1 %>
+  <% end %>
+<% end %>
+<% upcoming_jobs = current_user.shifts.where({completed: nil}) %>
+
+<% unread_messages = 0 %>
+<% chats = current_user.employee_chats %>
+<% chats.each do |chat| %>
+  <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
+<% end %>
+
+<nav id="sidebar">
+ <ul class="list-unstyled components">
+
+  <li>
+    <%= link_to "Profile", dashboard_path  %>
+  </li>
+
+  <li>
+    <%= link_to "Pending Applications ( #{pending_requests} )" , pending_requests_path  %>
+  </li>
+
+  <li>
+    <%= link_to "Upcoming Jobs ( #{upcoming_jobs.count} )", upcoming_shifts_path %>
+  </li>
+
+  <li>
+    <%= link_to 'Job History', historic_shifts_path  %>
+  </li>
+
+  <li>
+    <%= link_to "Reviews ( #{current_user.reviews.count} )", review_dashboard_path %>
+  </li>
+
+
+  <li>
+    <%= link_to "Favourites ( #{current_user.favourites.count} )", favourites_path %>
+    <a href="#"></a>
+  </li>
+
+  <li>
+    <%= link_to "Messages ( #{unread_messages} )", inbox_path  %>
+  </li>
+ </ul>
+
+
+</nav>
+<div class="px-2 py-3 sideSideBar">
+  <a href="#"><i class="fas fa-align-left" id="sidebarCollapse"></i></a>
+</div>
+

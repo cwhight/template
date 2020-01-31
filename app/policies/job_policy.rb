@@ -16,6 +16,18 @@ class JobPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def closed_jobs?
+    true
+  end
+
+  def listed_jobs?
+    true
+  end
+
+  def favourites?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

@@ -1,0 +1,122 @@
+<% page = "inbox" %>
+
+<div class="wrapper">
+  <% if current_user.employer %>
+    <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
+  <% else %>
+    <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
+  <% end %>
+  <div class="cont" id="content">
+    <div class="px-2 py-3">
+      <h4>Inbox</h4>
+
+      <div class="d-flex justify-content-between">
+        <div id="open-apps" class="btn p-3 card">
+          <a href="#">Open Applications</a>
+        </div>
+        <div id="upcoming" class="btn p-3 card">
+          <a href="#">Upcoming Jobs</a>
+        </div>
+        <div id="old-jobs" class="btn p-3 card">
+          <a href="#">Old Conversations</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-">
+
+          <div id="open-apps-msg" class="my-2">
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"><i class="far fa-envelope"></i></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @chats.order(created_at: :desc).each do |chat|%>
+                  <% unless chat.request.shift.user || Time.parse(chat.request.shift.start_time) < Time.now%>
+                    <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
+                    <tr>
+                      <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
+                      <td><%= render 'pages/chat-modal', chat: chat %></td>
+
+                      <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
+                      <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="upcoming-msg" class="d-none my-2">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"><i class="far fa-envelope"></i></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+
+            <% @chats.order(created_at: :desc).each do |chat|%>
+              <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
+                <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
+                    <tr>
+                      <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
+                      <td><%= render 'pages/chat-modal', chat: chat %></td>
+
+                      <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
+                      <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                    </tr>
+              <% end %>
+            <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-none my-2" id="old-jobs-msg">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"><i class="far fa-envelope"></i></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+            <% @chats.order(created_at: :desc).each do |chat|%>
+              <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
+                <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
+                    <tr>
+                      <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
+                      <td><%= render 'pages/chat-modal', chat: chat %></td>
+
+                      <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
+                      <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                    </tr>
+              <% end %>
+            <% end %>
+            </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-12">
+         <div class="my-2" id="chat-window-inbox">
+
+         </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
