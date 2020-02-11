@@ -15,33 +15,33 @@
 <nav id="sidebar">
  <ul class="list-unstyled components">
 
-  <li>
+  <li <%= page == "profile" ? "class=active" : "" %>>
     <%= link_to "Profile", dashboard_path  %>
   </li>
 
-  <li>
+  <li <%= page == "pending" ? "class=active" : "" %>>
     <%= link_to "Pending Applications ( #{pending_requests} )" , pending_requests_path  %>
   </li>
 
-  <li>
+  <li <%= page == "upcoming" ? "class=active" : "" %>>
     <%= link_to "Upcoming Jobs ( #{upcoming_jobs.count} )", upcoming_shifts_path %>
   </li>
 
-  <li>
+  <li <%= page == "historic"  ? "class=active" : "" %>>
     <%= link_to 'Job History', historic_shifts_path  %>
   </li>
 
-  <li>
+  <li <%= page == "reviews" ? "class=active" : "" %>>
     <%= link_to "Reviews ( #{current_user.reviews.count} )", review_dashboard_path %>
   </li>
 
 
-  <li>
+  <li <%= page == "favourites" ? "class=active" : "" %>>
     <%= link_to "Favourites ( #{current_user.favourites.count} )", favourites_path %>
     <a href="#"></a>
   </li>
 
-  <li>
+  <li <%= page == "inbox" ? "class=active" : "" %>>
     <%= link_to "Messages ( #{unread_messages} )", inbox_path  %>
   </li>
  </ul>

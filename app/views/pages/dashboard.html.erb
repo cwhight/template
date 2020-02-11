@@ -1,4 +1,4 @@
-<% page = "" %>
+<% page = "profile" %>
 <% pending_requests = 0 %>
 <% current_user.requests.each do |request| %>
   <% unless request.shift.user || Time.parse(request.shift.start_time) < Time.now %>
