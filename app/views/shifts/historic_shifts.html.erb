@@ -1,10 +1,10 @@
-<% page = "history" %>
+<% page = "historic" %>
 
 <div class="wrapper">
   <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
-  <div class="container px-2 py-3">
+  <div class="cont px-2 py-3">
 
-    <div class="dashboard-card col-12 col-md-8 offset-md-2">
+    <div class="dashboard-card">
       <h4 class="mx-3">Job History</h4>
 
       <% @shifts.order(:start_time).each do |shift|  %>
