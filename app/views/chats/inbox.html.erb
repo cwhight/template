@@ -10,17 +10,16 @@
     <div class="px-2 py-3">
       <h4>Inbox</h4>
 
-      <div class="d-flex justify-content-between">
-        <div id="open-apps" class="btn p-3 card">
-          <a href="#">Open Applications</a>
-        </div>
-        <div id="upcoming" class="btn p-3 card">
-          <a href="#">Upcoming Jobs</a>
-        </div>
-        <div id="old-jobs" class="btn p-3 card">
-          <a href="#">Old Conversations</a>
-        </div>
-      </div>
+      <nav class="d-flex">
+
+          <a href="#" id="open-apps" class="inbox-active btn p-2 inbox-nav">Open</a>
+
+          <a href="#" id="upcoming" class="p-2 btn inbox-nav">Upcoming</a>
+
+
+          <a href="#" id="old-jobs" class="p-2 btn inbox-nav">Old</a>
+
+      </nav>
 
       <div class="row">
         <div class="col-12 col-md-">
@@ -42,7 +41,7 @@
                     <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
                     <tr>
                       <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
-                      <td><%= link_to chat.messages.last.content, chat_path(chat), class: "inbox-link"  %></td>
+                      <td><%= link_to "#{chat.messages.last.content.first(20)}", chat_path(chat), class: "inbox-link"  %></td>
                       <!-- <td><%#= render 'pages/chat-modal', chat: chat %></td> -->
 
                       <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
@@ -118,6 +117,7 @@
 
     </div>
   </div>
+
 </div>
 
 

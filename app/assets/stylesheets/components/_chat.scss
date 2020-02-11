@@ -105,3 +105,16 @@ input.form-control.sidebar-form {
   opacity: 0.7;
   text-decoration: none;
 }
+
+.inbox-active {
+  border-bottom: 5px solid #2a69da;
+}
+
+.inbox-nav {
+  text-decoration: none;
+}
+
+.inbox-nav:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}

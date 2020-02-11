@@ -12,18 +12,27 @@ const openMessages = () => {
     openApps.classList.remove("d-none");
     upcoming.classList.add("d-none");
     oldJobs.classList.add("d-none");
+    openBtn.classList.add("inbox-active")
+    upcomingBtn.classList.remove("inbox-active")
+    oldBtn.classList.remove("inbox-active")
     chatWindow.innerHTML = "";
   })
   upcomingBtn.addEventListener("click", (e) => {
     openApps.classList.add("d-none");
     upcoming.classList.remove("d-none");
     oldJobs.classList.add("d-none");
+    openBtn.classList.remove("inbox-active")
+    upcomingBtn.classList.add("inbox-active")
+    oldBtn.classList.remove("inbox-active")
     chatWindow.innerHTML = "";
   })
   oldBtn.addEventListener("click", (e) => {
     openApps.classList.add("d-none");
     upcoming.classList.add("d-none");
     oldJobs.classList.remove("d-none");
+    openBtn.classList.remove("inbox-active")
+    upcomingBtn.classList.remove("inbox-active")
+    oldBtn.classList.add("inbox-active")
     chatWindow.innerHTML = "";
   })
 }
