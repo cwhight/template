@@ -94,3 +94,14 @@ input.form-control.sidebar-form {
   float: left;
 
 }
+
+.inbox-link {
+  text-decoration: none;
+  color: black;
+}
+
+.inbox-link:hover {
+  color: black;
+  opacity: 0.7;
+  text-decoration: none;
+}

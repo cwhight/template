@@ -42,7 +42,8 @@
                     <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
                     <tr>
                       <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
-                      <td><%= render 'pages/chat-modal', chat: chat %></td>
+                      <td><%= link_to chat.messages.last.content, chat_path(chat), class: "inbox-link"  %></td>
+                      <!-- <td><%#= render 'pages/chat-modal', chat: chat %></td> -->
 
                       <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
                       <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
@@ -70,8 +71,8 @@
                 <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
                     <tr>
                       <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
-                      <td><%= render 'pages/chat-modal', chat: chat %></td>
-
+                      <td><%= link_to chat.messages.last.content, chat_path(chat), class: "inbox-link"  %></td>
+                      <!-- <td><%#= render 'pages/chat-modal', chat: chat %></td> -->
                       <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
                       <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
                     </tr>
@@ -97,8 +98,8 @@
                 <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
                     <tr>
                       <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
-                      <td><%= render 'pages/chat-modal', chat: chat %></td>
-
+                      <td><%= link_to chat.messages.last.content, chat_path(chat), class: "inbox-link"  %></td>
+                      <!-- <td><%#= render 'pages/chat-modal', chat: chat %></td> -->
                       <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
                       <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
                     </tr>
