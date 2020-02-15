@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :users, only: [:edit, :update]
+  resources :users, only: [:edit, :update, :index]
 
   resources :requests, only: [:show] do
     resources :chats, only: [:create]
@@ -57,9 +57,9 @@ Rails.application.routes.draw do
   patch 'requests/:id/accept_request', to: 'shifts#accept_request', as: 'accept_request'
 
 
-  authenticate :user, lambda { |u| u.admin } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
+  # authenticate :user, lambda { |u| u.admin } do
+  #   mount Sidekiq::Web => '/sidekiq'
+  # end
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

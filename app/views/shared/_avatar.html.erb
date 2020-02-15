@@ -6,6 +6,7 @@
 
 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
   <% if current_user %>
+
     <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
   <% else %>
     <%= link_to 'Sign in', new_user_session_path, class: "dropdown-item" %>

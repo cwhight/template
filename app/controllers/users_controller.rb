@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
 
+  def index
+    @employees = policy_scope(User)
+    @employees = User.where(employer: false)
+
+  end
+
   def edit
     @user = User.find(params[:id])
     authorize @user

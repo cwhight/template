@@ -5,7 +5,7 @@
 
   </div>
   <div class="w-25 text-center bottom-navlink">
-    <%= link_to '', jobs_path, class: "fas fa-search text-center bottom-navlink"  %>
+    <%= link_to '', current_user.employer ? users_path : jobs_path, class: "fas fa-search text-center bottom-navlink"  %>
 
   </div>
   <div class="w-25 bottom-navlink">
