@@ -13,14 +13,16 @@
 }
 
 .bottom-navlink {
-  color: white;
-  font-size: 30px;
+  color: #2969DA;
+  font-size: 25px;
   text-align: center;
 }
 
 .navbar-bottom {
   justify-content: space-between;
-  background-color: #2969DA;
+  background-color: white;
+  border-top-style: solid;
+  border-top-color: #2969DA;
   max-width: 100%;
   min-height: 66px;
 }

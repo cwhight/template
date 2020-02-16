@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_152605) do
+ActiveRecord::Schema.define(version: 2020_02_16_145007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,23 @@ ActiveRecord::Schema.define(version: 2019_12_04_152605) do
     t.index ["user_id"], name: "index_shifts_on_user_id"
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+  end
+
+  create_table "skills_joiners", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "skills_id"
+    t.bigint "skill_id"
+    t.index ["skill_id"], name: "index_skills_joiners_on_skill_id"
+    t.index ["skills_id"], name: "index_skills_joiners_on_skills_id"
+    t.index ["user_id"], name: "index_skills_joiners_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -185,4 +202,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_152605) do
   add_foreign_key "sector_joiners", "sectors"
   add_foreign_key "shifts", "jobs"
   add_foreign_key "shifts", "users"
+  add_foreign_key "skills_joiners", "skills"
+  add_foreign_key "skills_joiners", "skills", column: "skills_id"
+  add_foreign_key "skills_joiners", "users"
 end

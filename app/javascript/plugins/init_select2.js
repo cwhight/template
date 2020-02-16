@@ -6,6 +6,10 @@ const initSelect2 = () => {
     placeholder: "Select job sectors...",
     allowClear: true
   });
+    $('.skill-picker').select2({
+    placeholder: "Select skills...",
+    allowClear: true
+  });
   $('.search_category').select2({
     placeholder: "Select job sectors...",
     allowClear: true,

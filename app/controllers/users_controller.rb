@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     authorize @user
+    skill_ids = params[:user][:skill_ids].drop(1)
+    @skills = skill_ids.map do |element|
+      Skill.find(element)
+    end
+    @user.skills = @skills
     if @user.save
       if @user.employer
         redirect_to dashboard_employer_path(@user)
@@ -29,6 +34,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :surname, :dob, :photo, :summary, :employer)
+    params.require(:user).permit(:first_name, :surname, :dob, :photo, :summary, :employer, :skills)
   end
 end

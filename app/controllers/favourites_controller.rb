@@ -17,7 +17,6 @@ class FavouritesController < ApplicationController
     @job = Job.find(params[:job_id])
     @favourite = Favourite.find(params[:id])
     authorize @favourite
-    # binding.pry
     @favourite.destroy
   end
 

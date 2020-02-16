@@ -4,6 +4,7 @@
     <%= f.input :first_name %>
     <%= f.input :surname %>
     <%= f.input :dob %>
+    <%= f.association :skills, label_method: :title, value_method: :id, input_html: { class: 'skill-picker' } %>
     <%= f.input :summary %>
     <%= f.input :employer, as: :boolean %>
     <%= f.input :photo, as: :file %>

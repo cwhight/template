@@ -6,7 +6,8 @@ class User < ApplicationRecord
   has_many :requests
   has_many :shifts
   has_many :favourites
-
+  has_many :skills_joiners
+  has_many :skills, through: :skills_joiners
   has_many :messages
   has_many :chats, foreign_key: "employer_id"
   has_many :employee_chats, foreign_key: "employee_id", class_name: "Chat"

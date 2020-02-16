@@ -43,6 +43,7 @@ sectors = ["Other", "Finance", "Business", "Charity", "Design", "Manufacturing",
 sectors.each do |e|
   puts "seeding with #{e}"
   Sector.create!(title: e)
+  Skill.create!(title: e)
 end
 
 prices = [1100,1500,1400,1050,1250,1800]
