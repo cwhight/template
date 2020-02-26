@@ -55,7 +55,7 @@
     <div class="d-flex justify-content-between">
 
       <%= render "reviews/shared/view-review-modal", employee: user unless user == current_user %>
-      <%= link_to 'Approach', edit_user_path(current_user), class: "btn btn-ghost" %>
+      <%= link_to 'Approach', new_user_offer_path(user), class: "btn btn-ghost" %>
     </div>
   <% end %>
 </div>

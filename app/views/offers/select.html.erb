@@ -1,0 +1,47 @@
+<div class="container confirmation-page">
+  <h2 class="mt-2"><i class="fas fa-arrow-right"></i> </h2><br>
+  <div class="row">
+    <div class="col-6">
+      <h2>Which shift are you offering to <%= @user.first_name %>?</h2>
+
+
+      <% current_user.jobs.each do |job| %>
+
+          <div class="py-2 dropdown">
+            <% shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}  %>
+            <% num_shifts = shifts.length %>
+            <div class="dropdown-toggle btn btn-flat collapsible active">
+              <%= job.title %>
+            </div>
+            <div class="content-collapse">
+              <% shifts.sort_by { |shift| shift.start_time }.each do |shift| %>
+                <% unless shift.user || shift.completed %>
+                  <% if Time.parse(shift.start_time) > Time.now %>
+                    <div class="dropdown-item message-submission">
+                      <div class="p-2 border-bottom">
+                        <div class="p-1 d-flex justify-content-between">
+                          <p><%= Time.parse(shift&.start_time)&.strftime("%e %b") %></p>
+                          <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                        </div>
+                        <div class="p-1 d-flex justify-content-between">
+                          <p><%= humanized_money_with_symbol(shift.price) %>/h</p>
+                          <%= link_to "Select shift", new_shift_offer_path(shift, @user),  class: "btn btn-sign-up" %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+
+    </div>
+    <div class="col-6">
+      <%= render '/users/shared/profile-card', user: @user, profile: true %>
+    </div>
+
+
+  </div>
+</div>
+

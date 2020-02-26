@@ -15,6 +15,7 @@ class Shift < ApplicationRecord
   monetize :price_cents
   after_create :total_pay
   after_update :total_pay
+  has_many :offers
 
   def start_time_before_end_time
     if end_time < start_time
