@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'offer/new'
   require "sidekiq/web"
 
   devise_for :users
@@ -26,6 +27,10 @@ Rails.application.routes.draw do
 
   resources :shifts, only: :show
 
+  get 'users/:id/offers/select', to: 'offers#select', as: :new_user_offer
+  get 'shifts/:id/users/:user_id/offers/new', to: 'offers#new', as: :new_shift_offer
+  post 'shifts/:id/users/:user_id/offers', to: 'offers#create', as: :create_shift_offer
+
   get '/reviews', to: 'reviews#review_dashboard', as: :review_dashboard
 
   post 'shifts/:shift_id/reviews', to: 'reviews#create', as: :shift_reviews
@@ -50,6 +55,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:edit, :update, :index]
+
 
   resources :requests, only: [:show] do
     resources :chats, only: [:create]

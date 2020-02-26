@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_16_145007) do
+ActiveRecord::Schema.define(version: 2020_02_25_181843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 2020_02_16_145007) do
     t.boolean "read", default: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "shift_id"
+    t.text "content"
+    t.index ["shift_id"], name: "index_offers_on_shift_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -192,6 +202,8 @@ ActiveRecord::Schema.define(version: 2020_02_16_145007) do
   add_foreign_key "jobs", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "offers", "shifts"
+  add_foreign_key "offers", "users"
   add_foreign_key "orders", "shifts"
   add_foreign_key "orders", "users"
   add_foreign_key "requests", "shifts"
