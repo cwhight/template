@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     end
 
     @review.user = @user
-
+    @review.reviewer = current_user
     if @review.save
       if current_user.employer
         @path = "jobs/#{@shift.job.id}"
