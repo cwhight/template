@@ -16,8 +16,6 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
-  resources :employees, only: [:index]
-
   patch '/shifts/close', to: 'shifts#close_shifts', as: :close_shifts
 
   get 'jobs/:id/close', to: 'jobs#close', as: :job_close
@@ -54,7 +52,9 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :users, only: [:edit, :update, :index]
+  get '/employees', to: 'users#index', as: :users
+
+  resources :users, only: [:edit, :update]
 
 
   resources :requests, only: [:show] do

@@ -1,0 +1,61 @@
+<div class="p-3 m-2 d-flex justify-content-between flex-column">
+
+   <div class="d-flex justify-content-between">
+    <div class="w-100">
+      <div class="w-100 profile-header">
+        <h2 class="d-inline"><%= user.first_name %> <%= user.surname %></h2>
+      </div>
+
+    </div>
+    <div>
+      <% if user.photo.attached? %>
+        <%= cl_image_tag user.photo.key, class: "avatar d-inline float-right", crop: :fill  %>
+      <% else %>
+        <%= image_tag "avatar.jpg", class: 'avatar' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div>
+
+      <% score_array = user.reviews.map { |review| review.score } %>
+      <% unless score_array.empty? %>
+        <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+        <div>
+          <p><span ><%= average_score.round(1) %> <i class="star fas fa-star"></i></span> </p>
+        </div>
+      <% else %>
+        <p>Review Score: No Reviews Yet </p>
+      <% end %>
+      <% now = Time.now.to_date %>
+      <% dob = user.dob %>
+      <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
+      <p><i class="fas fa-birthday-cake pink-icon"></i> <strong>Age: </strong><%= age %></p>
+      <p><i class="red-marker fas fa-map-marker-alt"></i> <%= "Address" %></p>
+    </div>
+    <div class="d-flex align-items-start">
+      <% user.skills.each do |skill| %>
+        <div class="skill-tag m-1 p-1">
+          <%= skill.title %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <p class="w-100 border-top border-bottom py-2 px-1" style="background-color: #fafafa"><em><%= user.summary%></em></p>
+
+  <% if current_user == user %>
+    <div class="d-flex justify-content-between align-items-center">
+
+      <div class="py-2">
+        <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
+      </div>
+
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-between">
+
+      <%= render "reviews/shared/view-review-modal", employee: user unless user == current_user %>
+      <%= link_to 'Approach', new_user_offer_path(user), class: "btn btn-ghost" %>
+    </div>
+  <% end %>
+</div>

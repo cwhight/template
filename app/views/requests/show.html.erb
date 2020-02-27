@@ -4,10 +4,32 @@
       <h1>Request from <%= @request.user.first_name.capitalize %></h1>
     </div>
     <div class="row">
-
+      <% user = @request.user %>
       <div class="col-12 col-md-6 mb-2">
         <%= render 'users/shared/profile-card', user: @request.user %>
-        <%= render "reviews/shared/view-reviews", user: @request.user %>
+        <div class="reviews profile-card card p-3 m-2">
+
+          <h2><%= user.first_name %>'s Reviews</h2>
+          <% if user.reviews.any? %>
+            <% user.reviews.each do |review| %>
+            <div class="shadow-sm p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="">
+                  <h6><%= review.title %></h6>
+
+                </div>
+                <h6><span ><% review.score.round.times do %><i class="star fas fa-star"></i><% end %></h6>
+
+              </div>
+              <p><%= review.shift.job.title %></p>
+
+              <p><%= review.content %></p>
+            </div>
+            <% end %>
+          <% else %>
+            <p>No reviews yet</p>
+          <% end %>
+        </div>
       </div>
 
       <div class="col-12 col-md-6">

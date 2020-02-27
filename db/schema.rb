@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_181843) do
+ActiveRecord::Schema.define(version: 2020_02_27_080346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 2020_02_25_181843) do
     t.bigint "shift_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "reviewer_id"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
     t.index ["shift_id"], name: "index_reviews_on_shift_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -210,6 +212,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_181843) do
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "shifts"
   add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
   add_foreign_key "sector_joiners", "jobs"
   add_foreign_key "sector_joiners", "sectors"
   add_foreign_key "shifts", "jobs"
