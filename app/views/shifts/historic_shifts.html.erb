@@ -5,7 +5,7 @@
   <div class="cont px-2 py-3">
 
     <div class="dashboard-card">
-      <h4 class="mx-3">Job History</h4>
+      <h3 class="pt-3">Job History</h3>
 
       <% @shifts.order(:start_time).each do |shift|  %>
         <% if shift.start_time < DateTime.now  %>
