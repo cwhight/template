@@ -17,16 +17,16 @@
   </li>
 
   <li <%= page == "listed_jobs" ? "class=active" : "" %>  data-selector="listed-jobs">
-    <%= link_to "Listed Jobs ( #{listed_jobs.count } )", listed_jobs_path  %>
-    <span><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a></span></a>
+
+    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Listed Jobs</a>
 
     <ul class="collapse list-unstyled" id="homeSubmenu">
-
+      <li class="text-right"><%= link_to "All Jobs ( #{listed_jobs.count } )", listed_jobs_path, class: "pr-3"  %></li>
       <% listed_jobs.each do |job| %>
 
-          <li <%= @job && job.id == @job.id ? 'class=active' : "" %>>
+          <li class="text-right" <%= @job && job.id == @job.id ? 'class=active' : "class=text-center" %>>
 
-            <%= link_to job.title, job_path(job)  %>
+            <%= link_to job.title, job_path(job), class: "pr-3"  %>
 
           </li>
 
@@ -57,6 +57,6 @@
 
 
 <div class="px-2 py-3 sideSideBar">
-  <a href="#"><i class="fas fa-align-left" id="sidebarCollapse"></i></a>
+  <a href="#"><i class="pt-3 fas fa-align-left" id="sidebarCollapse"></i></a>
 </div>
 
