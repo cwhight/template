@@ -17,12 +17,14 @@
 // });
 
 const sidebar = document.querySelector("#sidebar")
-const sidebarCollapse = document.getElementById("sidebarCollapse")
+const sidebarCollapsers = document.querySelectorAll("#sidebarCollapse")
 
-if (sidebarCollapse) {
-  sidebarCollapse.addEventListener('click', (e) => {
+if (sidebarCollapsers) {
+  sidebarCollapsers.forEach((c) => {
+    c.addEventListener('click', (e) => {
     sidebar.classList.toggle('active')
 
+    });
   });
 }
 
