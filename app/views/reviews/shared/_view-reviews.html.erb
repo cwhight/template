@@ -1,6 +1,5 @@
 <div class="p-3 m-2">
 
-  <h2><%= user.first_name %>'s Reviews</h2>
   <% if user.reviews.any? %>
     <% user.reviews.each do |review| %>
       <%= render 'reviews/shared/review-card', review: review %>

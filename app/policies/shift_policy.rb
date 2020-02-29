@@ -10,6 +10,7 @@ class ShiftPolicy < ApplicationPolicy
 
   def accept_offer?
     record.user == user
+
   end
 
   def show?

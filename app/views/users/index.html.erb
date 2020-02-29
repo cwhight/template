@@ -1,7 +1,7 @@
 <div class="cont">
-  <div class="row">
 
-      <div class="content-index col-12 col-lg-7">
+
+      <div class="content-index">
         <div class="container">
           <div class="row justify-content-between border-bottom">
             <h1 class="targeter m-3"
@@ -21,56 +21,42 @@
                 data-endday="<%= @higher_start_date.day %>"
               <% end %>>Job Seekers</h1>
           </div>
-            <div class="d-lg-none">
-
-              <div class="dropdown-toggle w-100 my-1 btn btn-large btn-flat collapsible active">
+          <div class="">
+            <%= simple_form_for :search, url: users_path, method: :get do |f| %>
+              <div class="form-group form-inline pt-3 justify-content-between nowrap">
+                <div class="px-0 col-12">
+                  <input class="form-control string required" type="text" placeholder="Search by name..." name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
+                </div>
+              </div>
+              <div class="dropdown-toggle w-100 mb-3 btn btn-large btn-flat collapsible active">
                 Filter
               </div>
-
               <div class="content-collapse">
+                <%= f.input :skills, collection: Skill.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
 
-                <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
-                  <div class="form-group form-inline py-3 justify-content-between nowrap">
-                    <div class="px-0 col-12">
-                      <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
-                    </div>
-                  </div>
+                <%= f.input :price_cents, label: "Filter by Review Score", required: false, wrapper_html: {class: "ml-1 pr-2"},
+                  input_html: { class: 'js-range-slider',
+                  type: 'text',
+                  name: 'my_range',
+                  value: "",
+                  'data-type': "double",
+                  'data-min': "0",
+                  'data-max': "5",
+                  'data-from': "#{params[:my_range].split(';').first if params[:my_range]}",
+                  'data-to': "#{params[:my_range].split(';').last if params[:my_range]}",
+                  'data-keyboard': "true",
+                  'data-skin': "round",
+                } %>
 
-                  <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
-                  <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-1 pr-2"},
-                    input_html: { class: 'js-range-slider',
-                    type: 'text',
-                    name: 'my_range',
-                    value: "",
-                    'data-type': "double",
-                    'data-min': "5",
-                    'data-max': "50",
-                    'data-from': "#{params[:my_range].split(';').first if params[:my_range]}",
-                    'data-to': "#{params[:my_range].split(';').last if params[:my_range]}",
-                    'data-grid': "true",
-                    'data-keyboard': "true",
-                    'data-skin': "round",
-                    'data-prefix': "£"
-                  } %>
-
-                  <%= f.input :start_time, label: "Filter by date", required: false,
-                    input_html: { class: 'js-range-slider2',
-                    type: 'text',
-                    name: 'start_time',
-                    value: "",
-                    'data-type': "double",
-                    'data-skin': "round"
-                  } %>
-
-                  <div>
-                    <button name="button" type="submit" class="float-right my-2 btn btn-search " style="height: 42px; width: 128px;">
-                      <i class="fas fa-search"></i> Search
-                    </button>
-                    <%= link_to 'Display all', jobs_path, class: 'btn btn-flat my-2' %>
-                  </div>
-                <% end %>
-              </div>
+                <div>
+                  <button name="button" type="submit" class="float-right my-2 btn btn-search " style="height: 42px; width: 128px;">
+                    <i class="fas fa-search"></i> Search
+                  </button>
+                  <%= link_to 'Display all', jobs_path, class: 'btn btn-flat my-2' %>
+                </div>
+              <% end %>
             </div>
+          </div>
 
           <div class="row">
             <% unless @employees.empty? %>
@@ -78,6 +64,7 @@
                 <div class="col-12 col-md-6">
 
                   <%= render 'users/shared/profile-card', favourite: @favourite, user: employee %>
+
                 </div>
 
               <% end %>
@@ -88,48 +75,5 @@
           </div>
         </div>
       </div>
-      <div class="pt-4 col-5 col-lg-5 d-none d-lg-block d-xl-block">
-        <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
-          <div class="form-group form-inline py-3 justify-content-between nowrap">
-            <div class="px-0 col-12">
-              <input class="form-control string required" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
-            </div>
-          </div>
-
-          <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
-          <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-1 pr-2"},
-            input_html: { class: 'js-range-slider',
-            type: 'text',
-            name: 'my_range',
-            value: "",
-            'data-type': "double",
-            'data-min': "5",
-            'data-max': "50",
-            'data-from': "#{params[:my_range].split(';').first if params[:my_range]}",
-            'data-to': "#{params[:my_range].split(';').last if params[:my_range]}",
-            'data-grid': "true",
-            'data-keyboard': "true",
-            'data-skin': "round",
-            'data-prefix': "£"
-          } %>
-
-          <%= f.input :start_time, label: "Filter by date", required: false,
-            input_html: { class: 'js-range-slider2',
-            type: 'text',
-            name: 'start_time',
-            value: "",
-            'data-type': "double",
-            'data-skin': "round"
-          } %>
-
-          <div>
-            <button name="button" type="submit" class="float-right my-2 btn btn-search " style="height: 42px; width: 128px;">
-              <i class="fas fa-search"></i> Search
-            </button>
-            <%= link_to 'Display all', jobs_path, class: 'btn btn-flat my-2' %>
-          </div>
-        <% end %>
-      </div>
     </div>
-  </div>
 

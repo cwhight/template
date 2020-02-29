@@ -60,7 +60,12 @@ class ShiftsController < ApplicationController
     @shift.user = @user
     authorize @shift
     if @shift.save!
-      redirect_to job_path(@shift.job)
+      @message = Message.new(user: current_user, chat: @request.chat, content: "Congratulations! your application has been accepted")
+      if @message.save
+        redirect_to job_path(@shift.job)
+      else
+          redirect_to request_path(@request), notice: "did not save"
+      end
     else
       redirect_to request_path(@request), notice: "did not save"
     end
@@ -73,7 +78,12 @@ class ShiftsController < ApplicationController
     @shift.user = @user
     authorize @shift
     if @shift.save!
-      redirect_to upcoming_shifts_path
+      @message = Message.new(user: current_user, chat: @offer.request.chat, content: "Congratulations! your offer has been accepted")
+      if @message.save
+        redirect_to upcoming_shifts_path
+      else
+        redirect_to offer_path(@offer), notice: "did not save"
+      end
     else
       redirect_to offer_path(@offer), notice: "did not save"
     end

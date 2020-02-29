@@ -18,28 +18,25 @@
   <div class="d-flex justify-content-between">
     <div>
 
-      <% score_array = user.reviews.map { |review| review.score } %>
-      <% unless score_array.empty? %>
-        <% average_score = score_array.reduce(:+).to_f / score_array.length %>
-        <div>
-          <p><span ><%= average_score.round(1) %> <i class="star fas fa-star"></i></span> </p>
-        </div>
-      <% else %>
-        <p>Review Score: No Reviews Yet </p>
-      <% end %>
+      <%= render "reviews/shared/view-review-modal", employee: user %>
       <% now = Time.now.to_date %>
       <% dob = user.dob %>
       <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
-      <p><i class="fas fa-birthday-cake pink-icon"></i> <strong>Age: </strong><%= age %></p>
-      <p><i class="red-marker fas fa-map-marker-alt"></i> <%= "Address" %></p>
+      <p class="mx-1"><i class="fas fa-birthday-cake pink-icon"></i> <strong>Age: </strong><%= age %></p>
+      <p class="mx-1"><i class="red-marker fas fa-map-marker-alt"></i> <%= "Address" %></p>
     </div>
-    <div class="d-flex align-items-start">
-      <% user.skills.each do |skill| %>
-        <div class="skill-tag m-1 p-1">
-          <%= skill.title %>
-        </div>
-      <% end %>
+    <div class="text-right">
+      <span class="m-1 p-1"><i class="fas fa-award green-marker mx-1 px-1"></i>  Skills</span>
+      <div class="d-flex align-items-start">
+
+        <% user.skills.each do |skill| %>
+          <div class="skill-tag m-1 p-1 w-40">
+            <%= skill.title %>
+          </div>
+        <% end %>
+      </div>
     </div>
+
   </div>
   <p class="w-100 border-top border-bottom py-2 px-1" style="background-color: #fafafa"><em><%= user.summary%></em></p>
 
@@ -52,10 +49,6 @@
 
     </div>
   <% else %>
-    <div class="d-flex justify-content-between">
-
-      <%= render "reviews/shared/view-review-modal", employee: user unless user == current_user %>
-      <%= link_to 'Approach', new_user_offer_path(user), class: "btn btn-ghost" %>
-    </div>
+    <%= link_to 'Approach', new_user_offer_path(user), class: "btn btn-ghost" %>
   <% end %>
 </div>
