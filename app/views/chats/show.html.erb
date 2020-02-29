@@ -1,5 +1,11 @@
-<div class="wrapper">
+<% page = "" %>
 
+<div class="wrapper">
+  <% if current_user.employer %>
+    <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
+  <% else %>
+    <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
+  <% end %>
 
   <div class="container pt-3">
     <nav class="navbar navbar-expand-lg navbar-light">

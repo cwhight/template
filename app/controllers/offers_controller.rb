@@ -6,6 +6,13 @@ class OffersController < ApplicationController
     authorize @offer
   end
 
+  def show
+    @offer = Offer.find(params[:id])
+    @request = @offer.request
+
+    authorize @offer
+  end
+
   def new
     @shift = Shift.find(params[:id])
     @user = User.find(params[:user_id])
@@ -18,10 +25,12 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @offer.user = User.find(params[:user_id])
     @offer.shift = Shift.find(params[:id])
+    request = Request.new(user: @offer.user, shift: @offer.shift, content: @offer.content)
+    @offer.request = request
     authorize @offer
     if @offer.save
       @chat = Chat.new
-      request = Request.new(user: @offer.user, shift: @offer.shift, content: @offer.content)
+
       if request.save
         @chat.request = request
         @chat.employee = @offer.user

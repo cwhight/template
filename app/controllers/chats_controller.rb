@@ -34,7 +34,7 @@ class ChatsController < ApplicationController
   end
 
   def inbox
-    @chats = current_user.chats
+    current_user.employer ? @chats = current_user.chats : @chats = current_user.employee_chats
     authorize @chats
   end
 

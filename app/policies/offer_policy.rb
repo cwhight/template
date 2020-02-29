@@ -1,5 +1,9 @@
 class OfferPolicy < ApplicationPolicy
 
+  def show?
+    record.user == user
+  end
+
   def new?
     user.employer
   end

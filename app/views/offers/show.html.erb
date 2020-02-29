@@ -1,0 +1,40 @@
+<% user = @offer.shift.job.user %>
+<% shift = @offer.shift %>
+
+  <div class="container pt-3">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <%= link_to "", pending_requests_path, class: "btn btn-primary fas fa-arrow-left" %>
+
+      </div>
+    </nav>
+    <div class="d-flex justify-content-around align-items-top m-3">
+      <h1>Offer from <%= user.first_name.capitalize %></h1>
+      <%= link_to "Accept Offer", accept_offer_path(@offer), method: :patch, class: "btn btn-flat mb-2" %>
+
+    </div>
+    <div class="row">
+
+
+
+
+      <div class="col-12 col-md-6 mb-2">
+
+
+        <%= render 'shifts/shared/shift-card-employee', shift: shift, user: user %>
+
+
+        <%= render 'users/shared/profile-card', user: user %>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="m-2 card">
+          <%= render "chats/chat-window", chat: @request.chat %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="empty_space"></div>
+

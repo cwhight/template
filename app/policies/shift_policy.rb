@@ -8,6 +8,10 @@ class ShiftPolicy < ApplicationPolicy
     record.job.user == user
   end
 
+  def accept_offer?
+    record.user == user
+  end
+
   def show?
     record.user == user || record.job.user == user
   end

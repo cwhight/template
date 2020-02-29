@@ -5,10 +5,10 @@
   <div class="cont px-2 py-3">
 
     <div class="dashboard-card">
-      <h3 class="pt-3">Upcoming Jobs</h3>
+      <h3 class="py-3">Upcoming Jobs</h3>
       <% @shifts.order(:start_time).each do |shift|  %>
         <% if shift.start_time >= DateTime.now  %>
-          <%= render 'shifts/shift-card-employee', shift: shift %>
+          <%= render 'shifts/shared/shift-card-employee', shift: shift, user: shift.job.user %>
         <% end %>
 
       <% end %>

@@ -56,11 +56,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [:edit, :update]
 
+  resources :offers, only: :show
 
   resources :requests, only: [:show] do
     resources :chats, only: [:create]
   end
   patch 'requests/:id/accept_request', to: 'shifts#accept_request', as: 'accept_request'
+  patch 'offers/:id/accept_offer', to: 'shifts#accept_offer', as: 'accept_offer'
 
 
   # authenticate :user, lambda { |u| u.admin } do

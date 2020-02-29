@@ -37,7 +37,7 @@
               </thead>
               <tbody>
                 <% @chats.order(created_at: :desc).each do |chat|%>
-                  <% unless chat.request.shift.user || Time.parse(chat.request.shift.start_time) < Time.now%>
+                  <% if !chat.request.shift.user || Time.parse(chat.request.shift.start_time) > Time.now%>
                     <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
                     <tr>
                       <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>

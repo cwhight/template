@@ -66,6 +66,19 @@ class ShiftsController < ApplicationController
     end
   end
 
+  def accept_offer
+    @offer = Offer.find(params[:id])
+    @shift = @offer.shift
+    @user = @offer.user
+    @shift.user = @user
+    authorize @shift
+    if @shift.save!
+      redirect_to upcoming_shifts_path
+    else
+      redirect_to offer_path(@offer), notice: "did not save"
+    end
+  end
+
   def upcoming_shifts
     @shifts = current_user.shifts
     authorize @shifts

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_080346) do
+ActiveRecord::Schema.define(version: 2020_02_28_164712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 2020_02_27_080346) do
     t.bigint "user_id"
     t.bigint "shift_id"
     t.text "content"
+    t.bigint "request_id"
+    t.index ["request_id"], name: "index_offers_on_request_id"
     t.index ["shift_id"], name: "index_offers_on_shift_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
@@ -204,6 +206,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_080346) do
   add_foreign_key "jobs", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "offers", "requests"
   add_foreign_key "offers", "shifts"
   add_foreign_key "offers", "users"
   add_foreign_key "orders", "shifts"
