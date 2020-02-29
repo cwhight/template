@@ -1,5 +1,13 @@
-<body style="background-image: url(<%= image_path 'test_page_requests.png' %> );">
-  <div class="container">
+<div class="wrapper">
+      <%= render 'pages/shared/employer_dashboard_sidebar', page: "" %>
+    <div class="container pt-3">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <%= link_to "", active_applications_path, class: "btn btn-primary fas fa-arrow-left" %>
+
+      </div>
+    </nav>
+
     <div class="d-flex justify-content-around m-3">
       <h1>Request from <%= @request.user.first_name.capitalize %></h1>
     </div>
@@ -30,4 +38,6 @@
     <p><%= link_to "View Job Listing", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
   </div>
   <div class="empty_space"></div>
-</body>
+</div>
+
+

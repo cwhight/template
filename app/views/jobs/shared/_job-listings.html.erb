@@ -31,6 +31,7 @@
           </div>
           <p><i class="red-marker fas fa-map-marker-alt"></i> <%= job.location %></p>
           <p><i class="green-marker fas fa-angle-double-right"></i> <%= job.description %></p>
+          <p><i class="pink-icon fas fa-tshirt"></i> <%= job.dress %></p>
           <div class="dropdown">
             <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}.length  %>
             <div class="dropdown-toggle btn btn-flat collapsible active">

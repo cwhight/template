@@ -15,6 +15,7 @@
   </div>
   <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.location %></p>
   <p><i class="green-marker fas fa-angle-double-right"></i> <%= shift.job.description %></p>
+  <p><i class="pink-icon fas fa-tshirt"></i> <%= job.dress %></p>
   <div class="d-flex">
     <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
     <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
