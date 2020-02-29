@@ -10,12 +10,37 @@
     display: none !important
   }
 
+  .navbar-top-mobile {
+    display: none !important
+  }
+
 }
+
+.top-nav-dropdown {
+  color: #2969DA;
+  font-size: 20px;
+}
+
+.top-navlink {
+  color: white !important;
+  font-size: 20px;
+}
+
 
 .bottom-navlink {
   color: #2969DA;
   font-size: 25px;
   text-align: center;
+}
+
+.navbar-top-mobile {
+  justify-content: space-between;
+  background-color: #2969da;
+  // border-bottom-style: solid;
+  // border-bottom-color: #2969DA;
+  color: white;
+  max-width: 100%;
+  min-height: 33px;
 }
 
 .navbar-bottom {

@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between fixed-top navbar navbar-top-mobile py-1">
+
+  <div class="" >
+
+      <a href="#"><i class="top-navlink fas fa-align-left" id="sidebarCollapse"></i></a>
+
+
+  </div>
+
+  <div class="">
+
+      <%#= render 'shared/avatar', class: 'homepage-avatar ' %>
+      <!-- <a href="#"><i class="fas top-navlink fa-align-center dropdown-toggle top-nav-dropdown"></i></a> -->
+    <%= image_tag "", class: "fas top-navlink dropdown-toggle top-nav-dropdown", id: 'navbarDropdown', data: {toggle: 'dropdown'}, 'aria-haspopup': false, 'aria-expanded': false %>
+
+
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <% if current_user %>
+
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        <% if  current_user.employer %>
+          <%= link_to 'Search Staff', users_path, class: "dropdown-item"  %>
+        <% else %>
+          <%= link_to 'Search Jobs', jobs_path, class: "dropdown-item"  %>
+        <% end %>
+        <%= link_to 'Dashboard', current_user.employer ? dashboard_employer_path : dashboard_path, class: "dropdown-item"  %>
+
+        <%= link_to 'Messages', inbox_path, class: "dropdown-item" %>
+
+      <% else %>
+        <%= link_to 'Sign in', new_user_session_path, class: "dropdown-item" %>
+        <%= link_to 'Sign up', new_user_registration_path, class: "dropdown-item" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

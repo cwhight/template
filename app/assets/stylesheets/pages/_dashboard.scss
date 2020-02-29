@@ -25,10 +25,13 @@
 #sidebar.active {
     margin-left: -250px;
 }
-
-.sideSideBar {
+@media (max-width: 500px) {
+  .sideSideBar {
+    display: none;
+  }
 
 }
+
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
