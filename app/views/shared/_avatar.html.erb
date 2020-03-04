@@ -4,7 +4,7 @@
   <%= image_tag "avatar.jpg", class: 'avatar dropdown-toggle homepage-avatar mobile-avatar', id: 'navbarDropdown', data: {toggle: 'dropdown'}, 'aria-haspopup': true, 'aria-expanded': false %>
 <% end %>
 
-<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+<div class="dropdown-menu dropdown-box mt-3 dropdown-menu-right" aria-labelledby="navbarDropdown">
   <% if current_user %>
 
     <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>

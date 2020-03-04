@@ -16,6 +16,12 @@
 
 }
 
+.dropdown-box {
+  border-radius: 5px;
+  margin-right: 8px;
+  margin-top: 5px;
+}
+
 .top-nav-dropdown {
   color: #2969DA;
   font-size: 20px;
@@ -40,7 +46,7 @@
   // border-bottom-color: #2969DA;
   color: white;
   max-width: 100%;
-  min-height: 33px;
+  min-height: 40px;
 }
 
 .navbar-bottom {
