@@ -11,8 +11,18 @@
     letter-spacing: -0.05em;
     font-size: 1.5rem
   }
+
+
 }
 
+
+
+
+@media (max-width: 768px) {
+   .modal-lg {
+    max-width: 500px;
+  }
+}
 // .simple_form.new_user {
 //   input[type="submit"] {
 //     @extend .btn-sign-up;

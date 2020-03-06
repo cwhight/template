@@ -78,7 +78,7 @@ freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", passwo
 puts "Creating employees"
 
 5.times do
- user = User.create!(dob: "01/01/1997", email: Faker::Internet.email, password: "123456", employer: false, first_name: Faker::Name.first_name, surname: Faker::Name.last_name )
+ user = User.create!(dob: "01/01/1997", email: Faker::Internet.email, password: "123456", employer: false, first_name: Faker::Name.first_name, surname: Faker::Name.last_name, summary: "Experienced bar staff, wait staff, front of house. Also can work as kitchen assistance. Lots of experience in club promotion and ticket sales too" )
  employees << user
 end
 

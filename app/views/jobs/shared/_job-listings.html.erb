@@ -1,4 +1,7 @@
-<%= render 'jobs/shared/job-card', job: job, num_shifts: num_shifts, favourite: favourite %>
+<div class="clickable">
+  <%= render 'jobs/shared/job-card', job: job, num_shifts: num_shifts, favourite: favourite %>
+</div>
+
 <div class="modal fade"  id="showJob<%=job.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content card shadow-none">

@@ -3,7 +3,7 @@
       <% unless score_array.empty? %>
         <% average_score = score_array.reduce(:+).to_f / score_array.length %>
         <div>
-          <h4><span ><i class="star fas fa-star"></i></span> <%= average_score.round(1) %></h4>
+          <p><span ><i class="star fas fa-star"></i></span> <%= average_score.round(1) %> - <span class="skill-tag"><%= score_array.length %> reviews</span></p>
         </div>
       <% else %>
         <p>Review Score: No Reviews Yet </p>
