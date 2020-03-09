@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  after_create :send_welcome_email
+
   has_many :jobs
   has_many :reviews, dependent: :destroy
   has_many :requests
@@ -76,4 +78,11 @@ class User < ApplicationRecord
     end
     return pending_shifts_json
   end
+
+  private
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome.deliver_now
+  end
+
 end

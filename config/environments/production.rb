@@ -3,6 +3,9 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.action_mailer.delivery_method = :postmark
+
+  config.action_mailer.postmark_settings = { :api_token => Rails.application.secrets.postmark_api_token }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
