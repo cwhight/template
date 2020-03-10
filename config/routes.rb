@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'offer/new'
+
   require "sidekiq/web"
 
+
   devise_for :users
-  root to: 'pages#home'
+  root to: 'pages#sign_up'
+  get '/home', to: 'pages#home', as: :home
   resources :jobs do
     resources :favourites, only: [:create, :destroy]
     resources :shifts, except: :show do

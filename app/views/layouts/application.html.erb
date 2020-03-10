@@ -42,7 +42,8 @@
 
   <body>
 
-    <% unless params[:controller] == 'pages' && params[:action] == 'home' %>
+    <% unless params[:controller] == 'pages' && params[:action] == 'home' || params[:controller] == 'pages' && params[:action] == 'sign_up' %>
+
       <%= render 'shared/navbar' %>
       <%= render 'shared/top-mobile-nav' %>
     <% end %>
@@ -52,7 +53,7 @@
     <!-- <div class="notice"><%#= notice %></div> -->
     <!-- <div class="alert"><%= alert %></div> -->
 
-    <%= render 'shared/footer' %>
+    <%#= render 'shared/footer' %>
 
     <!--jQuery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
