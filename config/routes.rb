@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  root to: 'pages#sign_up'
+  root to: 'pages#home'
   get '/home', to: 'pages#home', as: :home
   resources :jobs do
     resources :favourites, only: [:create, :destroy]

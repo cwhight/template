@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   def sign_up
   end
 
+  def landing
+  end
+
   def home
     @jobs = policy_scope(Job).order(created_at: :desc)
     @request = Request.new
