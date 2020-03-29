@@ -10,53 +10,59 @@
 
     <div class="row">
       <div class="col-lg-6 col-12">
-
         <h3 class="pt-3"><%= current_user.first_name %>'s Reviews</h3>
-        <div class="p-3 m-2">
+        <div class="scroll">
+          <div class="p-3 m-2">
 
-          <% if current_user.reviews.any? %>
-            <% current_user.reviews.each do |review| %>
-              <%= render 'reviews/shared/review-card', review: review %>
+            <% if current_user.reviews.any? %>
+              <% current_user.reviews.each do |review| %>
+                <%= render 'reviews/shared/review-card', review: review %>
+              <% end %>
+            <% else %>
+              <p>No reviews yet</p>
             <% end %>
-          <% else %>
-            <p>No reviews yet</p>
-          <% end %>
+          </div>
         </div>
+
+
       </div>
       <div class="col-lg-6 col-12">
         <h3 class="pt-3">Oustanding Reviews</h3>
-        <div class="p-3 m-2">
+        <div class="scroll">
+          <div class="p-3 m-2">
 
-          <%  if current_user.employer  %>
-            <% shifts = []  %>
-            <% current_user.jobs.each do |job| %>
-              <% job.shifts.each do |shift| %>
-                <% if shift.start_time < DateTime.now && shift.user %>
-                  <% shifts << shift %>
+            <%  if current_user.employer  %>
+              <% shifts = []  %>
+              <% current_user.jobs.each do |job| %>
+                <% job.shifts.each do |shift| %>
+                  <% if shift.start_time < DateTime.now && shift.user %>
+                    <% shifts << shift %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-          <% else %>
-            <% shifts = current_user.shifts %>
-          <% end %>
-          <% shifts.each do |shift| %>
-            <% unless shift.reviews.any? { |review| review.user != current_user } %>
-              <div class="card p-3 my-2">
-                <p><%= shift.job.title %></p>
-                <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.venue %></p>
-                <div class="d-flex">
-                  <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
-                  <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                </div>
-                <p><i class="star fas fa-coins"></i> <strong>Hourly rate: </strong> <%= humanized_money_with_symbol(shift.price) %></p>
-                <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %>
-              </div>
-
             <% else %>
-
+              <% shifts = current_user.shifts %>
             <% end %>
-          <% end %>
+            <% shifts.each do |shift| %>
+              <% unless shift.reviews.any? { |review| review.user != current_user } %>
+                <div class="border-bottom  p-3 my-2">
+                  <p><%= shift.job.title %></p>
+                  <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.venue %></p>
+                  <div class="d-flex">
+                    <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
+                    <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                  </div>
+                  <p><i class="star fas fa-coins"></i> <strong>Hourly rate: </strong> <%= humanized_money_with_symbol(shift.price) %></p>
+                  <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %>
+                </div>
+
+              <% else %>
+
+              <% end %>
+            <% end %>
+          </div>
         </div>
+
 
       </div>
     </div>
