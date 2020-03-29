@@ -50,6 +50,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_dashboard
+    @review = Review.new
     @reviews = current_user.reviews
     authorize @reviews
   end

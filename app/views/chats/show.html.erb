@@ -21,14 +21,14 @@
           Shift Details
         </div>
         <div class="content-collapse">
-          <%= render 'shifts/shared/shift-card-employee', shift: @chat.request.shift, user: @chat.request.shift.job.user, job: @chat.request.shift.job %>
+          <%= render 'shifts/shared/shift-card-chat', shift: @chat.request.shift, user: @chat.request.shift.job.user, job: @chat.request.shift.job %>
         </div>
 
         <%#= link_to 'Back', current_user.employer ? dashboard_employer_path(@current_user) : dashboard_path, class: "mt-3 btn btn-ghost"  %>
         <%= render "chats/chat-window", chat: @chat %>
       </div>
       <div class="col-lg-4 d-none d-lg-block ">
-        <%= render 'shifts/shared/shift-card-employee', shift: @chat.request.shift, user: @chat.request.shift.job.user, job: @chat.request.shift.job %>
+        <%= render 'shifts/shared/shift-card-chat', shift: @chat.request.shift, user: @chat.request.shift.job.user, job: @chat.request.shift.job %>
       </div>
 
     </div>

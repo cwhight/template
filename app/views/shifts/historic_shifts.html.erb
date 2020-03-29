@@ -9,9 +9,8 @@
 
       <% @shifts.order(:start_time).each do |shift|  %>
         <% if shift.start_time < DateTime.now  %>
-          <%#= render 'shifts/shift-card-employee', shift: shift %>
+            <%= render 'shifts/shared/shift-card-employee', shift: shift, user: shift.job.user, job: shift.job %>
         <% end %>
-
       <% end %>
     </div>
   </div>

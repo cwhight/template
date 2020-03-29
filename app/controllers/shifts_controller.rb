@@ -95,6 +95,7 @@ class ShiftsController < ApplicationController
   end
 
   def historic_shifts
+    @review = Review.new
     @shifts = current_user.shifts
     authorize @shifts
   end

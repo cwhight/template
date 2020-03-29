@@ -100,7 +100,7 @@ i = 0
 20.times do
   price = prices[rand(0..prices.size - 1)]
   job_index = rand(0..(jobs.size-5))
-  job = Job.create!(user: employers[rand(0..employers.size - 1)], title: jobs[job_index][0], location: addresses[i], description: "Cover needed for multiple shifts", sectors: Sector.where(title: jobs[job_index][2]), dress: "Smart shoes, casual - jeans and shirt" )
+  job = Job.create!(user: employers[rand(0..employers.size - 1)], title: jobs[job_index][0], location: addresses[i], description: "Cover needed for multiple shifts", sectors: Sector.where(title: jobs[job_index][2]), dress: "Smart shoes, casual - jeans and shirt", venue: "Wahoo Bar and Grill" )
   puts "jobs created"
   i += 1
   rand(1..5).times do
@@ -173,7 +173,7 @@ puts "creating Freddie's jobs"
 2.times do
   price = prices[rand(0..prices.size - 1)]
   puts "1"
-  job = Job.create!(user: freddie, title: jobs[i][0], description: jobs[i][1], location: "100-102 Hoxton St, Hackney, London N1 6SG", summary: "Hoxton 100", sectors: Sector.where(title: jobs[i][2]), dress: "Black t-shirt and blue jeans, smart shoes" )
+  job = Job.create!(user: freddie, title: jobs[i][0], description: jobs[i][1], location: "100-102 Hoxton St, Hackney, London N1 6SG", venue: "Hoxton 100", sectors: Sector.where(title: jobs[i][2]), dress: "Black t-shirt and blue jeans, smart shoes" )
   puts "2"
   i += 2
   # p employees[rand(0..(employees.size - 1))]

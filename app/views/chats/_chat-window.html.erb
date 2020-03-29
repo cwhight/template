@@ -2,7 +2,7 @@
   <div class="border-bottom mb-2 d-flex justify-content-between align-items-center">
     <div>
       <h4 style="text-align:center"><%= chat.request.shift.job.title %> on <%= Time.parse(chat.request.shift.start_time).strftime("%e %b") %></h4>
-      <p style="text-align:center"><%= chat.request.shift.job.summary %></p>
+      <p style="text-align:center"><%= chat.request.shift.job.venue %></p>
     </div>
     <% if current_user.employer %>
 

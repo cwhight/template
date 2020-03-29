@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   require "sidekiq/web"
 
-
+  get 'stripe/oauth', to: 'users#stripe_sign_up'
   devise_for :users
   root to: 'pages#home'
   get '/home', to: 'pages#home', as: :home

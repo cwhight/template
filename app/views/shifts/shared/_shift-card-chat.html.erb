@@ -1,0 +1,25 @@
+<div class="card p-3 m-2">
+  <% score_array = user.reviews.map { |review| review.score } %>
+
+  <div class="mb-1 d-flex justify-content-between">
+    <p>
+      <strong>Employer: </strong>
+      <%= "#{user.first_name} - " %>
+      <% unless score_array.empty? %>
+        <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+        <span ><%= average_score.round(1) %><i class="star fas fa-star"></i></span>
+      <% end %>
+    </p>
+    <div>
+      <%= cl_image_tag user.photo.key, class: "avatar d-inline float-right", crop: :fill if user.photo.attached? %>
+    </div>
+  </div>
+  <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.location %></p>
+  <p><i class="green-marker fas fa-angle-double-right"></i> <%= shift.job.description %></p>
+  <p><i class="pink-icon fas fa-tshirt"></i> <%= job.dress %></p>
+  <div class="d-flex">
+    <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
+    <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+  </div>
+  <p><i class="star fas fa-coins"></i> <strong>Hourly rate: </strong> <%= humanized_money_with_symbol(shift.price) %></p>
+</div>

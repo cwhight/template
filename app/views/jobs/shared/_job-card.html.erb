@@ -27,7 +27,7 @@
       </div>
 
       <div class="my-2 card-text">
-        <div class="mb-1"><%= job.summary %></div>
+        <div class="mb-1"><%= job.venue %></div>
         <% unless score_array.empty? %>
           <% average_score = score_array.reduce(:+).to_f / score_array.length %>
           <span ><%= average_score.round(1) %> <i class="star fas fa-star"></i></span>

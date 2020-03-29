@@ -1,5 +1,5 @@
 <div class="fixed-top d-flex justify-content-between navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"), current_user&.employer ? dashboard_employer_path : home_path, class: "navbar-brand px-2 py-3"  %>
+  <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"), current_user&.employer ? users_path : home_path, class: "navbar-brand px-2 py-3"  %>
   <div class="d-flex">
     <% if current_user %>
       <% if  current_user.employer %>

@@ -8,9 +8,10 @@
       <h3 class="py-3">Upcoming Jobs</h3>
       <% @shifts.order(:start_time).each do |shift|  %>
         <% if shift.start_time >= DateTime.now  %>
-          <%= render 'shifts/shared/shift-card-employee', shift: shift, user: shift.job.user %>
-        <% end %>
 
+              <%= render 'shifts/shared/shift-card-employee', shift: shift, user: shift.job.user, job: shift.job %>
+
+        <% end %>
       <% end %>
     </div>
   </div>
