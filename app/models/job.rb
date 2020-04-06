@@ -1,4 +1,6 @@
 class Job < ApplicationRecord
+  include AlgoliaSearch
+
   belongs_to :user
   has_many :favourites
   has_many :sector_joiners
@@ -19,6 +21,13 @@ class Job < ApplicationRecord
                   using: {
                     tsearch: { dictionary: "english" }
                   }
+
+
+  algoliasearch do
+    # attributes :title, :shifts
+    minWordSizefor1Typo 4
+    minWordSizefor2Typos 8
+  end
 
   def relevant_shifts(min_price, max_price, lower_start_date, higher_start_date)
     if min_price && lower_start_date

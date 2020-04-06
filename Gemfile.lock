@@ -314,7 +314,6 @@ DEPENDENCIES
   pundit
   pusher
   rails (= 5.2.3)
-  redis
   sassc-rails
   sidekiq
   sidekiq-failures (~> 1.0)
