@@ -28,74 +28,7 @@
 
     <!-- FULL SCREEN TOP ROW _ USER PROFILE INFO -->
         <div class="d-none d-md-block m-3">
-          <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around" style="min-height: 300px">
-            <% user = current_user %>
-
-        <!-- USER INFO -->
-            <div class="w-100 col-lg-4 profile-header">
-              <% score_array = user.reviews.map { |review| review.score } %>
-              <% unless score_array.empty? %>
-                <% average_score = score_array.reduce(:+).to_f / score_array.length %>
-                <div>
-                  <p><span ><i class="star fas fa-star"></i></span> <%= average_score.round(1) %> - <span class="skill-tag"><%= score_array.length %> reviews</span></p>
-                </div>
-              <% else %>
-                <p>Review Score: No Reviews Yet </p>
-              <% end %>
-              <div class="d-flex ">
-                <div class="pr-3 mr-3 w-30">
-                  <% now = Time.now.to_date %>
-                  <% dob = user.dob %>
-                  <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
-                  <p class="mx-1"><i class="fas fa-birthday-cake pink-icon"></i> <strong>Age: </strong><%= age %></p>
-                  <p class="mx-1"><i class="red-marker fas fa-map-marker-alt"></i> <%= "South London" %></p>
-                </div>
-
-              </div>
-            </div>
-
-        <!-- PROFILE PICTURe -->
-            <div class="d-flex justify-content-around col-12 col-lg-4">
-
-    <!--             <a class="btn btn-flat" href="https://connect.stripe.com/oauth/authorize?client_id=ca_GzHwY2wrwH0v9x65teLdTTG1a1mcyBly&state={STATE_VALUE}&scope=read_write&response_type=code&stripe_user[email]=cdwhight@gmail.com&stripe_user[url]=templatejobs.co.uk">STRIPE</a>
-           --><div class="d-flex flex-column align-items-center">
-                <h4 class="d-inline"><%= user.first_name %> <%= user.surname %></h4>
-
-                <% if user.photo.attached? %>
-                  <%= cl_image_tag user.photo.key, class: "avatar-large d-inline float-right shadow", crop: :fill  %>
-                <% else %>
-                  <%= image_tag "avatar.jpg", class: 'avatar-large shadow' %>
-                <% end %>
-                <div class="d-flex justify-content-between align-items-center">
-
-                  <div class="py-2">
-                    <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-        <!-- USER SUMMARY -->
-            <div class="col-4">
-              <div class="w-50">
-                <span class="m-1 p-1"><i class="fas fa-award green-marker mr-1 pr-1"></i>  Businesses</span>
-                <div class="skills-row align-items-start">
-
-                  <% venues = user.jobs.map do |job| %>
-                    <% job.venue %>
-                  <% end %>
-                  <% venues.uniq.each do |venue|%>
-                    <div class="skill-tag my-1 py-1">
-                      <span  class="mx-1"><%= venue %></span>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-              <p class="w-100 border-top border-bottom py-2 px-1" style="background-color: #fafafa"><em><%= user.summary%></em></p>
-            </div>
-          </div>
+          <%= render 'users/shared/full-screen-employee-profile' %>
         </div>
 
       <!-- SECOND ROW ICON LINKS -->
