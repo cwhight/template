@@ -1,4 +1,6 @@
 <% page = "reviews" %>
+<% score_array = current_user.reviews.map { |review| review.score } %>
+
 
 <div class="wrapper">
   <% if current_user.employer %>
@@ -9,11 +11,51 @@
   <div class="cont pt-3">
 
     <div class="row">
-      <div class="col-lg-6 col-12">
-        <h3 class="pt-3"><%= current_user.first_name %>'s Reviews</h3>
-        <div class="scroll">
-          <div class="p-3 m-2">
 
+      <div class="col-lg-8 col-12">
+        <h3 class="pt-3"><%= current_user.first_name %>'s Reviews</h3>
+        <div class="d-flex">
+          <div class="btn soft-card shadow-sm my-3 mr-1 w-75">
+            <% unless score_array.empty? %>
+              <% average_score = score_array.reduce(:+).to_f / score_array.length %>
+              <div>
+                <h3  class="pt-3">Your Average Score</h3>
+                <h4><span ><i class="star fas fa-star"></i></span> <%= average_score.round(1) %></h4>
+                <p><span class="skill-tag"><%= score_array.length %> reviews</span></p>
+              </div>
+            <% else %>
+              <p>Review Score: No Reviews Yet </p>
+            <% end %>
+          </div>
+          <div class="w-25 btn my-3 ml-1 soft-card shadow-sm d-flex flex-column justify-content-around">
+            <% if current_user.employer %>
+              <% shifts = [] %>
+              <% current_user.jobs.each do |job| %>
+                <% job.shifts.each do |shift| %>
+                  <% if shift.start_time < DateTime.now && shift.user %>
+                    <% shifts << shift %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <% shift_count = shifts.length %>
+              <div>
+                <h6 class="pb-0">Shifts Filled</h6>
+                <h3><%= shift_count %></h3>
+              </div>
+
+            <% else %>
+              <% total_pay = 0 %>
+              <%# current_user.shifts.reduce { |shift| total_pay += shift.total_pay } %>
+              <div>
+                <h6  class="pb-0">Total Pay</h6>
+                <h3>£ <%= total_pay %></h3>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
+        <div class="scroll soft-card shadow-sm mb-3">
+          <div class="p-3 m-2">
             <% if current_user.reviews.any? %>
               <% current_user.reviews.each do |review| %>
                 <%= render 'reviews/shared/review-card', review: review %>
@@ -26,41 +68,48 @@
 
 
       </div>
-      <div class="col-lg-6 col-12">
-        <h3 class="pt-3">Oustanding Reviews</h3>
-        <div class="scroll">
-          <div class="p-3 m-2">
+      <div class="col-lg-4 col-12">
+        <div class="shadow-sm soft-card p-3">
+          <h3 class="pt-3">Oustanding Reviews</h3>
+          <div class="scroll">
+            <div class="p-3 m-2">
+              <%  if current_user.employer  %>
+                <% shifts = []  %>
+                <% current_user.jobs.each do |job| %>
+                  <% job.shifts.each do |shift| %>
+                    <% if shift.start_time < DateTime.now && shift.user %>
+                      <% shifts << shift %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% shifts = current_user.shifts %>
+              <% end %>
+              <% if shifts.empty? %>
+                <p>You have no outsanding reviews</p>
+              <% else %>
+                <% shifts.each do |shift| %>
+                  <% unless shift.reviews.any? { |review| review.user != current_user } %>
+                    <div class="border-bottom  p-3 my-2">
+                      <p><%= shift.job.title %></p>
+                      <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.venue %></p>
+                      <div class="d-flex">
+                        <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
+                        <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                      </div>
+                      <p><i class="star fas fa-coins"></i> <strong>Hourly rate: </strong> <%= humanized_money_with_symbol(shift.price) %></p>
+                      <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %>
+                    </div>
 
-            <%  if current_user.employer  %>
-              <% shifts = []  %>
-              <% current_user.jobs.each do |job| %>
-                <% job.shifts.each do |shift| %>
-                  <% if shift.start_time < DateTime.now && shift.user %>
-                    <% shifts << shift %>
+                  <% else %>
+
                   <% end %>
                 <% end %>
               <% end %>
-            <% else %>
-              <% shifts = current_user.shifts %>
-            <% end %>
-            <% shifts.each do |shift| %>
-              <% unless shift.reviews.any? { |review| review.user != current_user } %>
-                <div class="border-bottom  p-3 my-2">
-                  <p><%= shift.job.title %></p>
-                  <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.venue %></p>
-                  <div class="d-flex">
-                    <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
-                    <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                  </div>
-                  <p><i class="star fas fa-coins"></i> <strong>Hourly rate: </strong> <%= humanized_money_with_symbol(shift.price) %></p>
-                  <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.user %>
-                </div>
 
-              <% else %>
-
-              <% end %>
-            <% end %>
+            </div>
           </div>
+
         </div>
 
 
