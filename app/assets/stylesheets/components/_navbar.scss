@@ -1,5 +1,5 @@
 @media (max-width: 500px) {
-  .navbar-lewagon {
+  .navbar-standard {
     display: none !important
   }
 
@@ -59,10 +59,12 @@
 }
 
 
-.navbar-lewagon {
+.navbar-standard {
   justify-content: space-between;
-  background-color: #2969DA;
+  background-color: white;
   max-width: 100%;
+  box-shadow: 0px 0px 1px 0px #2a69da;
+  shadow-color: #2a69da
 }
 
 .navbar-homepage {
@@ -74,15 +76,15 @@
   z-index: 1000;
 }
 
-.navbar-lewagon .navbar-collapse {
+.navbar-standard .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-standard .navbar-brand img {
   width: 135px;
 }
 
-.navbar-lewagon-white {
+.navbar-standard-white {
   background-color: white;
   opacity: 0.7;
 }
@@ -108,7 +110,7 @@
 }
 
 .nav-link {
-  color: white;
+  color: #2a69da;
   text-decoration: none;
   text-align: center;
   display: flex;
@@ -118,5 +120,6 @@
 }
 
 .nav-link:hover {
-  background-color: white;
+  border-bottom: 3px solid #2a69da;
+  box-shadow-bottom: 0px 1px 3px 0px #2a69da;
 }
