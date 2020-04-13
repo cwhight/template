@@ -61,7 +61,7 @@
       <div class="row">
         <% unless @employees.empty? %>
           <% @employees.each do |employee|%>
-            <div class="col-12 ">
+            <div class="col-12 my-1">
 
               <%= render 'users/shared/profile-modal', favourite: @favourite, user: employee %>
 

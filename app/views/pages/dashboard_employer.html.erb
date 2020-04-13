@@ -8,21 +8,26 @@
 <% end %>
 <% page = "profile" %>
 
-<body style="">
+<body>
   <div class="wrapper">
     <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
     <div class="container" id="content">
       <div class="selector py-3">
-        <div id="profile-card" class="d-md-none dashboard-renders dashboard-card row align-items-center justify-content-around border-bottom">
-          <%= render 'users/shared/profile-card', user: current_user %>
+
+    <!-- MOBILE TOP ROW - USER PROFILE -->
+        <div class="m-3 d-md-none">
+          <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around ">
+            <%= render 'users/shared/profile-card', user: current_user %>
+          </div>
         </div>
 
-
-        <div class="d-none d-md-block">
-          <div id="profile-card" class="dashboard-renders dashboard-card row align-items-center justify-content-around border-bottom" style="min-height: 300px">
+    <!-- FULL SCREEN TOP ROW _ USER PROFILE INFO -->
+        <div class="d-none d-md-block m-3">
+          <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around" style="min-height: 300px">
             <% user = current_user %>
+
+        <!-- USER INFO -->
             <div class="w-100 col-lg-4 profile-header">
-              <h4 class="d-inline"><%= user.first_name %> <%= user.surname %></h4>
               <% score_array = user.reviews.map { |review| review.score } %>
               <% unless score_array.empty? %>
                 <% average_score = score_array.reduce(:+).to_f / score_array.length %>
@@ -34,8 +39,6 @@
               <% end %>
               <div class="d-flex ">
                 <div class="pr-3 mr-3 w-30">
-
-
                   <% now = Time.now.to_date %>
                   <% dob = user.dob %>
                   <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
@@ -45,29 +48,31 @@
 
               </div>
             </div>
-            <div class="each-render d-flex justify-content-around col-12 col-lg-4">
+
+        <!-- PROFILE PICTURe -->
+            <div class="d-flex justify-content-around col-12 col-lg-4">
 
     <!--             <a class="btn btn-flat" href="https://connect.stripe.com/oauth/authorize?client_id=ca_GzHwY2wrwH0v9x65teLdTTG1a1mcyBly&state={STATE_VALUE}&scope=read_write&response_type=code&stripe_user[email]=cdwhight@gmail.com&stripe_user[url]=templatejobs.co.uk">STRIPE</a>
-           --><div class="d-flex flex-column">
+           --><div class="d-flex flex-column align-items-center">
+                <h4 class="d-inline"><%= user.first_name %> <%= user.surname %></h4>
+
                 <% if user.photo.attached? %>
                   <%= cl_image_tag user.photo.key, class: "avatar-large d-inline float-right shadow", crop: :fill  %>
                 <% else %>
                   <%= image_tag "avatar.jpg", class: 'avatar-large shadow' %>
                 <% end %>
-                <% if current_user == user %>
-                  <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
 
-                    <div class="py-2">
-                      <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
-                    </div>
+                  <div class="py-2">
+                    <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
+                  </div>
 
-                  </div>
-                <% else %>
-                  <div class="d-flex align-items-right text-right">
-                  </div>
-                <% end %>
+                </div>
+
               </div>
             </div>
+
+        <!-- USER SUMMARY -->
             <div class="col-4">
               <div class="w-50">
                 <span class="m-1 p-1"><i class="fas fa-award green-marker mr-1 pr-1"></i>  Businesses</span>
@@ -88,64 +93,69 @@
           </div>
         </div>
 
-          <div class="banner-2 row border-bottom">
-            <div class="each-render col-12 col-lg-6">
-              <div class="row btn py-0 d-flex justify-content-around" data-selector="messages">
-                <div class="col-12">
-                  <div class="btn dashboard-selector p-3 m-2">
-                    <a href="/inbox" ><i class="profile-icon my-3 fas fa-inbox"></i></a>
-                    <p>Inbox ( <%= unread_messages %> )</p>
-                  </div>
+      <!-- SECOND ROW ICON LINKS -->
+        <div class="row my-3 justify-content-between">
+        <!-- LEFT HAND SIDE -->
+          <div class="col-12 col-lg-6 mx-0 p-0">
+
+            <div class="text-center p-0 d-flex flex-column">
+          <!-- TOP ROW -->
+              <div class="soft-card shadow-sm my-1 mx-3">
+                <div class="btn p-3 m-2">
+                  <a href="/inbox" ><img src="https://img.icons8.com/nolan/96/inbox.png"/></a>
+                  <p class="dash-btn">Inbox ( <%= unread_messages %> )</p>
                 </div>
-                <div class="col-12">
-                  <div class="btn dashboard-selector p-3 m-2" data-selector="favourites">
-                    <a href="/dashboard_employer/favourites" ><i class="my-3 profile-icon far fa-heart"></i></a>
-                      <p>Favourites ( <%=  %> )</p>
-                  </div>
+              </div>
+          <!-- BOTTOM ROW -->
+              <div class="soft-card shadow-sm my-1 mx-3">
+                <div class="btn p-3 m-2">
+                  <a href="/dashboard_employer/favourites" ><img src="https://img.icons8.com/nolan/96/half-heart.png"/></a>
+                    <p class="dash-btn">Favourites ( <%=  %> )</p>
                 </div>
               </div>
             </div>
-            <div class=" each-render col-12 col-lg-6"  >
-              <div class="row px-0">
-                <div class="col-12  d-flex justify-content-around pr-0">
-                  <div class="btn dashboard-selector p-3 m-2" data-selector="pending-requests">
-                    <a href="/active_applications" ><i class="my-3 profile-icon fas fa-user-tie"></i></a>
-                      <p>Applications ( <%= applications %> )</p>
+          </div>
+      <!-- RIGHT HAND SIDE -->
+          <div class="mx-0 p-0 col-12 col-lg-6"  >
+        <!-- TOP ROW -->
+            <div class="d-flex flex-column p-0 text-center">
+              <div class="soft-card shadow-sm my-1 mx-3">
+                <div class="">
+                  <div class="btn p-3 m-2" >
+                    <a href="/active_applications" ><img src="https://img.icons8.com/nolan/96/questions.png"/></a>
+                      <p class="dash-btn">Applications ( <%= applications %> )</p>
                   </div>
                 </div>
 
-                <div class="col-6 d-flex justify-content-around pr-0">
-                  <div class="btn dashboard-selector p-3 m-2" data-selector="upcoming-jobs">
-                    <a href="/dashboard_employer/listed_jobs" ><i class="my-3 profile-icon fas fa-clock"></i></a>
-                      <p>Upcoming ( <%= listed_jobs.count %> )</p>
+              </div>
+          <!-- BOTTOM ROW -->
+              <div class="d-flex justify-content-around">
+                <div class="text-center w-50">
+                  <div class="shadow-sm soft-card my-1 ml-3 mr-1">
+                    <div class="btn p-3 m-2">
+                      <a href="/dashboard_employer/listed_jobs" ><img src="https://img.icons8.com/nolan/96/planner.png"/></a>
+                        <p class="dash-btn">Upcoming ( <%= listed_jobs.count %> )</p>
+                    </div>
                   </div>
                 </div>
-                <div class="col-6 d-flex justify-content-around pl-0">
-                  <div class="btn dashboard-selector p-3 m-2" data-selector="job-history">
-                    <a href="/dashboard_employer/closed_jobs" ><i class="my-3 profile-icon fas fa-history"></i></a>
-                      <p>JClosed Jobs ( <%= closed_jobs.count %> )</p>
+                <div class="text-center w-50">
+                  <div class="shadow-sm soft-card my-1 mr-3 ml-1">
+                    <div class="btn p-3 m-2">
+                      <a href="/dashboard_employer/closed_jobs" ><img src="https://img.icons8.com/nolan/96/expired.png"/></a>
+                        <p class="dash-btn">Closed Jobs ( <%= closed_jobs.count %> )</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="each-render col-12 col-lg-6 pr-lg-0 d-flex align-items-stretch ">
 
             </div>
           </div>
-
-
-          <div class="col-12">
-            <%= render 'reviews/shared/view-reviews', user: current_user %>
-          </div>
-
-
-
-
+        </div>
       </div>
-
     </div>
   </div>
   </div>
+  <a href="www.icons8.com">Icons8.com</a>
 </body>
 
 

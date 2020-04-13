@@ -19,15 +19,15 @@ if (document.getElementById("open-apps")) {
   openMessages();
 }
 
-var client = algoliasearch(ApplicationID, Search-Only-API-Key);
-var index = client.initIndex('Job');
-index.search('something', { hitsPerPage: 10, page: 0 })
-  .then(function searchDone(content) {
-    console.log(content)
-  })
-  .catch(function searchFailure(err) {
-    console.error(err);
-  });
+// var client = algoliasearch(ApplicationID, Search-Only-API-Key);
+// var index = client.initIndex('Job');
+// index.search('something', { hitsPerPage: 10, page: 0 })
+//   .then(function searchDone(content) {
+//     console.log(content)
+//   })
+//   .catch(function searchFailure(err) {
+//     console.error(err);
+//   });
 
 
 initSweetalert('#confirm-job', {

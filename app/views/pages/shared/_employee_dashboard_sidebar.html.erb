@@ -12,7 +12,7 @@
   <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
 <% end %>
 
-<nav id="sidebar">
+<nav id="sidebar" style="background-color: white">
  <ul class="list-unstyled components">
 
   <li <%= page == "profile" ? "class=active" : "" %>>
