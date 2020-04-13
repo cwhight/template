@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
-  include AlgoliaSearch
+  # include AlgoliaSearch
 
   belongs_to :user
   has_many :favourites
@@ -23,11 +23,11 @@ class Job < ApplicationRecord
                   }
 
 
-  algoliasearch do
-    # attributes :title, :shifts
-    minWordSizefor1Typo 4
-    minWordSizefor2Typos 8
-  end
+  # algoliasearch do
+  #   # attributes :title, :shifts
+  #   minWordSizefor1Typo 4
+  #   minWordSizefor2Typos 8
+  # end
 
   def relevant_shifts(min_price, max_price, lower_start_date, higher_start_date)
     if min_price && lower_start_date

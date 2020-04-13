@@ -5,13 +5,14 @@
 }
 
 body {
-  font-family: Lato;
+    font-family: 'Asap', sans-serif;
+  // font-family: Lato;
   min-height: 92vh;
   padding-top: 66px;
   margin: 0;
   overflow-x: hidden;
   background: white;
-  color: #484848
+  color: #686868
 }
 
 @media (max-width: 500px) {
@@ -29,10 +30,16 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Spartan;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  color: #272727;
+  // font-family: 'Asap', sans-serif;
+  // font-family: 'Fredoka One', cursive;
+  font-family: 'Baloo Tammudu 2', cursive;
+  font-weight: bolder;
+  // letter-spacing: 0.05em;
+  color: #484848;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 p {
@@ -147,6 +154,7 @@ p {
 
 .transparent-nav {
   background-color: rgba(0,0,0,0);
+  box-shadow: none !important;
 }
 
 .fa-check-circle {
