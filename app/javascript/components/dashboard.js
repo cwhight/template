@@ -22,7 +22,7 @@ const sidebarCollapsers = document.querySelectorAll("#sidebarCollapse")
 if (sidebarCollapsers) {
   sidebarCollapsers.forEach((c) => {
     c.addEventListener('click', (e) => {
-    sidebar.classList.toggle('active')
+    sidebar.classList.toggle('inactive')
 
     });
   });
