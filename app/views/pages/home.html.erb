@@ -1,31 +1,33 @@
 <%= render 'shared/homepage-navbar' %>
 
-<div class="row mx-0 landing-body my-3">
-  <div id="landing-hero">
+<div class="mx-0 landing-body my-3 d-flex align-items-center">
+  <div id="landing-hero" class="row mx-0 ">
     <div class="row navbar-preload">
-      <%#= cl_image_tag "https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png", alt: "alttext", height: 60, class: 'homepage-img'%>
       <%= render 'shared/transparent_navbar' %>
     </div>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-6 p-3 m-3 d-flex align-items-end">
       <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
+      <% unless current_user %>
+        <div id="">
+          <a href="/users/sign_in" class="btn btn-login">Login</a>
+          <a href="/users/sign_up" class="btn btn-sign-up"  data-toggle="modal" data-target="#modalContactForm">Sign up</a>
+        </div>
+      <% end %>
     </div>
-    <% unless current_user %>
-      <div id="signup">
-        <a href="/users/sign_in" class="btn btn-login">Login</a>
-        <a href="/users/sign_up" class="btn btn-sign-up"  data-toggle="modal" data-target="#modalContactForm">Sign up</a>
-      </div>
-    <% end %>
-    <div class="landing-card">
-      <div class="search-form-control form-group col-11" id='landing-page-search'>
+
+
+    <div class="col-12 d-flex justify-content-around">
+      <div class="search-form-control form-group" id='landing-page-search'>
         <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
-        <div class="form-group form-inline py-3 justify-content-between nowrap">
-          <div class="col- col-md-10">
-            <input class="form-control" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
-          </div>
-          <div>
-            <button name="button" type="submit" class="btn btn-search " style="height: 42px; width: 128px;">
-              <i class="fas fa-search"></i> Search
-            </button>
+        <div class="form-group form-inline py-3 w-100">
+          <div class="d-flex justify-content-between align-items-center w-100" >
+            <input class="form-control width-85 mx-1 pl-3 search-bar" type="text" placeholder="Job search" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
+
+            <div>
+              <button name="button" type="submit" class="btn btn-search" style="height: 3.5rem">
+                <i class="fas fa-search"></i> <span class="mobile-hidden">Search</span>
+              </button>
+            </div>
           </div>
         </div>
         <div class="d-inline">

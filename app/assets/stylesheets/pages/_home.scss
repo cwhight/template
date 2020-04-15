@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+@media (max-width: 500px) {
+  .mobile-hidden {
+    display: none
+  }
+}
+
+
 body {
     font-family: 'Asap', sans-serif;
   // font-family: Lato;
@@ -72,6 +79,13 @@ p {
   min-height: 60%
 }
 
+.search-bar {
+  border-radius: 50px !important
+}
+
+.width-85 {
+  width: 85% !important
+}
 .avatar {
   vertical-align: middle;
   object-fit: cover;
@@ -117,10 +131,16 @@ p {
   width: 100%;
 }
 
+@media (max-width: 500px) {
+  #landing-page-search {
+    width: 100%;
+  }
+}
+
 #landing-page-search {
   position: absolute;
   bottom: -44px;
-  width: 100%;
+  width: 80%;
   height: 73px;
 }
 
@@ -148,7 +168,7 @@ p {
 
 @media only screen and (max-width: 400px) {
 .mobile-avatar {
-  margin: 0px;
+    margin: 0px;
   }
 }
 

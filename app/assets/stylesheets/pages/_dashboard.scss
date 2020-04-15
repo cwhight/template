@@ -18,6 +18,13 @@
   font-size: 12px;
 }
 
+.blue-square {
+  background-color: #2969da;
+  h6, h3 {
+    color: white !important;
+  }
+}
+
 .scroll {
   max-height:100vh;
   overflow: scroll

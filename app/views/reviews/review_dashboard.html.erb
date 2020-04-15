@@ -13,7 +13,6 @@
     <div class="row">
 
       <div class="col-lg-8 col-12">
-        <h3 class="pt-3"><%= current_user.first_name %>'s Reviews</h3>
         <div class="d-flex">
           <div class="btn soft-card shadow-sm my-3 mr-1 w-75">
             <% unless score_array.empty? %>
@@ -27,7 +26,7 @@
               <p>Review Score: No Reviews Yet </p>
             <% end %>
           </div>
-          <div class="w-25 btn my-3 ml-1 soft-card shadow-sm d-flex flex-column justify-content-around">
+          <div class="w-25 btn my-3 ml-1 soft-card shadow-sm d-flex flex-column justify-content-around blue-square">
             <% if current_user.employer %>
               <% shifts = [] %>
               <% current_user.jobs.each do |job| %>
@@ -38,7 +37,7 @@
                 <% end %>
               <% end %>
               <% shift_count = shifts.length %>
-              <div>
+              <div class="blue-square">
                 <h6 class="pb-0">Shifts Filled</h6>
                 <h3><%= shift_count %></h3>
               </div>
@@ -46,7 +45,7 @@
             <% else %>
               <% total_pay = 0 %>
               <%# current_user.shifts.reduce { |shift| total_pay += shift.total_pay } %>
-              <div>
+              <div >
                 <h6  class="pb-0">Total Pay</h6>
                 <h3>£ <%= total_pay %></h3>
               </div>
@@ -54,25 +53,31 @@
             <% end %>
           </div>
         </div>
-        <div class="scroll soft-card shadow-sm mb-3">
-          <div class="p-3 m-2">
-            <% if current_user.reviews.any? %>
-              <% current_user.reviews.each do |review| %>
-                <%= render 'reviews/shared/review-card', review: review %>
-              <% end %>
-            <% else %>
-              <p>No reviews yet</p>
-            <% end %>
+        <div class="soft-card shadow-sm p-3">
+          <div class="border-bottom">
+                      <h3 class="mb-1 mt-3 pb-0">Your Reviews</h3>
+
           </div>
+          <div class="scroll">
+            <div class="pb-3 px-3 m-2 pt-1">
+              <% if current_user.reviews.any? %>
+                <% current_user.reviews.each do |review| %>
+                  <%= render 'reviews/shared/review-card', review: review %>
+                <% end %>
+              <% else %>
+                <p>No reviews yet</p>
+              <% end %>
+            </div>
+          </div>
+
         </div>
 
 
       </div>
       <div class="col-lg-4 col-12">
-        <div class="shadow-sm soft-card p-3">
-          <h3 class="pt-3">Oustanding Reviews</h3>
+        <div class="">
           <div class="scroll">
-            <div class="p-3 m-2">
+            <div class="">
               <%  if current_user.employer  %>
                 <% shifts = []  %>
                 <% current_user.jobs.each do |job| %>
@@ -90,7 +95,7 @@
               <% else %>
                 <% shifts.each do |shift| %>
                   <% unless shift.reviews.any? { |review| review.user != current_user } %>
-                    <div class="border-bottom  p-3 my-2">
+                    <div class="shadow-sm soft-card  p-3 my-2">
                       <p><%= shift.job.title %></p>
                       <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.venue %></p>
                       <div class="d-flex">
