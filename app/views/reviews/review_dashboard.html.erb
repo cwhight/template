@@ -96,10 +96,14 @@
                 <% shifts.each do |shift| %>
                   <% unless shift.reviews.any? { |review| review.user != current_user } %>
                     <div class="shadow-sm soft-card  p-3 my-2">
-                      <p><%= shift.job.title %></p>
+                      <% if current_user.employer %>
+                        <p class="border-bottom">Review <%= shift.user.first_name %> for their shift as <%= shift.job.title %></p>
+                      <% else %>
+                        <p class="border-bottom">Review <%= shift.user.first_name %> for your shift as <%= shift.job.title %></p>
+                      <% end %>
                       <p><i class="red-marker fas fa-map-marker-alt"></i> <%= shift.job.venue %></p>
                       <div class="d-flex">
-                        <p class="pr-3"><i class="red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %>:</p>
+                        <p class=""><i class="pr-1 red-icon fas fa-calendar"></i> <%= Time.parse(shift&.start_time)&.strftime("%e %b") %> : </p>
                         <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
                       </div>
                       <p><i class="star fas fa-coins"></i> <strong>Hourly rate: </strong> <%= humanized_money_with_symbol(shift.price) %></p>
