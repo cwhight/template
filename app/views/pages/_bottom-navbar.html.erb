@@ -1,7 +1,14 @@
+<% if current_user %>
+  <% messages = 0 %>
+  <% current_user.chats.each do |chat| %>
+    <% messages += chat.messages.select {|m| m.user != current_user && !m.read}.size %>
+  <% end %>
+<% end %>
+
 <div class="d-flex justify-content-around fixed-bottom navbar navbar-bottom">
 
   <div class="w-20 text-center bottom-navlink" >
-    <%= link_to '', home_path, class: "fas fa-home text-center bottom-navlink"  %>
+    <%= link_to '', root_path, class: "fas fa-home text-center bottom-navlink"  %>
 
   </div>
   <div class="w-20 text-center bottom-navlink">
@@ -11,17 +18,25 @@
       <%= link_to '', jobs_path, class: "fas fa-search text-center bottom-navlink"  %>
     <% end %>
   </div>
-  <div class="w-20 bottom-navlink">
-    <%= link_to '', favourites_path, class: "far fa-heart text-center bottom-navlink"  %>
-
-  </div>
-  <div class="w-20 bottom-navlink">
-    <%= link_to '', dashboard_path, class: "far fa-id-card text-center bottom-navlink"  %>
-
-  </div>
+  <% if current_user %>
     <div class="w-20 bottom-navlink">
-    <%= link_to '', inbox_path, class: "fas fa-inbox text-center bottom-navlink"  %>
+      <%= link_to '', favourites_path, class: "far fa-heart text-center bottom-navlink"  %>
 
+    </div>
+
+    <div class="w-20 bottom-navlink notification-container">
+      <%= link_to '', inbox_path, class: "fas fa-inbox text-center bottom-navlink"  %>
+      <div class="bottom-nav-notification <%= messages == 0 ? 'd-none' : ''%>"><%= messages %></div>
+
+    </div>
+
+  <% end %>
+  <div class="w-20 bottom-navlink">
+    <% if current_user %>
+      <%= link_to '', current_user.employer ? dashboard_employer_path : dashboard_path, class: "far fa-id-card text-center bottom-navlink"  %>
+    <% else %>
+      <%= link_to '', new_user_registration_path, class: "fas fa-user-plus text-center bottom-navlink green-marker"  %>
+    <% end %>
   </div>
 </div>
 

@@ -4,15 +4,9 @@
   padding: 0;
 }
 
-@media (max-width: 500px) {
-  .mobile-hidden {
-    display: none
-  }
-}
-
 
 body {
-    font-family: 'Asap', sans-serif;
+  font-family: 'Asap', sans-serif;
   // font-family: Lato;
   min-height: 92vh;
   padding-top: 66px;
@@ -39,7 +33,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   // font-family: 'Asap', sans-serif;
   // font-family: 'Fredoka One', cursive;
-  font-family: 'Baloo Tammudu 2', cursive;
+  font-family: 'Baloo Tammudu 2';
   font-weight: bolder;
   // letter-spacing: 0.05em;
   color: #484848;
@@ -52,6 +46,18 @@ h1, h2, h3, h4, h5, h6 {
 p {
   font-family: Lato;
   letter-spacing: -0.03em;
+}
+
+@media (max-width: 500px) {
+  .mobile-hidden {
+    display: none
+  }
+}
+
+@media (min-width: 500px) {
+  .full-hidden {
+    display: none
+  }
 }
 
 .cont {
@@ -86,6 +92,8 @@ p {
 .width-85 {
   width: 85% !important
 }
+
+
 .avatar {
   vertical-align: middle;
   object-fit: cover;
@@ -137,6 +145,19 @@ p {
   }
 }
 
+@media (min-width: 500px) {
+  .landing-title {
+    padding-left: 32px;
+    margin-left: 32px
+  }
+}
+
+.landing-title {
+  padding: 8px;
+  margin: 8px
+}
+
+
 #landing-page-search {
   position: absolute;
   bottom: -44px;
@@ -181,3 +202,4 @@ p {
   color: #62cc34;
   font-size: 65px;
 }
+

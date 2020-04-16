@@ -2,10 +2,10 @@
   <div class="border-bottom border-top p-3 job-card-container">
     <% score_array = job.user.reviews.map { |review| review.score } %>
 
-    <div class="job_card_header">
+    <div>
       <div class="row">
-        <div class="d-flex">
-          <h5 class="card-jobtitle ml-3"><%= job.title %></h5>
+        <div class="d-flex align-items-start">
+          <h5 class="card-jobtitle ml-3 mb-0"><%= job.title %></h5>
           <div class="ml-3" id="favourite-toggle<%=job.id%>">
             <% if current_user %>
               <% if current_user.favourites %>

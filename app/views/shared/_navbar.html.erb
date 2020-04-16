@@ -1,5 +1,13 @@
+<% if current_user %>
+  <% messages = 0 %>
+  <% current_user.chats.each do |chat| %>
+    <% messages += chat.messages.select {|m| m.user != current_user && !m.read}.size %>
+  <% end %>
+<% end %>
+
+
 <div class="fixed-top d-flex justify-content-between navbar-expand-sm navbar-light navbar-standard">
-  <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1575471730/template-404-logo_njqxag.png"), current_user&.employer ? users_path : home_path, class: "navbar-brand px-2 py-3"  %>
+  <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1575471730/template-404-logo_njqxag.png"), current_user&.employer ? users_path : root_path, class: "navbar-brand px-2 py-3"  %>
   <div class="d-flex">
     <% if current_user %>
       <% if  current_user.employer %>
@@ -8,8 +16,10 @@
         <%= link_to 'Search Jobs', jobs_path, class: "nav-link"  %>
       <% end %>
       <%= link_to 'Dashboard', current_user.employer ? dashboard_employer_path : dashboard_path, class: "nav-link"  %>
-
-      <%= link_to 'Messages', inbox_path, class: "nav-link" %>
+      <div class="notification-container">
+        <%= link_to 'Messages', inbox_path, class: "h-100 nav-link" %>
+        <div class="nav-notification <%= messages == 0 ? 'd-none' : ''%>"><%= messages %></div>
+      </div>
     <% end %>
     <div class="d-flex flex-column justify-content-around px-2">
       <%= render 'shared/avatar', class: 'homepage-avatar ' %>

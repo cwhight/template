@@ -6,7 +6,7 @@
   <% else %>
     <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
   <% end %>
-  <div class="cont" id="content">
+  <div class="container" id="content">
     <div class="px-2 py-3">
       <h3 class="pt-3">Inbox</h3>
 
@@ -30,22 +30,44 @@
               <thead>
                 <tr>
                   <th scope="col"><i class="far fa-envelope"></i></th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
+
                 </tr>
               </thead>
               <tbody>
                 <% @chats.order(created_at: :desc).each do |chat|%>
                   <% if !chat.request.shift.user || Time.parse(chat.request.shift.start_time) > Time.now%>
                     <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
-                    <tr>
-                      <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
-                      <td><%= link_to "#{chat.messages.last.content.first(20)}", chat_path(chat), class: "inbox-link"  %></td>
-                      <!-- <td><%#= render 'pages/chat-modal', chat: chat %></td> -->
+                    <tr class="d-flex justify-content-between align-items-center border-bottom">
 
-                      <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
-                      <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
+                      <td style="border: none !important" class=" align-items-center d-flex flex-column">
+                        <div class="notification-container">
+                          <% if current_user.photo.attached? %>
+                            <%= cl_image_tag current_user.photo.key, class: "avatar d-inline float-right ", crop: :fill  %>
+                          <% else %>
+                            <%= image_tag "avatar.jpg", class: 'avatar ' %>
+                          <% end %>
+                          <div class="chat-notification <%= messages == 0 ? 'd-none' : ''%>"><%= "#{messages}" %></div>
+                        </div>
+
+                        <span class="chat-name"><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name}" %></span>
+                      </td>
+                      <td class="w-75" style="border: none !important">
+                        <a href="<%= "chats/#{chat.id}"%>" class="inbox-link row justify-content-between w-100">
+                          <div class="col-12 px-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                              <span class="chat-title">
+                                <%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %>
+                              </span>
+                              <span class="chat-time">
+                                <%= "#{chat.messages.last.created_at.strftime("%H:%M")}" %>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-12 px-0">
+                            <p class="mb-0 chat-last-message"><%= "#{chat.messages.last.content.first(50)}" %>
+                          </div>
+                        </a>
+                      </td>
                     </tr>
                   <% end %>
                 <% end %>
@@ -68,13 +90,12 @@
             <% @chats.order(created_at: :desc).each do |chat|%>
               <% if chat.request.shift.user && Time.parse(chat.request.shift.start_time) > Time.now %>
                 <% messages = chat.messages.select {|m| m.user != current_user && !m.read}.size %>
-                    <tr>
-                      <td><%= "#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})" %></td>
-                      <td><%= link_to chat.messages.last.content, chat_path(chat), class: "inbox-link"  %></td>
-                      <!-- <td><%#= render 'pages/chat-modal', chat: chat %></td> -->
-                      <td><%= "#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}" %></td>
-                      <td><%= chat.messages.last.created_at.strftime("%H:%M") %></td>
-                    </tr>
+                    <%= link_to "<tr>
+                      <td>#{current_user.employer ? chat.employee.first_name : chat.employer.first_name} (#{messages})</td>
+                      <td>#{chat.messages.last.content}</td>
+                      <td>#{chat.request.shift.job.title} on #{Time.parse(chat.request.shift.start_time).strftime("%e %b")}</td>
+                      <td> #{chat.messages.last.created_at.strftime("%H:%M")}</td>
+                    </tr>", chat_path(chat) %>
               <% end %>
             <% end %>
               </tbody>
@@ -107,11 +128,6 @@
             </tbody>
             </table>
           </div>
-        </div>
-        <div class="col-12">
-         <div class="my-2" id="chat-window-inbox">
-
-         </div>
         </div>
       </div>
 

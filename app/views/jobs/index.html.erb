@@ -21,8 +21,14 @@
       </div>
       <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
         <div class="form-group form-inline pt-3 justify-content-between nowrap">
-          <div class="px-0 col-12">
-            <input class="form-control string required search-bar pl-3" type="text" placeholder="Job search" name="search[query]" style="width:100%" id="search_query" value="<%= params.dig(:search, :query) %>"/>
+          <div class="d-flex justify-content-between align-items-center w-100" >
+            <input class="form-control width-85 mr-1 pl-3 search-bar" type="text" placeholder="Job search" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
+
+            <div>
+              <button name="button" type="submit" class="btn btn-search" style="height: 3.5rem">
+                <i class="full-hidden fas fa-search"></i> <span class="mobile-hidden">Search</span>
+              </button>
+            </div>
           </div>
         </div>
         <div class="dropdown-toggle w-100 mb-3 btn btn-large btn-flat collapsible active">
@@ -54,16 +60,16 @@
             'data-type': "double",
             'data-skin': "round"
           } %>
-
+          <div>
+            <button name="button" type="submit" class="float-right mb-2 btn btn-search " style="height: 42px; width: 128px;">
+              <i class="fas fa-filter"></i> Filter
+            </button>
+            <%= link_to 'Display all', jobs_path, class: 'btn btn-flat mb-2' %>
+          </div>
 
 
         </div>
-        <div>
-          <button name="button" type="submit" class="float-right mb-2 btn btn-search " style="height: 42px; width: 128px;">
-            <i class="fas fa-search"></i> Search
-          </button>
-          <%= link_to 'Display all', jobs_path, class: 'btn btn-flat mb-2' %>
-        </div>
+
       <% end %>
       <div>
         <% unless @jobs.empty? %>
@@ -75,7 +81,7 @@
           <% end %>
           <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
         <% else %>
-          <%= link_to 'No jobs matched your search: Display all', jobs_path, class: 'btn btn-flat my-2' %>
+          Sorry, no jobs matched your criteria
         <% end %>
       </div>
     </div>
