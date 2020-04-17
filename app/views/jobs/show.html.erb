@@ -2,10 +2,7 @@
 
 <div class="wrapper">
   <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
-
-
-  <div class="cont content">
-
+  <div class="container py-3">
     <div class="d-flex justify-content-between">
       <div>
         <div class="py-1">
@@ -25,9 +22,9 @@
         <%= render 'shifts/shared/create-shift', shift: @shift, modal_button: "Create Shift"%>
         <%= render 'jobs/shared/edit-job', open_modal: "", modal_title: "Edit This Job", button_text: "Save Changes"%>
       </div>
-
     </div>
     <h2>Upcoming Shifts</h2>
+
     <table class="table table-hover">
       <thead>
         <tr>
@@ -67,7 +64,6 @@
         <% end %>
       </tbody>
     </table>
-
 
     <h2>Past Shifts</h2>
     <table class="table table-hover">
@@ -116,8 +112,6 @@
                   <% end %>
                 </td>
               <% end %>
-
-
             </tr>
           <% end %>
         <% end %>

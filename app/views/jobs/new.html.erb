@@ -1,14 +1,11 @@
-<div class="container content">
+<div class="container py-3">
   <h1>New Job</h1>
-
-    <%= simple_form_for @job do |f| %>
-      <%= f.input :title, error: 'Title must be between 2 and 30 characters' %>
-      <%= f.input :summary, label: 'Company Name' %>
-      <%= f.input :description, as: :text, error: 'Must have a description' %>
-      <%= f.input :location, error: 'Must have a location' %>
-      <%= f.association :sectors, label_method: :title, value_method: :id, input_html: { class: 'sector-picker' } %>
-
-
-      <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
+  <%= simple_form_for @job do |f| %>
+    <%= f.input :title, error: 'Title must be between 2 and 30 characters' %>
+    <%= f.input :summary, label: 'Company Name' %>
+    <%= f.input :description, as: :text, error: 'Must have a description' %>
+    <%= f.input :location, error: 'Must have a location' %>
+    <%= f.association :sectors, label_method: :title, value_method: :id, input_html: { class: 'sector-picker' } %>
+    <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
   <% end %>
 </div>

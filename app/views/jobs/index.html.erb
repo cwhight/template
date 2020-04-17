@@ -1,29 +1,32 @@
+<div class="targeter">
+  <% if params[:search] %>
+    <% if params[:search][:sectors] %>
+      data-sectors="<%= params[:search][:sectors].reject(&:empty?) %>"
+    <% end %>
+  <% end %>
+  <% if @lower_start_date %>
+    data-startyear="<%= @lower_start_date.year %>"
+    data-startmonth="<%= @lower_start_date.month %>"
+    data-startday="<%= @lower_start_date.day %>"
+  <% end %>
+  <% if @higher_start_date %>
+    data-endyear="<%= @higher_start_date.year %>"
+    data-endmonth="<%= @higher_start_date.month %>"
+    data-endday="<%= @higher_start_date.day %>"
+  <% end %>
+</div>
+
 <div class="row mx-0">
+  <!--  Search content  -->
   <div class="content-index col-12 col-lg-7">
     <div class="container">
-      <div class="row justify-content-between border-bottom">
-        <h1 class="targeter m-3"
-          <% if params[:search] %>
-            <% if params[:search][:sectors] %>
-              data-sectors="<%= params[:search][:sectors].reject(&:empty?) %>"
-            <% end %>
-          <% end %>
-          <% if @lower_start_date %>
-            data-startyear="<%= @lower_start_date.year %>"
-            data-startmonth="<%= @lower_start_date.month %>"
-            data-startday="<%= @lower_start_date.day %>"
-          <% end %>
-          <% if @higher_start_date %>
-            data-endyear="<%= @higher_start_date.year %>"
-            data-endmonth="<%= @higher_start_date.month %>"
-            data-endday="<%= @higher_start_date.day %>"
-          <% end %>>Available Jobs</h1>
+      <div class="pt-3 border-bottom">
+        <h1 class="my-3">Available Jobs</h1>
       </div>
       <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
         <div class="form-group form-inline pt-3 justify-content-between nowrap">
           <div class="d-flex justify-content-between align-items-center w-100" >
             <input class="form-control width-85 mr-1 pl-3 search-bar" type="text" placeholder="Job search" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
-
             <div>
               <button name="button" type="submit" class="btn btn-search" style="height: 3.5rem">
                 <i class="full-hidden fas fa-search"></i> <span class="mobile-hidden">Search</span>
@@ -53,30 +56,27 @@
           } %>
 
           <%= f.input :start_time, label: "Filter by date", required: false,
-            input_html: { class: 'js-range-slider2',
-            type: 'text',
-            name: 'start_time',
-            value: "",
-            'data-type': "double",
-            'data-skin': "round"
-          } %>
+              input_html: { class: 'js-range-slider2',
+              type: 'text',
+              name: 'start_time',
+              value: "",
+              'data-type': "double",
+              'data-skin': "round"
+            } %>
           <div>
             <button name="button" type="submit" class="float-right mb-2 btn btn-search " style="height: 42px; width: 128px;">
               <i class="fas fa-filter"></i> Filter
             </button>
             <%= link_to 'Display all', jobs_path, class: 'btn btn-flat mb-2' %>
           </div>
-
-
         </div>
-
       <% end %>
       <div>
         <% unless @jobs.empty? %>
           <% @jobs.each do |job|%>
             <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
             <% unless num_shifts <= 0 %>
-              <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>
+              <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: job, num_shifts: num_shifts %>
             <% end %>
           <% end %>
           <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
@@ -84,8 +84,9 @@
           Sorry, no jobs matched your criteria
         <% end %>
       </div>
-    </div>
-  </div>
+    </div> <!-- End of container -->
+  </div> <!-- End of search content -->
+<!--   Map box -->
   <div class="col-5 col-lg-5 d-none d-lg-block d-xl-block">
     <div
       id="map"
@@ -98,6 +99,6 @@
       data-markers="<%= @markers.to_json %>"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-  </div>
+  </div> <!-- End of map -->
 </div>
 

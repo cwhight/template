@@ -1,29 +1,26 @@
 <%= render 'shared/homepage-navbar' %>
+<%= render 'shared/transparent_navbar' %>
 
-<div class="mx-0 landing-body my-3 d-flex align-items-center">
-  <div id="landing-hero" class="row mx-0 ">
-    <div class="row navbar-preload">
-      <%= render 'shared/transparent_navbar' %>
-    </div>
-    <div class="col-12 col-lg-6 d-flex align-items-end">
-      <div class="landing-title">
-        <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
-        <% unless current_user %>
-          <div id="">
-            <a href="/users/sign_in" class="btn btn-login">Login</a>
-            <a href="/users/sign_up" class="btn btn-sign-up"  data-toggle="modal" data-target="#modalContactForm">Sign up</a>
-          </div>
-        <% end %>
-      </div>
-    </div>
+<div id="landing-hero" class="row mx-0 ">
 
-    <div class="col-12 d-flex justify-content-around">
-      <div class="search-form-control form-group" id='landing-page-search'>
-        <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
+  <div class="col-12 col-lg-6 d-flex align-items-end">
+    <div class="landing-title">
+      <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
+      <% unless current_user %>
+        <div id="">
+          <a href="/users/sign_in" class="btn btn-login">Login</a>
+          <a href="/users/sign_up" class="btn btn-sign-up"  data-toggle="modal" data-target="#modalContactForm">Sign up</a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-12 d-flex justify-content-around">
+    <div class="search-form-control form-group" id='landing-page-search'>
+      <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
         <div class="form-group form-inline py-3 w-100">
           <div class="d-flex justify-content-between align-items-center w-100" >
             <input class="form-control width-85 mr-1 pl-3 search-bar" type="text" placeholder="Job search" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
-
             <div>
               <button name="button" type="submit" class="btn btn-search" style="height: 3.5rem">
                 <i class="fas fa-search"></i> <span class="mobile-hidden">Search</span>
@@ -34,35 +31,34 @@
         <div class="d-inline">
           <% unless current_user %>
             <p id="search-box-text-bottom" class="m-3 d-none d-sm-none d-md-block"><a href="#" data-toggle="modal" data-target="#modalContactForm">Sign up here</a> to apply for jobs.</p>
-          <% else %>
-<!--             <p id="search-box-text-bottom" class="m-3"><a href="/dashboard" id="dashboard" target="/dashboard">Visit your dashboard here</a> to see the jobs you've saved.</p> -->
           <% end %>
         </div>
-      </div>
       <% end %>
     </div>
   </div>
 </div>
+<!-- End of top banner -->
+
+<!-- Main Content -->
 
 <div class="py-3 landing-jobs justify-content-center">
   <div class="col-11 content-index">
-    <div class="row justify-content-between">
-      <h1 class="px-4">Available Jobs</h1>
+    <div class="d-flex justify-content-between">
+      <h1>Available Jobs</h1>
       <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>
     </div>
-
-      <div>
-        <% @jobs.each do |job|%>
-          <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
-          <% unless num_shifts <= 0 %>
-            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>
-          <% end %>
-
+    <div>
+      <% @jobs.each do |job|%>
+        <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+        <% unless num_shifts <= 0 %>
+          <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: job, num_shifts: num_shifts %>
         <% end %>
-        <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
-      </div>
+      <% end %>
+      <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+    </div>
   </div>
 </div>
+<!-- End of main content -->
 
 <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">

@@ -1,80 +1,75 @@
-  <div class="clickable" data-toggle="modal" data-target="#approachUser<%=user.id%>">
-    <%= render 'users/shared/profile-card', user: user %>
-  </div>
+<div class="clickable" data-toggle="modal" data-target="#approachUser<%=user.id%>">
+  <%= render 'users/shared/profile-card', user: user %>
+</div>
 
-  <div class="modal fade" id="approachUser<%=user.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal fade" id="approachUser<%=user.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
 
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="container ">
-          <div class="row">
-            <div class="col-12 col-lg-6 pt-3">
-              <%= render '/users/shared/profile-card', user: user, profile: true %>
-            </div>
-            <div class="col-12 col-lg-6 pt-3">
-              <div class="border-top border-bottom p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-                <h4>Reviews</h4>
-                <div class="reviews">
-                  <% if user.reviews.any? %>
-                    <% user.reviews.each do |review| %>
-                     <%= render 'reviews/shared/review-card', review: review %>
-                    <% end %>
-                  <% else %>
-                    <p>No reviews yet</p>
-                  <% end %>
-                </div>
+      <div class="container ">
+        <div class="row">
 
-              </div>
-
-            </div>
-
-
-
+          <div class="col-12 col-lg-6 pt-3">
+            <%= render '/users/shared/profile-card', user: user, profile: true %>
           </div>
-          <div class="py-3">
+
+          <div class="col-12 col-lg-6 pt-3">
+            <div class="border-top border-bottom p-3">
+              <h4>Reviews</h4>
+              <div class="reviews">
+                <% if user.reviews.any? %>
+                  <% user.reviews.each do |review| %>
+                   <%= render 'reviews/shared/review-card', review: review %>
+                  <% end %>
+                <% else %>
+                  <p>No reviews yet</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-3 col-12">
             <h2>Which shift are you offering to <%= user.first_name %>?</h2>
-
-
             <% current_user.jobs.each do |job| %>
-
-                <div class="py-2 dropdown">
-                  <% shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}  %>
-                  <% num_shifts = shifts.length %>
-                  <div class="dropdown-toggle btn btn-flat collapsible active">
-                    <%= job.title %>
-                  </div>
-                  <div class="content-collapse">
-                    <% shifts.sort_by { |shift| shift.start_time }.each do |shift| %>
-                      <% unless shift.user || shift.completed %>
-                        <% if Time.parse(shift.start_time) > Time.now %>
-                          <div class="dropdown-item message-submission">
-                            <div class="p-2 border-bottom">
-                              <div class="p-1 d-flex justify-content-between">
-                                <p><%= Time.parse(shift&.start_time)&.strftime("%e %b") %></p>
-                                <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
-                              </div>
-                              <div class="p-1 d-flex justify-content-between">
-                                <p><%= humanized_money_with_symbol(shift.price) %>/h</p>
-                                <%= link_to "Select shift", new_shift_offer_path(shift, user),  class: "btn btn-sign-up" %>
-                              </div>
+              <div class="py-2 dropdown">
+                <% shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}  %>
+                <% num_shifts = shifts.length %>
+                <div class="dropdown-toggle btn btn-flat collapsible active">
+                  <%= job.title %>
+                </div>
+                <div class="content-collapse">
+                  <% shifts.sort_by { |shift| shift.start_time }.each do |shift| %>
+                    <% unless shift.user || shift.completed %>
+                      <% if Time.parse(shift.start_time) > Time.now %>
+                        <div class="dropdown-item message-submission">
+                          <div class="p-2 border-bottom">
+                            <div class="p-1 d-flex justify-content-between">
+                              <p><%= Time.parse(shift&.start_time)&.strftime("%e %b") %></p>
+                              <p><%= Time.parse(shift&.start_time)&.strftime("%k:%M") %> to <%= Time.parse(shift&.end_time)&.strftime("%k:%M") %></p>
+                            </div>
+                            <div class="p-1 d-flex justify-content-between">
+                              <p><%= humanized_money_with_symbol(shift.price) %>/h</p>
+                              <%= link_to "Select shift", new_shift_offer_path(shift, user),  class: "btn btn-sign-up" %>
                             </div>
                           </div>
-                        <% end %>
+                        </div>
                       <% end %>
                     <% end %>
-                  </div>
+                  <% end %>
                 </div>
+              </div>
             <% end %>
           </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
+        </div> <!-- End of row -->
+      </div> <!-- End of container -->
+    </div> <!-- End of modal content -->
+  </div> <!-- End of modal dialogue -->
+</div> <!-- End of modal fade -->

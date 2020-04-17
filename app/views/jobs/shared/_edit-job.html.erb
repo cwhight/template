@@ -1,26 +1,26 @@
-  <button type="button" class="btn btn-ghost" data-toggle="modal" data-target="#formModalCenter">
-    <i class="far fa-edit"></i>
-  </button>
+<button type="button" class="btn btn-ghost" data-toggle="modal" data-target="#formModalCenter">
+  <i class="far fa-edit"></i>
+</button>
 
-  <div class="modal fade" id="formModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle"><%= "#{modal_title}" %></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <%= simple_form_for @job do |f| %>
-              <%= f.input :title, error: 'Title must be between 2 and 30 characters' %>
-              <%= f.input :summary, label: 'Company Name' %>
-              <%= f.input :description, as: :text, error: 'Must have a description' %>
-              <%= f.input :location, error: 'Must have a location' %>
-              <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
-            <% end %>
-          </div>
-
-        </div>
+<div class="modal fade" id="formModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><%= "#{modal_title}" %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <%= simple_form_for @job do |f| %>
+          <%= f.input :title, error: 'Title must be between 2 and 30 characters' %>
+          <%= f.input :summary, label: 'Company Name' %>
+          <%= f.input :description, as: :text, error: 'Must have a description' %>
+          <%= f.input :location, error: 'Must have a location' %>
+          <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
+        <% end %>
+      </div>
+
     </div>
+  </div>
+</div>

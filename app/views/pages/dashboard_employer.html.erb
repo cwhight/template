@@ -8,88 +8,88 @@
 <% end %>
 <% page = "profile" %>
 
-<body>
-  <div class="wrapper">
-    <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
-    <div class="container" id="content">
-      <div class="selector py-3">
 
-    <!-- MOBILE TOP ROW - USER PROFILE -->
-        <div class="m-3 d-md-none">
-          <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around ">
-            <%= render 'users/shared/profile-card', user: current_user %>
-          </div>
-        </div>
+<div class="wrapper">
+  <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
+  <div class="container py-3" id="content">
 
-    <!-- FULL SCREEN TOP ROW _ USER PROFILE INFO -->
-        <div class="d-none d-md-block m-3">
-          <%= render 'users/shared/full-screen-employer-profile' %>
-        </div>
 
-      <!-- SECOND ROW ICON LINKS -->
-        <div class="row my-3 justify-content-between">
-        <!-- LEFT HAND SIDE -->
-          <div class="col-12 col-lg-6 mx-0 p-0">
-
-            <div class="text-center p-0 d-flex flex-column">
-          <!-- TOP ROW -->
-              <div class="soft-card shadow-sm my-1 mx-3">
-                <div class="btn p-3 m-2">
-                  <a href="/inbox" ><img src="https://img.icons8.com/nolan/96/inbox.png"/></a>
-                  <p class="dash-btn">Inbox ( <%= unread_messages %> )</p>
-                </div>
-              </div>
-          <!-- BOTTOM ROW -->
-              <div class="soft-card shadow-sm my-1 mx-3">
-                <div class="btn p-3 m-2">
-                  <a href="/dashboard_employer/favourites" ><img src="https://img.icons8.com/nolan/96/half-heart.png"/></a>
-                    <p class="dash-btn">Favourites ( <%=  %> )</p>
-                </div>
-              </div>
-            </div>
-          </div>
-      <!-- RIGHT HAND SIDE -->
-          <div class="mx-0 p-0 col-12 col-lg-6"  >
-        <!-- TOP ROW -->
-            <div class="d-flex flex-column p-0 text-center">
-              <div class="soft-card shadow-sm my-1 mx-3">
-                <div class="">
-                  <div class="btn p-3 m-2" >
-                    <a href="/active_applications" ><img src="https://img.icons8.com/nolan/96/questions.png"/></a>
-                      <p class="dash-btn">Applications ( <%= applications %> )</p>
-                  </div>
-                </div>
-
-              </div>
-          <!-- BOTTOM ROW -->
-              <div class="d-flex justify-content-around">
-                <div class="text-center w-50">
-                  <div class="shadow-sm soft-card my-1 ml-3 mr-1">
-                    <div class="btn p-3 m-2">
-                      <a href="/dashboard_employer/listed_jobs" ><img src="https://img.icons8.com/nolan/96/planner.png"/></a>
-                        <p class="dash-btn">Upcoming ( <%= listed_jobs.count %> )</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-center w-50">
-                  <div class="shadow-sm soft-card my-1 mr-3 ml-1">
-                    <div class="btn p-3 m-2">
-                      <a href="/dashboard_employer/closed_jobs" ><img src="https://img.icons8.com/nolan/96/expired.png"/></a>
-                        <p class="dash-btn">Closed Jobs ( <%= closed_jobs.count %> )</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
+  <!-- MOBILE TOP ROW - USER PROFILE -->
+    <div class="m-3 d-md-none">
+      <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around ">
+        <%= render 'users/shared/profile-card', user: current_user %>
       </div>
     </div>
-  </div>
-  </div>
-  <a href="www.icons8.com">Icons8.com</a>
-</body>
+
+  <!-- FULL SCREEN TOP ROW _ USER PROFILE INFO -->
+    <div class="d-none d-md-block m-3">
+      <%= render 'users/shared/full-screen-employer-profile' %>
+    </div>
+
+    <!-- SECOND ROW ICON LINKS -->
+    <div class="row my-3 justify-content-between">
+
+      <div class="text-center p-0 col-12 col-lg-8">
+        <div class="soft-card shadow-sm my-1 mx-3">
+          <a href="/inbox" class="inbox-link">
+            <div class=" p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/inbox.png"/>
+              <p class="dash-btn">Inbox ( <%= unread_messages %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center p-0 col-12 col-lg-4">
+        <div class="soft-card shadow-sm my-1 mx-3">
+          <a href="#" class="inbox-link">
+            <div class="p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/half-heart.png"/>
+              <p class="dash-btn">Favourites ( <%=  %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
+ <!-- BOTTOM ROW -->
+
+      <div class="p-0 col-12 col-lg-6 text-center">
+        <div class="soft-card shadow-sm my-1 mx-3">
+          <a href="/active_applications" class="inbox-link">
+            <div class=" p-3 m-2" >
+              <img src="https://img.icons8.com/nolan/96/questions.png"/>
+              <p class="dash-btn">Applications ( <%= applications %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="p-0 col-6 col-lg-3 text-center">
+        <div class="shadow-sm soft-card my-1 ml-3 mr-1">
+          <a href="/dashboard_employer/listed_jobs" class="inbox-link">
+            <div class=" p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/planner.png"/>
+                <p class="dash-btn">Listed Jobs ( <%= listed_jobs.count %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="p-0 text-center col-6 col-lg-3">
+        <div class="shadow-sm soft-card my-1 mr-3 ml-1">
+          <a href="/dashboard_employer/closed_jobs" class="inbox-link">
+            <div class=" p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/expired.png"/>
+                <p class="dash-btn">Closed Jobs ( <%= closed_jobs.count %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div> <!-- #End of row -->
+  </div> <!-- End of container -->
+</div> <!-- End of wrapper -->
+<a href="www.icons8.com">Icons8.com</a>
+
 
 
 

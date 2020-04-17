@@ -13,100 +13,94 @@
   <% unread_messages += chat.messages.select {|m| m.user != current_user && !m.read }.size %>
 <% end %>
 
+
 <div class="wrapper">
- <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
+  <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
+  <div class="container py-3" id="content">
 
-  <div class="container" id="content">
 
-    <div class="selector py-3">
-          <!-- MOBILE TOP ROW - USER PROFILE -->
-        <div class="m-3 d-md-none">
-          <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around ">
-            <%= render 'users/shared/profile-card', user: current_user %>
-          </div>
-        </div>
+  <!-- MOBILE TOP ROW - USER PROFILE -->
+    <div class="m-3 d-md-none">
+      <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around ">
+        <%= render 'users/shared/profile-card', user: current_user %>
+      </div>
+    </div>
 
-    <!-- FULL SCREEN TOP ROW _ USER PROFILE INFO -->
-        <div class="d-none d-md-block m-3">
-          <%= render 'users/shared/full-screen-employee-profile' %>
-        </div>
+  <!-- FULL SCREEN TOP ROW _ USER PROFILE INFO -->
+    <div class="d-none d-md-block m-3">
+      <%= render 'users/shared/full-screen-employer-profile' %>
+    </div>
 
-      <!-- SECOND ROW ICON LINKS -->
-        <div class="row my-3 justify-content-between">
-        <!-- LEFT HAND SIDE -->
-          <div class="col-12 col-lg-6 mx-0 p-0">
+    <!-- SECOND ROW ICON LINKS -->
+    <div class="row my-3 justify-content-between">
 
-            <div class="text-center p-0 d-flex flex-column">
-          <!-- TOP ROW -->
-              <div class="soft-card shadow-sm my-1 mx-3">
-                <div class="btn p-3 m-2">
-                  <a href="/inbox" ><img src="https://img.icons8.com/nolan/96/inbox.png"/></a>
-                  <p class="dash-btn">Inbox ( <%= unread_messages %> )</p>
-                </div>
-              </div>
-          <!-- BOTTOM ROW -->
-              <div class="soft-card shadow-sm my-1 mx-3">
-                <div class="btn dash-btn p-3 m-2">
-                  <a href="/dashboard/favourites" ><img src="https://img.icons8.com/nolan/96/half-heart.png"/></a>
-                    <p class="dash-btn">Favourites ( <%= current_user.favourites.count %> )</p>
-                </div>
-              </div>
+      <div class="text-center p-0 col-12 col-lg-8">
+        <div class="soft-card shadow-sm my-1 mx-3">
+          <a href="/inbox" class="inbox-link">
+            <div class=" p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/inbox.png"/>
+              <p class="dash-btn">Inbox ( <%= unread_messages %> )</p>
             </div>
-          </div>
-      <!-- RIGHT HAND SIDE -->
-          <div class="mx-0 p-0 col-12 col-lg-6"  >
-        <!-- TOP ROW -->
-            <div class="d-flex flex-column p-0 text-center">
-              <div class="soft-card shadow-sm my-1 mx-3">
-                <div class="">
-                  <div class="btn dash-btn p-3 m-2" >
-                    <a href="/dashboard/pending" ><img src="https://img.icons8.com/nolan/96/questions.png"/></a>
-                      <p class="dash-btn">Applications ( <%= pending_requests %> )</p>
-                  </div>
-                </div>
-
-              </div>
-          <!-- BOTTOM ROW -->
-              <div class="d-flex justify-content-around">
-                <div class="text-center w-50">
-                  <div class="shadow-sm soft-card my-1 ml-3 mr-1">
-                    <div class="btn dash-btn p-3 m-2">
-                      <a href="/dashboard/upcoming" ><img src="https://img.icons8.com/nolan/96/planner.png"/></a>
-                        <p class="dash-btn">Upcoming ( <%= upcoming_jobs.count %> )</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-center w-50">
-                  <div class="shadow-sm soft-card my-1 mr-3 ml-1">
-                    <div class="btn dash-btn p-3 m-2">
-                      <a href="/dashboard/historic" ><img src="https://img.icons8.com/nolan/96/expired.png"/></a>
-                        <p class="dash-btn">Job History</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
+          </a>
         </div>
       </div>
-        <div class="row">
-          <div class="col-12">
 
-            <div
-              data-upcoming="<%= User.upcoming_shifts_to_json(current_user.id).to_json %>"
-              data-past="<%= User.past_shifts_to_json(current_user.id).to_json %>"
-              data-pending="<%= User.pending_shifts_to_json(current_user.id).to_json %>"
-              id="calendar" class="p-3 m-2">
+      <div class="text-center p-0 col-12 col-lg-4">
+        <div class="soft-card shadow-sm my-1 mx-3">
+          <a href="dashboard/favourites" class="inbox-link">
+            <div class="p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/half-heart.png"/>
+              <p class="dash-btn">Favourites ( <%= current_user.favourites.count %> )</p>
             </div>
-          </div>
-
+          </a>
         </div>
+      </div>
+ <!-- BOTTOM ROW -->
 
-    </div>
-  </div>
-  <a href="www.icons8.com">Icons8.com</a>
+      <div class="p-0 col-12 col-lg-6 text-center">
+        <div class="soft-card shadow-sm my-1 mx-3">
+          <a href="/dashboard/pending" class="inbox-link">
+            <div class=" p-3 m-2" >
+              <img src="https://img.icons8.com/nolan/96/questions.png"/>
+              <p class="dash-btn">Applications ( <%= pending_requests %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
 
-</div>
+      <div class="p-0 col-6 col-lg-3 text-center">
+        <div class="shadow-sm soft-card my-1 ml-3 mr-1">
+          <a href="/dashboard/upcoming" class="inbox-link">
+            <div class=" p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/planner.png"/>
+              <p class="dash-btn">Upcoming ( <%= upcoming_jobs.count %> )</p>
+            </div>
+          </a>
+        </div>
+      </div>
 
+      <div class="p-0 text-center col-6 col-lg-3">
+        <div class="shadow-sm soft-card my-1 mr-3 ml-1">
+          <a href="/dashboard/historic" class="inbox-link">
+            <div class=" p-3 m-2">
+              <img src="https://img.icons8.com/nolan/96/expired.png"/>
+                <p class="dash-btn">Past Shifts</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div
+          data-upcoming="<%= User.upcoming_shifts_to_json(current_user.id).to_json %>"
+          data-past="<%= User.past_shifts_to_json(current_user.id).to_json %>"
+          data-pending="<%= User.pending_shifts_to_json(current_user.id).to_json %>"
+          id="calendar" class="p-3 m-2">
+        </div>
+      </div>
+
+    </div> <!-- #End of row -->
+  </div> <!-- End of container -->
+</div> <!-- End of wrapper -->
+<a href="www.icons8.com">Icons8.com</a>
 

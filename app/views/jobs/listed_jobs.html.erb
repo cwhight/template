@@ -1,14 +1,11 @@
 <% page = "listed_jobs" %>
-
 <div class="wrapper">
   <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
   <div class="cont pt-3">
     <div class="m-2 d-flex justify-content-between align-items-center">
-
       <h3 class="pt-3">Listed Jobs</h3>
       <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
     </div>
-
 
     <table class="table table-hover">
       <thead>
@@ -19,34 +16,26 @@
           <th scope="col">Details</th>
         </tr>
       </thead>
-    <tbody>
+      <tbody>
+        <% @jobs.each do |job| %>
+          <% active_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user} %>
+          <% num_shifts = active_shifts.length  %>
+          <% num_requests = 0 %>
 
+          <% active_shifts.each do  |shift|  %>
+            <% num_requests += shift.requests.count %>
+          <% end %>
+          <tr class="">
+            <th scope="row"><%= job.title %></th>
+            <td><%= num_shifts %> unstaffed</td>
+            <td><%= num_requests %> pending applications </td>
+            <td><%= link_to 'View Details', job_path(job), class: "btn btn-flat" %></td>
+          </tr>
+        <% end %>
 
-      <% @jobs.each do |job| %>
-            <% active_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user} %>
-            <% num_shifts = active_shifts.length  %>
-            <% num_requests = 0 %>
-            <% active_shifts.each do  |shift|  %>
-              <% num_requests += shift.requests.count %>
-            <% end %>
-
-
-           <tr class="">
-              <th scope="row"><%= job.title %></th>
-
-              <td><%= num_shifts %> unstaffed</td>
-
-              <td><%= num_requests %> pending applications </td>
-
-              <td><%= link_to 'View Details', job_path(job), class: "btn btn-flat" %></td>
-
-            </tr>
-
-      <% end %>
-    </tbody>
-  </table>
-
-  </div>
-</div>
+      </tbody>
+    </table>
+  </div> <!-- End of container -->
+</div> <!-- End of wrapper -->
 
 

@@ -38,7 +38,7 @@
            <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>[m
            <% unless num_shifts <= 0 %>[m
 [31m-            <%= render 'shared/show-jobs', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
-[32m+[m[32m            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
+[32m+[m[32m            <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
            <% end %>[m
          <% end %>[m
          <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>[m
@@ -102,7 +102,7 @@
                    <% num_shifts = fav.job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>[m
  [m
 [31m-                  <%= render 'shared/show-jobs', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>[m
-[32m+[m[32m                  <%= render 'jobs/shared/job-listings', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>[m
+[32m+[m[32m                  <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>[m
  [m
                  <% end %>[m
                <% else %>[m
@@ -179,7 +179,7 @@
            <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>[m
            <% unless num_shifts <= 0 %>[m
 [31m-            <%= render 'shared/show-jobs', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
-[32m+[m[32m            <%= render 'jobs/shared/job-listings', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
+[32m+[m[32m            <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: job, num_shifts: num_shifts %>[m
            <% end %>[m
  [m
          <% end %>[m

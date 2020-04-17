@@ -42,14 +42,13 @@
   </head>
 
   <body>
-
     <% unless params[:controller] == 'pages' && params[:action] == 'home' || params[:controller] == 'pages' && params[:action] == 'sign_up' %>
 
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/top-mobile-nav' %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/top-mobile-nav' %>
     <% end %>
     <%= render 'layouts/messages' %>
-        <%= yield %>
+    <%= yield %>
 
     <!-- <div class="notice"><%#= notice %></div> -->
     <!-- <div class="alert"><%= alert %></div> -->
@@ -65,7 +64,7 @@
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
     <% unless params[:controller] == 'chats' && params[:action] == 'show' %>
-      <%= render 'pages/bottom-navbar' %>
+      <%= render 'shared/bottom-navbar' %>
     <% end %>
   </body>
 </html>

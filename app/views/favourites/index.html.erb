@@ -10,7 +10,7 @@
             <% current_user.favourites.each do |fav| %>
               <% num_shifts = fav.job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
 
-              <%= render 'jobs/shared/job-listings', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>
+              <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: fav.job, num_shifts: num_shifts %>
 
             <% end %>
           <% else %>
