@@ -18,9 +18,9 @@
     </div>
     <div>
       <% if user.photo.attached? %>
-        <%= cl_image_tag user.photo.key, class: "avatar-large d-inline float-right", crop: :fill  %>
+        <%= cl_image_tag user.photo.key, class: "avatar d-inline float-right", crop: :fill  %>
       <% else %>
-        <%= image_tag "avatar.jpg", class: 'avatar-large' %>
+        <%= image_tag "avatar.jpg", class: 'avatar' %>
       <% end %>
     </div>
   </div>

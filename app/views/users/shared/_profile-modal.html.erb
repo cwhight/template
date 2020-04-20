@@ -14,18 +14,17 @@
       </div>
 
       <div class="container ">
-        <div class="row">
 
-          <div class="col-12 pt-3 d-lg-none">
+          <div class="pt-3 d-lg-none">
             <%= render '/users/shared/profile-card', user: user, no_header: true %>
           </div>
 
-          <div class="col-12 pt-3 mobile-hidden d-none d-lg-block">
+          <div class="pt-3 mobile-hidden d-none d-lg-block">
             <%= render '/users/shared/full-screen-employee-profile', user: user, no_header: true %>
           </div>
 
-          <div class="col-12 pt-3">
-            <div class="border-top border-bottom p-3">
+          <div class="pt-3">
+            <div class="p-3">
               <h4>Reviews</h4>
               <div class="reviews">
                 <% if user.reviews.any? %>
@@ -39,8 +38,8 @@
             </div>
           </div>
 
-          <div class="py-3 col-12">
-            <h2>Offer a shift to <%= user.first_name %></h2>
+          <div class="py-3">
+            <h3>Offer a shift to <%= user.first_name %></h3>
             <% current_user.jobs.each do |job| %>
               <div class="py-2 dropdown text-center">
                 <% shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}  %>
@@ -72,7 +71,6 @@
             <% end %>
           </div>
 
-        </div> <!-- End of row -->
       </div> <!-- End of container -->
     </div> <!-- End of modal content -->
   </div> <!-- End of modal dialogue -->

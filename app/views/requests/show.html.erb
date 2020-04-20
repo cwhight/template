@@ -1,43 +1,44 @@
 <div class="wrapper">
       <%= render 'pages/shared/employer_dashboard_sidebar', page: "" %>
-    <div class="container pt-3">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-        <%= link_to "", active_applications_path, class: "btn btn-primary fas fa-arrow-left" %>
+    <div class="container py-3">
 
-      </div>
-    </nav>
 
-    <div class="d-flex justify-content-around m-3">
+    <div class="d-flex justify-content-between align-items-start m-3">
       <h1>Request from <%= @request.user.first_name.capitalize %></h1>
-    </div>
-    <div class="row">
-      <% user = @request.user %>
-      <div class="col-12 col-md-6 mb-2">
-        <%= render 'users/shared/profile-card', user: @request.user %>
-        <div class="reviews profile-card card p-3 m-2">
+      <div><i class="fas fa-arrow-right"></i>  <%= link_to "View Job Listing", job_path(@request.shift.job), class: 'inbox-link' %></div>
 
-          <h2><%= user.first_name %>'s Reviews</h2>
-          <% if user.reviews.any? %>
-            <% user.reviews.each do |review| %>
-             <%= render 'reviews/shared/review-card', review: review %>
-            <% end %>
-          <% else %>
-            <p>No reviews yet</p>
-          <% end %>
+    </div>
+    <div class="row mb-3">
+      <% user = @request.user %>
+      <div class="col-12 col-md-6">
+        <div class="h-100">
+          <div class="">
+            <%= render 'users/shared/profile-card', user: @request.user %>
+          </div>
+          <div class="p-3 m-2 ">
+            <h2><%= user.first_name %>'s Reviews</h2>
+            <div class="reviews border-top">
+
+              <% if user.reviews.any? %>
+                <% user.reviews.each do |review| %>
+                 <%= render 'reviews/shared/review-card', review: review %>
+                <% end %>
+              <% else %>
+                <p>No reviews yet</p>
+              <% end %>
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div class="col-12 col-md-6">
-        <div class="m-2 card">
+        <div class="card h-100">
           <%= render "chats/chat-window", chat: @request.chat %>
         </div>
       </div>
-
     </div>
-    <p><%= link_to "View Job Listing", job_path(@request.shift.job), class: 'btn btn-flat' %></p>
   </div>
-  <div class="empty_space"></div>
 </div>
 
 

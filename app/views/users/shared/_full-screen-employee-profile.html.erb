@@ -12,7 +12,7 @@
       <p>Review Score: No Reviews Yet </p>
     <% end %>
     <div class="d-flex ">
-      <div class="pr-3 mr-3 w-30">
+      <div class="pr-3 mr-3">
         <% now = Time.now.to_date %>
         <% dob = user.dob %>
         <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>

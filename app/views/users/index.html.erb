@@ -66,11 +66,11 @@
 
     <% unless @employees.empty? %>
       <% @employees.each do |employee|%>
-        <div class="col-12 my-1">
+        <div class="my-1">
           <%= render 'users/shared/profile-modal', favourite: @favourite, user: employee %>
         </div>
       <% end %>
-      <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+      <%= link_to 'Display all', users_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
     <% else %>
       <%= 'Sorry, no results matched your criteria' %>
     <% end %>
