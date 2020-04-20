@@ -1,8 +1,12 @@
 <div class="container confirmation-page">
   <h2 class="mt-2"><i class="fas fa-arrow-right"></i> </h2><br>
+  <h2>Approach <%= @user.first_name %> for: <%= @shift.job.title %></h2>
   <div class="row">
-    <div class="col-6">
-      <h2>Approach <%= @user.first_name %> for: <%= @shift.job.title %></h2>
+    <div class="col-lg-6 col-12 mb-3">
+      <%= render '/users/shared/profile-card', user: @user, profile: true %>
+    </div>
+    <div class="col-12 col-lg-6 mb-3">
+
         <div class="dropdown-item message-submission">
           <div class="p-2 border-bottom">
             <div class="p-1 d-flex justify-content-between">
@@ -21,9 +25,6 @@
         <%= f.button :submit, "Send Offer", class: "btn btn-flat", id: "employee-apply-sweetalert" %>
       <% end %>
 
-    </div>
-    <div class="col-6">
-      <%= render '/users/shared/profile-card', user: @user, profile: true %>
     </div>
 
 
