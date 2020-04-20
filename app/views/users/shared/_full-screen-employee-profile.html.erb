@@ -1,5 +1,4 @@
 <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around" style="min-height: 300px">
-  <% user = current_user %>
 
 <!-- USER INFO -->
   <div class="w-100 col-lg-4 profile-header">
@@ -19,6 +18,16 @@
         <% age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)%>
         <p class="mx-1"><i class="fas fa-birthday-cake pink-icon"></i> <strong>Age: </strong><%= age %></p>
         <p class="mx-1"><i class="red-marker fas fa-map-marker-alt"></i> <%= "South London" %></p>
+        <div>
+          <span class="m-1 p-1"><i class="fas fa-award green-marker mr-1 pr-1"></i>  Skills</span>
+          <div class="skills-row align-items-start">
+            <% user.skills.each do |skill| %>
+              <div class="skill-tag my-1 py-1">
+                <span  class="mx-1"><%= skill.title %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -29,7 +38,7 @@
 
 <!--             <a class="btn btn-flat" href="https://connect.stripe.com/oauth/authorize?client_id=ca_GzHwY2wrwH0v9x65teLdTTG1a1mcyBly&state={STATE_VALUE}&scope=read_write&response_type=code&stripe_user[email]=cdwhight@gmail.com&stripe_user[url]=templatejobs.co.uk">STRIPE</a>
  --><div class="d-flex flex-column align-items-center">
-      <h4 class="d-inline"><%= user.first_name %> <%= user.surname %></h4>
+      <h4 class="<%= no_header ? 'd-none' : '' %>"><%= user.first_name %> <%= user.surname %></h4>
 
       <% if user.photo.attached? %>
         <%= cl_image_tag user.photo.key, class: "avatar-large d-inline float-right shadow", crop: :fill  %>
@@ -39,7 +48,9 @@
       <div class="d-flex justify-content-between align-items-center">
 
         <div class="py-2">
-          <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
+          <% if  user == current_user %>
+            <%= link_to 'Update', edit_user_path(current_user), class: "btn btn-ghost" %>
+          <% end %>
         </div>
 
       </div>
@@ -49,20 +60,7 @@
 
 <!-- USER SUMMARY -->
   <div class="col-4">
-    <div class="w-50">
-      <span class="m-1 p-1"><i class="fas fa-award green-marker mr-1 pr-1"></i>  Businesses</span>
-      <div class="skills-row align-items-start">
 
-        <% venues = user.jobs.map do |job| %>
-          <% job.venue %>
-        <% end %>
-        <% venues.uniq.each do |venue|%>
-          <div class="skill-tag my-1 py-1">
-            <span  class="mx-1"><%= venue %></span>
-          </div>
-        <% end %>
-      </div>
-    </div>
     <p class="w-100 border-top border-bottom py-2 px-1" style="background-color: #fafafa"><em><%= user.summary%></em></p>
   </div>
 </div>
