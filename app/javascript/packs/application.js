@@ -12,23 +12,19 @@ import 'select2/dist/css/select2.css';
 import { initSelect2 } from '../plugins/init_select2';
 import { initSweetalert } from '../plugins/init_sweetalert';
 import { showJobs} from '../components/showJobs';
-import { stickyNavbar} from '../components/stickyNavbar';
+import { scrollNav} from '../components/stickyNavbar';
 import { openMessages } from '../components/inbox';
+import { collapse } from '../components/dashboard';
 
 if (document.getElementById("open-apps")) {
   openMessages();
 }
 
-// var client = algoliasearch(ApplicationID, Search-Only-API-Key);
-// var index = client.initIndex('Job');
-// index.search('something', { hitsPerPage: 10, page: 0 })
-//   .then(function searchDone(content) {
-//     console.log(content)
-//   })
-//   .catch(function searchFailure(err) {
-//     console.error(err);
-//   });
+if (document.getElementById('homepage-navbar')) {
+  scrollNav();
+}
 
+collapse()
 
 initSweetalert('#confirm-job', {
   title: "Done",

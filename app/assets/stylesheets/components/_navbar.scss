@@ -2,7 +2,10 @@
   .navbar-standard {
     display: none !important
   }
+}
 
+.scroll {
+  background-color: white !important;
 }
 
 @media (min-width: 500px) {
@@ -58,6 +61,9 @@
   min-height: 66px;
 }
 
+.t-logo img {
+  height: 30px !important;
+}
 
 .navbar-standard {
   justify-content: space-between;
@@ -67,21 +73,13 @@
   shadow-color: #2a69da
 }
 
-.navbar-homepage {
-  justify-content: space-between;
-  background-color: #2a69da;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-}
-
 .navbar-standard .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-standard .navbar-brand img {
+.navbar-brand img {
   width: 135px;
+  height: auto;
 }
 
 .navbar-standard-white {

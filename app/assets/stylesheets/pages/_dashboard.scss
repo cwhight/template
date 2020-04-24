@@ -31,60 +31,55 @@
 }
 
 .wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
+  display: flex;
+  width: 100%;
+  align-items: stretch;
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    height: 92vh;
-    position: sticky;
-    top: 66px;
-
+  min-width: 250px;
+  max-width: 250px;
+  height: 92vh;
+  position: sticky;
+  top: 66px;
+  color: #292929;
+  transition: all 0.3s;
 }
 
 #sidebar.inactive {
-    margin-left: -250px;
+  margin-left: -250px;
 }
 
 @media (max-width: 500px) {
   .sideSideBar {
     display: none;
   }
-
 }
 
-#sidebar {
-    color: #292929;
-    transition: all 0.3s;
-}
 
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: #6d7fcc;
+  padding: 20px;
+  background: #6d7fcc;
 }
 
 #sidebar ul.components {
-    padding: 20px 0;
+  padding: 20px 0;
 }
 
 #sidebar ul p {
-    color: #fff;
-    padding: 10px;
+  color: #fff;
+  padding: 10px;
 }
 
 #sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-    color: #464646;
-
-    letter-spacing: -0.05em;
-    font-weight: 600;
-    font-size: 16px;
-    margin-left: 10px;
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  color: #464646;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  font-size: 16px;
+  margin-left: 10px;
 }
 #sidebar ul li a:hover {
     color: #131313;
@@ -107,15 +102,6 @@
 #sidebarCollapse:hover {
   color: grey;
   opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
 }
 
 .card {

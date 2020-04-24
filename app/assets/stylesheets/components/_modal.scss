@@ -1,9 +1,10 @@
   .modal.left .modal-dialog,
   .modal.right .modal-dialog {
     position: fixed;
+    bottom: 0px;
     margin: auto;
     width: 50%;
-    height: 100%;
+    min-height: 70%;
     -webkit-transform: translate3d(0%, 0, 0);
         -ms-transform: translate3d(0%, 0, 0);
          -o-transform: translate3d(0%, 0, 0);
@@ -12,14 +13,17 @@
 
   .modal.left .modal-content,
   .modal.right .modal-content {
-    height: 100%;
     overflow-y: auto;
   }
 
-  .modal-content.right {
+  .modal.right .modal-content {
     border-top-left-radius: 3%;
+    border-bottom-left-radius: 3%;
   }
 
+.justify-content-evenly {
+  justify-content: space-evenly
+}
 
 /*Left*/
   .modal.left.fade .modal-dialog{
@@ -47,9 +51,9 @@
     right: 0;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1200px) {
     .modal.left .modal-dialog,
     .modal.right .modal-dialog {
-      width: 90%;
+      width: 95%;
     }
   }

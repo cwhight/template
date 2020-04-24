@@ -4,7 +4,6 @@
   padding: 0;
 }
 
-
 body {
   font-family: 'Asap', sans-serif;
   // font-family: Lato;
@@ -50,7 +49,7 @@ p {
 
 @media (max-width: 500px) {
   .mobile-hidden {
-    display: none
+    display: none !important
   }
 }
 
@@ -135,20 +134,9 @@ p {
   line-height: 4vh;
 }
 
-#landing-hero {
-  width: 100%;
-}
-
 @media (max-width: 500px) {
   #landing-page-search {
     width: 100%;
-  }
-}
-
-@media (min-width: 500px) {
-  .landing-title {
-    padding-left: 32px;
-    margin-left: 32px
   }
 }
 
@@ -157,6 +145,12 @@ p {
   margin: 8px
 }
 
+@media (min-width: 500px) {
+  .landing-title {
+    padding-left: 0px;
+    margin-left: 10%;
+  }
+}
 
 #landing-page-search {
   position: absolute;

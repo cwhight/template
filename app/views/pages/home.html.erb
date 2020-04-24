@@ -1,11 +1,10 @@
 <%= render 'shared/homepage-navbar' %>
-<%= render 'shared/transparent_navbar' %>
 
-<div id="landing-hero" class="row mx-0 ">
+<div id="landing-banner" class="row mx-0 ">
 
   <div class="col-12 col-lg-6 d-flex align-items-end">
     <div class="landing-title">
-      <h1 id="landing-hero-h1">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
+      <h1 id="landing-headline">The quickest and easiest way to find short term work that suits your lifestyle.</h1>
       <% unless current_user %>
         <div id="">
           <a href="/users/sign_in" class="btn btn-login">Login</a>
@@ -42,7 +41,7 @@
 <!-- Main Content -->
 
 <div class="py-3 landing-jobs justify-content-center">
-  <div class="col-11 content-index">
+  <div class="width-85 content-index">
     <div class="d-flex justify-content-between">
       <h1>Available Jobs</h1>
       <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-none d-sm-block', id: 'display_all_jobs' %>

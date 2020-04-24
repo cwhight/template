@@ -1,7 +1,14 @@
-<div class="fixed-top navbar navbar-expand-sm navbar-light navbar-standard" id="site_header">
-   <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1574099382/Template_Logo_V1_evmfvp.png"), current_user&.employer ? dashboard_employer_path : root_path, class: "navbar-brand"  %>
-    <p></p>
-    <%= render 'shared/avatar', class: 'homepage-avatar ' %>
+<div class="fixed-top d-flex justify-content-between align-items-center mobile-hidden" id="homepage-navbar">
+   <%= link_to image_tag("https://res.cloudinary.com/cwhight/image/upload/v1587654447/template_t_white_qmkzcy.png"), current_user&.employer ? dashboard_employer_path : root_path, class: "p-3 t-logo", id: "white-t"  %>
+   <%= link_to image_tag("https://res.cloudinary.com/cwhight/image/upload/v1587655300/template_t_blue_vuz04r.png"), current_user&.employer ? dashboard_employer_path : root_path, class: "d-none p-3 t-logo", id: "blue-t"  %>
+  <div class="d-flex">
+    <div class="">
+      <%= link_to 'Sign in', new_user_session_path, class: "btn btn-ghost" %>
+    </div>
+    <div class="px-2">
+      <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-sign-up" %>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
