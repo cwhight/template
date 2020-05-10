@@ -6,6 +6,6 @@
     <%= f.input :description, as: :text, error: 'Must have a description' %>
     <%= f.input :location, error: 'Must have a location' %>
     <%= f.association :sectors, label_method: :title, value_method: :id, input_html: { class: 'sector-picker' } %>
-    <%= f.button :submit, "Create Job", class: "btn btn-flat" %>
+    <%= f.button :submit, "Create Job", class: "btn btn-bw" %>
   <% end %>
 </div>

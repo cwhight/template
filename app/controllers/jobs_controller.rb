@@ -1,15 +1,15 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :close, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: [:index, :filter, :order_by_pay]
+
+  @@jobs
+  @@search_term = ""
 
   def index
     @request = Request.new
     @favourite = Favourite.new
-    @jobs = policy_scope(Job).order(created_at: :desc)
-    filter_title_sector
-    filter_pay
-    filter_time
-
+    @@jobs = policy_scope(Job).order(created_at: :desc)
+    @jobs= @@jobs
     if @jobs
       @markers = @jobs.map do |job|
         {
@@ -18,6 +18,41 @@ class JobsController < ApplicationController
           infoWindow: render_to_string(partial: "info_window", locals: { job: job })
         }
       end
+    end
+  end
+
+  def filter
+    if params[:search][:query] &.== @@search_term
+      @jobs = @@jobs
+    else
+      @jobs = apply_search
+    end
+    authorize @jobs
+    filter_pay
+    filter_time
+    filter_sector
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def filter_title_venue
+    @jobs = apply_search
+    authorize @jobs
+    respond_to do |format|
+      format.html { redirect_to jobs_path }
+      format.js
+    end
+  end
+
+  def order_by_pay
+    @jobs = @@jobs
+    authorize @jobs
+    @jobs = @jobs.sort_by(&:pay).reverse
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
@@ -103,14 +138,35 @@ class JobsController < ApplicationController
     authorize @job
   end
 
+  def apply_search
+    @@jobs = policy_scope(Job).order(created_at: :desc)
+    if params[:search][:query]
+      @@search_term == params[:search][:query]
+      @@jobs = @@jobs.search "#{params[:search][:query]}", match: :word_middle unless params.dig(:search, :query).blank?
+    end
+    @@jobs
+  end
+
   def filter_pay
-    if params[:my_range].present?
+    if params[:my_range]
       @lower_pay = params[:my_range].split(";").first.to_i * 100
       @higher_pay = params[:my_range].split(";").last.to_i * 100
 
       @jobs = @jobs.select do |job|
         job.shifts.pluck(:price_cents).any? { |pay| (pay > @lower_pay) && (pay < @higher_pay) } &&
           job.shifts.select { |shift| (shift.price_cents > @lower_pay) && (shift.price_cents < @higher_pay) }.any? { |shift| !shift.completed }
+      end
+    end
+    @jobs
+  end
+
+  def filter_sector
+    if params[:search][:sectors] && params[:search][:sectors].reject(&:blank?)
+      sectors = params[:search][:sectors].reject(&:blank?).map do |id|
+        Sector.find(id)
+      end
+      unless sectors.empty?
+        @jobs = @jobs.select {|job| job.sectors.any? { |sector| sectors.include?(sector)}}
       end
     end
     @jobs
@@ -131,12 +187,6 @@ class JobsController < ApplicationController
     @jobs
   end
 
-  def filter_title_sector
-    if params[:search].present?
-      @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
-      @jobs = @jobs.search_by_sector(params[:search][:sectors].reject(&:blank?)) if params.dig(:search, :sectors)&.reject(&:blank?)&.any?
-      @jobs = @jobs.kinda_matching(params[:search][:query]) unless params.dig(:search, :query).blank?
-    end
-    @jobs
-  end
+
+
 end

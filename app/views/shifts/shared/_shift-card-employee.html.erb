@@ -26,7 +26,7 @@
     </div>
     <div class="d-flex flex-column col-12 col-lg-4 align-items-end">
       <% if shift.start_time >= DateTime.now  %>
-        <%= link_to 'Chat', chat_path(current_user.requests.where(shift: shift).first.chat), class: "btn-flat btn w-100" %>
+        <%= link_to 'Chat', chat_path(current_user.requests.where(shift: shift).first.chat), class: "btn-bw btn w-100" %>
       <% else %>
         <% unless shift.reviews.any? { |review| review.user != current_user } %>
           <%= render 'reviews/shared/create-review-modal', shift: shift, review_target: shift.job.user %>

@@ -1,0 +1,41 @@
+var filterResults = document.getElementById('jobs-section');
+
+function clearHtml() {
+  filterResults.innerHTML = ""
+}
+
+function addHtml(html) {
+  filterResults.insertAdjacentHTML('beforeend', html);
+}
+
+clearHtml()
+
+clearHtml()
+<% unless @jobs.empty? %>
+  <% @jobs.each do |job|%>
+    <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
+    <% unless num_shifts <= 0 %>
+      addHtml("<%= j render 'jobs/shared/job-details-modal', favourite: @favourite, job: job, num_shifts: num_shifts %>")
+    <% end %>
+  <% end %>
+  addHtml("<a href='/jobs' class='btn btn-bw d-block d-sm-none my-3' id='display_all_jobs'>Display all</a>")
+
+<% else %>
+  addHtml("Sorry, no jobs matched your criteria - <a class='inline-link' href='/jobs'>clear filters</a>")
+<% end %>
+
+var colls = document.querySelectorAll(".collapsible");
+
+colls.forEach((coll) => {
+  coll.addEventListener("click", (e) => {
+    e.currentTarget.classList.toggle("active")
+    var content = e.currentTarget.nextElementSibling;
+    if (e.currentTarget.classList.contains("active")){
+      content.style.height = 0;
+
+    } else {
+      content.style.height = content.scrollHeight + "px";
+
+    }
+  });
+})

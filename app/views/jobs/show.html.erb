@@ -53,7 +53,7 @@
 
                 </td>
                 <% chat = shift.requests.where(user: shift.user).first.chat %>
-                <td><%= link_to "Message #{shift.user.first_name}", chat_path(chat), class: "btn btn-flat" %></td>
+                <td><%= link_to "Message #{shift.user.first_name}", chat_path(chat), class: "btn btn-bw" %></td>
               <% else %>
                 <td><%= render 'requests/shared/view-requests-modal', shift: shift %></td>
                 <td><%= render 'shifts/edit-shift', shift: shift, modal_button: "" %></td>
@@ -108,7 +108,7 @@
                   <%= form_tag job_shift_orders_path(@job, shift) do %>
                     <%= hidden_field_tag 'shift_id', @shift.id %>
                     <%= hidden_field_tag 'job_id', @job.id %>
-                    <%= submit_tag 'Pay', class: 'btn btn-flat' %>
+                    <%= submit_tag 'Pay', class: 'btn btn-bw' %>
                   <% end %>
                 </td>
               <% end %>

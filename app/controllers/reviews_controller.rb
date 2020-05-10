@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
     @review.user = @user
     @review.reviewer = current_user
     if @review.save
+      update_user_reviews(@user, @review)
       if current_user.employer
         @path = "jobs/#{@shift.job.id}"
         respond_to do |format|
@@ -63,5 +64,12 @@ class ReviewsController < ApplicationController
 
   def set_review
     @review = Review.find(params[:id])
+  end
+
+  def update_user_reviews(user, review)
+    score_array = user.reviews.map { |review| review.score }
+    score_array << review.score
+    user.review_score = score_array.reduce(:+).to_f / score_array.length
+    user.save
   end
 end

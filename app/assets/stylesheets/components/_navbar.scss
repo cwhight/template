@@ -30,6 +30,21 @@
   font-size: 20px;
 }
 
+.nav-link {
+  color: #2a69da;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.nav-link:hover {
+  border-bottom: 3px solid #2a69da;
+  box-shadow-bottom: 0px 1px 3px 0px #2a69da;
+}
+
 .top-navlink {
   color: white !important;
   font-size: 20px;
@@ -45,8 +60,6 @@
 .navbar-top-mobile {
   justify-content: space-between;
   background-color: #2969da;
-  // border-bottom-style: solid;
-  // border-bottom-color: #2969DA;
   color: white;
   max-width: 100%;
   min-height: 40px;
@@ -73,51 +86,9 @@
   shadow-color: #2a69da
 }
 
-.navbar-standard .navbar-collapse {
-  flex-grow: 0;
-}
 
 .navbar-brand img {
   width: 135px;
   height: auto;
 }
 
-.navbar-standard-white {
-  background-color: white;
-  opacity: 0.7;
-}
-.nav-text {
-  color: white !important;
-}
-
-.rounded {
-  border-radius: 50%;
-  background-color: transparent;
-}
-
-.empty_space {
-  height: 20vh;
-}
-
-.lots_of_empty_space {
-  height: 60vh;
-}
-
-.lots_of_empty_space_new_password {
-  height: 55vh;
-}
-
-.nav-link {
-  color: #2a69da;
-  text-decoration: none;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
-
-.nav-link:hover {
-  border-bottom: 3px solid #2a69da;
-  box-shadow-bottom: 0px 1px 3px 0px #2a69da;
-}

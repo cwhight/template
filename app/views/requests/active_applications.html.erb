@@ -3,7 +3,7 @@
 
 <div class="wrapper">
   <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
-  <div class="cont px-2 pt-3">
+  <div class="container px-2 pt-3">
     <div>
       <h3 class="pt-3">Active Applications</h3>
       <p>Manage your job applications here - you currently have <%= applications %> applications </p>
@@ -32,7 +32,7 @@
               <td><strong><%= Time.parse(request.shift.start_time).strftime("%e %b") %>:</strong> <%= Time.parse(request.shift.start_time).strftime("%H:%M") %> to <%= Time.parse(request.shift.end_time).strftime("%H:%M") %></td>
               <td><%= request.user.first_name %></td>
               <% if request.chat %>
-                <td><%= link_to 'View Application', request_path(request), class: "btn btn-flat" %></td>
+                <td><%= link_to 'View Application', request_path(request), class: "btn btn-bw" %></td>
               <% else %>
                 <td></td>
               <% end %>

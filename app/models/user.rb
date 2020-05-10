@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # after_create :send_welcome_email
 
+  searchkick word_middle: [:skills, :first_name, :surname, :summary]
+  User.reindex
+
   has_many :jobs
   has_many :reviews, dependent: :destroy
   has_many :requests

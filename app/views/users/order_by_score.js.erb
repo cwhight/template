@@ -1,0 +1,39 @@
+var filterResults = document.getElementById('employees-section');
+
+function clearHtml() {
+  filterResults.innerHTML = ""
+}
+
+function addHtml(html) {
+  filterResults.insertAdjacentHTML('beforeend', html);
+}
+
+clearHtml()
+
+clearHtml()
+<% unless @employees.empty? %>
+  <% @employees.each do |employee|%>
+    addHtml("<div class='my-1 soft-card shadow-sm pt-2'><%= j render 'users/shared/profile-modal', favourite: @favourite, user: employee %></div>")
+
+  <% end %>
+  addHtml("<a href='/employees' class='btn btn-bw d-block d-sm-none my-3' id='display_all_employees'>Display all</a>")
+
+<% else %>
+  addHtml("Sorry, no employees matched your criteria - <a class='inline-link' href='/employees'>clear filters</a>")
+<% end %>
+
+var colls = document.querySelectorAll(".collapsible");
+
+colls.forEach((coll) => {
+  coll.addEventListener("click", (e) => {
+    e.currentTarget.classList.toggle("active")
+    var content = e.currentTarget.nextElementSibling;
+    if (e.currentTarget.classList.contains("active")){
+      content.style.height = 0;
+
+    } else {
+      content.style.height = content.scrollHeight + "px";
+
+    }
+  });
+})

@@ -1,10 +1,39 @@
 class UsersController < ApplicationController
 
-  def index
-    @employees = policy_scope(User)
-    @employees = User.where(employer: false)
+  @@employees
+  @@search_term = ""
 
+  def index
+    @@employees = policy_scope(User).select {|user| user.employer == false }
+    @employees = @@employees
   end
+
+  def filter
+    if params[:search][:query].blank?
+      @@employees = User.where(employer: false)
+      @employees = @@employees
+    elsif params[:search][:query] &.== @@search_term
+      @employees = @@employees
+    else
+      @employees = apply_search
+    end
+    filter_skills
+    filter_review_score
+    respond_to do |f|
+      f.js
+    end
+  end
+
+  def order_by_score
+    @employees = @@employees
+    authorize @employees
+    @employees = @employees.sort_by(&:review_score).reverse
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 
   def edit
     @user = User.find(params[:id])
@@ -67,6 +96,41 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :surname, :dob, :photo, :summary, :employer, :skills)
+  end
+
+  def apply_search
+    @@employees = User.where(employer: false)
+    if params[:search][:query]
+      @@search_term == params[:search][:query]
+      unless params[:search][:query] == ""
+        @@employees = @@employees.search "#{params[:search][:query]}", match: :word_middle
+      end
+    end
+    @@employees
+  end
+
+  def filter_skills
+    if params[:search][:skills] && params[:search][:skills].reject(&:blank?)
+      skills = params[:search][:skills].reject(&:blank?).map do |id|
+        Skill.find(id)
+      end
+      unless skills.empty?
+        @employees = @employees.select {|job| job.skills.any? { |skill| skills.include?(skill)}}
+      end
+    end
+    @employees
+  end
+
+  def filter_review_score
+    if params[:review_score]
+      @min_score = params[:review_score].split(";").first.to_i
+      @max_score = params[:review_score].split(";").last.to_i
+
+      @employees = @employees.select do |employee|
+        employee.review_score >= @min_score && employee.review_score <= @max_score
+      end
+    end
+    @employees
   end
 
   def state_matches?(state_parameter)

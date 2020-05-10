@@ -1,5 +1,7 @@
 class Job < ApplicationRecord
-  # include AlgoliaSearch
+  # include searchkick and elasticsearch
+  searchkick word_middle: [:title, :venue], filterable: [:sectors]
+  Job.reindex
 
   belongs_to :user
   has_many :favourites
@@ -15,12 +17,12 @@ class Job < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
   scope :search_by_sector, ->(ids) { joins(:sector_joiners).merge(SectorJoiner.where(sector_id: ids.map(&:to_i))) }
-  include PgSearch::Model
-  pg_search_scope :kinda_matching,
-                  against: :title,
-                  using: {
-                    tsearch: { dictionary: "english" }
-                  }
+  # include PgSearch::Model
+  # pg_search_scope :kinda_matching,
+  #                 against: :title,
+  #                 using: {
+  #                   tsearch: { dictionary: "english" }
+  #                 }
 
 
   # algoliasearch do

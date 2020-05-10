@@ -1,4 +1,4 @@
-<div class="targeter">
+<div class="targeter d-none">
   <% if params[:search] %>
     <% if params[:search][:sectors] %>
       data-sectors="<%= params[:search][:sectors].reject(&:empty?) %>"
@@ -24,10 +24,10 @@
       <h1 class="my-3">Job Seekers</h1>
     </div>
 
-    <%= simple_form_for :search, url: users_path, method: :get do |f| %>
+    <%= simple_form_for :search, url: users_filter_path, remote: true, method: :get do |f| %>
       <div class="form-group form-inline pt-3 justify-content-between nowrap">
         <div class="d-flex justify-content-between align-items-center w-100" >
-          <input class="form-control width-85 mr-1 pl-3 search-bar" type="text" placeholder="Job search" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
+          <input class="form-control width-85 mr-1 pl-3 search-bar" type="text" placeholder="Search for Employees" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
           <div>
             <button name="button" type="submit" class="btn btn-search" style="height: 3.5rem">
               <i class="full-hidden fas fa-search"></i> <span class="mobile-hidden">Search</span>
@@ -36,22 +36,29 @@
         </div>
       </div>
 
-      <div class="dropdown-toggle w-100 mb-3 btn btn-large btn-flat collapsible active">
-        Filter
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="dropdown-toggle width-85 mb-3 btn btn-large btn-bw clickable active mr-1" id="filter-dropdown">
+          Filter
+        </div>
+        <%= image_tag "", class: "fas fa-sort-amount-down mb-3 btn btn-large btn-plain clickable active", id: "sortDropDown", data: {toggle: 'dropdown'}, 'aria-haspopup': false, 'aria-expanded': false %>
+        <div class="dropdown-box dropdown-menu dropdown-menu-right mt-3" aria-labelledby="sortDropDown">
+          <%= link_to 'Review Score', users_sort_score_path, remote: :true, class: "dropdown-item" %>
+        </div>
+
       </div>
 
-      <div class="content-collapse">
+      <div class="content-collapse" id="filter-form">
         <%= f.input :skills, collection: Skill.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
-        <%= f.input :price_cents, label: "Filter by Review Score", required: false, wrapper_html: {class: "ml-1 pr-2"},
+        <%= f.input :review_score, label: "Filter by Review Score", required: false, wrapper_html: {class: "ml-1 pr-2"},
           input_html: { class: 'js-range-slider',
           type: 'text',
-          name: 'my_range',
+          name: 'review_score',
           value: "",
           'data-type': "double",
           'data-min': "0",
           'data-max': "5",
-          'data-from': "#{params[:my_range].split(';').first if params[:my_range]}",
-          'data-to': "#{params[:my_range].split(';').last if params[:my_range]}",
+          'data-from': "#{params[:review_score].split(';').first if params[:review_score]}",
+          'data-to': "#{params[:review_score].split(';').last if params[:review_score]}",
           'data-keyboard': "true",
           'data-skin': "round",
         } %>
@@ -59,21 +66,23 @@
           <button name="button" type="submit" class="float-right mb-2 btn btn-search " style="height: 42px; width: 128px;">
             <i class="fas fa-filter"></i> Filter
           </button>
-          <%= link_to 'Display all', jobs_path, class: 'btn btn-flat mb-2' %>
+          <%= link_to 'Display all', users_path, class: 'btn btn-bw mb-2' %>
         </div>
       </div>
     <% end %>
-
-    <% unless @employees.empty? %>
-      <% @employees.each do |employee|%>
-        <div class="my-1">
-          <%= render 'users/shared/profile-modal', favourite: @favourite, user: employee %>
-        </div>
+    <div id="employees-section">
+      <% unless @employees.empty? %>
+        <% @employees.each do |employee|%>
+          <div class="my-1 soft-card shadow-sm pt-2">
+            <%= render 'users/shared/profile-modal', favourite: @favourite, user: employee %>
+          </div>
+        <% end %>
+        <%= link_to 'Display all', users_path, class: 'btn btn-bw d-block d-sm-none my-3', id: 'display_all_employees' %>
+      <% else %>
+        <%= 'Sorry, no results matched your criteria' %> - <%= link_to 'clear filters', users_path, class: "inline-link" %>
       <% end %>
-      <%= link_to 'Display all', users_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
-    <% else %>
-      <%= 'Sorry, no results matched your criteria' %>
-    <% end %>
+    </div>
+
 
   </div> <!-- End of container -->
 </div> <!-- End of wrapper -->

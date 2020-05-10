@@ -6,11 +6,17 @@
 <% end %>
 
 
-<div class="fixed-top d-flex justify-content-between navbar-expand-sm navbar-light navbar-standard">
-  <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1575471730/template-404-logo_njqxag.png"), current_user&.employer ? users_path : root_path, class: "navbar-brand px-2 py-3"  %>
+<div class="fixed-top d-flex justify-content-between mobile-hidden navbar-standard">
+  <div class="d-flex">
+    <%= link_to image_tag("https://res.cloudinary.com/dt02hu2ll/image/upload/v1575471730/template-404-logo_njqxag.png"), current_user&.employer ? users_path : root_path, class: "navbar-brand px-2 py-3"  %>
+  </div>
+
   <div class="d-flex">
     <% if current_user %>
       <% if  current_user.employer %>
+        <div class="d-flex align-items-center">
+          <%= link_to "Create Job", new_job_path, class: "btn btn-sign-up" %>
+        </div>
         <%= link_to 'Search Staff', users_path, class: "nav-link"  %>
       <% else %>
         <%= link_to 'Search Jobs', jobs_path, class: "nav-link"  %>

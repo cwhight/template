@@ -44,7 +44,7 @@
               <div class="py-2 dropdown text-center">
                 <% shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}  %>
                 <% num_shifts = shifts.length %>
-                <div class="dropdown-toggle btn btn-flat collapsible active width-85">
+                <div class="dropdown-toggle btn btn-bw collapsible active width-85">
                   <%= job.title %>
                 </div>
                 <div class="content-collapse">

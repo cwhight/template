@@ -66,19 +66,19 @@ employees = []
 puts "creating random employers"
 
 10.times do
-  user = User.create!(dob: "01/01/1982", email: Faker::Internet.email, password: "123456", employer: true, first_name: Faker::Name.first_name, surname: Faker::Name.last_name )
+  user = User.create!(dob: "01/01/1982", email: Faker::Internet.email, password: "123456", employer: true, first_name: Faker::Name.first_name, surname: Faker::Name.last_name, review_score: rand(4..5) )
   employers << user
 end
 
 puts "creating Freddie"
 
-freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", password: "123456", employer: true, first_name: "Freddie", surname: "Warren", summary: "Owner of a small chain of restaurants/bars in North London")
+freddie = User.create!(dob: "01/01/1980", email: "freddie@hoxton100.com", password: "123456", employer: true, first_name: "Freddie", surname: "Warren", summary: "Owner of a small chain of restaurants/bars in North London", review_score: 4.5)
 
 
 puts "Creating employees"
 
 5.times do
- user = User.create!(dob: "01/01/1997", email: Faker::Internet.email, password: "123456", employer: false, first_name: Faker::Name.first_name, surname: Faker::Name.last_name, summary: "Experienced bar staff, wait staff, front of house. Also can work as kitchen assistance. Lots of experience in club promotion and ticket sales too" )
+ user = User.create!(dob: "01/01/1997", email: Faker::Internet.email, password: "123456", employer: false, first_name: Faker::Name.first_name, surname: Faker::Name.last_name, summary: "Experienced bar staff, wait staff, front of house. Also can work as kitchen assistance. Lots of experience in club promotion and ticket sales too", review_score: rand(4..5) )
  employees << user
 end
 
@@ -88,7 +88,7 @@ puts "Employers created"
 
 puts "Creating Raj"
 
-User.create!(email: "chris.williams@gmail.com", password: "123456", employer: false, first_name: "Chris", surname: "Williams", dob: "01/11/1993", summary: "I have 8 years experience working in multiple hospitality roles, can wait tables, mix cocktails and manage a bar. Looking to pick up additional shifts over the holidays" )
+User.create!(email: "chris.williams@gmail.com", password: "123456", employer: false, first_name: "Chris", surname: "Williams", dob: "01/11/1993", summary: "I have 8 years experience working in multiple hospitality roles, can wait tables, mix cocktails and manage a bar. Looking to pick up additional shifts over the holidays", review_score: 4.8 )
 
 charlie = User.last
 
@@ -103,12 +103,18 @@ i = 0
   job = Job.create!(user: employers[rand(0..employers.size - 1)], title: jobs[job_index][0], location: addresses[i], description: "Cover needed for multiple shifts", sectors: Sector.where(title: jobs[job_index][2]), dress: "Smart shoes, casual - jeans and shirt", venue: "Wahoo Bar and Grill" )
   puts "jobs created"
   i += 1
+  pays = []
   rand(1..5).times do
     start_index = rand(0..6)
     shift = Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
     puts "Shift created"
     Request.create!(shift: shift, user: employees[rand(0..(employees.size - 1))], content: "Hi, I'd really like to work this shift, please get back to me if you have any questions")
+    pays << price
   end
+
+  job.pay = price
+  job.save
+
   rand(2..4).times do
     start_index = rand(0..6)
     user = employees[rand(0..(employees.size - 1))]
@@ -130,6 +136,7 @@ i = 0
   puts "jobs created"
   i += 1
   user = charlie
+  pays = []
   rand(0..1).times do
     start_index = rand(0..6)
     shift = Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
@@ -143,8 +150,13 @@ i = 0
       message = Message.new(chat: chat, content: request.content, read: true, user: user )
       request.update(chat: chat)
       message.save(validate: false)
-
+      pays << price
   end
+  p job
+
+  job.pay = price
+  job.save
+
   rand(1..2).times do
     start_index = rand(0..6)
 
@@ -177,23 +189,27 @@ puts "creating Freddie's jobs"
   puts "2"
   i += 2
   # p employees[rand(0..(employees.size - 1))]
+  pays = []
   rand(3..6).times do
     user = employees[rand(0..(employees.size - 1))]
     puts "future shifts"
     start_index = rand(0..4)
-    Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
+    shift = Shift.create!(title: job.title, job: job, price_cents: price, start_time: shift_starts[start_index], end_time: shift_starts[start_index] + rand(4..6)*3600)
     shift = Shift.last
     Request.new(shift: shift, user: user, content: "Hi, I'd really like to work this shift, please get back to me if you have any questions").save(validate: false)
          request = Request.last
       chat = Chat.new(request: request, employee: user, employer: request.shift.job.user)
 
       chat.save(validate: false)
-      p chat
       message = Message.new(chat: chat, content: request.content, read: true, user: user )
       request.update(chat: chat)
       message.save(validate: false)
-
+    pays << price
   end
+  p pays.sort
+  job.pay = price
+  job.save
+
   puts "creating old shifts"
   j = 0
   rand(4..5).times do
