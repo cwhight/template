@@ -4,6 +4,14 @@ class UserPolicy < ApplicationPolicy
     record == user
   end
 
+  def order_by_score?
+    user.employer
+  end
+
+  def filter?
+    order_by_score?
+  end
+
   class Scope < Scope
     def resolve
       if user.employer

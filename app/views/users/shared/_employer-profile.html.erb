@@ -20,9 +20,8 @@
 
       <% score_array = user.reviews.map { |review| review.score } %>
       <% unless score_array.empty? %>
-        <% average_score = score_array.reduce(:+).to_f / score_array.length %>
         <div>
-          <p><span ><%= average_score.round(1) %> <i class="star fas fa-star"></i></span> </p>
+          <p><span ><%= user.review_score.round(1) %> <i class="star fas fa-star"></i></span> </p>
         </div>
       <% else %>
         <p>Review Score: No Reviews Yet </p>

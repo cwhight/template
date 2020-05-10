@@ -1,5 +1,5 @@
 
-  <button type="button" class="btn btn-flat my-2" data-toggle="modal" data-target="#show<%=shift.id%>">
+  <button type="button" class="btn btn-bw my-2" data-toggle="modal" data-target="#show<%=shift.id%>">
     <% request_number = 0 %>
     <% request_number += shift.requests.select{ |request| !request.shift.user && Time.parse(request.shift.start_time) > Time.now }.size %>
     <% if request_number == 0 %>
@@ -33,7 +33,7 @@
                   <p>Review Score: No Reviews Yet </p>
                 <% end %>
                 <p><%= request.content %></p>
-                <%= link_to "More details >", request_path(request), class: "btn btn-flat m-1" %>
+                <%= link_to "More details >", request_path(request), class: "btn btn-bw m-1" %>
               </div>
             <% end %>
           </div>

@@ -1,4 +1,4 @@
-<div class="targeter">
+<div class="targeter d-none">
   <% if params[:search] %>
     <% if params[:search][:sectors] %>
       data-sectors="<%= params[:search][:sectors].reject(&:empty?) %>"
@@ -23,7 +23,7 @@
       <div class="pt-3 border-bottom">
         <h1 class="my-3">Available Jobs</h1>
       </div>
-      <%= simple_form_for :search, url: jobs_path, method: :get do |f| %>
+      <%= simple_form_for :search, url: job_filter_path, method: :get, remote: true do |f| %>
         <div class="form-group form-inline pt-3 justify-content-between nowrap">
           <div class="d-flex justify-content-between align-items-center w-100" >
             <input class="form-control width-85 mr-1 pl-3 search-bar" type="text" placeholder="Job search" name="search[query]" id="search_query" value="<%= params.dig(:search, :query) %>"/>
@@ -34,44 +34,54 @@
             </div>
           </div>
         </div>
-        <div class="dropdown-toggle w-100 mb-3 btn btn-large btn-flat collapsible active">
+
+      <div class="d-flex align-items-center">
+        <div class="dropdown-toggle width-85 mb-3 btn btn-large btn-bw clickable active mr-1" id="filter-dropdown">
           Filter
         </div>
-        <div class="content-collapse">
-          <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
-          <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-1 pr-2"},
-            input_html: { class: 'js-range-slider',
-            type: 'text',
-            name: 'my_range',
-            value: "",
-            'data-type': "double",
-            'data-min': "5",
-            'data-max': "50",
-            'data-from': "#{params[:my_range].split(';').first if params[:my_range]}",
-            'data-to': "#{params[:my_range].split(';').last if params[:my_range]}",
-            'data-grid': "true",
-            'data-keyboard': "true",
-            'data-skin': "round",
-            'data-prefix': "£"
-          } %>
+        <%= image_tag "", class: "fas fa-sort-amount-down mb-3 btn btn-large btn-plain clickable active", id: "sortDropDown", data: {toggle: 'dropdown'}, 'aria-haspopup': false, 'aria-expanded': false %>
+        <div class="dropdown-box dropdown-menu dropdown-menu-right mt-3" aria-labelledby="sortDropDown">
+          <%= link_to 'Pay', sort_pay_path, remote: :true, class: "dropdown-item" %>
+        </div>
 
-          <%= f.input :start_time, label: "Filter by date", required: false,
-              input_html: { class: 'js-range-slider2',
+      </div>
+
+      <div class="content-collapse" id="filter-form">
+            <%= f.input :sectors, collection: Sector.all, label_method: :title, value_method: :id, label: false, required: false, wrapper_html: {class: "ml-0"}, input_html: { class: 'search_category mx-3', multiple: true, style: 'width: 100%', value: "" } %>
+            <%= f.input :price_cents, label: "Filter by pay/h", required: false, wrapper_html: {class: "ml-1 pr-2"},
+              input_html: { class: 'js-range-slider',
               type: 'text',
-              name: 'start_time',
+              name: 'my_range',
               value: "",
               'data-type': "double",
-              'data-skin': "round"
+              'data-min': "5",
+              'data-max': "50",
+              'data-from': "#{params[:my_range].split(';').first if params[:my_range]}",
+              'data-to': "#{params[:my_range].split(';').last if params[:my_range]}",
+              'data-grid': "true",
+              'data-keyboard': "true",
+              'data-skin': "round",
+              'data-prefix': "£"
             } %>
-          <div>
-            <button name="button" type="submit" class="float-right mb-2 btn btn-search " style="height: 42px; width: 128px;">
-              <i class="fas fa-filter"></i> Filter
-            </button>
-            <%= link_to 'Display all', jobs_path, class: 'btn btn-flat mb-2' %>
-          </div>
-        </div>
-      <% end %>
-      <div>
+
+            <%= f.input :start_time, label: "Filter by date", required: false,
+            wrapper_html: {class: "mx-5"},
+                input_html: { class: 'js-range-slider2',
+                type: 'text',
+                name: 'start_time',
+                value: "",
+                'data-type': "double",
+                'data-skin': "round"
+              } %>
+            <div>
+              <button name="button" type="submit" class="float-right mb-2 btn btn-search " style="height: 42px; width: 128px;">
+                <i class="fas fa-filter"></i> Filter
+              </button>
+              <%= link_to 'Display all', jobs_path, class: 'btn btn-bw mb-2' %>
+            </div>
+        <% end %>
+      </div>
+      <div id="jobs-section">
         <% unless @jobs.empty? %>
           <% @jobs.each do |job|%>
             <% num_shifts = job.shifts.select { |shift| Time.parse(shift.start_time) > Time.now && !shift.user}.length  %>
@@ -79,9 +89,9 @@
               <%= render 'jobs/shared/job-details-modal', favourite: @favourite, job: job, num_shifts: num_shifts %>
             <% end %>
           <% end %>
-          <%= link_to 'Display all', jobs_path, class: 'btn btn-flat d-block d-sm-none my-3', id: 'display_all_jobs' %>
+          <%= link_to 'Display all', jobs_path, class: 'btn btn-bw d-block d-sm-none my-3', id: 'display_all_jobs' %>
         <% else %>
-          Sorry, no jobs matched your criteria
+          <%= 'Sorry, no jobs matched your criteria' %> - <%= link_to 'clear filters', jobs_path, class: "inline-link" %>
         <% end %>
       </div>
     </div> <!-- End of container -->

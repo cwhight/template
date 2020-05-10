@@ -1,12 +1,11 @@
 <div id="profile-card" class="soft-card shadow-sm row align-items-center justify-content-around" style="min-height: 300px">
 
 <!-- USER INFO -->
-  <div class="w-100 col-lg-4 profile-header">
+  <div class="w-100 col-4 profile-header">
     <% score_array = user.reviews.map { |review| review.score } %>
     <% unless score_array.empty? %>
-      <% average_score = score_array.reduce(:+).to_f / score_array.length %>
       <div>
-        <p><span ><i class="star fas fa-star"></i></span> <%= average_score.round(1) %> - <span class="skill-tag"><%= score_array.length %> reviews</span></p>
+        <p><span ><i class="star fas fa-star"></i></span> <%= user.review_score.round(1) %> - <span class="skill-tag"><%= score_array.length %> reviews</span></p>
       </div>
     <% else %>
       <p>Review Score: No Reviews Yet </p>
@@ -24,9 +23,9 @@
   </div>
 
 <!-- PROFILE PICTURe -->
-  <div class="d-flex justify-content-around col-12 col-lg-4">
+  <div class="d-flex justify-content-around col-4">
 
-<!--             <a class="btn btn-flat" href="https://connect.stripe.com/oauth/authorize?client_id=ca_GzHwY2wrwH0v9x65teLdTTG1a1mcyBly&state={STATE_VALUE}&scope=read_write&response_type=code&stripe_user[email]=cdwhight@gmail.com&stripe_user[url]=templatejobs.co.uk">STRIPE</a>
+<!--             <a class="btn btn-bw" href="https://connect.stripe.com/oauth/authorize?client_id=ca_GzHwY2wrwH0v9x65teLdTTG1a1mcyBly&state={STATE_VALUE}&scope=read_write&response_type=code&stripe_user[email]=cdwhight@gmail.com&stripe_user[url]=templatejobs.co.uk">STRIPE</a>
  --><div class="d-flex flex-column align-items-center">
       <h4 class="d-inline"><%= user.first_name %> <%= user.surname %></h4>
 

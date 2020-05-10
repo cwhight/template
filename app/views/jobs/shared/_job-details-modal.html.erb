@@ -37,7 +37,7 @@
           <p><i class="pink-icon fas fa-tshirt"></i> <%= job.dress %></p>
           <div class="dropdown">
             <% num_shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now}.length  %>
-            <div class="dropdown-toggle btn btn-flat collapsible active">
+            <div class="dropdown-toggle btn btn-bw collapsible active">
               View <%= job.relevant_shifts(@lower_pay, @higher_pay, @lower_start_date, @higher_start_date).count %> Available Shifts
             </div>
             <div class="content-collapse">

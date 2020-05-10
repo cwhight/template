@@ -1,4 +1,5 @@
-<div class="p-3 container">
+<div class="p-3 container h-100 d-flex flex-column justify-content-between">
+  <div>
   <div class="border-bottom mb-2 d-flex justify-content-between align-items-center">
     <div>
       <h4 style="text-align:center"><%= chat.request.shift.job.title %> on <%= Time.parse(chat.request.shift.start_time).strftime("%e %b") %></h4>
@@ -6,7 +7,7 @@
     </div>
     <% if current_user.employer %>
 
-      <%= link_to "Accept #{chat.employee.first_name}", accept_request_path(chat.request), method: :patch, class: "btn btn-flat my-3" %>
+      <%= link_to "Accept #{chat.employee.first_name}", accept_request_path(chat.request), method: :patch, class: "btn btn-bw my-3" %>
     <% end %>
     <div>
       <% if policy(chat.request.shift).accept_request? %>
@@ -39,6 +40,7 @@
         </div>
       <% end %>
     </div>
+  </div>
     <div class="mt-2" id="message-box">
       <%= render 'chats/message-box', message: Message.new, chat: chat %>
     </div>

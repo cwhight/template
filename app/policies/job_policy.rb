@@ -28,6 +28,14 @@ class JobPolicy < ApplicationPolicy
     true
   end
 
+  def order_by_pay?
+    true
+  end
+
+  def filter?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

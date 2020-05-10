@@ -3,7 +3,7 @@ import 'select2';
 
 const initSelect2 = () => {
   $('.sector-picker').select2({
-    placeholder: "Select job sectors...",
+    placeholder: "Search by industry...",
     allowClear: true
   });
     $('.skill-picker').select2({
@@ -11,7 +11,7 @@ const initSelect2 = () => {
     allowClear: true
   });
   $('.search_category').select2({
-    placeholder: "Select job sectors...",
+    placeholder: "Search by industry...",
     allowClear: true,
     width: 'resolve'
   });

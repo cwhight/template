@@ -1,15 +1,14 @@
 <% no_header = false unless no_header %>
 
-<div class="profile-card border-top border-bottom p-3 mx-2 d-flex justify-content-between flex-column" style="background-color: white">
+<div class="profile-card p-3 mx-2 d-flex justify-content-between flex-column" style="background-color: white">
    <div class="d-flex justify-content-between">
     <div class="w-100">
       <div class="w-100 profile-header">
         <h4 class="<%= no_header ? 'd-none' : '' %>"><%= user.first_name %> <%= user.surname %></h4>
         <% score_array = user.reviews.map { |review| review.score } %>
         <% unless score_array.empty? %>
-          <% average_score = score_array.reduce(:+).to_f / score_array.length %>
           <div>
-            <p><span ><i class="star fas fa-star"></i></span> <%= average_score.round(1) %> - <span class="skill-tag"><%= score_array.length %> reviews</span></p>
+            <p><span ><i class="star fas fa-star"></i></span> <%= user.review_score.round(1) %> - <span class="skill-tag"><%= score_array.length %> reviews</span></p>
           </div>
         <% else %>
           <p>Review Score: No Reviews Yet </p>

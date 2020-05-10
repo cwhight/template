@@ -8,7 +8,7 @@
 
 <div class="wrapper">
   <%= render 'pages/shared/employee_dashboard_sidebar', page: page %>
-  <div class="cont px-2 py-3">
+  <div class="container px-2 py-3">
     <div>
       <h3 class="pt-3">Active Applications</h3>
       <p>Manage your job applications here - you currently have <%= pending_requests %> applications </p>
@@ -35,9 +35,9 @@
                   </th>
                   <td><%= request.shift.job.user.first_name %></td>
                   <% if request.offer %>
-                    <td><%= link_to 'View Offer', offer_path(request.offer), class: 'btn btn-flat' %></td>
+                    <td><%= link_to 'View Offer', offer_path(request.offer), class: 'btn btn-bw' %></td>
                   <% else %>
-                    <td><%= link_to 'View Messages', chat_path(request.chat), class: 'btn btn-flat' %></td>
+                    <td><%= link_to 'View Messages', chat_path(request.chat), class: 'btn btn-bw' %></td>
                   <% end %>
                 </tr>
             <% end %>

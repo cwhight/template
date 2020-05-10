@@ -2,7 +2,7 @@
 
 <div class="wrapper">
   <%= render 'pages/shared/employer_dashboard_sidebar', page: page %>
-  <div class="cont pt-3">
+  <div class="container pt-3">
     <div class="m-2 d-flex justify-content-between align-items-center">
       <h3 class="pt-3">Closed Jobs</h3>
       <%= link_to "Create Job", new_job_path, class: "btn btn-ghost" %>
@@ -39,7 +39,7 @@
             <th scope="row"><%= job.title %></th>
             <td><%= num_shifts %> unstaffed</td>
             <td><%= num_requests %> pending applications </td>
-            <td><%= link_to 'View Details', job_path(job), class: "btn btn-flat" %></td>
+            <td><%= link_to 'View Details', job_path(job), class: "btn btn-bw" %></td>
           </tr>
 
         <% end %>

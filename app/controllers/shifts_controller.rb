@@ -15,6 +15,7 @@ class ShiftsController < ApplicationController
     @shift.title = @job.title
     @shift.job = @job
     if @shift.save
+      update_highest_pay(@job, @shift)
       redirect_to job_path(@job)
     else
       redirect_to job_path(@job), alert: "Did not save"
@@ -29,6 +30,7 @@ class ShiftsController < ApplicationController
   def update
     @shift.update(shift_params)
     if @shift.save
+      update_highest_pay(@shift.job, @shift)
       redirect_to job_path(@shift.job)
     else
       render :new
@@ -109,22 +111,14 @@ class ShiftsController < ApplicationController
   def set_shift
     @shift = Shift.find(params[:id])
   end
+
+  def update_highest_pay(job, shift)
+    shifts = job.shifts.reject { |shift| shift.completed || shift.user || Time.parse(shift.start_time) < Time.now }
+    unless shifts.empty?
+      job.pay = shifts.sort_by(&:price_cents).reverse.first.price
+      job.save
+    end
+  end
+
 end
-
-# def upcoming_shifts_to_json
-#   upcoming_shifts_json = []
-#   return unless current_user.employer == false
-
-#   current_user.shifts.select { |shift| shift.start_time >= DateTime.now }.each do
-#     upcoming_shift_json = {
-#       title: shift.title,
-#       start_time: shift.start_time,
-#       end_time: shift.end_time
-#     }
-
-#     upcoming_shift_json << upcoming_shifts_json
-
-#     return upcoming_shifts_json
-#   end
-# end
 

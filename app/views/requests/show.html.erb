@@ -1,5 +1,5 @@
 <div class="wrapper">
-      <%= render 'pages/shared/employer_dashboard_sidebar', page: "" %>
+    <%= render 'pages/shared/employer_dashboard_sidebar', page: "" %>
     <div class="container py-3">
 
 
@@ -12,10 +12,10 @@
       <% user = @request.user %>
       <div class="col-12 col-md-6">
         <div class="h-100">
-          <div class="">
+          <div class="soft-card shadow-sm">
             <%= render 'users/shared/profile-card', user: @request.user %>
           </div>
-          <div class="p-3 m-2 ">
+          <div class="p-3 mt-3 soft-card shadow-sm">
             <h2><%= user.first_name %>'s Reviews</h2>
             <div class="reviews border-top">
 
@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-12 col-md-6">
-        <div class="card h-100">
+        <div class="soft-card shadow-sm h-100">
           <%= render "chats/chat-window", chat: @request.chat %>
         </div>
       </div>

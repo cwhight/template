@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
   get 'jobs/:id/close', to: 'jobs#close', as: :job_close
+  post 'jobs/sort_pay', to: 'jobs#order_by_pay'
+  get 'job/order_by_pay', to: 'jobs#order_by_pay', as: :sort_pay
+  get 'job/filter', to: 'jobs#filter', as: :job_filter
 
 # Payments
 
@@ -53,6 +56,8 @@ Rails.application.routes.draw do
 
   get 'users/:id/offers/select', to: 'offers#select', as: :new_user_offer
   resources :users, only: [:edit, :update]
+  get 'user/search', to: 'users#filter', as: :users_filter
+  get 'user/sort_score', to: 'users#order_by_score', as: :users_sort_score
 
   get '/employees', to: 'users#index', as: :users
 

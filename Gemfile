@@ -13,6 +13,7 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'pg_search'
 gem 'cloudinary', '~> 1.12.0'
 gem 'geocoder'
+gem 'searchkick'
 
 gem 'pundit'
 gem 'devise'
