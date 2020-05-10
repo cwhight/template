@@ -4,7 +4,6 @@
 //= require fullcalendar/locale-all
 //= require_tree .
 //= require ./cable.js
-//= require algolia/v3/algoliasearch.min
 
 var upcoming = $("#calendar").data('upcoming');
 var past = $("#calendar").data('past');

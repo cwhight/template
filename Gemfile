@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
 
-gem "algoliasearch-rails"
 gem 'social-share-button', '~> 1.2', '>= 1.2.1'
 
 gem 'fullcalendar-rails'
